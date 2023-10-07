@@ -1,0 +1,64 @@
+/*
+    Fons del contenidor login (all)
+*/
+.login_container {
+    -fx-background-color: #EEEEEE;
+}
+
+/*
+    Estil del contenidor del Logo
+*/
+.login_logo_container {
+    -fx-background-color: #132A13; /**/
+    -fx-alignment: center;
+}
+
+.login_logo_container Text {
+    -fx-font-size: 2em;
+    /*-fx-fill: #FFFFFF;*/
+    -fx-fill: #fcbd28;
+}
+/*Not in use at the moment - Usage self image*/
+.login_logo_container FontAwesomeIconView {
+    -fx-fill: #ECF39E;
+}
+
+/*
+    Estil del Form (Login)
+*/
+
+.login_form_container {
+    -fx-spacing: 15;
+    -fx-alignment: top_left;
+}
+
+.login_form_container Label {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+}
+
+
+
+.input_field {
+    -fx-background-color: #FFFFFF;
+    -fx-pref-height: 35;
+    -fx-font-size: 1.2em;
+}
+
+.login_form_container Button {
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+    -fx-pref-width: 350;
+    -fx-pref-height: 30;
+    -fx-font-size: 1.2em;
+}
+
+.login_form_container Button:hover {
+    -fx-cursor: hand;
+}
+
+.more_spacing_upper{
+    -fx-pref-height: 60;
+}
+
+
