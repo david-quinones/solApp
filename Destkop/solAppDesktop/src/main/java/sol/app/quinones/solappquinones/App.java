@@ -1,16 +1,16 @@
 package sol.app.quinones.solappquinones;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sol.app.quinones.solappquinones.Models.Model;
+
 
 public class App extends Application {
+    /*
+        Entrada de l'aplicació, amb el recurs del login
+    */
     @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage stage) {
+        Model.getInstance().getViewFactory().showLoginWindow();
     }
 }
