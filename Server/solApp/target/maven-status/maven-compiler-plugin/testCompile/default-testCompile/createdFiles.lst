@@ -1,0 +1,5 @@
+estructurapr\DadesPRTest.class
+estructurapr\PeticioClientTest.class
+estructurapr\RetornDadesTest.class
+persistencia\ConexioBBDDTest.class
+persistencia\UsuariDAOTest.class
