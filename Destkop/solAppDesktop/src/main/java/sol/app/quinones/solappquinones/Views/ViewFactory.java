@@ -15,7 +15,7 @@ public class ViewFactory {
     public AnchorPane getDashboardView(){
         if(dashboardView == null){
             try{
-                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Dashboard.fxml")).load();
+                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/Dashboard.fxml")).load();
             }catch(Exception e){
                 e.printStackTrace();
             }

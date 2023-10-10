@@ -2,9 +2,12 @@
 
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sol.app.quinones.solappquinones.Controllers.user.UserController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml">
+    <left>
+        <fx:include source="UserMenu.fxml"/>
+    </left>
+    <center>
+        <fx:include source="DashboardEmty.fxml"/>
+    </center>
+</BorderPane>

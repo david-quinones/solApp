@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 public class Usuari {
 
     private int id;
-    private String username;
+    private String nomUsuari;
     private String password;
 
     private boolean isTeacher;
@@ -16,19 +16,19 @@ public class Usuari {
     }
 
     public Usuari(String username, String password) {
-        this.username = username;
+        this.nomUsuari = username;
         this.password = password;
     }
 
     public Usuari(int id, String username, String password) {
         this.id = id;
-        this.username = username;
+        this.nomUsuari = username;
         this.password = password;
     }
 
     public Usuari(int id, String username, String password, boolean isTeacher, boolean isAdmin) {
         this.id = id;
-        this.username = username;
+        this.nomUsuari = username;
         this.password = password;
         this.isTeacher = isTeacher;
         this.isAdmin = isAdmin;
@@ -48,12 +48,12 @@ public class Usuari {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNomUsuari() {
+        return nomUsuari;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNomUsuari(String nomUsuari) {
+        this.nomUsuari = nomUsuari;
     }
 
     public String getPassword() {
