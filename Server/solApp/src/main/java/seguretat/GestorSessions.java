@@ -10,7 +10,7 @@ import java.util.UUID;
  */
 public class GestorSessions {
     private static GestorSessions instancia = null;
-    private HashMap<Integer,String> sesionsActives = new HashMap<>();
+    private HashMap<String,Integer> sesionsActives = new HashMap<>();
     
     
     
@@ -30,32 +30,22 @@ public class GestorSessions {
     /**Agrega sessió activa al gestor
      * 
      * @param usuari que ha iniciat la sessió
+     * @param numSessio número de sessió
      */
-    public void agregarSessio(Usuari usuari){
-        //Generem un número únic i aleatori de sessió
-        String numeroSessio = UUID.randomUUID().toString();
+    public void agregarSessio(Usuari usuari, String numSessio){
+
         //Afegim el número de sessió al HashMap de sessions actives
-        sesionsActives.put(usuari.getId(),numeroSessio );
+        sesionsActives.put(numSessio,usuari.getId());
     }
     
-    
-    /**Métode que retorna el número de sessió a partir del id d'un usuari
-     * 
-     * @param idUsuari identificador del usuari conectat
-     * @return el número de sessió
-     */
-    public String retornaSessio(int idUsuari){
-        return sesionsActives.get(idUsuari);
-    }
-    
-    
+
     /**Verifica si una sessió está activa
      * 
      * @param numSessio que s'ha de verificar
      * @return 
      */
-    public boolean verificarSessio(int idUsuari){
-        return sesionsActives.containsKey(idUsuari);
+    public boolean verificarSessio(String numSessio){
+        return sesionsActives.containsKey(numSessio);
     }
     
     
@@ -63,7 +53,7 @@ public class GestorSessions {
      * 
      * @param numSessio que cal eliminar
      */
-    public void eliminarSessio(int idUsuari){
-        sesionsActives.remove(idUsuari);
+    public void eliminarSessio(String numSessio){
+        sesionsActives.remove(numSessio);
     }
 }

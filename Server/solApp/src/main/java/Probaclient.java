@@ -47,6 +47,7 @@ public class Probaclient {
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String llegir = input.readLine();
             RetornDades retorn = gson.fromJson(llegir, RetornDades.class);
+            System.out.println(llegir);
             
             if(retorn.getCodiResultat() > 0){
                 usuari = (Usuari) retorn.getDades(0, Usuari.class);
@@ -69,10 +70,8 @@ public class Probaclient {
             
             peticio = new PeticioClient("LOGOUT");
            // peticio.affegirDades(retorn.getDades(1, String.class));
-            peticio.afegirDades("4551666");
-            peticio.afegirDades(usuari);
-            
-            
+            peticio.afegirDades("256dc91d-527e-40c2-9569-06948d45045d");
+   
             PrintWriter output2 = new PrintWriter(new OutputStreamWriter(socket2.getOutputStream()),true);
             output2.println(gson.toJson(peticio));
 

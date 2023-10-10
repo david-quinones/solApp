@@ -39,9 +39,10 @@ public class ControladorResposta {
                 return resposta;
                 
             case "LOGOUT":
+                //Número de sessió que envia el client
                 String numSessio = (String) peticio.getDades(0, String.class);
-                Usuari usuari = (Usuari) peticio.getDades(1, Usuari.class);
-                resposta = dadesResposta.respostaLogout(numSessio, usuari.getId());
+                //Generem resposta de LOGOUT amb el número de sessió rebut.
+                resposta = dadesResposta.respostaLogout(numSessio);
                 return resposta;
                 
             default:
