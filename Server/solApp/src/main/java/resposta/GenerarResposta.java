@@ -3,6 +3,7 @@ package resposta;
 import entitats.Usuari;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
+import java.util.UUID;
 import persistencia.ConexioBBDD;
 import persistencia.UsuariDAO;
 import seguretat.GestorSessions;
@@ -32,14 +33,16 @@ public class GenerarResposta {
         
         //Si l'usuri no es null
         if(usuari != null){
-            //Generem un número de sessió
-            sessions.agregarSessio(usuari);
+            //Generem número de sessió
+            String numeroSessio = UUID.randomUUID().toString();
+            //Emmagatzmar el número de sessió al usuari actiu
+            sessions.agregarSessio(usuari, numeroSessio);
             //Afegim a la resposta codi de consulta correcte
             resposta = new RetornDades(CODI_CORRECTE);
             //Afegim a la resposta totes les dades de l'usuari validat
             resposta.afegirDades(usuari);
             //Afegim a la resposta el número de sessió generat
-            resposta.afegirDades(sessions.retornaSessio(usuari.getId()));
+            resposta.afegirDades(numeroSessio);
 
             //Retornem el paquet de les dades en l'objecte RetornDades
             return resposta;
@@ -54,14 +57,13 @@ public class GenerarResposta {
     /**Métode que realitza el logout d'un usuari eliminan la sessió activa.
      * 
      * @param numSessio número de sessió activa
-     * @param usuariId usuari amb la sessió activa
      * @return resposta amb les dades
      */
-    public RetornDades respostaLogout(String numSessio, int usuariId){
+    public RetornDades respostaLogout(String numSessio){
         //Comprobem si el número de sessió está activa
-        if(sessions.retornaSessio(usuariId).equals(numSessio)){
+        if(sessions.verificarSessio(numSessio)){
             //Eliminem número de sessió
-            sessions.eliminarSessio(usuariId);
+            sessions.eliminarSessio(numSessio);
             //Generem resposta
             resposta = new RetornDades(CODI_CORRECTE);
             return resposta;
