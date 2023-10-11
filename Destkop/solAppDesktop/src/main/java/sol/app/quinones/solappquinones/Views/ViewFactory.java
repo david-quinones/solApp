@@ -4,7 +4,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sol.app.quinones.solappquinones.Controllers.Teacher.TeacherController;
 import sol.app.quinones.solappquinones.Controllers.admin.AdminController;
+import sol.app.quinones.solappquinones.Controllers.user.UserController;
 
 public class ViewFactory {
     //Admin Views
@@ -38,8 +40,15 @@ public class ViewFactory {
 
     public void showUserWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/User/User.fxml"));
-        AdminController adminController = new AdminController();
-        loader.setController(adminController);
+        UserController userController = new UserController();
+        loader.setController(userController);
+        createStage(loader);
+    }
+
+    public void showTeacherWindow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Teacher/Teacher.fxml"));
+        TeacherController teacherController = new TeacherController();
+        loader.setController(teacherController);
         createStage(loader);
     }
 

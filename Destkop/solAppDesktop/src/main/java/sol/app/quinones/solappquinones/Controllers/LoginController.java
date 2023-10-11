@@ -40,6 +40,7 @@ public class LoginController implements Initializable {
     }
 
     private void onLogin(){
+
         String name = fld_usuari.getText();
         String password = fld_password.getText();
 
@@ -57,11 +58,15 @@ public class LoginController implements Initializable {
             String respota = socket.sendMessage(JsonUtil.toJson(peticio));
 
             /*RESPOSTA*/
-            //convert to JSON
+            //convert to "JSON"
             JSONObject jObj = new JSONObject(respota);
+
             if(jObj.getInt("codiResultat") == 0) {
+
                 System.out.println("Error en la connexió"); //finestra floatant i netejar valors TODO
+
             }else{
+
                 System.out.println("creem Objecte..");
                 singletonConnection.setUserConnectat(Usuari.fromJson(jObj.getJSONArray("dades").get(0).toString()));
                 singletonConnection.setKey(jObj.getJSONArray("dades").get(1).toString());
@@ -74,22 +79,16 @@ public class LoginController implements Initializable {
 
                 }else if(singletonConnection.getUserConnectat().isTeacher()){
 
-                    System.out.println("no es profe");
+                    Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
+                    Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
+                    Model.getInstance().getViewFactory().showTeacherWindow(); //mostrem la finesta nova
 
                 }else{
-                    
+
                     Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
                     Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
                     Model.getInstance().getViewFactory().showUserWindow(); //mostrem la finesta nova
                 }
-
-
-
-                //entrem
-
-
-
-
 
             }
 
