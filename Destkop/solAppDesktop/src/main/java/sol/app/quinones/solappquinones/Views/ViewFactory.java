@@ -36,6 +36,13 @@ public class ViewFactory {
         createStage(loader);
     }
 
+    public void showUserWindow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/User/User.fxml"));
+        AdminController adminController = new AdminController();
+        loader.setController(adminController);
+        createStage(loader);
+    }
+
     private void createStage(FXMLLoader loader) {
         Scene scene = null;
         try{

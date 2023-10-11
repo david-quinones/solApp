@@ -14,6 +14,7 @@ import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Models.Usuari;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
+import sol.app.quinones.solappquinones.Service.SingletonConnection;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,9 +32,7 @@ public class LoginController implements Initializable {
     private ServerComunication socket = new ServerComunication();
     private Peticio peticio = new Peticio();
 
-    public static Usuari userLogin;
-
-    public static String codificacio;
+    private SingletonConnection singletonConnection = SingletonConnection.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,9 +42,6 @@ public class LoginController implements Initializable {
     private void onLogin(){
         String name = fld_usuari.getText();
         String password = fld_password.getText();
-
-        //clean dades (server struc)
-        //JsonUtil.clearArray();
 
         //Connect to server and send petition
         try{
@@ -64,18 +60,33 @@ public class LoginController implements Initializable {
             //convert to JSON
             JSONObject jObj = new JSONObject(respota);
             if(jObj.getInt("codiResultat") == 0) {
-                System.out.println("Error");
+                System.out.println("Error en la connexió"); //finestra floatant i netejar valors TODO
             }else{
                 System.out.println("creem Objecte..");
-                userLogin = Usuari.fromJson(jObj.getJSONArray("dades").get(0).toString());
-                codificacio = (jObj.getJSONArray("dades").get(1).toString());
-                System.out.println(userLogin.getId());
-                System.out.println(codificacio);
+                singletonConnection.setUserConnectat(Usuari.fromJson(jObj.getJSONArray("dades").get(0).toString()));
+                singletonConnection.setKey(jObj.getJSONArray("dades").get(1).toString());
+
+                if(singletonConnection.getUserConnectat().isAdmin()){
+
+                    Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
+                    Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
+                    Model.getInstance().getViewFactory().showAdminWindow(); //mostrem la finesta nova
+
+                }else if(singletonConnection.getUserConnectat().isTeacher()){
+
+                    System.out.println("no es profe");
+
+                }else{
+                    
+                    Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
+                    Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
+                    Model.getInstance().getViewFactory().showUserWindow(); //mostrem la finesta nova
+                }
+
+
 
                 //entrem
-                Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
-                Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
-                Model.getInstance().getViewFactory().showAdminWindow(); //mostrem la finesta nova
+
 
 
 

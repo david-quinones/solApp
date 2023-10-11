@@ -4,6 +4,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import sol.app.quinones.solappquinones.Controllers.LoginController;
+import sol.app.quinones.solappquinones.Service.SingletonConnection;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -26,7 +27,7 @@ public class DashboardController implements Initializable {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         lbl_login_date.setText("Avui, " + simpleDateFormat.format(date));
 
-        txt_user_name.setText("Hola, " + LoginController.userLogin.getNomUsuari());
+        txt_user_name.setText("Hola, " + SingletonConnection.getInstance().getUserConnectat().getNomUsuari().toUpperCase());
 
 
     }
