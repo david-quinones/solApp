@@ -8,6 +8,6 @@
         <fx:include source="TeacherMenu.fxml"/>
     </left>
     <center>
-        <fx:include source="/Fxml/Dashboard.fxml"/>
+        <fx:include source="DashboardEmty.fxml"/>
     </center>
 </BorderPane>
