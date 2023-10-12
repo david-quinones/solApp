@@ -4,6 +4,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import sol.app.quinones.solappquinones.Models.Model;
+import sol.app.quinones.solappquinones.Service.MenuService;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
 
 import java.net.URL;
@@ -29,14 +30,9 @@ public class AdminMenuController implements Initializable {
     }
 
     public void logout(){
-        //TODO refactorizar logout, todas lo tienen solo 1 vez escrito
-        //liberar token si dice ok server
-        SingletonConnection.getInstance().closeConnection();
-        //mostrat pantalla TODO Refactorizar metodo de cerrar ya que se utiliza muhco
 
-        Stage stage = (Stage) btn_logout.getScene().getWindow(); //obtenim la finestra del label existent
-        Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
-        Model.getInstance().getViewFactory().showLoginWindow(); //mostrem la finesta nova
+        MenuService.logout((Stage) btn_logout.getScene().getWindow());
+
     }
 
 }
