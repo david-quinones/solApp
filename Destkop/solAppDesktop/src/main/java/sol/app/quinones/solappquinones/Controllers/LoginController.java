@@ -53,9 +53,11 @@ public class LoginController implements Initializable {
             //create user
             Usuari user = new Usuari(name, password);
             //add Object to array - convert with serverStr to JSON
-            peticio.setDades(Arrays.asList(JsonUtil.toJson(user)));
+            peticio.addDades(JsonUtil.toJson(user));
             //send message (convert petition to JSON)
             String respota = socket.sendMessage(JsonUtil.toJson(peticio));
+
+
 
             /*RESPOSTA*/
             //convert to "JSON"

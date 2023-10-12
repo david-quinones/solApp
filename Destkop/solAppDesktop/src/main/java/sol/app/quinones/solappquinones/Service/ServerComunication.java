@@ -31,7 +31,7 @@ public class ServerComunication {
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String input = in.readLine();
 
-        boolean haveDades = input.isEmpty() ? false:true;
+        boolean haveDades = input.isEmpty() || input == null ? false:true;
 
         if(haveDades){
             return input;

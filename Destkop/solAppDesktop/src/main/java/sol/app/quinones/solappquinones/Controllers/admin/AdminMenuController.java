@@ -21,6 +21,8 @@ public class AdminMenuController implements Initializable {
     public Button btn_comunicacio;
     public Button btn_esdeveniment;
 
+    private MenuService menuService = new MenuService();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -31,7 +33,7 @@ public class AdminMenuController implements Initializable {
 
     public void logout(){
 
-        MenuService.logout((Stage) btn_logout.getScene().getWindow());
+        menuService.logout((Stage) btn_logout.getScene().getWindow());
 
     }
 

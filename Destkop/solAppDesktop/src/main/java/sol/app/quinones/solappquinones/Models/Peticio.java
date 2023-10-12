@@ -1,11 +1,12 @@
 package sol.app.quinones.solappquinones.Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Peticio {
 
     private String peticio;
-    private List<String> dades;
+    private ArrayList<String> dades = new ArrayList<>();
 
     public Peticio() {
 
@@ -20,11 +21,13 @@ public class Peticio {
         this.peticio = peticio;
     }
 
-    public List<String> getDades() {
+    public ArrayList<String> getDades() {
         return dades;
     }
 
-    public void setDades(List<String> dades) {
-        this.dades = dades;
+    public void addDades(String dades){
+        this.dades.add(dades);
     }
+
+
 }

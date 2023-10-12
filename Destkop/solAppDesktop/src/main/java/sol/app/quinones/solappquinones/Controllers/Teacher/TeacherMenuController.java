@@ -15,7 +15,8 @@ public class TeacherMenuController implements Initializable {
     public Button btn_esdeveniment;
     public Button btn_perfil;
     public Button btn_logout;
-    public Button btn_report;
+
+    private MenuService menuService = new MenuService();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -24,6 +25,6 @@ public class TeacherMenuController implements Initializable {
 
     public void logout(){
 
-        MenuService.logout((Stage) btn_logout.getScene().getWindow());
+        menuService.logout((Stage) btn_logout.getScene().getWindow());
     }
 }
