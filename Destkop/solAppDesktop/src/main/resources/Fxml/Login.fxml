@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="login_container" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.LoginController">
    <children>
       <VBox prefHeight="400.0" prefWidth="200.0" styleClass="login_logo_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -26,7 +27,7 @@
             <Label fx:id="lbl_usuari" text="Usuari:" />
             <TextField fx:id="fld_usuari" styleClass="input_field" />
             <Label text="Contrasenya:" />
-            <TextField fx:id="fld_password" styleClass="input_field" />
+            <PasswordField fx:id="fld_password" styleClass="input_field" />
             <Button fx:id="btn_accedir" mnemonicParsing="false" text="Accedir" />
          </children>
       </VBox>

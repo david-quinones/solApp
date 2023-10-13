@@ -44,6 +44,8 @@ public class LoginController implements Initializable {
         String name = fld_usuari.getText();
         String password = fld_password.getText();
 
+        System.out.println(password);
+
         //Connect to server and send petition
         try{
             //connect soket
@@ -73,27 +75,17 @@ public class LoginController implements Initializable {
                 singletonConnection.setUserConnectat(Usuari.fromJson(jObj.getJSONArray("dades").get(0).toString()));
                 singletonConnection.setKey(jObj.getJSONArray("dades").get(1).toString());
 
-                if(singletonConnection.getUserConnectat().isAdmin()){
+                Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
+                Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
 
-                    Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
-                    Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
-                    Model.getInstance().getViewFactory().showAdminWindow(); //mostrem la finesta nova
-
-                }else if(singletonConnection.getUserConnectat().isTeacher()){
-
-                    Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
-                    Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
-                    Model.getInstance().getViewFactory().showTeacherWindow(); //mostrem la finesta nova
-
+                if (singletonConnection.getUserConnectat().isAdmin()){
+                    Model.getInstance().getViewFactory().showMainWindow("admin"); //mostrem la finesta nova
+                }else if (singletonConnection.getUserConnectat().isTeacher()){
+                    Model.getInstance().getViewFactory().showMainWindow("teacher"); //mostrem la finesta nova
                 }else{
-
-                    Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
-                    Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
-                    Model.getInstance().getViewFactory().showUserWindow(); //mostrem la finesta nova
+                    Model.getInstance().getViewFactory().showMainWindow("user"); //mostrem la finesta nova
                 }
-
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (JSONException e) {
