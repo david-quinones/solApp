@@ -1,6 +1,7 @@
 package sol.app.quinones.solappquinones.Service;
 
 import javafx.stage.Stage;
+import org.json.JSONObject;
 import sol.app.quinones.solappquinones.Models.Model;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
@@ -22,6 +23,18 @@ public class MenuService {
 
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
+            JSONObject jsonObject = new JSONObject(resposta);
+            if(jsonObject.getInt("codiResultat") == 1){
+                //TODO refactorizar logout, todas lo tienen solo 1 vez escrito
+                //liberar token si dice ok server
+                SingletonConnection.getInstance().closeConnection();
+                //mostrat pantalla TODO Refactorizar metodo de cerrar ya que se utiliza muhco
+                Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
+                Model.getInstance().getViewFactory().showLoginWindow(); //mostrem la finesta nova
+            }else{
+                System.out.println("no se ha podido salir, "); //TODO
+            }
+
             System.out.println(resposta);
 
 
@@ -29,13 +42,7 @@ public class MenuService {
             e.printStackTrace();
         }
 
-        //TODO refactorizar logout, todas lo tienen solo 1 vez escrito
-        //liberar token si dice ok server
-        SingletonConnection.getInstance().closeConnection();
-        //mostrat pantalla TODO Refactorizar metodo de cerrar ya que se utiliza muhco
 
-        Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
-        Model.getInstance().getViewFactory().showLoginWindow(); //mostrem la finesta nova
     }
 
 }
