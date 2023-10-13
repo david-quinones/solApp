@@ -8,7 +8,7 @@ import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowControll
 
 
 public class ViewFactory {
-    //Admin Views
+
     private AnchorPane dashboardView;
 
     public ViewFactory(){}

@@ -10,10 +10,12 @@ public class MainWindowController implements Initializable {
 
     private final String rol;
 
+    //contructor
     public MainWindowController(String rol){
         this.rol = rol;
     }
 
+    //injectem dependencia per tindre total accés
     @FXML
     private MenuController menuController;
 

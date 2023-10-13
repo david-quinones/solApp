@@ -1,6 +1,8 @@
 package sol.app.quinones.solappquinones.Controllers.MainWindow;
 
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.json.JSONObject;
@@ -34,7 +36,6 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         btn_logout.setOnAction(event -> logout());
 
     }
@@ -47,20 +48,30 @@ public class MenuController implements Initializable {
     private void selectMenu(String rol){
         switch (rol){
             case "teacher":
-                btn_user.setDisable(true);
-                btn_professor.setDisable(true);
-                break;
-            case "user":
-                //btn_user.setDisable(true);
                 btn_user.setVisible(false);
                 btn_user.setManaged(false);
-                //btn_professor.setDisable(true);
+
+                btn_professor.setVisible(false);
+                btn_professor.setManaged(false);
+                break;
+            case "user":
+
+                btn_user.setVisible(false); // no el fa visible
+                btn_user.setManaged(false); // reajusta el menu, per no tindre en compte el button
+
+
                 btn_professor.setVisible(false); //ocultar
-                btn_professor.setManaged(false); //reajustar menu (que no el tingui en compte)
-                btn_alumne.setDisable(true);
-                btn_aula.setDisable(true);
+                btn_professor.setManaged(false);
+
+                btn_alumne.setVisible(false);
+                btn_alumne.setManaged(false);
+
+                btn_aula.setVisible(false);
+                btn_aula.setManaged(false);
+
                 break;
             case "admin":
+                //no s'oculta res
                 break;
         }
     }
@@ -68,24 +79,29 @@ public class MenuController implements Initializable {
     public void logout(){
 
         try{
-            //TODO
+
             socket.connect();
             Peticio peticio = new Peticio("LOGOUT");
-            //peticio.addDades(SingletonConnection.getInstance().getUserConnectat().toString());
             peticio.addDades(SingletonConnection.getInstance().getKey().replace("\"",""));
-
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
             JSONObject jsonObject = new JSONObject(resposta);
             if(jsonObject.getInt("codiResultat") == 1){
-                //TODO refactorizar logout, todas lo tienen solo 1 vez escrito
+
                 //liberar token si dice ok server
                 SingletonConnection.getInstance().closeConnection();
-                //mostrat pantalla TODO Refactorizar metodo de cerrar ya que se utiliza muhco
-                Model.getInstance().getViewFactory().closeStage((Stage) btn_perfil.getScene().getWindow()); //tanquem la finestra
-                Model.getInstance().getViewFactory().showLoginWindow(); //mostrem la finesta nova
+                //Tancar finestra actual i obrir login
+                Model.getInstance().getViewFactory().closeStage((Stage) btn_perfil.getScene().getWindow());
+                Model.getInstance().getViewFactory().showLoginWindow();
+
             }else{
-                System.out.println("no se ha podido salir, "); //TODO
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Missatge informatiu");
+                alert.setHeaderText(null);
+                alert.setContentText("No es pot desvincular amb el servidor, es força tancar l'aplicació");
+                alert.showAndWait();
+                Platform.exit();
+
             }
 
             System.out.println(resposta);
