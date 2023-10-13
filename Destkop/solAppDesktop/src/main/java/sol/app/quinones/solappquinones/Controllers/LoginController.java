@@ -22,10 +22,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+/**
+ * The type Login controller.
+ */
 public class LoginController implements Initializable {
+    /**
+     * The Lbl usuari.
+     */
     public Label lbl_usuari;
+    /**
+     * The Fld usuari.
+     */
     public TextField fld_usuari;
+    /**
+     * The Fld password.
+     */
     public TextField fld_password;
+    /**
+     * The Btn accedir.
+     */
     public Button btn_accedir;
 
 
@@ -44,7 +59,16 @@ public class LoginController implements Initializable {
         String name = fld_usuari.getText();
         String password = fld_password.getText();
 
+
+        //TODO
+        if(fld_usuari.getText().isEmpty() || fld_password.getText().isEmpty()){
+            fld_usuari.requestFocus(); //pasar focus (selecciona todo)
+            fld_usuari.positionCaret(fld_usuari.getText().length());//poner focus al final (no selecciona)
+        }
+
         System.out.println(password);
+
+        peticio.dropDades();
 
         //Connect to server and send petition
         try{
@@ -68,6 +92,8 @@ public class LoginController implements Initializable {
             if(jObj.getInt("codiResultat") == 0) {
 
                 System.out.println("Error en la connexió"); //finestra floatant i netejar valors TODO
+                fld_password.setText("");
+                fld_password.requestFocus();
 
             }else{
 
@@ -103,6 +129,13 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * Show error alert.
+     *
+     * @param title       the title
+     * @param headerText  the header text
+     * @param contentText the content text
+     */
     public void showErrorAlert(String title, String headerText, String contentText){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
