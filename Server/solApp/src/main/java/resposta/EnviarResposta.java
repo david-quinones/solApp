@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**Classe que enviará la resposta al client a través d'un socket
  *
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class EnviarResposta {
     Socket socket;

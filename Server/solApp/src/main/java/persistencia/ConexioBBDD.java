@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 /**Clase per poder fer la conexió amb la base de dades i la desconexió de forma
  * segura
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class ConexioBBDD {
     private static final String JDBD_URL = "jdbc:mysql://localhost:3306/escola_bressol";

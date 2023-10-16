@@ -32,6 +32,10 @@ public class Probaclient {
             
             Usuari usuari = new Usuari("PAU", "hola");
             
+            System.out.println("1- Creo l'usuari següent:");
+            System.out.println(usuari.getNomUsuari());
+            System.out.println(usuari.getPassword());
+            
             //OBJECTE AMB LA PETICIÓ
 
             PeticioClient peticio = new PeticioClient("LOGIN");
@@ -41,23 +45,28 @@ public class Probaclient {
             Gson gson = new Gson();
             PrintWriter output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()),true);
             output.println(gson.toJson(peticio));
+            System.out.println();
+            System.out.println("Creo la petició amb el següent format:");
+            System.out.println(gson.toJson(peticio));
  
             
             //REVEM LA RESPOSTA DEL SERVIDOR
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String llegir = input.readLine();
             RetornDades retorn = gson.fromJson(llegir, RetornDades.class);
+            System.out.println();
+            System.out.println("Revem la resposta del servidor:");
             System.out.println(llegir);
             
             if(retorn.getCodiResultat() > 0){
                 usuari = (Usuari) retorn.getDades(0, Usuari.class);
                System.out.println("Codi resultat: " + retorn.getCodiResultat()); 
-            System.out.println(usuari.getId());
-            System.out.println(usuari.getNomUsuari());
-            System.out.println(usuari.getPassword());
-            System.out.println(usuari.isIsAdmin());
-            System.out.println(usuari.isIsTeacher());
-            System.out.println(retorn.getDades(1, String.class));
+            System.out.println("Id usuari: " + usuari.getId());
+            System.out.println("Nom usuari: " + usuari.getNomUsuari());
+            System.out.println("Password usuari: " + usuari.getPassword());
+            System.out.println("Admin: " + usuari.isIsAdmin());
+            System.out.println("Teacher: " + usuari.isIsTeacher());
+            System.out.println("Número de sessió: \n" + retorn.getDades(1, String.class));
             }else{
                 System.out.println("Usuari no validat");
             }

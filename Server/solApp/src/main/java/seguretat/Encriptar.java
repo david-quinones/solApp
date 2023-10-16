@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 /**
- *Classe per millorar la segureta encriptant les dades
+ *Classe per millorar la seguretat encriptant les dades
  * @author pau
  */
 public class Encriptar {

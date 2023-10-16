@@ -9,9 +9,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
-/**
+/**Clase per fer les proves de la classe ConexioBBDD
  *
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class ConexioBBDDTest {
     private ConexioBBDD conexioBBDD;

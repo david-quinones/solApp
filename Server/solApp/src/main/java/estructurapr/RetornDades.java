@@ -2,7 +2,7 @@ package estructurapr;
 
 /**
  *Dades retornades pel servidor
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class RetornDades extends DadesPR{
     private int codiResultat;
@@ -16,7 +16,6 @@ public class RetornDades extends DadesPR{
     }
 
 
-    
     /**Constructor amb el codi del resultat. Les dades es poden afegir mes tard.
      * 
      * @param codiResultat , enter amb el codi del resultat d'una petició concreta.
