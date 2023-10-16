@@ -22,10 +22,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+/**
+ * The type Login controller.
+ */
 public class LoginController implements Initializable {
+    /**
+     * The Lbl usuari.
+     */
     public Label lbl_usuari;
+    /**
+     * The Fld usuari.
+     */
     public TextField fld_usuari;
+    /**
+     * The Fld password.
+     */
     public TextField fld_password;
+    /**
+     * The Btn accedir.
+     */
     public Button btn_accedir;
 
 
@@ -43,6 +58,17 @@ public class LoginController implements Initializable {
 
         String name = fld_usuari.getText();
         String password = fld_password.getText();
+
+
+        //TODO
+        if(fld_usuari.getText().isEmpty() || fld_password.getText().isEmpty()){
+            fld_usuari.requestFocus(); //pasar focus (selecciona todo)
+            fld_usuari.positionCaret(fld_usuari.getText().length());//poner focus al final (no selecciona)
+        }
+
+        System.out.println(password);
+
+        peticio.dropDades();
 
         //Connect to server and send petition
         try{
@@ -66,6 +92,8 @@ public class LoginController implements Initializable {
             if(jObj.getInt("codiResultat") == 0) {
 
                 System.out.println("Error en la connexió"); //finestra floatant i netejar valors TODO
+                fld_password.setText("");
+                fld_password.requestFocus();
 
             }else{
 
@@ -73,27 +101,17 @@ public class LoginController implements Initializable {
                 singletonConnection.setUserConnectat(Usuari.fromJson(jObj.getJSONArray("dades").get(0).toString()));
                 singletonConnection.setKey(jObj.getJSONArray("dades").get(1).toString());
 
-                if(singletonConnection.getUserConnectat().isAdmin()){
+                Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
+                Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
 
-                    Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
-                    Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
-                    Model.getInstance().getViewFactory().showAdminWindow(); //mostrem la finesta nova
-
-                }else if(singletonConnection.getUserConnectat().isTeacher()){
-
-                    Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
-                    Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
-                    Model.getInstance().getViewFactory().showTeacherWindow(); //mostrem la finesta nova
-
+                if (singletonConnection.getUserConnectat().isAdmin()){
+                    Model.getInstance().getViewFactory().showMainWindow("admin"); //mostrem la finesta nova
+                }else if (singletonConnection.getUserConnectat().isTeacher()){
+                    Model.getInstance().getViewFactory().showMainWindow("teacher"); //mostrem la finesta nova
                 }else{
-
-                    Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
-                    Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
-                    Model.getInstance().getViewFactory().showUserWindow(); //mostrem la finesta nova
+                    Model.getInstance().getViewFactory().showMainWindow("user"); //mostrem la finesta nova
                 }
-
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (JSONException e) {
@@ -111,6 +129,13 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * Show error alert.
+     *
+     * @param title       the title
+     * @param headerText  the header text
+     * @param contentText the content text
+     */
     public void showErrorAlert(String title, String headerText, String contentText){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
