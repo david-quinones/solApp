@@ -4,9 +4,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
-/**Classe per fer les proves unitaries
+/**Classe per fer les proves unitaries de l'entitat Usuari
  *
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class UsuariTest {
     private Usuari usuari;

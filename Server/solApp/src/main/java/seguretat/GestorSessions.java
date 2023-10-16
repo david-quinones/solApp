@@ -6,7 +6,7 @@ import java.util.UUID;
 
 /**
  *Classe que gestiona les sesions actives a l'aplicació
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class GestorSessions {
     private static GestorSessions instancia = null;

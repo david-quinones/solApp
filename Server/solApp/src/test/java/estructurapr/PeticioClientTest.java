@@ -4,9 +4,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
-/**
+/**Classe per fer les proves de la classe PeticioClient
  *
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class PeticioClientTest {
     private PeticioClient peticio;

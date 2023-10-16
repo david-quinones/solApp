@@ -2,7 +2,7 @@ package entitats;
 
 /**
  *Clase que representa l'entitat Usuari a l'aplicació.
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class Usuari {
     private int id;
@@ -10,9 +10,7 @@ public class Usuari {
     private String password;
     private boolean isAdmin;
     private boolean isTeacher;
-    private int personaId;
     
-
     
     //Constructors:
     /**Constructor per crear l'usuari amb els camps nomUsuari i password.
@@ -32,15 +30,13 @@ public class Usuari {
      * @param password
      * @param isAdmin
      * @param isTeacher 
-     * @param personaId 
      */
-    public Usuari(int id, String nomUsuari, String password, boolean isAdmin, boolean isTeacher, int personaId) {
+    public Usuari(int id, String nomUsuari, String password, boolean isAdmin, boolean isTeacher) {
         this.id = id;
         this.nomUsuari = nomUsuari;
         this.password = password;
         this.isAdmin = isAdmin;
         this.isTeacher = isTeacher;
-        this.personaId = personaId;
         
     }
 
@@ -83,13 +79,5 @@ public class Usuari {
     public void setIsTeacher(boolean isTeacher) {
         this.isTeacher = isTeacher;
     }
-
-    public int getPersonaId() {
-        return personaId;
-    }
-
-    public void setPersonaId(int personaId) {
-        this.personaId = personaId;
-    }
-    
+  
 }

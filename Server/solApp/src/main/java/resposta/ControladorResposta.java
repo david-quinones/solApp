@@ -6,7 +6,7 @@ import estructurapr.RetornDades;
 
 /**
  *La classe determinará la resposta corresponent segons la petició rebuda.
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class ControladorResposta {
     private PeticioClient peticio;

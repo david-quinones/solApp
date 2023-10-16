@@ -1,5 +1,9 @@
 estructurapr\DadesPRTest.class
+seguretat\GestorSessionsTest.class
 estructurapr\PeticioClientTest.class
+persistencia\UsuariDAOTest.class
+seguretat\EncriptarTest.class
+resposta\ControladorRespostaTest.class
 estructurapr\RetornDadesTest.class
 persistencia\ConexioBBDDTest.class
-persistencia\UsuariDAOTest.class
+resposta\GenerarRespostaTest.class

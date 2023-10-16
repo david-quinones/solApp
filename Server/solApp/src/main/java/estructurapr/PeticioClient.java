@@ -1,8 +1,8 @@
 package estructurapr;
 
 /**
- *Ordre de petició al servidor per part del client
- * @author pau
+ *Classe que contindrà les dades de les peticions de cada client
+ * @author Pau Castell Galtes
  */
 public class PeticioClient extends DadesPR{
     private String peticio;

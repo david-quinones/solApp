@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**Clase que contindrà les dades de les peticions i respostes de les crides
  * al servidor
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class DadesPR {
     

@@ -15,7 +15,7 @@ import seguretat.Encriptar;
 /**
  *Classe que proporciona métodes per accedir i manipular dades relacionades amb
  * l'entitat usuari de la base de dades.
- * @author pau
+ * @author Pau Castell Galtes
  */
 public class UsuariDAO {
     private ConexioBBDD base_dades;
@@ -24,7 +24,6 @@ public class UsuariDAO {
 
     /**Constructor de la classe UsuariDAO
      * 
-     * @param conexio a la base de dades per realitzar les operacions.
      */
     public UsuariDAO() {
         try {
@@ -46,9 +45,7 @@ public class UsuariDAO {
     /**Métode per validar el nom d'usuari i el password rebut amb les dades 
      * emmagatzemades.
      * @param usuari dades de l'usuari a validar
-     * @return Usuari amb les totes les dades del usuari validat
-     * @throws SQLException
-     * @throws NoSuchAlgorithmException 
+     * @return Usuari amb les totes les dades del usuari validat 
      */
     public Usuari validarUsuari(Usuari usuari){
 
