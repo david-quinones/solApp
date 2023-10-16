@@ -37,6 +37,7 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_logout.setOnAction(event -> logout());
+        btn_perfil.setOnAction(event -> openPerfil());
 
     }
 
@@ -111,6 +112,10 @@ public class MenuController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    public void openPerfil(){
+        //dashboard de perfil (poder editar dades) --> panell superior de editar (aqui també el menu superior)
     }
 
 

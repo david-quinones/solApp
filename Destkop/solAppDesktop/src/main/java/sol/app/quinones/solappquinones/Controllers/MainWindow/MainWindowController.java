@@ -15,13 +15,13 @@ public class MainWindowController implements Initializable {
         this.rol = rol;
     }
 
-    //injectem dependencia per tindre total accés
+    //injectem dependencia per tindre total accés(es el id de FXML + Controller)
     @FXML
-    private MenuController menuController;
+    private MenuController mainMenuController;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        menuController.setRol(this.rol);
+        mainMenuController.setRol(this.rol);
     }
 }
