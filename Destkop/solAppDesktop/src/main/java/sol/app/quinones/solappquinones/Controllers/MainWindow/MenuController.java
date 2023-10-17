@@ -15,6 +15,13 @@ import sol.app.quinones.solappquinones.Service.SingletonConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador per el menu prinicpal de l'aplicació
+ * S'encarrega de gestionar la visibilitat i funcionalitats dels elements
+ * segons el rol d'usuari
+ *
+ * @author david
+ */
 public class MenuController implements Initializable {
     public Button btn_user;
     public Button btn_alumne;
@@ -29,23 +36,31 @@ public class MenuController implements Initializable {
 
     private String rol;
 
-
     private ServerComunication socket = new ServerComunication();
 
-
-
+    /**
+     * Metode inicialitzador cridat després de carregar la finestra
+     * Estableix les accions dels botons
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_logout.setOnAction(event -> logout());
         btn_perfil.setOnAction(event -> openPerfil());
-
     }
 
+    /**
+     * Estableix el rol de l'usuari i asjuta la visibilitat dels elements del menu
+     * @param rol
+     */
     public void setRol(String rol){
         this.rol = rol;
         selectMenu(this.rol);
     }
 
+    /**
+     * Ajusta la visibilitat dels elements del menu en funcio del rol que arriba per parametre
+     * @param rol
+     */
     private void selectMenu(String rol){
         switch (rol){
             case "teacher":
@@ -77,10 +92,14 @@ public class MenuController implements Initializable {
         }
     }
 
+    /**
+     * Tanca la sessió de l'usuari actual i mostra la pantalla d'inici de sessió
+     */
     public void logout(){
 
         try{
 
+            //TODO
             socket.connect();
             Peticio peticio = new Peticio("LOGOUT");
             peticio.addDades(SingletonConnection.getInstance().getKey().replace("\"",""));
@@ -114,7 +133,11 @@ public class MenuController implements Initializable {
 
     }
 
+    /**
+     * Obre el perfil de l'usuari per veure i editar les seves dades principals
+     */
     public void openPerfil(){
+        //TODO
         //dashboard de perfil (poder editar dades) --> panell superior de editar (aqui també el menu superior)
     }
 

@@ -3,27 +3,52 @@ package sol.app.quinones.solappquinones.Service;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * Classe que proporciona una interficia per establir una connexió amb el servidor usant SOCKET
+ * Permet connectar al servidor, enviar missatges i rebre respostes
+ *
+ * @author david
+ */
 public class ServerComunication {
 
     private String serverAddress;
     private int port;
     private Socket socket;
 
+    /**
+     * Constructor que inicializa la comunicació amb el servidor a la direcció i port establers
+     */
     public ServerComunication() {
         this.serverAddress = "localhost";
         this.port = 9999;
     }
 
+    /**
+     * Contructor que inicializa la comunicació amb el servidor utilizant els parametres que rep de direcció i port
+     * @param serverAddress
+     * @param port
+     */
     public ServerComunication(String serverAddress, int port) {
         this.serverAddress = serverAddress;
         this.port = port;
     }
 
+    /**
+     * Metode que estableix la connexió amb el servidor utilitzant l'adreça i port
+     * @throws IOException En cas d'error durant la connexió
+     */
     public void connect() throws IOException {
         socket = new Socket(serverAddress, port);
     }
 
+    /**
+     * Envia missatge al servidor i espera respota
+     * @param message missatge que ha d'enviar
+     * @return respota del servidor
+     * @throws IOException En cas d'errr durant la comunicació
+     */
     public String sendMessage (String message) throws IOException {
+        //TODO
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         out.println(message);
 

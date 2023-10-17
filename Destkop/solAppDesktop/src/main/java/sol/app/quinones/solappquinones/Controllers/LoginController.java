@@ -23,39 +23,40 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
- * The type Login controller.
+ * Controlador per la finestra de inici de sessió
+ *
+ * @author david
  */
 public class LoginController implements Initializable {
-    /**
-     * The Lbl usuari.
-     */
+
+    //Components de la inerficia grafica
     public Label lbl_usuari;
-    /**
-     * The Fld usuari.
-     */
     public TextField fld_usuari;
-    /**
-     * The Fld password.
-     */
     public TextField fld_password;
-    /**
-     * The Btn accedir.
-     */
     public Button btn_accedir;
 
 
+    //Objectes per la comunicació amb el servidor i construir les peticions
     private ServerComunication socket = new ServerComunication();
     private Peticio peticio = new Peticio();
-
     private SingletonConnection singletonConnection = SingletonConnection.getInstance();
 
+    /**
+     * Metode inicialitzador, es crida després de carregar la finestra
+     * Configura les accions dels components
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_accedir.setOnAction(event -> onLogin()); //en apretar, accedim al metode
     }
 
+    /**
+     * Metode que es crida en presionar el boto d'accedir
+     * Gestiona el procés d'inici de sessio
+     */
     private void onLogin(){
 
+        //Obtenim les dades dels camps
         String name = fld_usuari.getText();
         String password = fld_password.getText();
 
@@ -70,7 +71,7 @@ public class LoginController implements Initializable {
 
         peticio.dropDades();
 
-        //Connect to server and send petition
+        //Connect to server and send petition //TODO si no hi ha connexió error:
         try{
             //connect soket
             socket.connect();
@@ -130,12 +131,14 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * Show error alert.
+     * Mostra una alerta d'error
      *
      * @param title       the title
      * @param headerText  the header text
      * @param contentText the content text
      */
+
+    //TODO --> passar-ho a una clase d'error amb una finestra??
     public void showErrorAlert(String title, String headerText, String contentText){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

@@ -9,21 +9,23 @@ import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowControll
 
 
 /**
- * The type View factory.
+ * Classe que gestiona i proporciona diferents vistes de l'aplicació
+ *
+ * @author david
  */
 public class ViewFactory {
 
     private AnchorPane dashboardView;
 
     /**
-     * Instantiates a new View factory.
+     * Contructor per defecte
      */
     public ViewFactory(){}
 
     /**
-     * Get dashboard view anchor pane.
+     * Obte i crea la vista Dashboard (actual desus)
      *
-     * @return the anchor pane
+     * @return instancia de {@link AnchorPane}
      */
     public AnchorPane getDashboardView(){
         if(dashboardView == null){
@@ -38,7 +40,7 @@ public class ViewFactory {
     }
 
     /**
-     * Show login window.
+     * Mostra finestra inici sessió
      */
     public void showLoginWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
@@ -46,9 +48,9 @@ public class ViewFactory {
     }
 
     /**
-     * Show main window.
+     * Mostra la finestra principal (finestra més menus) configurant segons el rol proporcionat
      *
-     * @param rol the rol
+     * @param rol Rol de l'usuari, afetctació com mostrarà la finestra principal (menu)
      */
     public void showMainWindow(String rol){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MainWindow.fxml"));
@@ -57,7 +59,10 @@ public class ViewFactory {
         createStage(loader);
     }
 
-
+    /**
+     * Crea i mostra una nova finestra basada amb el FXML proporcionat
+     * @param loader FXMLLoader per carregar la vista
+     */
     private void createStage(FXMLLoader loader) {
         Scene scene = null;
         try{
@@ -73,9 +78,9 @@ public class ViewFactory {
     }
 
     /**
-     * Close stage.
+     * Tanca la finestra propocionada
      *
-     * @param stage the stage
+     * @param stage Finestra a tancar
      */
     public void closeStage(Stage stage){
         stage.close();
