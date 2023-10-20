@@ -27,10 +27,12 @@ public class ViewFactory {
      *
      * @return instancia de {@link AnchorPane}
      */
+
+    /*
     public AnchorPane getDashboardView(){
         if(dashboardView == null){
             try{
-                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/Dashboard.fxml")).load();
+                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/Dashboard1.fxml")).load();
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -38,7 +40,7 @@ public class ViewFactory {
 
         return  dashboardView;
     }
-
+    */
     /**
      * Mostra finestra inici sessió
      */
