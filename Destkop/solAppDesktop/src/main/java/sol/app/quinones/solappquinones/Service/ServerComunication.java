@@ -35,7 +35,7 @@ public class ServerComunication {
 
     /**
      * Metode que estableix la connexió amb el servidor utilitzant l'adreça i port
-     * @throws IOException En cas d'error durant la connexió
+     * @throws IOException En cas d'error durant la connexió li pasaem al pare que l'ha cridat
      */
     public void connect() throws IOException {
         socket = new Socket(serverAddress, port);
@@ -48,22 +48,24 @@ public class ServerComunication {
      * @throws IOException En cas d'errr durant la comunicació
      */
     public String sendMessage (String message) throws IOException {
-        //TODO
+        //Obrim connexió i enviem
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         out.println(message);
 
-        //resposta:
+        //Obtenim resposta
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String input = in.readLine();
 
-        boolean haveDades = input.isEmpty() || input == null ? false:true;
+        boolean haveDades = (input != null && !input.isEmpty()); // ni null ni buida (blanc)
 
         if(haveDades){
+            socket.close();
             return input;
         }
+
         socket.close();
 
-        return "No hi ha dades, ni respota";
+        return null; //ja captura l'excepció el JSON
     }
 
 }

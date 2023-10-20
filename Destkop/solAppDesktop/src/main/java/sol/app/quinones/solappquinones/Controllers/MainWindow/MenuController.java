@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.json.JSONObject;
+import sol.app.quinones.solappquinones.Controllers.ErrorController;
 import sol.app.quinones.solappquinones.Models.Model;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
@@ -99,7 +100,6 @@ public class MenuController implements Initializable {
 
         try{
 
-            //TODO
             socket.connect();
             Peticio peticio = new Peticio("LOGOUT");
             peticio.addDades(SingletonConnection.getInstance().getKey().replace("\"",""));
@@ -115,19 +115,12 @@ public class MenuController implements Initializable {
                 Model.getInstance().getViewFactory().showLoginWindow();
 
             }else{
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Missatge informatiu");
-                alert.setHeaderText(null);
-                alert.setContentText("No es pot desvincular amb el servidor, es força tancar l'aplicació");
-                alert.showAndWait();
+                ErrorController.showErrorAlert("Missatge Informatiu", null, "No es pot desvincular amb el servidor, es força tancar l'aplicació", Alert.AlertType.INFORMATION);
                 Platform.exit();
-
             }
 
-            System.out.println(resposta);
-
-
         }catch(Exception e){
+            ErrorController.showErrorAlert("Error","Error al Desconnectar", e.getMessage(), Alert.AlertType.ERROR);
             e.printStackTrace();
         }
 
