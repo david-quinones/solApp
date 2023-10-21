@@ -16,7 +16,7 @@ public class JsonUtil {
     private static ArrayList<String> dades = new ArrayList<>();
 
     /**
-     * Afageix un objecte a la llista interna després deconvertir a la seva represntació "JSON"
+     * Afageix un objecte a la llista interna després de convertir a la seva representació "JSON"
      * @param ob Objecte afegir
      */
     public void afegirObjet(Object ob){

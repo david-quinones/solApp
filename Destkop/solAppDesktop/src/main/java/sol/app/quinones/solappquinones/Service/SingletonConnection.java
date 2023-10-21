@@ -24,6 +24,8 @@ public class SingletonConnection {
         return instance;
     }
 
+    private SingletonConnection(){}
+
     /**
      * Estableix la clau de connexió
      * @param key clau que retorna el servidor

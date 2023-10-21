@@ -68,4 +68,14 @@ public class ServerComunication {
         return null; //ja captura l'excepció el JSON
     }
 
+    /**
+     * Estableix el socket utilitza per la comunicació
+     * Metode per probes unitaries, ja que s'indentifica com a protected per accedir des de subclases
+     *
+     * @param socket
+     */
+    protected void setSocket(Socket socket){
+        this.socket = socket;
+    }
+
 }
