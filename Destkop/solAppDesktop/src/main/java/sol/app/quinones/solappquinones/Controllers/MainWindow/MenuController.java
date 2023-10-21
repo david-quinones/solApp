@@ -114,6 +114,7 @@ public class MenuController implements Initializable {
                 Model.getInstance().getViewFactory().closeStage((Stage) btn_perfil.getScene().getWindow());
                 Model.getInstance().getViewFactory().showLoginWindow();
 
+
             }else{
                 ErrorController.showErrorAlert("Missatge Informatiu", null, "No es pot desvincular amb el servidor, es força tancar l'aplicació", Alert.AlertType.INFORMATION);
                 Platform.exit();

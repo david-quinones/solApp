@@ -65,6 +65,7 @@ public class LoginController implements Initializable {
             ErrorController.showErrorAlert("Error","Error de Dades", "Es necessari emplenar Usuari i Password" , Alert.AlertType.INFORMATION);
             fld_usuari.requestFocus(); //pasar focus (selecciona todo)
             fld_usuari.positionCaret(fld_usuari.getText().length());//poner focus al final (no selecciona)
+            fld_password.setText("");
             return;
 
         }
