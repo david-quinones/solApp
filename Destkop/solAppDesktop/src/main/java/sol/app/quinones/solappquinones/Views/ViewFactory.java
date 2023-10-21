@@ -77,6 +77,7 @@ public class ViewFactory {
 
     /**
      * Crea i mostra una nova finestra basada amb el FXML proporcionat
+     * També te control al tancar per la X l'aplicació
      * @param loader FXMLLoader per carregar la vista
      * @param login identifica si es la finestra de login o no per realitzar n accio
      */
