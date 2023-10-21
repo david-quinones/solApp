@@ -10,9 +10,28 @@ import java.net.Socket;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Classe encarregada de tastejar amb JUnit el correcte funcionament en la comuncaició amb un servidor utilitzat Socket
+ *
+ * Proves dissenyades per validar la correcta insercio i transmissio de missatges client - servidor
+ *
+ * @author david
+ */
 
 public class ServerComunicationTest  {
 
+    /**
+     * Test per revisar el correcte funcionament de sendMessage, assegurant que enviem i revem missatge correctament
+     *
+     * Realiza les seguents accions:
+     *      Configurar un objecte Mock per simular connexió en xarxa
+     *      Creem una instancia de SercverConmnection i assignem el mock (ssobrescribim el metdoe)
+     *      Enviemm un missatge i captrum respota
+     *      Comprovem que la respota correcte es la esperada
+     *      Comprovem que formem bé els missatges que enviem
+     *
+     * @throws IOException perque la connexio per xarxa por llenár aquesta excepcio
+     */
     @Test
     public void testSendMessage() throws IOException {
         //Configurem els mocks (simular connexió)
@@ -35,7 +54,7 @@ public class ServerComunicationTest  {
         serverComunication.connect();
         String resposta = serverComunication.sendMessage("envio missatge, arriba?");
 
-        //capturar respota
+        //capturar respota i comprovem que ok
         assertEquals("Respotsa", resposta);
         assertEquals("envio missatge, arriba?\r\n", byteArrayOutputStream.toString());
 
