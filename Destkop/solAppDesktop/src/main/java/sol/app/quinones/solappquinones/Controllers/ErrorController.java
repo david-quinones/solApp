@@ -2,6 +2,11 @@ package sol.app.quinones.solappquinones.Controllers;
 
 import javafx.scene.control.Alert;
 
+/**
+ * Controlador per els errors del programa
+ *
+ * @author david
+ */
 public class ErrorController {
 
     /**
