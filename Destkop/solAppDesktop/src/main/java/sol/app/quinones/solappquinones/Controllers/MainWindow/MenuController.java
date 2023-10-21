@@ -123,6 +123,7 @@ public class MenuController implements Initializable {
         }catch(Exception e){
             ErrorController.showErrorAlert("Error","Error al Desconnectar", e.getMessage(), Alert.AlertType.ERROR);
             e.printStackTrace();
+            Platform.exit();
         }
 
     }
