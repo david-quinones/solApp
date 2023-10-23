@@ -22,6 +22,7 @@ import java.util.concurrent.Future;
 
 import estel.solapp.R;
 import estel.solapp.common.CommController;
+import estel.solapp.common.SingletonSessio;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
 import estel.solapp.models.User;
@@ -62,20 +63,21 @@ public class LoginActivity extends AppCompatActivity {
         try {
             ValorsResposta resposta = future.get();
             Gson gson= new Gson();
-            Log.d("RESPOSTA", gson.toJson(resposta));
+            Log.d("RESPOSTA LOGIN", gson.toJson(resposta));
             if (resposta==null){
                 showToast(parent,context, "Error de conexió amb el servidor. ");
 
             }else{
-                if (resposta.getReturnCode() > CommController.OK_RETURN_CODE ) {
-                    User user = (User) resposta.getData(0, User.class);
-                    sessionCode = (String) resposta.getData(1,String.class);
-                    Log.d("sessionCode", sessionCode);
-                    if (user.isAdmin()) { Utility.gotoActivity(this, HomeAdminActivity.class);}
+                if (resposta.getReturnCode() == CommController.OK_RETURN_CODE ) {
 
-                    //if (user.isUser()) { Utility.gotoActivity(this, HomeUserActivity.class);}
+                    SingletonSessio.getInstance().setUserConnectat((User) resposta.getData(0, User.class));
+                    SingletonSessio.getInstance().setKey((String) resposta.getData(1,String.class));
+                    Log.d("sessionCode", SingletonSessio.getInstance().getKey());
+                    if (SingletonSessio.getInstance().getUserConnectat().isAdmin()) { Utility.gotoActivity(this, HomeAdminActivity.class);}
 
-                    if (user.isTeacher()) { Utility.gotoActivity(this, HomeTeacherActivity.class);}
+                    //if (SingletonSessio.getInstance().getUserConnectat().isUser()) { Utility.gotoActivity(this, HomeUserActivity.class);}
+
+                    if (SingletonSessio.getInstance().getUserConnectat().isTeacher()) { Utility.gotoActivity(this, HomeTeacherActivity.class);}
 
 
                 } else {

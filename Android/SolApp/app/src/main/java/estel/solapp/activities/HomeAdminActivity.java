@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.gson.Gson;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -16,6 +19,7 @@ import java.util.concurrent.Future;
 
 import estel.solapp.R;
 import estel.solapp.common.CommController;
+import estel.solapp.common.SingletonSessio;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
 
@@ -51,7 +55,7 @@ public class HomeAdminActivity extends AppCompatActivity {
 
         Context context = getApplicationContext();
         HomeAdminActivity parent = this;
-        String sessionCode =;
+
         Button btn = (Button) findViewById(R.id.logoutBtn);
 
         // request (must be done in an other thread)
@@ -62,13 +66,20 @@ public class HomeAdminActivity extends AppCompatActivity {
         // result processing
         try {
             ValorsResposta resposta=future.get();
-            if (resposta.getReturnCode() == CommController.OK_RETURN_CODE) {
-                Utility.gotoActivity(this, LoginActivity.class);
-//                Intent i = new Intent(this.getApplicationContext(), MainActivity.class);
-//                startActivity(i);
-//                finish();
-            } else {
-                showToast(parent, context, "Error tancant sessió!");
+            Gson gson= new Gson();
+            Log.d("RESPOSTA LOGOUT", gson.toJson(resposta));
+
+            if (resposta==null){showToast(parent,context, "Error de conexió amb el servidor. ");
+
+            }else {
+
+                if (resposta.getReturnCode() == CommController.OK_RETURN_CODE) {
+                    Utility.gotoActivity(this, LoginActivity.class);
+                    SingletonSessio.getInstance().closeConnection();
+
+                } else {
+                    showToast(parent, context, "Error tancant sessió!");
+                }
             }
         } catch (ExecutionException | InterruptedException e) {
             showToast(parent, context, "Error (" + e.getMessage() + ")");

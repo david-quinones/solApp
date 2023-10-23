@@ -18,12 +18,9 @@ import estel.solapp.models.User;
 
 public class CommController {
 
-
-    public static int BAD_VALUE = -1;
-    private static int sessionCode=BAD_VALUE;
     private static int port = 9999;
     private static String serverName = "192.168.1.131";
-    public static final int OK_RETURN_CODE = 0;
+    public static final int OK_RETURN_CODE = 1;
 
     // Noms de les peticions
 
@@ -53,7 +50,8 @@ public class CommController {
      * returns true if client is logged and false otherwhise
      * @return
      */
-    public static boolean isLogged(){return sessionCode != BAD_VALUE;}
+
+    public static boolean isLogged() {return SingletonSessio.getInstance().getKey() != null;}
 
 
     /**
@@ -79,21 +77,13 @@ public class CommController {
      */
     public static ValorsResposta doLogout(){
 
-        //if(sessionCode==BAD_VALUE) return OK_RETURN_CODE.;
-
         PeticioClient logout = new PeticioClient(LOGOUT);
 
-        logout.addDataObject(sessionCode);
+        logout.addDataObject(SingletonSessio.getInstance().getKey().replace("\"",""));
 
         ValorsResposta resposta = talkToServer(logout);
 
         if(resposta==null) return null;
-
-        int code= resposta.getReturnCode();
-
-        if(code==OK_RETURN_CODE){
-            sessionCode=BAD_VALUE;
-        }
 
         return resposta;
 
@@ -105,11 +95,11 @@ public class CommController {
      */
     public static User[] doListUsers(){
 
-        if(sessionCode==BAD_VALUE) return null;
+
 
         PeticioClient listUsers = new PeticioClient(LIST_USERS);
 
-        listUsers.addPrimitiveData(sessionCode);
+        listUsers.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
 
         ValorsResposta resposta=talkToServer(listUsers);
 
@@ -132,17 +122,17 @@ public class CommController {
      * @param user  user to be added
      * @return result code
      */
-    public static int doAddUser(User user){
+    public static ValorsResposta doAddUser(User user){
 
         PeticioClient addUser = new PeticioClient(ADD_USER);
-        addUser.addPrimitiveData(sessionCode);
+        addUser.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
         addUser.addDataObject(user);
 
         ValorsResposta resposta=talkToServer(addUser);
 
-        if(resposta==null) return BAD_VALUE;
+        if(resposta==null) return null;
 
-        return resposta.getReturnCode();
+        return resposta;
 
     }
     /**
