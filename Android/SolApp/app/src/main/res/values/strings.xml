@@ -1,13 +1,3 @@
 <resources>
-    <string name="app_name">SolApp</string>
-    <string name="BtnAltaAlumne">Alta alumne</string>
-    <string name="BtnAltaUsuari">Alta usuari</string>
-    <string name="BtnModificacioUsuari">Modificació usuari</string>
-    <string name="BtnModificacioAlumne">Modificació alumne</string>
-    <string name="BtnLlistatAlumnes">Consulta d\'alumnes</string>
-    <string name="BtnLlistatUsuaris">Consulta d\'usuaris</string>
-    <string name="BtnLogout">Desconectar</string>
-    <string name="eTAddUserUserName">Nom Usuari</string>
-    <string name="eTAddUserName">Nom</string>
-    <string name="btnAddUser">Alta d\'susari</string>
+    <string name="app_name">Solapp</string>
 </resources>

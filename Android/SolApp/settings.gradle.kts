@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SolApp"
+rootProject.name = "Solapp"
 include(":app")
  
