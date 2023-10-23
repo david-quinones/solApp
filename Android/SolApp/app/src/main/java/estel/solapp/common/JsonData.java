@@ -11,8 +11,8 @@ public class JsonData {
 
 
     /**
-     * Adds a data to the order at the end.
-     * @param data data to be added
+     * Afegeix objecte data.
+     * @param data dada objecte a afegir
      */
 
     public void addDataObject(Object data){
@@ -22,8 +22,8 @@ public class JsonData {
     }
 
     /**
-     * Adds a data to the order at the end.
-     * @param data data to be added
+     * Afegeig dada primitiva.
+     * @param data dada a afegir
      */
     public void addPrimitiveData(Object data){
 
@@ -33,10 +33,10 @@ public class JsonData {
 
 
     /**
-     * Gets the data, at the specified position, as an object of the specified class.
-     * @param DataNumber data position (starting with 0)
-     * @param clasz data class
-     * @return parameter value
+     * Agafa la dada en la posició especificada com objecte de la classe especificada.
+     * @param DataNumber Posició de la dada (començant per 0)
+     * @param clasz Classe de la dada
+     * @return dada
      */
     public Object getData(int DataNumber, Class clasz){
         try{

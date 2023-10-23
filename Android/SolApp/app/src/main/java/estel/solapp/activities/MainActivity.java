@@ -18,7 +18,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Tasca per mostrar la pantalla d'inici
         TimerTask inicio = new TimerTask() {
+
             @Override
             public void run() {
 
@@ -29,6 +31,7 @@ public class MainActivity extends Activity {
             }
         };
 
+        //Temporitzador de 5 segons
         Timer espera=new Timer();
         espera.schedule(inicio,5000);
 

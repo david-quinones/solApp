@@ -23,7 +23,7 @@ public class ValorsResposta extends JsonData {
     }
 
     /**
-     * Gets the response's return code.
+     * Agafa el codi de resposta OK/NG del sevidor com integer.
      * @return return code
      */
     public int getReturnCode() {

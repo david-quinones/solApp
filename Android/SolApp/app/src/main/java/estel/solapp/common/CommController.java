@@ -23,7 +23,6 @@ public class CommController {
     public static final int OK_RETURN_CODE = 1;
 
     // Noms de les peticions
-
     public static final String LOGIN = "LOGIN";
     public static final String LOGOUT = "LOGOUT";
     public static final String LIST_USERS = "LIST_USERS";
@@ -47,7 +46,7 @@ public class CommController {
     }
 
     /**
-     * returns true if client is logged and false otherwhise
+     * Retorna true si hi ha sessio i false si no
      * @return
      */
 
@@ -55,10 +54,10 @@ public class CommController {
 
 
     /**
-     * Makes a login request to the server
+     * Petició de login al servidor
      * @param user  username
      * @param password password
-     * @return result code
+     * @return resposta del servidor
      */
     public static ValorsResposta doLogin(String user, String password){
         User usuari = new User(user,password);
@@ -72,13 +71,14 @@ public class CommController {
     }
 
     /**
-     * Makes a logout request to the server
-     * @return result code
+     * Petició de logout servidor
+     * @return resposta del sevidor
      */
     public static ValorsResposta doLogout(){
 
         PeticioClient logout = new PeticioClient(LOGOUT);
 
+        //Afegim el codi de sessió a la petició
         logout.addDataObject(SingletonSessio.getInstance().getKey().replace("\"",""));
 
         ValorsResposta resposta = talkToServer(logout);
@@ -90,7 +90,7 @@ public class CommController {
     }
 
     /**
-     * Makes a "list user" request to the server
+     * Petició de llista d'usuaris al servidor
      * @return result users array; null if error.
      */
     public static User[] doListUsers(){
@@ -118,9 +118,9 @@ public class CommController {
     }
 
     /**
-     * Makes an "add user" request to the server
-     * @param user  user to be added
-     * @return result code
+     * Petició d'afegir usuari al servidor
+     * @param user  Usiari que afegirem
+     * @return resposta del servidor
      */
     public static ValorsResposta doAddUser(User user){
 
@@ -136,9 +136,9 @@ public class CommController {
 
     }
     /**
-     * Makes a "query user" request to the server
-     * @param username  username to search
-     * @return result user with this username; null if error
+     * Fa la petició de recerca d'usuari al servidor
+     * @param username  Nom d'usuari a buscar
+     * @return resposta del servidor
      */
     public static User doQueryUser(String username){
         if(username.equals("99")) { // simulates non-existent key
@@ -148,12 +148,15 @@ public class CommController {
         }
 
     }
-
-    // Sends message to the server and returns its response.
-    // messages are serialized as Json values before and after communication
+    /**
+    * Envia missatge al servidor i rep la resposta d'aquest.
+    * Transformació dels missatges en Json avans i després de l'enviament
+    * @param peticio Petició al sevidor
+    * @return resposta Resposta del servidor.
+    */
     private static ValorsResposta talkToServer(PeticioClient peticio){
         try {
-            Socket socket = connect();
+            Socket socket = connect();//Conexió amb el sevidor
 
             Gson gson= new Gson();
 

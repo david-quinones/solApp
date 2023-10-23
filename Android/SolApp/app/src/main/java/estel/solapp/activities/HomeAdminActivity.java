@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -22,6 +24,7 @@ import estel.solapp.common.CommController;
 import estel.solapp.common.SingletonSessio;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
+import estel.solapp.models.User;
 
 public class HomeAdminActivity extends AppCompatActivity {
 
@@ -29,27 +32,34 @@ public class HomeAdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
+
+
+        TextView benvinguda;
+        benvinguda =((TextView) findViewById(R.id.textBenvinguda));
+        benvinguda.setText("Benvigut "+SingletonSessio.getInstance().getUserConnectat().getNomUsuari());
     }
 
+
+
     /**
-     * One click response
-     * goes to the AddUser Activity
-     * @param view source event
+     * Click per anar
+     * al la acivitat per afegir usuari AddUser Activity
+     * @param view vista
      */
     public void goAddUser(View view){
         //Utility.gotoActivity(this, AddUserActivity.class);
     }
     /**
-     * One click response
-     * goes to the QueryUser Activity
-     * @param view source event
+     * Click per anar
+     * al la acivitat per cercar  usuari QueryUser Activity
+     * @param view vista
      */
 //    public void goQueryUser(View view){Utility.gotoActivity(this, QueryUserActivity.class);}
 
     /**
-     *  One click response
-     *  closes session and returns to the login screen; on error, warns to the user
-     * @param view source event
+     * Click per
+     * Tancar sessió
+     * @param view vista
      */
     public void doLogout(View view){
 
@@ -58,40 +68,39 @@ public class HomeAdminActivity extends AppCompatActivity {
 
         Button btn = (Button) findViewById(R.id.logoutBtn);
 
-        // request (must be done in an other thread)
+        // La patició al servidor es fa en unaltre fil
         ExecutorService executor = Executors.newSingleThreadExecutor();
         btn.setEnabled(false);
         Future<ValorsResposta> future = executor.submit(() -> {return CommController.doLogout();});
 
-        // result processing
+        // Procesar resposta del servidor
         try {
             ValorsResposta resposta=future.get();
-            Gson gson= new Gson();
-            Log.d("RESPOSTA LOGOUT", gson.toJson(resposta));
+            Gson gson= new Gson();//creació de Json per mostrar al log
+            Log.d("RESPOSTA LOGOUT", gson.toJson(resposta)); //Log per controlar el que rebem del server
 
-            if (resposta==null){showToast(parent,context, "Error de conexió amb el servidor. ");
+            if (resposta==null){showToast(parent,context, "Error de conexió amb el servidor. "); //Si no obtenim resposta es que no hi ha conexió.
 
             }else {
 
-                if (resposta.getReturnCode() == CommController.OK_RETURN_CODE) {
+                if (resposta.getReturnCode() == CommController.OK_RETURN_CODE) {//Si el codi de resposta es correcte
                     Utility.gotoActivity(this, LoginActivity.class);
                     SingletonSessio.getInstance().closeConnection();
 
                 } else {
-                    showToast(parent, context, "Error tancant sessió!");
+                    showToast(parent, context, "Error tancant sessió!"); //Si el codi no es correcte mostrar missatge error
                 }
             }
         } catch (ExecutionException | InterruptedException e) {
-            showToast(parent, context, "Error (" + e.getMessage() + ")");
+            showToast(parent, context, "Error (" + e.getMessage() + ")");//Mostrar missatge error si ha fallat
         } finally {
             btn.setEnabled(true);
-        }
-        ;
+        };
 
     }
 
     /**
-     * Prevents return to the login screen without previous logout
+     * Avis amb un missatge si es vol tancar l'aplicació sense fer logout
      */
     @Override
     public void onBackPressed() {
