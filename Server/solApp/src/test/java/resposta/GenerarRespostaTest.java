@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package resposta;
 
 import entitats.Usuari;
@@ -25,8 +21,8 @@ public class GenerarRespostaTest {
      */
     @Before
     public void setUp(){
-        usuariCorrecte = new Usuari(1, "nom_usuari", "password", true, false, 0);
-        usuariFail = new Usuari(1, "nom_usuari", "error", true, false, 0);
+        usuariCorrecte = new Usuari(1, "nom_usuari", "password", true, false);
+        usuariFail = new Usuari(1, "nom_usuari", "error", true, false);
         gestorSessions = GestorSessions.obtindreInstancia();
     }
 

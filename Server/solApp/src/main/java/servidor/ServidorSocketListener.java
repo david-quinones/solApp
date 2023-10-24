@@ -74,7 +74,7 @@ public class ServidorSocketListener {
             } catch (IOException ex) {
                 
                 Logger.getLogger(ServidorSocketListener.class.getName()).log(Level.SEVERE, 
-                        "Error al intentar escoltar clients en el métode escoltarClients", ex);
+                        "Servidor tancat, no es poden escoltar clients");
             }
             
         }

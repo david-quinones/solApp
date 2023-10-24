@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: entitats.UsuariTest
 -------------------------------------------------------------------------------
-Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.080 s -- in entitats.UsuariTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.058 s -- in entitats.UsuariTest

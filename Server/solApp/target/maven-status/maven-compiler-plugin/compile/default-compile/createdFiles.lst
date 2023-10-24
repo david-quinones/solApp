@@ -1,1 +1,16 @@
+servidor\ServidorSocketListener$GestorClients.class
+Probaclient.class
+entitats\Usuari.class
+persistencia\ConexioBBDD.class
+seguretat\GestorSessions.class
+servidor\ServidorSocketListener.class
+estructurapr\RetornDades.class
+estructurapr\PeticioClient.class
 HashProbes.class
+resposta\EnviarResposta.class
+resposta\ControladorResposta.class
+serverMainProba.class
+seguretat\Encriptar.class
+persistencia\UsuariDAO.class
+resposta\GenerarResposta.class
+estructurapr\DadesPR.class
