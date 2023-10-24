@@ -4,7 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
-
+/**
+ * Classe per selialitzar i deserialitzar els Jsons
+ * @author Juan Antonio
+ */
 public class JsonData {
 
     private ArrayList<String> dades = new ArrayList<>();

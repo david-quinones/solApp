@@ -26,7 +26,10 @@ import estel.solapp.common.SingletonSessio;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
 import estel.solapp.models.User;
-
+/**
+ * Classe controladora de la pantalla de login
+ * @author Juan Antonio
+ */
 public class LoginActivity extends AppCompatActivity {
 
     @Override

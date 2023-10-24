@@ -7,7 +7,10 @@ import android.widget.TextView;
 
 import estel.solapp.R;
 import estel.solapp.common.SingletonSessio;
-
+/**
+ * Classe controladora pantalla menú principal per rol professor
+ * @author Juan Antonio
+ */
 public class HomeTeacherActivity extends AppCompatActivity {
 
     @Override

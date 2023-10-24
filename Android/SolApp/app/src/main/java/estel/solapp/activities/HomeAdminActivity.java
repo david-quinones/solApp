@@ -25,7 +25,10 @@ import estel.solapp.common.SingletonSessio;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
 import estel.solapp.models.User;
-
+/**
+ * Classe controladora de menú principal d'usuaris admin
+ * @author Juan Antonio
+ */
 public class HomeAdminActivity extends AppCompatActivity {
 
     @Override

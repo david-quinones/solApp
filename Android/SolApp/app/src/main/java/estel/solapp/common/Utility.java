@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+/**
+ * Classe d'utilitats pels toasts o tancar i obrir fienstres (intents)
+ * @author Juan Antonio
+ */
 public class Utility {
 
     public static void showToast(Context context, String message){

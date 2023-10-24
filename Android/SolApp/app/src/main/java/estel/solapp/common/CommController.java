@@ -15,7 +15,10 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import estel.solapp.models.User;
-
+/**
+ * Classe de comunicació amb el servidor
+ * @author Juan Antonio
+ */
 public class CommController {
 
     private static int port = 9999;

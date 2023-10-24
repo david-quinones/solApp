@@ -1,5 +1,8 @@
 package estel.solapp.models;
-
+/**
+ * Classe model Usuari
+ * @author Juan Antonio
+ */
 public class User {
 
     private int id;

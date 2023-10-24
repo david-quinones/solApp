@@ -1,7 +1,10 @@
 package estel.solapp.common;
 
 import estel.solapp.models.User;
-
+/**
+ * Classe per instancia única singletó amb codi de sessió
+ * @author Juan Antonio
+ */
 public class SingletonSessio {
 
     //unica instancia de Singleton

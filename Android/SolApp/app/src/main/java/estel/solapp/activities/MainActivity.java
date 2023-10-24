@@ -10,7 +10,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import estel.solapp.R;
-
+/**
+ * Classe de presentació/entrada a l'aplicació
+ * @author Juan Antonio
+ */
 public class MainActivity extends Activity {
 
     @Override
