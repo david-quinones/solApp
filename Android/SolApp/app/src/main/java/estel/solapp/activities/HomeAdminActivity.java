@@ -39,7 +39,7 @@ public class HomeAdminActivity extends AppCompatActivity {
 
         TextView benvinguda;
         benvinguda =((TextView) findViewById(R.id.textBenvinguda));
-        benvinguda.setText("Benvigut "+SingletonSessio.getInstance().getUserConnectat().getNomUsuari());
+        benvinguda.setText("Usuari: "+SingletonSessio.getInstance().getUserConnectat().getNomUsuari());
     }
 
 
@@ -107,6 +107,7 @@ public class HomeAdminActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
-        showToast(this,getApplicationContext(), "S'ha de sortir per tancar sessió");
+
+        showToast(this, getApplicationContext(), "S'ha de sortir per tancar sessió");
     }
 }
