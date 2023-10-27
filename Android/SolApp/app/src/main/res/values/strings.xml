@@ -7,4 +7,19 @@
     <string name="comunicacions">Comunicacions</string>
     <string name="accedir">Accedir</string>
     <string name="sortir">Sortir</string>
+    <string name="title_activity_nav_gestio_usuaris">Gestio d\'usuaris</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Solapp</string>
+    <string name="nav_header_subtitle">Escola bressol L\'Estel</string>
+    <string name="nav_header_desc">Menú de gestió d\'usuaris</string>
+    <string name="action_settings">Propietats</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="elimina_usuari">Eliminar usuari</string>
+    <string name="afegir_usuari">Afegir Usuari</string>
 </resources>

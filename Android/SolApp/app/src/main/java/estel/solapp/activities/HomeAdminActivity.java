@@ -19,6 +19,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import estel.solapp.NavGestioUsuarisActivity;
 import estel.solapp.R;
 import estel.solapp.common.CommController;
 import estel.solapp.common.SingletonSessio;
@@ -49,8 +50,8 @@ public class HomeAdminActivity extends AppCompatActivity {
      * al la acivitat per afegir usuari AddUser Activity
      * @param view vista
      */
-    public void goAddUser(View view){
-        //Utility.gotoActivity(this, AddUserActivity.class);
+    public void goGestioUsiaris(View view){
+        Utility.gotoActivity(this, NavGestioUsuarisActivity.class);
     }
     /**
      * Click per anar

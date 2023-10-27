@@ -50,6 +50,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#FFFFFF"
+        android:onClick="goGestioUsiaris"
         android:shadowColor="#000000"
         android:singleLine="false"
         android:text="@string/gestio_usuaris"

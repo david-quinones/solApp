@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="estel.solapp.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/afegir_usuari"
+        android:name="estel.solapp.AfegirUsuari"
+        android:label="fragment_afegir_usuari"
+        tools:layout="@layout/fragment_afegir_usuari" />
+    <fragment
+        android:id="@+id/elimina_usuari"
+        android:name="estel.solapp.EliminaUsuari"
+        android:label="fragment_elimina_usuari"
+        tools:layout="@layout/fragment_elimina_usuari" />
+</navigation>
