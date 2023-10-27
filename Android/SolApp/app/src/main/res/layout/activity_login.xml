@@ -76,7 +76,7 @@
         android:layout_marginBottom="18dp"
         android:backgroundTint="#090909"
         android:onClick="goHome"
-        android:text="Accedir"
+        android:text="@string/accedir"
         android:textAlignment="center"
         android:textSize="24sp"
         app:cornerRadius="1dp"

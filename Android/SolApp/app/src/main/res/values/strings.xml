@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Solapp</string>
+    <string name="gestio_usuaris">Gestió d\'usuaris</string>
+    <string name="gestio_professors">Gestió de professors</string>
+    <string name="gestio_alumnes">Gestió d\'alumnes</string>
+    <string name="gestio_aules">Gestió d\'aules</string>
+    <string name="comunicacions">Comunicacions</string>
+    <string name="accedir">Accedir</string>
+    <string name="sortir">Sortir</string>
 </resources>
