@@ -47,14 +47,11 @@ public class GenerarRespostaTest {
      * 
      */
     @Test
-    public void testRespostaLogout() {
+    public void testRespostaLogout() {        
         GenerarResposta generarResposta = new GenerarResposta();
-        RetornDades retornDades = generarResposta.respostaLogout("noActiva");
-        //Resposta logout error
-        assertEquals(retornDades.getCodiResultat(), 0);
         String numSessio = "sessioActiva";
         gestorSessions.agregarSessio(usuariCorrecte, numSessio);
-        retornDades = generarResposta.respostaLogout(numSessio);
+        RetornDades retornDades = generarResposta.respostaLogout(numSessio);
         assertEquals(retornDades.getCodiResultat(), 1);
     }
     

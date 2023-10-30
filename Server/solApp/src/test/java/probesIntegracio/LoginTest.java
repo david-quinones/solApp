@@ -19,7 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import servidor.ServidorSocketListener;
 
-/**
+/**Test per comprobar la crida a la petició LOGIN al servidor
  *
  * @author Pau Castell Galtes
  */
@@ -42,6 +42,7 @@ public class LoginTest {
             }
         });    
         serverThread.start();
+        
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
@@ -94,15 +95,18 @@ public class LoginTest {
             socket.close();
             //Comprobem que les dades rebudes coincideixen amb un login correcte
             //Comprobem primer el codi del resultat, 1 en cas de verificació correcte
-            assertEquals(1, retorn.getCodiResultat());
-            assertEquals(1, usuariRetorn.getId());
-            assertNotNull(numSessio);
+            assertEquals("Codi de resultat correcte", 1, retorn.getCodiResultat());
+            assertEquals("Id de l'usuari retornat",1, usuariRetorn.getId());
+            assertNotNull("Número de sessió no null",numSessio);
 
         } catch (IOException ex) {
             Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
     
+    /**En aquest test comprobem l'exexució en cas d'una validació incorrecte.
+     * 
+     */
     @Test
     public void testLoginError(){
         
@@ -132,7 +136,7 @@ public class LoginTest {
             socket.close();
             //Comprobem que les dades rebudes coincideixen amb un login correcte
             //Comprobem el codi del resultat, 0 en cas de verificació fallida
-            assertEquals(0, retorn.getCodiResultat());
+            assertEquals("Codi d'error",0, retorn.getCodiResultat());
 
     
         } catch (IOException ex) {

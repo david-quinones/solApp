@@ -18,7 +18,7 @@ import org.junit.Test;
 import seguretat.GestorSessions;
 import servidor.ServidorSocketListener;
 
-/**
+/**Classe per fer les probes sobre la crida LOGOUT al servidor
  *
  * @author Pau Castell Galtes
  */
@@ -98,15 +98,21 @@ public class LogoutTest {
             socket.close();
             
             //Comprobem que el resultat es l'esperat, 1 si s'ha tancat la sessió correctament
-            assertEquals(1, retorn.getCodiResultat());
+            assertEquals("Codi del resultat correcte",1, retorn.getCodiResultat());
             //Comprobem que s'ha esborrat la sessió activa
-            assertEquals(false, gestorSessions.verificarSessio(llegir));
+            assertEquals("La sessió s'ha eliminat de les sessions actives",
+                    false, gestorSessions.verificarSessio(sessioActiva));
             
         } catch (IOException ex) {
             Logger.getLogger(LogoutTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    /**Mètode per simular un número de sessió
+     * 
+     * @param usuari
+     * @return 
+     */
     public String numSessio(Usuari usuari){
         //Es crea un número de sessió per fer la proba
         String numeroSessio = UUID.randomUUID().toString();
@@ -116,6 +122,11 @@ public class LogoutTest {
         return numeroSessio;
     }
     
+    /**Test per comprobar la desconexió d'un usuari amb un número de sessió no 
+     * vàlid
+     * 
+     */
+    @Test
     public void testLogoutIncorrecte(){
         try {
             //Socket client
@@ -141,7 +152,7 @@ public class LogoutTest {
             socket.close();
             
             //Comprobem que el resultat es 0, error al tancar la sessió
-            assertEquals(0, retorn.getCodiResultat());
+            assertEquals("Codi d'error",0, retorn.getCodiResultat());
             
         } catch (IOException ex) {
             Logger.getLogger(LogoutTest.class.getName()).log(Level.SEVERE, null, ex);

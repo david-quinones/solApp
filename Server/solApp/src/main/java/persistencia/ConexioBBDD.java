@@ -14,7 +14,7 @@ public class ConexioBBDD {
     private static final String JDBD_URL = "jdbc:mysql://localhost:3306/escola_bressol";
     private static final String USUARI =  "root";
     private static final String PASSWORD = "1234";
-    
+    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
     private Connection conexio;
     
     
@@ -26,6 +26,8 @@ public class ConexioBBDD {
     public Connection conectar() throws SQLException{
         
         conexio = DriverManager.getConnection(JDBD_URL,USUARI,PASSWORD);
+        
+        LOGGER.info("Connexió a la base de dades.");
         
         return conexio;       
     }
@@ -39,6 +41,7 @@ public class ConexioBBDD {
             
             if(conexio != null){
                 conexio.close();
+                LOGGER.info("Conexió a la base de dades tancada.");
             }
             
         } catch (SQLException ex) {

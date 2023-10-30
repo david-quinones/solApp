@@ -1,8 +1,12 @@
 package resposta;
 
+import entitats.Empleat;
 import entitats.Usuari;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
+import java.util.logging.Logger;
+import persistencia.PersonaDAO;
+import seguretat.GestorSessions;
 
 /**
  *La classe determinará la resposta corresponent segons la petició rebuda.
@@ -12,6 +16,10 @@ public class ControladorResposta {
     private PeticioClient peticio;
     private GenerarResposta dadesResposta;
     private RetornDades resposta;
+    private String numSessio;
+    private GestorSessions sessions = GestorSessions.obtindreInstancia();
+    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
+    private static final int CODI_ERROR = 0;
 
     /**Constructor que rep la petició del client i inicialitza la clase dadesResposta
      * per poder sol·licitar les dades de retorn
@@ -30,7 +38,7 @@ public class ControladorResposta {
      * @return RetornDades amb les dades de la resposta.
      */
     public RetornDades gestionarResposta(){
-        String ordre = peticio.getPeticio();
+        String ordre = comprobarSessio(peticio);
 
         switch (ordre) {
             //Demanem les dades a dadesResposta en funció de l'ordre de la petició
@@ -39,16 +47,39 @@ public class ControladorResposta {
                 return resposta;
                 
             case "LOGOUT":
-                //Número de sessió que envia el client
-                String numSessio = (String) peticio.getDades(0, String.class);
                 //Generem resposta de LOGOUT amb el número de sessió rebut.
                 resposta = dadesResposta.respostaLogout(numSessio);
                 return resposta;
+            case "ALTA_EMPLEAT":
+                //Generem resposat a la solicitut d'alta d'un empleat
+                resposta = dadesResposta.respostaAltaEmpleat((Empleat) peticio.getDades(1, Empleat.class));
+                return resposta;
                 
             default:
-                throw new AssertionError();
+                return resposta = new RetornDades(CODI_ERROR);
         }
  
+    }
+
+    /**Métode per comprobar que la sessió existeix abans de donar una resposta
+     * 
+     * @param peticio
+     * @return 
+     */
+    
+    public String comprobarSessio(PeticioClient peticio){
+        //Obtenim numero de sessió
+        numSessio = (String) peticio.getDades(0, String.class);
+        //Si la sessió existeix i no es una petició de LOGIN solicitem resposta
+        if(!peticio.getPeticio().equals("LOGIN")){
+            if(sessions.verificarSessio(numSessio)){
+                return peticio.getPeticio();
+            }else{
+                LOGGER.info("La sessió no existeix");
+                return "ERROR";
+            }
+        }
+        return peticio.getPeticio();
     }
     
 }

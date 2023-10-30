@@ -1,11 +1,15 @@
 package resposta;
 
-import entitats.Usuari;
+import entitats.*;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import persistencia.ConexioBBDD;
-import persistencia.UsuariDAO;
+import persistencia.*;
 import seguretat.GestorSessions;
 
 /**
@@ -18,6 +22,17 @@ public class GenerarResposta {
     private RetornDades resposta;
     private UsuariDAO usuariDAO;
     private GestorSessions sessions = GestorSessions.obtindreInstancia();
+    private ConexioBBDD base_dades;
+    private Connection conexio;
+    
+    public GenerarResposta(){
+        try {
+            conexio = base_dades.conectar();
+        } catch (SQLException ex) {
+            Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE,
+                    "Error al conectar amb la base de dades", ex);
+        }
+    }
     
     
     /**Métode que contrueix la resposta que s'enviará al client per validar 
@@ -60,18 +75,31 @@ public class GenerarResposta {
      * @return resposta amb les dades
      */
     public RetornDades respostaLogout(String numSessio){
-        //Comprobem si el número de sessió está activa
-        if(sessions.verificarSessio(numSessio)){
             //Eliminem número de sessió
             sessions.eliminarSessio(numSessio);
             //Generem resposta
             resposta = new RetornDades(CODI_CORRECTE);
             return resposta;
-        }else{
-            //Resposta en cas de sessió no activa
-            resposta = new RetornDades(CODI_ERROR);
-            return resposta;
-        }
+
     }
-        
+    
+    /**Métode que genera la resoposta a una solicitud d'alta d'un empleat
+     * 
+     * @param empleat que es vol donar d'alta
+     * @return codi correcte o d'error
+     */
+    public RetornDades respostaAltaEmpleat(Empleat empleat){
+            //Instanciem la classe EmpleatDAO
+            EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
+            //Codi que ens indica quantes files s'han insertat
+            int codiAltaEmpleat = empleatDAO.altaEmpleat(empleat);
+            //Comprobem que l'entitat Empleat s'ha insertat
+            if(codiAltaEmpleat > 0){
+                return resposta = new RetornDades(CODI_CORRECTE);
+            }else{
+                //Si no s'ha insertat cap fila retornem codi d'error
+                return resposta = new RetornDades(CODI_ERROR);
+            }
+
+    }      
 }
