@@ -56,7 +56,7 @@ public class JsonLoginController implements Initializable {
             //create user
             Usuari user = new Usuari(name, password);
             //add Object to array - convert with serverStr to JSON
-            peticio.setDades(Arrays.asList(user));
+            /**///peticio.setDades(Arrays.asList(user).toString());
             //send message (convert petition to JSON)
             String respota = socket.sendMessage(JsonUtil.toJson(peticio));
 
@@ -70,7 +70,7 @@ public class JsonLoginController implements Initializable {
             }else{
                 System.out.println("creem Objecte..");
                 System.out.println(respota);
-                userLogin = Usuari.fromJson(jObj.getJSONArray("dades").get(0));
+               /**/// userLogin = Usuari.fromJson(jObj.getJSONArray("dades").get(0));
                 //option 1
                 JSONObject obj2 = (JSONObject) jObj.getJSONArray("dades").get(1);
                 //option2
@@ -89,7 +89,7 @@ public class JsonLoginController implements Initializable {
                 //entrem
                 Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
                 Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
-                Model.getInstance().getViewFactory().showAdminWindow(); //mostrem la finesta nova
+                //Model.getInstance().getViewFactory().showMainWindow("user"); //mostrem la finesta nova
 
 
 

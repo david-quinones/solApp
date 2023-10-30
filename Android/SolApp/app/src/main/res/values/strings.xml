@@ -1,13 +1,29 @@
 <resources>
-    <string name="app_name">SolApp</string>
-    <string name="BtnAltaAlumne">Alta alumne</string>
-    <string name="BtnAltaUsuari">Alta usuari</string>
-    <string name="BtnModificacioUsuari">Modificació usuari</string>
-    <string name="BtnModificacioAlumne">Modificació alumne</string>
-    <string name="BtnLlistatAlumnes">Consulta d\'alumnes</string>
-    <string name="BtnLlistatUsuaris">Consulta d\'usuaris</string>
-    <string name="BtnLogout">Desconectar</string>
-    <string name="eTAddUserUserName">Nom Usuari</string>
-    <string name="eTAddUserName">Nom</string>
-    <string name="btnAddUser">Alta d\'susari</string>
+    <string name="app_name">Solapp</string>
+    <string name="gestio_usuaris">Gestió d\'usuaris</string>
+    <string name="gestio_professors">Gestió de professors</string>
+    <string name="gestio_alumnes">Gestió d\'alumnes</string>
+    <string name="gestio_aules">Gestió d\'aules</string>
+    <string name="comunicacions">Comunicacions</string>
+    <string name="accedir">Accedir</string>
+    <string name="sortir">Sortir</string>
+    <string name="title_activity_nav_gestio_usuaris">Gestio d\'usuaris</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Solapp</string>
+    <string name="nav_header_subtitle">Escola bressol L\'Estel</string>
+    <string name="nav_header_desc">Menú de gestió d\'usuaris</string>
+    <string name="action_settings">Propietats</string>
+
+    <string name="menu_home">Menu</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="elimina_usuari">Eliminar usuari</string>
+    <string name="afegir_usuari">Afegir Usuari</string>
+    <string name="gestio_usuaris_menu">Menu de gestió d\'usuaris</string>
+    <string name="modifica_usuari">Modificar usuari</string>
+    <string name="busca_usuari">Buscar usuari</string>
+    <string name="tornar_menu">Tornar al menú principal</string>
 </resources>

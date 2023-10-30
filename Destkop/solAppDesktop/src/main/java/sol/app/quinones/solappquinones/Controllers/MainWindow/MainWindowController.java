@@ -6,22 +6,35 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador per la finestra principal de l'apliació
+ * S'encarrega d'inicialitzar i gestionar el comportament basat amb el rol de l'usuri
+ *
+ * @author david
+ */
 public class MainWindowController implements Initializable {
 
+    //Rol de l'usuari que ha iniciat sessió
     private final String rol;
 
-    //contructor
+    /**
+     * Contructor
+     * @param rol Rol de l'usuari que ha iniciat
+     */
     public MainWindowController(String rol){
         this.rol = rol;
     }
 
-    //injectem dependencia per tindre total accés
+    //Injecció dependencia controlador menu (Nom ha de ser Id *.fxml + Controller)
     @FXML
-    private MenuController menuController;
+    private MenuController mainMenuController;
 
-
+    /**
+     * Metode inicialitzador, que es crida després de carregar la finestra
+     * Estableix el rol de l'usuari al controaldor del menu
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        menuController.setRol(this.rol);
+        mainMenuController.setRol(this.rol);
     }
 }

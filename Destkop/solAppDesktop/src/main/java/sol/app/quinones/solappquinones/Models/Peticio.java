@@ -4,65 +4,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Peticio.
+ * Classe que representa una petició amb un tipus especifc i dades associades
+ *
+ * @author david
  */
 public class Peticio {
 
+    /* Tipus de la petició, exemple "LOGIN", "PERFIL", "LOGOUT" */
     private String peticio;
+    /*Llista de dades o parametres associats a la petició*/
     private ArrayList<String> dades = new ArrayList<>();
 
     /**
-     * Instantiates a new Peticio.
+     * Contrucctor per defecte
      */
     public Peticio() {
 
     }
 
     /**
-     * Instantiates a new Peticio.
+     * Contructor que estableix el tipus de petició
      *
-     * @param peticio the peticio
+     * @param peticio tipus petició
      */
     public Peticio(String peticio) {this.peticio = peticio;}
 
     /**
-     * Gets peticio.
+     * Retorna la llista de dades associades a la solicitud
      *
-     * @return the peticio
+     * @return el tipus de petició
      */
     public String getPeticio() {
         return peticio;
     }
 
     /**
-     * Sets peticio.
+     * Estableix tipus petició
      *
-     * @param peticio the peticio
+     * @param peticio tipus petició
      */
     public void setPeticio(String peticio) {
         this.peticio = peticio;
     }
 
     /**
-     * Gets dades.
+     * Retorna la llista de dades associades a la solicitud
      *
-     * @return the dades
+     * @return Llista dades
      */
     public ArrayList<String> getDades() {
         return dades;
     }
 
     /**
-     * Add dades.
+     * Afagueix un nou element a la llista
      *
-     * @param dades the dades
+     * @param dades Dada afegida
      */
     public void addDades(String dades){
         this.dades.add(dades);
     }
 
     /**
-     * Drop dades.
+     * Neteja la llista
      */
     public void dropDades(){
         this.dades.clear();

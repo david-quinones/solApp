@@ -23,51 +23,54 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
- * The type Login controller.
+ * Controlador per la finestra de inici de sessió
+ *
+ * @author david
  */
 public class LoginController implements Initializable {
-    /**
-     * The Lbl usuari.
-     */
+
+    //Components de la inerficia grafica
     public Label lbl_usuari;
-    /**
-     * The Fld usuari.
-     */
     public TextField fld_usuari;
-    /**
-     * The Fld password.
-     */
     public TextField fld_password;
-    /**
-     * The Btn accedir.
-     */
     public Button btn_accedir;
 
 
+    //Objectes per la comunicació amb el servidor i construir les peticions
     private ServerComunication socket = new ServerComunication();
     private Peticio peticio = new Peticio();
-
     private SingletonConnection singletonConnection = SingletonConnection.getInstance();
 
+    /**
+     * Metode inicialitzador, es crida després de carregar la finestra
+     * Configura les accions dels components
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_accedir.setOnAction(event -> onLogin()); //en apretar, accedim al metode
     }
 
+    /**
+     * Metode que es crida en presionar el boto d'accedir
+     * Gestiona el procés d'inici de sessio
+     */
     private void onLogin(){
 
+        //Obtenim les dades dels camps
         String name = fld_usuari.getText();
         String password = fld_password.getText();
 
-
-        //TODO
+        //Mirem que usuari and password no estigui buit (sempre han de tindre dades)
         if(fld_usuari.getText().isEmpty() || fld_password.getText().isEmpty()){
+            ErrorController.showErrorAlert("Error","Error de Dades", "Es necessari emplenar Usuari i Password" , Alert.AlertType.INFORMATION);
             fld_usuari.requestFocus(); //pasar focus (selecciona todo)
             fld_usuari.positionCaret(fld_usuari.getText().length());//poner focus al final (no selecciona)
+            fld_password.setText("");
+            return;
+
         }
 
-        System.out.println(password);
-
+        //netejem List (no tingui temporals d'errors anteriors)
         peticio.dropDades();
 
         //Connect to server and send petition
@@ -83,27 +86,25 @@ public class LoginController implements Initializable {
             //send message (convert petition to JSON)
             String respota = socket.sendMessage(JsonUtil.toJson(peticio));
 
-
-
             /*RESPOSTA*/
             //convert to "JSON"
             JSONObject jObj = new JSONObject(respota);
 
             if(jObj.getInt("codiResultat") == 0) {
-
-                System.out.println("Error en la connexió"); //finestra floatant i netejar valors TODO
-                fld_password.setText("");
-                fld_password.requestFocus();
+                ErrorController.showErrorAlert("Error","Error de Dades", "Usuari o Contrasenya incorrectes" , Alert.AlertType.WARNING);
+                fld_password.setText(""); //netejem password
+                fld_password.requestFocus(); //posem focus al password (com està net, no fa falta anar al final)
 
             }else{
-
-                System.out.println("creem Objecte..");
+                //Deserializem l'objecte usuari assignant-lo al Singleton directament
                 singletonConnection.setUserConnectat(Usuari.fromJson(jObj.getJSONArray("dades").get(0).toString()));
+                //Assignem la Key a singleton
                 singletonConnection.setKey(jObj.getJSONArray("dades").get(1).toString());
 
                 Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
                 Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
 
+                //mirem rol de l'usuari per obrir un menu o un altre
                 if (singletonConnection.getUserConnectat().isAdmin()){
                     Model.getInstance().getViewFactory().showMainWindow("admin"); //mostrem la finesta nova
                 }else if (singletonConnection.getUserConnectat().isTeacher()){
@@ -112,35 +113,15 @@ public class LoginController implements Initializable {
                     Model.getInstance().getViewFactory().showMainWindow("user"); //mostrem la finesta nova
                 }
             }
+
         } catch (IOException e) {
+            ErrorController.showErrorAlert("Error","Error de Comunicació", e.getMessage(), Alert.AlertType.ERROR);
             throw new RuntimeException(e);
         } catch (JSONException e) {
+            ErrorController.showErrorAlert("Error","Error en tractar el 'JSON' de resposta", e.getMessage(), Alert.AlertType.ERROR);
             throw new RuntimeException(e);
         }
 
-
-        /*
-
-        }else{
-            showErrorAlert("ACCESO DENEGADO", "User / Passwor bad", "El usuario o la contraseña son erroenos");
-            fld_password.setText("");
-        }
-        */
-
     }
 
-    /**
-     * Show error alert.
-     *
-     * @param title       the title
-     * @param headerText  the header text
-     * @param contentText the content text
-     */
-    public void showErrorAlert(String title, String headerText, String contentText){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
-        alert.showAndWait();
-    }
 }

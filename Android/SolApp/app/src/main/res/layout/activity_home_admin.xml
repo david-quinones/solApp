@@ -3,101 +3,177 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/btnLlistatUsuaris"
-        android:layout_width="175dp"
-        android:layout_height="45dp"
-        android:onClick="goQueryUser"
-        android:text="@string/BtnLlistatUsuaris"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="544dp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="310dp"
-        android:layout_height="116dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sollAppTitle2"
-        app:layout_constraintVertical_bias="0.067"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+    android:layout_height="match_parent"
+    android:background="@color/solapp_background"
+    tools:context=".activities.HomeAdminActivity">
 
     <TextView
-        android:id="@+id/sollAppTitle2"
-        android:layout_width="217dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="32dp"
-        android:text="SolApp"
-        android:textAlignment="center"
+        android:id="@+id/textCap"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Menu Principal"
+        android:textAlignment="inherit"
+        android:textAllCaps="false"
+        android:textColor="#A5A274"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewMenuPrincipal"
-        android:layout_width="126dp"
-        android:layout_height="42dp"
-        android:text="Menú principal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/BtnAltaUsuari"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.141" />
-
-    <Button
-        android:id="@+id/BtnAltaUsuari"
-        android:layout_width="175dp"
-        android:layout_height="45dp"
-        android:onClick="goAddUser"
-        android:text="@string/BtnAltaUsuari"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="276dp" />
-
-    <Button
-        android:id="@+id/BtnModificacioUsuari"
-        android:layout_width="175dp"
-        android:layout_height="45dp"
-        android:text="@string/BtnModificacioUsuari"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="413dp" />
-
-    <Button
-        android:id="@+id/BtnLlistatAlumnes"
-        android:layout_width="175dp"
-        android:layout_height="45dp"
-        android:text="@string/BtnLlistatAlumnes"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="614dp" />
-
-    <Button
-        android:id="@+id/BtnModificacioAlumne"
-        android:layout_width="175dp"
-        android:layout_height="45dp"
-        android:text="@string/BtnModificacioAlumne"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="475dp" />
-
-    <Button
-        android:id="@+id/BtnAltaAlumne"
-        android:layout_width="175dp"
-        android:layout_height="45dp"
-        android:text="@string/BtnAltaAlumne"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="343dp" />
-
-    <Button
-        android:id="@+id/BtnLogout"
-        android:layout_width="wrap_content"
+        android:id="@+id/textBenvinguda"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:onClick="doLogout"
-        android:text="@string/BtnLogout"
-        app:layout_constraintEnd_toStartOf="@+id/BtnLlistatAlumnes"
-        app:layout_constraintHorizontal_bias="0.505"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="614dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textCap" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textBenvinguda"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/usersBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:onClick="goGestioUsiaris"
+        android:shadowColor="#000000"
+        android:singleLine="false"
+        android:text="@string/gestio_usuaris"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:cornerRadius="1dp"
+        app:icon="@drawable/baseline_groups_2_24"
+        app:iconGravity="start"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toTopOf="@id/professorsBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#040000"
+        app:strokeWidth="2dp" />
+
+    <Button
+        android:id="@+id/professorsBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:shadowColor="#000000"
+        android:singleLine="false"
+        android:text="@string/gestio_professors"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:cornerRadius="1dp"
+        app:icon="@drawable/baseline_school_24"
+        app:iconGravity="start"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toTopOf="@id/alumnesBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#040000"
+        app:strokeWidth="2dp" />
+
+    <Button
+        android:id="@+id/alumnesBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:shadowColor="#000000"
+        android:singleLine="false"
+        android:text="@string/gestio_alumnes"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:cornerRadius="1dp"
+        app:icon="@drawable/baseline_face_24"
+        app:iconGravity="start"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toTopOf="@id/aulessBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#040000"
+        app:strokeWidth="2dp" />
+
+    <Button
+        android:id="@+id/aulessBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:shadowColor="#000000"
+        android:singleLine="false"
+        android:text="@string/gestio_aules"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:cornerRadius="1dp"
+        app:icon="@drawable/baseline_table_restaurant_24"
+        app:iconGravity="start"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toTopOf="@id/comunicacionsBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#040000"
+        app:strokeWidth="2dp" />
+
+    <Button
+        android:id="@+id/comunicacionsBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#FFFFFF"
+        android:shadowColor="#000000"
+        android:singleLine="false"
+        android:text="@string/comunicacions"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:cornerRadius="1dp"
+        app:icon="@drawable/baseline_alternate_email_24"
+        app:iconGravity="start"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/logoutBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#040000"
+        app:strokeWidth="2dp" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="239dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="18dp"
+        android:backgroundTint="#090909"
+        android:onClick="doLogout"
+        android:text="@string/sortir"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:cornerRadius="1dp"
+        app:icon="@drawable/ic_logo_foreground"
+        app:iconGravity="start"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

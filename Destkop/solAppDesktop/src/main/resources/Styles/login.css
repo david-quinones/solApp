@@ -3,6 +3,7 @@
 */
 .login_container {
     -fx-background-color: #EEEEEE;
+    //-fx-background-color: linear-gradient(to right,#AEDFF7,#f4f990);
 }
 
 /*
@@ -41,6 +42,7 @@
 
 .input_field {
     -fx-background-color: #FFFFFF;
+    //-fx-border-color: BLACK;
     -fx-pref-height: 35;
     -fx-font-size: 1.2em;
 }

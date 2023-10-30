@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.json.JSONObject;
+import sol.app.quinones.solappquinones.Controllers.ErrorController;
 import sol.app.quinones.solappquinones.Models.Model;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
@@ -15,6 +16,13 @@ import sol.app.quinones.solappquinones.Service.SingletonConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador per el menu prinicpal de l'aplicació
+ * S'encarrega de gestionar la visibilitat i funcionalitats dels elements
+ * segons el rol d'usuari
+ *
+ * @author david
+ */
 public class MenuController implements Initializable {
     public Button btn_user;
     public Button btn_alumne;
@@ -29,22 +37,31 @@ public class MenuController implements Initializable {
 
     private String rol;
 
-
     private ServerComunication socket = new ServerComunication();
 
-
-
+    /**
+     * Metode inicialitzador cridat després de carregar la finestra
+     * Estableix les accions dels botons
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_logout.setOnAction(event -> logout());
-
+        btn_perfil.setOnAction(event -> openPerfil());
     }
 
+    /**
+     * Estableix el rol de l'usuari i asjuta la visibilitat dels elements del menu
+     * @param rol
+     */
     public void setRol(String rol){
         this.rol = rol;
         selectMenu(this.rol);
     }
 
+    /**
+     * Ajusta la visibilitat dels elements del menu en funcio del rol que arriba per parametre
+     * @param rol
+     */
     private void selectMenu(String rol){
         switch (rol){
             case "teacher":
@@ -76,6 +93,9 @@ public class MenuController implements Initializable {
         }
     }
 
+    /**
+     * Tanca la sessió de l'usuari actual i mostra la pantalla d'inici de sessió
+     */
     public void logout(){
 
         try{
@@ -94,23 +114,26 @@ public class MenuController implements Initializable {
                 Model.getInstance().getViewFactory().closeStage((Stage) btn_perfil.getScene().getWindow());
                 Model.getInstance().getViewFactory().showLoginWindow();
 
-            }else{
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Missatge informatiu");
-                alert.setHeaderText(null);
-                alert.setContentText("No es pot desvincular amb el servidor, es força tancar l'aplicació");
-                alert.showAndWait();
-                Platform.exit();
 
+            }else{
+                ErrorController.showErrorAlert("Missatge Informatiu", null, "No es pot desvincular amb el servidor, es força tancar l'aplicació", Alert.AlertType.INFORMATION);
+                Platform.exit();
             }
 
-            System.out.println(resposta);
-
-
         }catch(Exception e){
+            ErrorController.showErrorAlert("Error","Error al Desconnectar", e.getMessage(), Alert.AlertType.ERROR);
             e.printStackTrace();
+            Platform.exit();
         }
 
+    }
+
+    /**
+     * Obre el perfil de l'usuari per veure i editar les seves dades principals
+     */
+    public void openPerfil(){
+        //TODO
+        //dashboard de perfil (poder editar dades) --> panell superior de editar (aqui també el menu superior)
     }
 
 
