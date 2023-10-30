@@ -46,4 +46,11 @@ public class Utility {
         parent.finish();
     }
 
+    public static void gotoActivityChild(AppCompatActivity parent, Class destination){
+
+        Intent i = new Intent(parent, destination);
+        parent.startActivity(i);
+
+    }
+
 }

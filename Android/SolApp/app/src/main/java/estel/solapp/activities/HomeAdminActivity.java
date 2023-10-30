@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -19,13 +18,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import estel.solapp.NavGestioUsuarisActivity;
+import estel.solapp.ui.admin.NavGestioUsuarisActivity;
 import estel.solapp.R;
 import estel.solapp.common.CommController;
 import estel.solapp.common.SingletonSessio;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
-import estel.solapp.models.User;
+
 /**
  * Classe controladora de menú principal d'usuaris admin
  * @author Juan Antonio
@@ -47,18 +46,13 @@ public class HomeAdminActivity extends AppCompatActivity {
 
     /**
      * Click per anar
-     * al la acivitat per afegir usuari AddUser Activity
+     * al menú navigation de gestió d'usuaris
      * @param view vista
      */
     public void goGestioUsiaris(View view){
-        Utility.gotoActivity(this, NavGestioUsuarisActivity.class);
+
+        Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
     }
-    /**
-     * Click per anar
-     * al la acivitat per cercar  usuari QueryUser Activity
-     * @param view vista
-     */
-//    public void goQueryUser(View view){Utility.gotoActivity(this, QueryUserActivity.class);}
 
     /**
      * Click per

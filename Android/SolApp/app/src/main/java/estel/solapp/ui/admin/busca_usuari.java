@@ -1,4 +1,4 @@
-package estel.solapp;
+package estel.solapp.ui.admin;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import estel.solapp.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AfegirUsuari#newInstance} factory method to
+ * Use the {@link busca_usuari#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AfegirUsuari extends Fragment {
+public class busca_usuari extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class AfegirUsuari extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AfegirUsuari() {
+    public busca_usuari() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class AfegirUsuari extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AfegirUsuari.
+     * @return A new instance of fragment busca_usuari.
      */
     // TODO: Rename and change types and number of parameters
-    public static AfegirUsuari newInstance(String param1, String param2) {
-        AfegirUsuari fragment = new AfegirUsuari();
+    public static busca_usuari newInstance(String param1, String param2) {
+        busca_usuari fragment = new busca_usuari();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class AfegirUsuari extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_afegir_usuari, container, false);
+        return inflater.inflate(R.layout.fragment_busca_usuari, container, false);
     }
 }

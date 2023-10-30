@@ -15,11 +15,15 @@
     <string name="nav_header_desc">Menú de gestió d\'usuaris</string>
     <string name="action_settings">Propietats</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Menu</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="elimina_usuari">Eliminar usuari</string>
     <string name="afegir_usuari">Afegir Usuari</string>
+    <string name="gestio_usuaris_menu">Menu de gestió d\'usuaris</string>
+    <string name="modifica_usuari">Modificar usuari</string>
+    <string name="busca_usuari">Buscar usuari</string>
+    <string name="tornar_menu">Tornar al menú principal</string>
 </resources>
