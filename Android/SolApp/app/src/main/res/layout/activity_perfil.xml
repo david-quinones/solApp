@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/solapp_background"
+    tools:context=".activities.PerfilActivity">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Perfil"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="117dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textViewPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <Button
+        android:id="@+id/modificarPerfilBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#090909"
+        android:text="Modificar perfil"
+        android:textAlignment="viewEnd"
+        android:textSize="16sp"
+        app:cornerRadius="1dp"
+        app:icon="@drawable/baseline_create_24"
+        app:iconGravity="top"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPerfil" />
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="431dp"
+        android:layout_marginTop="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modificarPerfilBtn"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFDFD"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/borde_edittext"
+                android:text="Nom d'usuari"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextUserName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/borde_edittext"
+                android:ems="10"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/borde_edittext"
+                android:text="Nom"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextNom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/borde_edittext"
+                android:clickable="true"
+                android:editable="true"
+                android:ems="10"
+                android:enabled="true"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/modificarlBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="112dp"
+                android:backgroundTint="#090909"
+                android:clickable="false"
+                android:text="Confirmar canvis"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:visibility="visible"
+                app:cornerRadius="1dp"
+                app:icon="@drawable/baseline_done_24"
+                app:iconGravity="top"
+                app:iconTint="#FFFFFF" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

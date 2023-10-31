@@ -26,4 +26,6 @@
     <string name="modifica_usuari">Modificar usuari</string>
     <string name="busca_usuari">Buscar usuari</string>
     <string name="tornar_menu">Tornar al menú principal</string>
+    <string name="title_activity_nav_gestio_professors">NavGestioProfessorsActivity</string>
+    <string name="perfilbtn">Perfil</string>
 </resources>
