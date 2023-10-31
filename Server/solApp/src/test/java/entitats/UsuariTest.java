@@ -16,7 +16,7 @@ public class UsuariTest {
     @Before
     public void setUp(){
         
-        usuari = new Usuari(1, "nomUsuari", "password", true, false,1);
+        usuari = new Usuari(1, "nomUsuari", "password", true, false);
     }
     
     
@@ -104,23 +104,5 @@ public class UsuariTest {
         usuari.setIsTeacher(true);
         assertEquals(usuari.isIsTeacher(), true);
     }
-    
-    /**Test per comprobar el retorn del métod getPersonaId
-     * 
-     */
-    @Test
-    public void testGetPersonaId(){
-        assertEquals(usuari.getPersonaId(), 1);
-    }
-    
-    /**Test per comprobar el métode setPersonaId i comprobar el canvis
-     * 
-     */
-    @Test
-    public void testSetPersonaId(){
-        usuari.setPersonaId(2);
-        assertEquals(usuari.getPersonaId(), 2);
-    }
-    
-    
+
 }

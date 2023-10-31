@@ -21,6 +21,7 @@ public class UsuariDAO {
     private ConexioBBDD base_dades;
     private Connection conexio;
     private Encriptar seguretat;
+    PreparedStatement ps;
 
     /**Constructor de la classe UsuariDAO
      * 
@@ -52,7 +53,7 @@ public class UsuariDAO {
         try {
             //Consulta a la base de dades
             String consulta = "SELECT * FROM usuari WHERE nom_usuari = ?";
-            PreparedStatement ps = conexio.prepareStatement(consulta);
+            ps = conexio.prepareStatement(consulta);
             
             //Establim el nom d'usuari rebut a la consulta
             ps.setString(1, usuari.getNomUsuari());
@@ -91,7 +92,13 @@ public class UsuariDAO {
             Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE, null, ex);
             
         }finally{          
-            base_dades.tancarConexio();
+            try {
+                ps.close();
+                base_dades.tancarConexio();
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE,
+                        "Error al tancar el Prepared Statement", ex);
+            }
         }
         
         return null;

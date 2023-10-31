@@ -1,14 +1,13 @@
 -------------------------------------------------------------------------------
-Test set: resposta.EnviarRespostaTest
+Test set: persistencia.PersonaDAOTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.218 s <<< FAILURE! -- in resposta.EnviarRespostaTest
-resposta.EnviarRespostaTest.testEnviarResposta -- Time elapsed: 0.129 s <<< FAILURE!
-org.junit.ComparisonFailure: 
-expected:<[{"codiResultat":0,"dades":[]}
-]> but was:<[]>
-	at org.junit.Assert.assertEquals(Assert.java:117)
-	at org.junit.Assert.assertEquals(Assert.java:146)
-	at resposta.EnviarRespostaTest.testEnviarResposta(EnviarRespostaTest.java:41)
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.566 s <<< FAILURE! -- in persistencia.PersonaDAOTest
+persistencia.PersonaDAOTest.testAltaPersona -- Time elapsed: 0.520 s <<< FAILURE!
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at persistencia.PersonaDAOTest.testAltaPersona(PersonaDAOTest.java:40)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -17,6 +16,7 @@ expected:<[{"codiResultat":0,"dades":[]}
 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
 	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)

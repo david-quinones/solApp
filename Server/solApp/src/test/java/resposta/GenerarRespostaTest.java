@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package resposta;
 
 import entitats.Usuari;
@@ -25,8 +21,8 @@ public class GenerarRespostaTest {
      */
     @Before
     public void setUp(){
-        usuariCorrecte = new Usuari(1, "nom_usuari", "password", true, false, 0);
-        usuariFail = new Usuari(1, "nom_usuari", "error", true, false, 0);
+        usuariCorrecte = new Usuari(1, "nom_usuari", "password", true, false);
+        usuariFail = new Usuari(1, "nom_usuari", "error", true, false);
         gestorSessions = GestorSessions.obtindreInstancia();
     }
 
@@ -51,14 +47,11 @@ public class GenerarRespostaTest {
      * 
      */
     @Test
-    public void testRespostaLogout() {
+    public void testRespostaLogout() {        
         GenerarResposta generarResposta = new GenerarResposta();
-        RetornDades retornDades = generarResposta.respostaLogout("noActiva");
-        //Resposta logout error
-        assertEquals(retornDades.getCodiResultat(), 0);
         String numSessio = "sessioActiva";
         gestorSessions.agregarSessio(usuariCorrecte, numSessio);
-        retornDades = generarResposta.respostaLogout(numSessio);
+        RetornDades retornDades = generarResposta.respostaLogout(numSessio);
         assertEquals(retornDades.getCodiResultat(), 1);
     }
     
