@@ -10,6 +10,7 @@ estructurapr\RetornDades.class
 estructurapr\PeticioClient.class
 HashProbes.class
 resposta\EnviarResposta.class
+utilitats\Utils.class
 entitats\Persona.class
 resposta\ControladorResposta.class
 ProbaInsertarPersona.class

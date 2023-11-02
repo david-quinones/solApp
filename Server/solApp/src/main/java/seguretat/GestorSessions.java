@@ -21,6 +21,9 @@ public class GestorSessions {
     public static synchronized GestorSessions obtindreInstancia(){
         if(instancia == null){
             instancia = new GestorSessions();
+            //NOMES PER FER PROVES
+            Usuari usuari = new Usuari(2, "Pau", "hola", true, false);
+            instancia.agregarSessio(usuari, "sessioProves");
         }
         //Retornem la instancia única del GestorSessions
         return instancia;
@@ -55,5 +58,20 @@ public class GestorSessions {
      */
     public void eliminarSessio(String numSessio){
         sesionsActives.remove(numSessio);
+    }
+    
+    /**Métode que retorna el valor del Hash Map a partir de la clau. A partir del
+     * número de sessió retorna el id de l'usuari connectat
+     * 
+     * @param numSessio
+     * @return 
+     */
+    public int idUsuariConectat(String numSessio){
+        int idUsuari = 0;
+        if(sesionsActives.containsKey(numSessio)){
+            return idUsuari = sesionsActives.get(numSessio);
+        }else{
+            return idUsuari;
+        }
     }
 }

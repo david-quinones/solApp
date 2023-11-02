@@ -1,5 +1,7 @@
 package entitats;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -8,11 +10,11 @@ import java.time.format.DateTimeFormatter;
  * @author Pau Castell Galtes
  */
 public class Persona {
-    private int id;
+    private int idPersona;
     private String nom;
     private String cognom1;
     private String cognom2;
-    private LocalDate data_naixement;
+    private String data_naixement;
     private String dni;
     private String telefon;
     private String mail;
@@ -31,11 +33,11 @@ public class Persona {
      */
     public Persona(int id, String nom, String cognom1, String cognom2,
             String data_naixement, String dni, String telefon, String mail) {
-        this.id = id;
+        this.idPersona = id;
         this.nom = nom;
         this.cognom1 = cognom1;
         this.cognom2 = cognom2;
-        this.data_naixement = LocalDate.parse(data_naixement, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.data_naixement = data_naixement;
         this.dni = dni;
         this.telefon = telefon;
         this.mail = mail;
@@ -46,32 +48,36 @@ public class Persona {
         this.nom = nom;
         this.cognom1 = cognom1;
         this.cognom2 = cognom2;
-        this.data_naixement = LocalDate.parse(data_naixement, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.data_naixement = data_naixement;
         this.dni = dni;
         this.telefon = telefon;
         this.mail = mail;
     }
 
     public Persona(int id, String nom, String cognom1, String cognom2, String data_naixement) {
-        this.id = id;
+        this.idPersona = id;
         this.nom = nom;
         this.cognom1 = cognom1;
         this.cognom2 = cognom2;
-        this.data_naixement = LocalDate.parse(data_naixement, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.data_naixement = data_naixement;
     }
 
     public Persona(String nom, String cognom1, String cognom2, String data_naixement) {
         this.nom = nom;
         this.cognom1 = cognom1;
         this.cognom2 = cognom2;
-        this.data_naixement = LocalDate.parse(data_naixement, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.data_naixement = data_naixement;
+    }
+    
+    public Persona(){
+        
     }
 
     
     //Getters i Setters
     
     public int getId() {
-        return id;
+        return idPersona;
     }
 
     public String getNom() {
@@ -87,12 +93,11 @@ public class Persona {
     }
 
     public String getData_naixement() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return data_naixement.format(format);
+        return data_naixement;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idPersona = id;
     }
 
     public void setNom(String nom) {
@@ -107,8 +112,8 @@ public class Persona {
         this.cognom2 = cognom2;
     }
 
-    public void setData_naixement(String data_naixement) {
-        this.data_naixement = LocalDate.parse(data_naixement, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public void setData_naixement(String data) {
+        data_naixement = data;
     }
 
     public void setDni(String dni) {

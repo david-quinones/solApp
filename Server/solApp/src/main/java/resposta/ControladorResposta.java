@@ -1,6 +1,7 @@
 package resposta;
 
 import entitats.Empleat;
+import entitats.Persona;
 import entitats.Usuari;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
@@ -54,7 +55,20 @@ public class ControladorResposta {
                 //Generem resposat a la solicitut d'alta d'un empleat
                 resposta = dadesResposta.respostaAltaEmpleat((Empleat) peticio.getDades(1, Empleat.class));
                 return resposta;
-                
+            case "CONSULTA_PERFIL":
+                //Generem resposta amb les dades de la Persona vinculada al usuari
+                String numSessio = (String) peticio.getDades(0, String.class);
+                resposta = dadesResposta.respostaConsultaPersona(numSessio);
+                return resposta;
+            case "MODIFICAR_PERFIL":
+                //Generem resposta amb les noves dades de la Persona SIMULAT
+                Persona personaNova = (Persona) peticio.getDades(1, Persona.class);
+                resposta =  dadesResposta.respostaModificarPersona(personaNova);
+                return resposta;
+            case "LLISTAR EMPLEATS":
+                //Generem la resposta amb les dades de tots els empleats
+                resposta = dadesResposta.respostaLlistarEmpleats();
+                return resposta;
             default:
                 return resposta = new RetornDades(CODI_ERROR);
         }
@@ -81,5 +95,6 @@ public class ControladorResposta {
         }
         return peticio.getPeticio();
     }
+    
     
 }

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: resposta.GenerarRespostaTest
+Test set: utilitats.UtilsTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.678 s -- in resposta.GenerarRespostaTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.057 s -- in utilitats.UtilsTest

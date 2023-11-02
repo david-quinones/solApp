@@ -11,8 +11,13 @@ probesIntegracio\LoginTest$1.class
 probesIntegracio\LoginTest.class
 persistencia\EmpleatDAOTest.class
 persistencia\UsuariDAOTest.class
+probesIntegracio\ModificacióPerfilTest.class
 entitats\PersonaTest.class
+probesIntegracio\ConsultaPersonaTest$1.class
+probesIntegracio\ConsultaPersonaTest.class
 persistencia\PersonaDAOTest.class
 seguretat\EncriptarTest.class
 entitats\UsuariTest.class
 resposta\ControladorRespostaTest.class
+utilitats\UtilsTest.class
+probesIntegracio\ModificacióPerfilTest$1.class

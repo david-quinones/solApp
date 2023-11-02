@@ -8,10 +8,10 @@ import java.time.format.DateTimeFormatter;
  * @author Pau Castell Galtes
  */
 public class Empleat extends Persona{
-    private int id;
+    private int idEmpleat;
     private boolean actiu;
-    private LocalDate iniciContracte;
-    private LocalDate finalContracte;
+    private String iniciContracte;
+    private String finalContracte;
 
     
     /**Constructors, diferents segons les necessitats
@@ -26,29 +26,29 @@ public class Empleat extends Persona{
             String finalContracte
             ) {
         super(idPersona, nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
-        this.id = id;
+        this.idEmpleat = id;
         this.actiu = actiu;
-        this.iniciContracte = LocalDate.parse(iniciContracte, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.finalContracte = LocalDate.parse(finalContracte, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.iniciContracte = iniciContracte;
+        this.finalContracte = finalContracte;
     }
 
     public Empleat(String nom, String cognom1, String cognom2, String data_naixement,
             String dni, String telefon, String mail,boolean actiu, String iniciContracte, String finalContracte) {
         super(nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.actiu = actiu;
-        this.iniciContracte = LocalDate.parse(iniciContracte, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.finalContracte = LocalDate.parse(finalContracte, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.iniciContracte = iniciContracte;
+        this.finalContracte = finalContracte;
     }
     
     
     //Getters i Setters
 
     public int getId() {
-        return id;
+        return idEmpleat;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idEmpleat = id;
     }
 
     public boolean isActiu() {
@@ -60,21 +60,19 @@ public class Empleat extends Persona{
     }
 
     public String getIniciContracte() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return iniciContracte.format(format);
+        return iniciContracte;
     }
 
     public void setIniciContracte(String iniciContracte) {
-        this.iniciContracte = LocalDate.parse(iniciContracte, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.iniciContracte = iniciContracte;
     }
 
     public String getFinalContracte() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return finalContracte.format(format);
+        return finalContracte;
     }
 
     public void setFinalContracte(String finalContracte) {
-        this.finalContracte = LocalDate.parse(finalContracte, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.finalContracte = finalContracte;
     }
     
     
