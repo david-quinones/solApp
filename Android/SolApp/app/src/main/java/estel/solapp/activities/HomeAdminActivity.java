@@ -36,20 +36,73 @@ public class HomeAdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
 
-
+        //Benvinguda amb el nom d'usuari logat
         TextView benvinguda;
         benvinguda =((TextView) findViewById(R.id.textBenvinguda));
         benvinguda.setText("Usuari: "+SingletonSessio.getInstance().getUserConnectat().getNomUsuari());
     }
 
+    /*************************************************************
+     *
+     * mETODES PER OBRIR LES VISTES CORRESPONENT ALS EVENTS DE BOTÓ
+     *
+     **************************************************************/
 
+    /**
+     * Click per anar
+     * a la informació del perfil d'usuari
+     * @param view vista
+     */
+    public void goPerfil(View view){
 
+        Utility.gotoActivityChild(this, PerfilActivity.class);
+    }
     /**
      * Click per anar
      * al menú navigation de gestió d'usuaris
      * @param view vista
      */
     public void goGestioUsiaris(View view){
+
+        Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+    }
+
+    /**
+     * Click per anar
+     * al menú navigation de gestió de professors
+     * @param view vista
+     */
+    public void goGestioProfessors(View view){
+
+        Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+    }
+
+    /**
+     * Click per anar
+     * al menú navigation de gestió de alumnes
+     * @param view vista
+     */
+    public void goGestioAlumnes(View view){
+
+        Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+    }
+
+    /**
+     * Click per anar
+     * al menú navigation de gestió de aules
+     * @param view vista
+     */
+    public void goGestioAules(View view){
+
+        Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+    }
+
+    /**
+     * Click per anar
+     * al menú navigation de gestió de comunicacions
+     * @param view vista
+     */
+    public void goGestioComunicacions(View view){
 
         Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
     }
@@ -66,7 +119,7 @@ public class HomeAdminActivity extends AppCompatActivity {
 
         Button btn = (Button) findViewById(R.id.logoutBtn);
 
-        // La patició al servidor es fa en unaltre fil
+        // La petició al servidor es fa en unaltre fil
         ExecutorService executor = Executors.newSingleThreadExecutor();
         btn.setEnabled(false);
         Future<ValorsResposta> future = executor.submit(() -> {return CommController.doLogout();});
