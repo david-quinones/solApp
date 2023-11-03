@@ -2,7 +2,7 @@
     Fons del contenidor login (all)
 */
 .login_container {
-    -fx-background-color: #EEEEEE;
+    -fx-background-color: #AEDFF7;//#EEEEEE
     //-fx-background-color: linear-gradient(to right,#AEDFF7,#f4f990);
 }
 
@@ -10,7 +10,7 @@
     Estil del contenidor del Logo
 */
 .login_logo_container {
-    -fx-background-color: #132A13; /**/
+    -fx-background-color: #AEDFF7; /*#132A13*/
     -fx-alignment: center;
 }
 

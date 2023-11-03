@@ -7,6 +7,7 @@ module sol.app.quinones.solappquinones {
 
     opens sol.app.quinones.solappquinones to javafx.fxml;
     opens sol.app.quinones.solappquinones.Controllers.MainWindow to javafx.fxml;
+    opens sol.app.quinones.solappquinones.Controllers to javafx.fxml;
     opens sol.app.quinones.solappquinones.Models to com.google.gson;
     exports sol.app.quinones.solappquinones;
     exports sol.app.quinones.solappquinones.Controllers;

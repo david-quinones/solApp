@@ -133,4 +133,12 @@ public class ViewFactory {
     }
 
 
+    public void showWindowAula(String rol){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/Dashboard.fxml"));
+        MainWindowController mainWindowController = new MainWindowController(rol);
+        loader.setController(mainWindowController);
+        createStage(loader, false);
+    }
+
+
 }

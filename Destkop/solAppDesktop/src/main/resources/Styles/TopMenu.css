@@ -1,0 +1,32 @@
+#topMenu {
+    -fx-background-color: #EEEEEE;
+    -fx-padding: 5px 20px;
+    -fx-spacing: 20px;
+    -fx-alignment: center-left;
+}
+
+#topMenu > .button {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #132A13;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 15px;
+    -fx-font-size: 1.1em;
+    -fx-effect: dropshadow(three-pass-box, #Dddddd, 5, 0, 0, 6);
+}
+
+#topMenu > .button:hover {
+    -fx-cursor: hand;
+}
+
+#topMenu > .button > .graphic {
+    -fx-fill: #132A13;
+}
+
+#topMenu > .text-field {
+    -fx-pref-width: 200px;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 1.1em;
+}

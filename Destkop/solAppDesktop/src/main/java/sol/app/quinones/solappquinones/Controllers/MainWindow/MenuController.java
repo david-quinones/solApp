@@ -2,6 +2,7 @@ package sol.app.quinones.solappquinones.Controllers.MainWindow;
 
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -12,6 +13,7 @@ import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
+import sol.app.quinones.solappquinones.Views.ViewFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,6 +36,7 @@ public class MenuController implements Initializable {
     public Button btn_comunicacio;
     public Button btn_esdeveniment;
 
+    private MainWindowController mainWindowController;
 
     private String rol;
 
@@ -45,8 +48,12 @@ public class MenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         btn_logout.setOnAction(event -> logout());
         btn_perfil.setOnAction(event -> openPerfil());
+        btn_aula.setOnAction(event -> openAula());
+        btn_alumne.setOnAction(event -> openAlumne());
+        
     }
 
     /**
@@ -134,6 +141,21 @@ public class MenuController implements Initializable {
     public void openPerfil(){
         //TODO
         //dashboard de perfil (poder editar dades) --> panell superior de editar (aqui també el menu superior)
+    }
+
+    //metode per establir referencia de MainWindowsController
+    public void setMainWindowController(MainWindowController mainWindowController){
+        this.mainWindowController = mainWindowController;
+    }
+
+    private void openAlumne() {
+        mainWindowController.changeCentralView("/Fxml/MainWindow/Dashboard.fxml");
+    }
+
+    private void openAula() {
+
+        mainWindowController.changeCentralView("/Fxml/Dashboard_.fxml");
+
     }
 
 
