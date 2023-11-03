@@ -1,8 +1,12 @@
 package sol.app.quinones.solappquinones.Controllers.MainWindow;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,6 +21,14 @@ public class MainWindowController implements Initializable {
     //Rol de l'usuari que ha iniciat sessió
     private final String rol;
 
+    //Injectem dependencia del panel
+    @FXML
+    private BorderPane mainBorderPane;
+
+    //Injecció dependencia controlador menu (Nom ha de ser Id *.fxml + Controller)
+    @FXML
+    private MenuController mainMenuController;
+
     /**
      * Contructor
      * @param rol Rol de l'usuari que ha iniciat
@@ -25,9 +37,6 @@ public class MainWindowController implements Initializable {
         this.rol = rol;
     }
 
-    //Injecció dependencia controlador menu (Nom ha de ser Id *.fxml + Controller)
-    @FXML
-    private MenuController mainMenuController;
 
     /**
      * Metode inicialitzador, que es crida després de carregar la finestra
@@ -36,5 +45,18 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainMenuController.setRol(this.rol);
+        mainMenuController.setMainWindowController(this); //TODO
+    }
+
+    //TODO
+    public void changeCentralView(String fxmlPath){
+        try{
+
+            Node newView = FXMLLoader.load(getClass().getResource(fxmlPath));
+            mainBorderPane.setCenter(newView);
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
