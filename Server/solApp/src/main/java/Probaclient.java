@@ -79,7 +79,7 @@ public class Probaclient {
             
             peticio = new PeticioClient("LOGOUT");
            // peticio.affegirDades(retorn.getDades(1, String.class));
-            peticio.afegirDades("256dc91d-527e-40c2-9569-06948d45045d");
+            peticio.afegirDades("sessioProves");
    
             PrintWriter output2 = new PrintWriter(new OutputStreamWriter(socket2.getOutputStream()),true);
             output2.println(gson.toJson(peticio));

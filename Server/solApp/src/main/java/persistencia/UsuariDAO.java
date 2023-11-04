@@ -26,19 +26,10 @@ public class UsuariDAO {
     /**Constructor de la classe UsuariDAO
      * 
      */
-    public UsuariDAO() {
-        try {
-            
-            base_dades = new ConexioBBDD();
-            
-            conexio = base_dades.conectar();
-            
-            seguretat = new Encriptar();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE,
-                    "Error al conectar amb la base de dades", ex);
-        }
+    public UsuariDAO(Connection conexio) {
+        this.conexio = conexio;
+        seguretat = new Encriptar();
+
     }
     
     
@@ -91,16 +82,7 @@ public class UsuariDAO {
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE, null, ex);
             
-        }finally{          
-            try {
-                ps.close();
-                base_dades.tancarConexio();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE,
-                        "Error al tancar el Prepared Statement", ex);
-            }
-        }
-        
+        }            
         return null;
     }
      

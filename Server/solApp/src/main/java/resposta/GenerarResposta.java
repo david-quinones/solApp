@@ -43,7 +43,7 @@ public class GenerarResposta {
      */
     public RetornDades respostaLogin(Usuari usuari){ 
         
-        usuariDAO = new UsuariDAO();
+        usuariDAO = new UsuariDAO(conexio);
         //Validació de l'usuari i password
         usuari = usuariDAO.validarUsuari(usuari);
         

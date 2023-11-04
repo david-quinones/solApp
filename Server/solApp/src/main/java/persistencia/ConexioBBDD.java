@@ -42,6 +42,8 @@ public class ConexioBBDD {
             if(conexio != null){
                 conexio.close();
                 LOGGER.info("Conexió a la base de dades tancada.");
+            }else{
+                LOGGER.info("Conexió a la base de dades tancada.");
             }
             
         } catch (SQLException ex) {

@@ -143,6 +143,9 @@ public class ServidorSocketListener {
                 
                 //Enviem resposta al client amb les dades
                 output.enviarResposta(dadesResposta);
+                
+                ConexioBBDD base_dades = new ConexioBBDD();
+                base_dades.tancarConexio();
                              
             } catch (IOException ex) {
                 Logger.getLogger(ServidorSocketListener.class.getName()).log(Level.SEVERE,
@@ -150,7 +153,6 @@ public class ServidorSocketListener {
                 
             }finally{
                 try {
-                    base_dades.tancarConexio();
                     client.close();
                 } catch (IOException ex) {
                     Logger.getLogger(ServidorSocketListener.class.getName()).log(Level.SEVERE,

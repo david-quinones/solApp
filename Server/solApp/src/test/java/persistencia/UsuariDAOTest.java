@@ -1,6 +1,10 @@
 package persistencia;
 
 import entitats.Usuari;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -11,14 +15,24 @@ import org.junit.Before;
  */
 public class UsuariDAOTest {
     private UsuariDAO usuariDAO;
-    
+    private Connection conexio;
+    private ConexioBBDD baseDades;
     /**Inicialitzem la classe UsuariDAO abans de cada proba
      * 
      */
     @Before
     public void setUp(){
-        usuariDAO = new UsuariDAO();
+        try {
+            baseDades = new ConexioBBDD();
+            conexio = baseDades.conectar();
+            usuariDAO = new UsuariDAO(conexio);
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAOTest.class.getName()).log(Level.SEVERE, 
+                    "Error al conectar amb la base de dades", ex);
+        }
+
     }
+
     
 
     /**Test per comprobar el métode validarUsuari, aquest métode retorna un usuari

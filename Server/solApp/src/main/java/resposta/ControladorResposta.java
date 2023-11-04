@@ -6,6 +6,7 @@ import entitats.Usuari;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
 import java.util.logging.Logger;
+import persistencia.ConexioBBDD;
 import persistencia.PersonaDAO;
 import seguretat.GestorSessions;
 
@@ -69,7 +70,7 @@ public class ControladorResposta {
                 //Generem la resposta amb les dades de tots els empleats
                 resposta = dadesResposta.respostaLlistarEmpleats();
                 return resposta;
-            default:
+            default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }
  
@@ -94,6 +95,7 @@ public class ControladorResposta {
             }
         }
         return peticio.getPeticio();
+        
     }
     
     
