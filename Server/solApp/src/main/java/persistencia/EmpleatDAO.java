@@ -3,7 +3,9 @@ package persistencia;
 import entitats.Empleat;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +16,6 @@ import java.util.logging.Logger;
  */
 public class EmpleatDAO {
     private Connection conexio;
-    private PersonaDAO personaDAO;
     private PreparedStatement psEmpleat;
     private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
     private static final int CORRECTE = 1;
@@ -65,5 +66,66 @@ public class EmpleatDAO {
         }
         
         return -1;
+    }
+    
+    /**Métode per obtindre una llista amb tots els empleats que consten a la base
+     * de dades.
+     * 
+     * @return llista amb els empleats
+     */
+    public ArrayList llistarEmpleats(){
+        try {
+            LOGGER.info("Consulta per llistar tots els empleats");
+            //Array que contindrà la llista d'empleats
+            ArrayList<Empleat> llistaEmpleats = new ArrayList();
+            
+            String consulta = "SELECT *" +
+                       " FROM empleat e INNER JOIN persona p "
+                    +  "ON e.persona_id = p.id;";
+            psEmpleat = conexio.prepareStatement(consulta);
+            
+            ResultSet rs = psEmpleat.executeQuery();
+            
+            while(rs.next()){
+                llistaEmpleats.add(obtindreEmpleat(rs));
+            }
+            
+            return llistaEmpleats;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE,
+                    "Error al intentar realitzar la conulta", ex);
+        }  
+        
+        return llistarEmpleats();
+    }
+    
+    /**Métode per obrindre un objecte Empleat a partir d'un ResultSet de la base de dades
+     * 
+     * @param dadesObtingudes de la base de dades
+     * @return objecte Empleat
+     */
+    public Empleat obtindreEmpleat(ResultSet dadesObtingudes){
+        Empleat empleat = new Empleat();
+        try {
+            empleat.setIdEmpleat(dadesObtingudes.getInt("e.id"));
+            empleat.setIdPersona(dadesObtingudes.getInt("p.id"));
+            empleat.setNom(dadesObtingudes.getString("nom"));
+            empleat.setCognom1(dadesObtingudes.getString("cognom1"));
+            empleat.setCognom2(dadesObtingudes.getString("cognom2"));
+            empleat.setData_naixement(dadesObtingudes.getString("data_naixement"));
+            empleat.setDni(dadesObtingudes.getString("dni"));
+            empleat.setTelefon(dadesObtingudes.getString("telefon"));
+            empleat.setMail(dadesObtingudes.getString("mail"));
+            LOGGER.info("Obtingut empleat amb idEmpleat: " + empleat.getIdEmpleat());
+            
+            return empleat;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE,
+                    "Error al obtindre l'empleat", ex);
+        }
+        return empleat;
     }
 }

@@ -39,15 +39,18 @@ public class Empleat extends Persona{
         this.iniciContracte = iniciContracte;
         this.finalContracte = finalContracte;
     }
+    public Empleat(){
+        
+    }
     
     
     //Getters i Setters
 
-    public int getId() {
+    public int getIdEmpleat() {
         return idEmpleat;
     }
 
-    public void setId(int id) {
+    public void setIdEmpleat(int id) {
         this.idEmpleat = id;
     }
 

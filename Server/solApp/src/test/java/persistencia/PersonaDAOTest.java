@@ -61,7 +61,7 @@ public class PersonaDAOTest {
     public void testConsultaPersona(){
         personaDAO = new PersonaDAO(conexio);
         Persona persona = personaDAO.consultaPersona(2);
-        assertEquals(1, persona.getId());
+        assertEquals(1, persona.getIdPersona());
         assertEquals("Castell", persona.getCognom1());
     }
     

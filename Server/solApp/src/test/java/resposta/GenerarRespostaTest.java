@@ -4,6 +4,7 @@ import entitats.Empleat;
 import entitats.Persona;
 import entitats.Usuari;
 import estructurapr.RetornDades;
+import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -89,19 +90,27 @@ public class GenerarRespostaTest {
         assertEquals(1, resposta.getCodiResultat());
     }
     
-    //TEST SIMULAT LLISTAR EMPLEATS
+    /**Test per comprobar que la resposta es genera correctament amb la llista
+     * dels empleats
+     * 
+     */
     @Test
     public void testLlistarEmpleats(){
         GenerarResposta generarResposta = new GenerarResposta();
         RetornDades retornDades = generarResposta.respostaLlistarEmpleats();
-        Empleat empleat1 = (Empleat) retornDades.getDades(0, Empleat.class);
-        Empleat empleat2 = (Empleat) retornDades.getDades(1, Empleat.class);
-        Empleat empleat5 = (Empleat) retornDades.getDades(4, Empleat.class);
-        Empleat empleat8 = (Empleat) retornDades.getDades(7, Empleat.class);
-        assertEquals(1, empleat1.getId());
-        assertEquals(2, empleat2.getId());
-        assertEquals(5, empleat5.getId());
-        assertEquals(8, empleat8.getId());
+        //Comprobem codi resultat correcte
+        assertEquals(1, retornDades.getCodiResultat());
+        //Comprobem la cantitat d'empleats de la llista
+        assertEquals(4, retornDades.getDades(0, Integer.class));
+        //comprobem que hi ha 4 empleats
+        Empleat empleat = (Empleat) retornDades.getDades(1, Empleat.class);
+        assertNotNull(empleat);
+        empleat = (Empleat) retornDades.getDades(2, Empleat.class);
+        assertNotNull(empleat);
+        empleat = (Empleat) retornDades.getDades(3, Empleat.class);
+        assertNotNull(empleat);
+        empleat = (Empleat) retornDades.getDades(4, Empleat.class);
+        assertNotNull(empleat);
  
     }
 }
