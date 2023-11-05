@@ -1,0 +1,35 @@
+.profile_view {
+    -fx-background-color: #F0F0F0;
+    -fx-padding: 20;
+    -fx-alignment: center;
+}
+
+.profile_view Label {
+    -fx-text-fill: #333333;
+    -fx-font-size: 1.2em;
+}
+
+.profile_view TextField {
+    -fx-pref-width: 200;
+    -fx-max-width: Infinity; /* This will allow the text field to grow */
+}
+
+.profile_view Button {
+    -fx-background-color: #5CACEE;
+    -fx-text-fill: white;
+    -fx-pref-width: 100; /* Set a preferred width */
+}
+
+.profile_view Button:hover {
+    -fx-cursor: hand;
+}
+
+/* Responsive button sizing */
+.profile_view HBox {
+    -fx-fill-width: true;
+}
+
+.profile_view HBox Button {
+    -fx-min-width: 100; /* Ensuring buttons have a minimum width */
+    -fx-max-width: Infinity; /* Allow buttons to grow */
+}

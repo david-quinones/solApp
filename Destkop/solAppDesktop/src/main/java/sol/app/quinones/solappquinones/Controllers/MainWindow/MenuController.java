@@ -1,20 +1,25 @@
 package sol.app.quinones.solappquinones.Controllers.MainWindow;
 
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.json.JSONException;
 import org.json.JSONObject;
 import sol.app.quinones.solappquinones.Controllers.ErrorController;
+import sol.app.quinones.solappquinones.Controllers.PerfilController;
 import sol.app.quinones.solappquinones.Models.Model;
+import sol.app.quinones.solappquinones.Models.Persona;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
 import sol.app.quinones.solappquinones.Views.ViewFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -41,6 +46,8 @@ public class MenuController implements Initializable {
     private String rol;
 
     private ServerComunication socket = new ServerComunication();
+
+    private Peticio peticio = new Peticio();
 
     /**
      * Metode inicialitzador cridat després de carregar la finestra
@@ -109,7 +116,7 @@ public class MenuController implements Initializable {
 
             socket.connect();
             Peticio peticio = new Peticio("LOGOUT");
-            peticio.addDades(SingletonConnection.getInstance().getKey().replace("\"",""));
+            peticio.addDades(SingletonConnection.getInstance().getKey());
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
             JSONObject jsonObject = new JSONObject(resposta);
@@ -139,8 +146,9 @@ public class MenuController implements Initializable {
      * Obre el perfil de l'usuari per veure i editar les seves dades principals
      */
     public void openPerfil(){
+        mainWindowController.changeCentralView("/Fxml/PerfilUsuari.fxml");
         //TODO
-        //dashboard de perfil (poder editar dades) --> panell superior de editar (aqui també el menu superior)
+        //Model -> view Factory refactor all (fxml and controllers) to use factory with cnage central View
     }
 
     //metode per establir referencia de MainWindowsController

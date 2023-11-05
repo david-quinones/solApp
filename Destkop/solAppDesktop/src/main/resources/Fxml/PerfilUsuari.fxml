@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Fxml.PerfilUsuari"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox fx:id="mainPerfil" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../Styles/Perfil.css" fx:controller="sol.app.quinones.solappquinones.Controllers.PerfilController" alignment="CENTER">
+   <children>
+      <VBox styleClass="profile_view" spacing="10" maxWidth="400" alignment="TOP_CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20">
+               <children>
+                  <Label text="Nom:" />
+                  <TextField fx:id="txtNom" promptText="Nom" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <children>
+                  <Label text="Primer Cognom:" />
+                  <TextField fx:id="txtCognom1" promptText="Primer Cognom" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <children>
+                  <Label text="Segon Cognom:" />
+                  <TextField fx:id="txtCognom2" promptText="Segon Cognom" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <children>
+                  <Label text="Data de Naixement:" />
+                  <DatePicker fx:id="dpDataNaixement" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <children>
+                  <Label text="DNI:" />
+                  <TextField fx:id="txtDni" promptText="DNI" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <children>
+                  <Label text="Telèfon:" />
+                  <TextField fx:id="txtTelefon" promptText="Telèfon" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10" >
+               <children>
+                  <Label text="Email:" />
+                  <TextField fx:id="txtMail" promptText="Email" HBox.hgrow="ALWAYS"/>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+               <children>
+                  <Button text="Actualitzar" onAction="#actualitzarDades" minWidth="100" HBox.hgrow="ALWAYS"/>
+                  <Button text="Cancelar" onAction="#cancelarActualitzarDades" minWidth="100" HBox.hgrow="ALWAYS"/>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
