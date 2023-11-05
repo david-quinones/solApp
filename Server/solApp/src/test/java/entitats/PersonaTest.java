@@ -25,7 +25,7 @@ public class PersonaTest {
      */
     @Test
     public void testGetId(){
-        assertEquals(1, persona.getId());
+        assertEquals(1, persona.getIdPersona());
     }
     
      /**Proba del getter del nom de Persona
@@ -91,8 +91,8 @@ public class PersonaTest {
      */
     @Test
     public void testSetId(){
-        persona.setId(25);
-        assertEquals(25, persona.getId());
+        persona.setIdPersona(25);
+        assertEquals(25, persona.getIdPersona());
     }
     
     /**Test per probar el setter del nom

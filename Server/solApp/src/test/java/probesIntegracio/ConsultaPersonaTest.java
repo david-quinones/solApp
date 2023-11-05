@@ -94,8 +94,8 @@ public class ConsultaPersonaTest {
             System.out.println("Comprovem les dades rebudes");
             assertEquals(1, retorn.getCodiResultat());
             LOGGER.info("Codi del resultat esperat 1 " + retorn.getCodiResultat());
-            assertEquals(1, persona.getId());
-            LOGGER.info("Dada esperada 1, dada rebuda " + persona.getId());
+            assertEquals(1, persona.getIdPersona());
+            LOGGER.info("Dada esperada 1, dada rebuda " + persona.getIdPersona());
             assertEquals("Pau", persona.getNom());
             LOGGER.info("Dada esperada Pau, dada rebuda " + persona.getNom());
             assertEquals("933703532", persona.getTelefon());

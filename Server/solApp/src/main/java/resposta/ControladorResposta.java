@@ -66,7 +66,7 @@ public class ControladorResposta {
                 Persona personaNova = (Persona) peticio.getDades(1, Persona.class);
                 resposta =  dadesResposta.respostaModificarPersona(personaNova);
                 return resposta;
-            case "LLISTAR EMPLEATS":
+            case "LLISTAR_EMPLEATS":
                 //Generem la resposta amb les dades de tots els empleats
                 resposta = dadesResposta.respostaLlistarEmpleats();
                 return resposta;

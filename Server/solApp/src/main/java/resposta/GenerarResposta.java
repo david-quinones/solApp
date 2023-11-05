@@ -5,6 +5,7 @@ import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ public class GenerarResposta {
     private GestorSessions sessions = GestorSessions.obtindreInstancia();
     private ConexioBBDD base_dades;
     private Connection conexio;
+    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
     
     public GenerarResposta(){
         try {
@@ -70,6 +72,8 @@ public class GenerarResposta {
         
     }
     
+    
+    
     /**Métode que realitza el logout d'un usuari eliminan la sessió activa.
      * 
      * @param numSessio número de sessió activa
@@ -83,6 +87,8 @@ public class GenerarResposta {
             return resposta;
 
     }
+    
+    
     
     /**Métode que genera la resoposta a una solicitud d'alta d'un empleat
      * 
@@ -102,6 +108,8 @@ public class GenerarResposta {
                 return resposta = new RetornDades(CODI_ERROR);
             }
     }
+    
+    
     
     /**Mètode que retorna les dades de la persona vinculada al usuari que ha iniciat
      * sessió.
@@ -125,6 +133,8 @@ public class GenerarResposta {
         }
     }
     
+    
+    
     /**Métode que generarà la resposta segons la informació obtinguda de l'execució
      * a la base de dades
      * @param personaNova noves dades del perfil 
@@ -142,32 +152,33 @@ public class GenerarResposta {
         }
     }
     
+    
+    
+    /**Métode per generar la resposta amb la llista d'empleats
+     * 
+     * @return reposta
+     */
     public RetornDades respostaLlistarEmpleats(){
-        //METODE SIMULAT PER LLISTAR EMPLEATS
-        Empleat empleat1 = new Empleat(1, "Juan", "García", "Pérez", "1990-05-20", "12345678A", "123456789", "juan@email.com", 1, true, "2022-01-01", "2023-12-31");
-        Empleat empleat2 = new Empleat(2, "María", "López", "González", "1988-07-15", "23456789B", "987654321", "maria@email.com", 2, true, "2021-12-01", "2023-11-30");
-        Empleat empleat3 = new Empleat(3, "Pedro", "Martínez", "Sánchez", "1992-03-10", "34567890C", "456789123", "pedro@email.com", 3, true, "2022-02-15", "2023-12-15");
-        Empleat empleat4 = new Empleat(4, "Ana", "Rodríguez", "Fernández", "1995-11-08", "45678901D", "987654321", "ana@email.com", 4, true, "2022-03-10", "2023-12-10");
-        Empleat empleat5 = new Empleat(5, "Luis", "Pérez", "Gómez", "1991-09-25", "56789012E", "123456789", "luis@email.com", 5, true, "2022-04-05", "2023-12-05");
-        Empleat empleat6 = new Empleat(6, "Carmen", "Sánchez", "Martínez", "1989-12-12", "67890123F", "987654321", "carmen@email.com", 6, true, "2022-05-01", "2023-12-01");
-        Empleat empleat7 = new Empleat(7, "Javier", "Gómez", "Rodríguez", "1993-06-30", "78901234G", "456789123", "javier@email.com", 7, true, "2022-06-15", "2023-11-15");
-        Empleat empleat8 = new Empleat(8, "Sofía", "Fernández", "López", "1996-02-18", "89012345H", "123456789", "sofia@email.com", 8, true, "2022-07-10", "2023-11-10");
-        Empleat empleat9 = new Empleat(9, "Diego", "González", "Pérez", "1994-08-05", "90123456I", "987654321", "diego@email.com", 9, true, "2022-08-05", "2023-11-05");
-        Empleat empleat10 = new Empleat(10, "Lucía", "Pérez", "Sánchez", "1990-04-22", "01234567J", "456789123", "lucia@email.com", 10, true, "2022-09-01", "2023-11-01");
-        
-        resposta = new RetornDades(CODI_CORRECTE);
-        resposta.afegirDades(empleat1);
-        resposta.afegirDades(empleat2);
-        resposta.afegirDades(empleat3);
-        resposta.afegirDades(empleat4);
-        resposta.afegirDades(empleat5);
-        resposta.afegirDades(empleat6);
-        resposta.afegirDades(empleat7);
-        resposta.afegirDades(empleat8);
-        resposta.afegirDades(empleat9);
-        resposta.afegirDades(empleat10);
+        ArrayList<Empleat> llistaEmpleats = new ArrayList();
+        EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
+        //Es demana la llista d'empleats a EmpleatDAO
+        llistaEmpleats = empleatDAO.llistarEmpleats();
+        //Si la llista no está buida omplim la resposta amb els empleats
+        if(!llistaEmpleats.isEmpty()){           
+            resposta = new RetornDades(CODI_CORRECTE);
+            //Afegim el tamany de l'array list per al client
+            resposta.afegirDades(llistaEmpleats.size());
+            for(Empleat empleat: llistaEmpleats){
+                resposta.afegirDades(empleat);
+            }                      
+            LOGGER.info("Resposta amb la llista d'empleats");
+            
+        }else{
+            LOGGER.info("Llista empleats buida");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
         
         return resposta;
-        
+   
     }
 }

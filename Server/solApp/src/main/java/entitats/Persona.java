@@ -76,7 +76,7 @@ public class Persona {
     
     //Getters i Setters
     
-    public int getId() {
+    public int getIdPersona() {
         return idPersona;
     }
 
@@ -96,7 +96,7 @@ public class Persona {
         return data_naixement;
     }
 
-    public void setId(int id) {
+    public void setIdPersona(int id) {
         this.idPersona = id;
     }
 

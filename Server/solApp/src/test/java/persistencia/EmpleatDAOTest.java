@@ -3,6 +3,7 @@ package persistencia;
 import entitats.Empleat;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -55,8 +56,20 @@ public class EmpleatDAOTest {
         int filesAfectades = empleatDAO.altaEmpleat(empleat);
         //Si l'alta es correcte el número de files afectades será superior a 0.
         assertTrue(filesAfectades > 0);
-
-       
+        
+    }
+    
+    /**Test per comprobar el métode per llistr empleats
+     * 
+     */
+    @Test
+    public void testLlistarEmpleats(){
+        empleatDAO = new EmpleatDAO(conexio);
+        ArrayList<Empleat> empleats= empleatDAO.llistarEmpleats();
+        assertEquals(1, empleats.get(0).getIdEmpleat());
+        assertEquals(2, empleats.get(1).getIdEmpleat());
+        assertEquals(3, empleats.get(2).getIdEmpleat());
+        assertEquals(4, empleats.get(3).getIdEmpleat());
     }
     
 }

@@ -111,7 +111,7 @@ public class PersonaDAO {
             //Comprobem si hi han dades al resultSet
             while(dadesObingudes.next()){               
                 persona = new Persona();
-                persona.setId(dadesObingudes.getInt("id"));
+                persona.setIdPersona(dadesObingudes.getInt("id"));
                 persona.setNom(dadesObingudes.getString("nom"));
                 persona.setCognom1(dadesObingudes.getString("cognom1"));
                 persona.setCognom2(dadesObingudes.getString("cognom2"));
@@ -119,7 +119,7 @@ public class PersonaDAO {
                 persona.setDni(dadesObingudes.getString("dni"));
                 persona.setTelefon(dadesObingudes.getString("telefon"));
                 persona.setMail(dadesObingudes.getString("mail"));
-                LOGGER.info("Obtinguda persona amb idPersona: " + persona.getId());
+                LOGGER.info("Obtinguda persona amb idPersona: " + persona.getIdPersona());
             }
             
             return persona;
@@ -134,7 +134,7 @@ public class PersonaDAO {
     public int modificarPerfil(Persona persona){
         
         try {
-            LOGGER.info("Modifiquem les dades de la Perosna amb idPersona " + persona.getId());
+            LOGGER.info("Modifiquem les dades de la Perosna amb idPersona " + persona.getIdPersona());
             //Consulta per modificar le dades
             String modificarSQL = "UPDATE persona SET nom = ?, cognom1 = ?, cognom2 = ?, "
                     + "data_naixement = ?, dni = ?, telefon = ?, mail = ? WHERE id = ?;";
@@ -148,7 +148,7 @@ public class PersonaDAO {
             ps.setString(5, persona.getDni());
             ps.setString(6, persona.getTelefon());
             ps.setString(7, persona.getMail());
-            ps.setInt(8, persona.getId());
+            ps.setInt(8, persona.getIdPersona());
             
             //Executem la modificació i obtenim el número de files afectades
             int filesAfectades = ps.executeUpdate();

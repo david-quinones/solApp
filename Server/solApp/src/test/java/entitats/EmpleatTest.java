@@ -25,7 +25,7 @@ public class EmpleatTest {
      */
     @Test
     public void testGetId() {
-        assertEquals(1, empleat.getId());
+        assertEquals(1, empleat.getIdEmpleat());
     }
 
     /**Test per probar le setter del id
@@ -33,8 +33,8 @@ public class EmpleatTest {
      */
     @Test
     public void testSetId() {
-        empleat.setId(2);
-        assertEquals(2, empleat.getId());
+        empleat.setIdEmpleat(2);
+        assertEquals(2, empleat.getIdEmpleat());
     }
 
     /**Test per probar el getter de isActiu
