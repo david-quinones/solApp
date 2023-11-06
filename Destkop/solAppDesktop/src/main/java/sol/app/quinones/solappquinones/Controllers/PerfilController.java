@@ -110,6 +110,8 @@ public class PerfilController implements Initializable {
     @FXML
     private void cancelarActualitzarDades() {
         // Lógica para manejar la cancelación
+        initData();
+
     }
 
 
