@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import estel.solapp.models.Persona;
 import estel.solapp.models.User;
 /**
  * Classe de comunicació amb el servidor
@@ -28,8 +29,10 @@ public class CommController {
     // Noms de les peticions
     public static final String LOGIN = "LOGIN";
     public static final String LOGOUT = "LOGOUT";
-    public static final String LIST_USERS = "LIST_USERS";
-    public static final String ADD_USER = "ADD_USER";
+    public static final String LLISTAR_USUARIS = "LLISTAR_USUARIS";
+    public static final String AFEGIR_USUARI = "AFEGIR_USUARI";
+    public static final String CONSULTA_PERFIL = "CONSULTA_PERFIL";
+    public static final String MODIFICA_PERFIL = "MODIFICA_PERFIL";
 
 
     //Conexió amb el servidor
@@ -93,6 +96,48 @@ public class CommController {
     }
 
     /**
+     * Petició d'informació de perfil servidor
+     * @return resposta del sevidor
+     */
+    public static ValorsResposta consultaPerfil(){
+
+        PeticioClient consultaPerfil = new PeticioClient(CONSULTA_PERFIL);
+
+        //Afegim el codi de sessió a la petició
+        consultaPerfil.addDataObject(SingletonSessio.getInstance().getKey().replace("\"",""));
+
+        ValorsResposta resposta = talkToServer(consultaPerfil);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /**
+     * Petició de modificació de perfil al servidor
+     * @return resposta del sevidor
+     */
+    public static ValorsResposta modificaPerfil(Persona persona){
+
+        PeticioClient modificaPerfil = new PeticioClient(MODIFICA_PERFIL);
+
+        modificaPerfil.addDataObject(persona);
+        //Afegim el codi de sessió a la petició
+        modificaPerfil.addDataObject(SingletonSessio.getInstance().getKey().replace("\"",""));
+
+        ValorsResposta resposta = talkToServer(modificaPerfil);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+
+
+
+    /**
      * Petició de llista d'usuaris al servidor
      * @return result users array; null if error.
      */
@@ -100,7 +145,7 @@ public class CommController {
 
 
 
-        PeticioClient listUsers = new PeticioClient(LIST_USERS);
+        PeticioClient listUsers = new PeticioClient(LLISTAR_USUARIS);
 
         listUsers.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
 
@@ -127,7 +172,7 @@ public class CommController {
      */
     public static ValorsResposta doAddUser(User user){
 
-        PeticioClient addUser = new PeticioClient(ADD_USER);
+        PeticioClient addUser = new PeticioClient(AFEGIR_USUARI);
         addUser.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
         addUser.addDataObject(user);
 

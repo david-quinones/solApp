@@ -44,7 +44,7 @@ public class HomeAdminActivity extends AppCompatActivity {
 
     /*************************************************************
      *
-     * mETODES PER OBRIR LES VISTES CORRESPONENT ALS EVENTS DE BOTÓ
+     * METODES PER OBRIR LES VISTES CORRESPONENT ALS EVENTS DE BOTÓ
      *
      **************************************************************/
 
@@ -149,6 +149,13 @@ public class HomeAdminActivity extends AppCompatActivity {
         };
 
     }
+
+    /*****************************
+    *
+    * Informacio de perfil
+    *
+     *****************************/
+
 
     /**
      * Avis amb un missatge si es vol tancar l'aplicació sense fer logout
