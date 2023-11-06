@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,13 +42,10 @@ public class MenuController implements Initializable {
     public Button btn_comunicacio;
     public Button btn_esdeveniment;
 
-    private MainWindowController mainWindowController;
-
     private String rol;
-
     private ServerComunication socket = new ServerComunication();
 
-    private Peticio peticio = new Peticio();
+    private Peticio peticio;
 
     /**
      * Metode inicialitzador cridat després de carregar la finestra
@@ -60,8 +58,9 @@ public class MenuController implements Initializable {
         btn_perfil.setOnAction(event -> openPerfil());
         btn_aula.setOnAction(event -> openAula());
         btn_alumne.setOnAction(event -> openAlumne());
-        
+
     }
+
 
     /**
      * Estableix el rol de l'usuari i asjuta la visibilitat dels elements del menu
@@ -111,11 +110,9 @@ public class MenuController implements Initializable {
      * Tanca la sessió de l'usuari actual i mostra la pantalla d'inici de sessió
      */
     public void logout(){
-
         try{
-
             socket.connect();
-            Peticio peticio = new Peticio("LOGOUT");
+            peticio = new Peticio("LOGOUT");
             peticio.addDades(SingletonConnection.getInstance().getKey());
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
@@ -127,7 +124,6 @@ public class MenuController implements Initializable {
                 //Tancar finestra actual i obrir login
                 Model.getInstance().getViewFactory().closeStage((Stage) btn_perfil.getScene().getWindow());
                 Model.getInstance().getViewFactory().showLoginWindow();
-
 
             }else{
                 ErrorController.showErrorAlert("Missatge Informatiu", null, "No es pot desvincular amb el servidor, es força tancar l'aplicació", Alert.AlertType.INFORMATION);
@@ -146,26 +142,15 @@ public class MenuController implements Initializable {
      * Obre el perfil de l'usuari per veure i editar les seves dades principals
      */
     public void openPerfil(){
-        mainWindowController.changeCentralView("/Fxml/PerfilUsuari.fxml");
-        //TODO
-        //Model -> view Factory refactor all (fxml and controllers) to use factory with cnage central View
-    }
-
-    //metode per establir referencia de MainWindowsController
-    public void setMainWindowController(MainWindowController mainWindowController){
-        this.mainWindowController = mainWindowController;
+        Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Perfil");
     }
 
     private void openAlumne() {
-        mainWindowController.changeCentralView("/Fxml/MainWindow/Dashboard.fxml");
+        Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Alumne");
     }
 
     private void openAula() {
-
-        mainWindowController.changeCentralView("/Fxml/Dashboard_.fxml");
-
+        Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Aula");
     }
-
-
 
 }
