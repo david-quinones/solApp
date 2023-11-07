@@ -4,7 +4,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import sol.app.quinones.solappquinones.Models.Model;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +27,7 @@ public class MainWindowController implements Initializable {
     @FXML
     private BorderPane mainBorderPane;
 
+
     //Injecció dependencia controlador menu (Nom ha de ser Id *.fxml + Controller)
     @FXML
     private MenuController mainMenuController;
@@ -40,23 +43,31 @@ public class MainWindowController implements Initializable {
 
     /**
      * Metode inicialitzador, que es crida després de carregar la finestra
-     * Estableix el rol de l'usuari al controaldor del menu
+     * Estableix el rol de l'usuari al controaldor del menu i inicializa el listener per saber que prenem i realizar accions sobre el FXML (mainMenu)
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         mainMenuController.setRol(this.rol);
-        mainMenuController.setMainWindowController(this); //TODO
+
+        //listener to menu acction
+        Model.getInstance().getViewFactory().getSeleccioClientItemMenu().addListener((observableValue, oldV, newV) -> {
+            switch (newV){
+                case "Perfil":
+                    mainBorderPane.setCenter(Model.getInstance().getViewFactory().getPerfilView());
+                    //mainBorderPane.setTop(Model.getInstance().getViewFactory().getMenuTopViewr());
+                    mainBorderPane.setTop(null);
+                    break;
+                case "X":
+                    mainBorderPane.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+                    mainBorderPane.setTop(null);
+                    break;
+                default:
+                    mainBorderPane.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+                    mainBorderPane.setTop(null);
+                    break;
+            }
+        });
     }
 
-    //TODO
-    public void changeCentralView(String fxmlPath){
-        try{
-
-            Node newView = FXMLLoader.load(getClass().getResource(fxmlPath));
-            mainBorderPane.setCenter(newView);
-
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
 }

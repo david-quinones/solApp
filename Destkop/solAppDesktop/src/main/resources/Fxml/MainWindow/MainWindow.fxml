@@ -8,6 +8,6 @@
         <fx:include fx:id="mainMenu" source="Menu.fxml"/>
     </left>
     <center>
-        <fx:include source="DashboardEmty.fxml"/>
+        <fx:include fx:id="mainCenter" source="DashboardEmty.fxml"/>
     </center>
 </BorderPane>
