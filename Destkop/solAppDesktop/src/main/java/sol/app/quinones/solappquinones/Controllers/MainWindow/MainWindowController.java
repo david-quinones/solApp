@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import sol.app.quinones.solappquinones.Models.Model;
 
@@ -25,6 +26,7 @@ public class MainWindowController implements Initializable {
     //Injectem dependencia del panel
     @FXML
     private BorderPane mainBorderPane;
+
 
     //Injecció dependencia controlador menu (Nom ha de ser Id *.fxml + Controller)
     @FXML
@@ -53,14 +55,17 @@ public class MainWindowController implements Initializable {
             switch (newV){
                 case "Perfil":
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getPerfilView());
-                    mainBorderPane.setTop(Model.getInstance().getViewFactory().getMenuTopViewr());
+                    //mainBorderPane.setTop(Model.getInstance().getViewFactory().getMenuTopViewr());
+                    mainBorderPane.setTop(null);
                     break;
                 case "X":
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getDashboardView());
                     mainBorderPane.setTop(null);
+                    break;
                 default:
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getDashboardView());
                     mainBorderPane.setTop(null);
+                    break;
             }
         });
     }

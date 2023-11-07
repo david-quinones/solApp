@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="mainPerfil" prefHeight="750.0" prefWidth="850.0" stylesheets="@../Styles/Perfil.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.PerfilController">
-   <VBox alignment="TOP_CENTER" spacing="10" styleClass="profile_view" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" stylesheets="@../Styles/Perfil.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.PerfilController">
+   <VBox fx:id="mainPerfil" alignment="TOP_CENTER" spacing="10" styleClass="profile_view" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="690.0" prefWidth="835.0" spacing="10" styleClass="profile_view">
          <children>

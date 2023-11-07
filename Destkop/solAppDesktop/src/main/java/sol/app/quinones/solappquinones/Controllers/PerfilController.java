@@ -5,10 +5,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import org.json.JSONException;
 import org.json.JSONObject;
-import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowController;
-import sol.app.quinones.solappquinones.Controllers.MainWindow.MenuController;
+import sol.app.quinones.solappquinones.Models.Model;
 import sol.app.quinones.solappquinones.Models.Persona;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
@@ -22,6 +23,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class PerfilController implements Initializable {
+
+    @FXML
+    public VBox mainPerfil;
 
     @FXML
     private TextField txtNom;
@@ -51,7 +55,6 @@ public class PerfilController implements Initializable {
 
     private Peticio peticio = new Peticio();
     private ServerComunication socket = new ServerComunication();
-
 
 
     // Métodos para manejar acciones, como actualizar los datos
@@ -112,12 +115,13 @@ public class PerfilController implements Initializable {
         // Lógica para manejar la cancelación
         initData();
 
-    }
 
+    }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        mainPerfil.getChildren().add(0, Model.getInstance().getViewFactory().getMenuTopViewr());
         startDate();
     }
 
