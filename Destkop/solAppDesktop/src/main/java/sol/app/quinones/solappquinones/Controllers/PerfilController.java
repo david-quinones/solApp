@@ -121,7 +121,7 @@ public class PerfilController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        mainPerfil.getChildren().add(0, Model.getInstance().getViewFactory().getMenuTopViewr());
+        //mainPerfil.getChildren().add(0, Model.getInstance().getViewFactory().getMenuTopViewr(this));
         startDate();
     }
 

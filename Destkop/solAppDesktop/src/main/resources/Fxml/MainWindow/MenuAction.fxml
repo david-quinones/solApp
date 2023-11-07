@@ -7,7 +7,7 @@
 
 <HBox id="topMenu" prefHeight="60.0" prefWidth="1000.0" stylesheets="@../../Styles/TopMenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.TopMenuController">
    <children>
-      <Button fx:id="btnAdd">
+      <Button fx:id="btnAdd" onAction="#add">
          <graphic>
             <FontAwesomeIconView glyphName="PLUS" size="20" />
          </graphic>
