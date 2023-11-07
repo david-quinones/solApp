@@ -16,12 +16,14 @@ import java.net.Socket;
 
 import estel.solapp.models.Persona;
 import estel.solapp.models.User;
-/**
- * Classe de comunicació amb el servidor
+/****************************************
+ * Classe de comunicacions amb el servidor
+ * Peticions i rebuda de respostes
  * @author Juan Antonio
- */
+ ****************************************/
 public class CommController {
 
+    //Dades de conexió
     private static int port = 9999;
     private static String serverName = "192.168.1.131";
     public static final int OK_RETURN_CODE = 1;
@@ -33,39 +35,42 @@ public class CommController {
     public static final String AFEGIR_USUARI = "AFEGIR_USUARI";
     public static final String CONSULTA_PERFIL = "CONSULTA_PERFIL";
     public static final String MODIFICA_PERFIL = "MODIFICA_PERFIL";
+    public static final String BUSCA_USUARI = "BUSCA_USUARI";
 
-
-    //Conexió amb el servidor
+    /***********************************
+    * Conexió amb el servidor per socket
+    ************************************/
     private static Socket connect() {
+
         Socket s;
 
         try {
+
             s= new Socket();
             s.connect(new InetSocketAddress(serverName,port),4000);
 
             return s;
-        } catch (IOException ex) {
 
+        } catch (IOException ex) {
             return null;
         }
 
     }
 
-    /**
-     * Retorna true si hi ha sessio i false si no
+    /***************************************************
+     * Métode retorna true si hi ha sessio i false si no
      * @return
-     */
-
+     ***************************************************/
     public static boolean isLogged() {return SingletonSessio.getInstance().getKey() != null;}
 
-
-    /**
+    /******************************
      * Petició de login al servidor
      * @param user  username
      * @param password password
      * @return resposta del servidor
-     */
+     *******************************/
     public static ValorsResposta doLogin(String user, String password){
+
         User usuari = new User(user,password);
         PeticioClient login = new PeticioClient(LOGIN);
         login.addDataObject(usuari);
@@ -76,10 +81,10 @@ public class CommController {
         return resposta;
     }
 
-    /**
+    /******************************
      * Petició de logout servidor
      * @return resposta del sevidor
-     */
+     ******************************/
     public static ValorsResposta doLogout(){
 
         PeticioClient logout = new PeticioClient(LOGOUT);
@@ -95,10 +100,10 @@ public class CommController {
 
     }
 
-    /**
+    /*****************************************
      * Petició d'informació de perfil servidor
      * @return resposta del sevidor
-     */
+     *****************************************/
     public static ValorsResposta consultaPerfil(){
 
         PeticioClient consultaPerfil = new PeticioClient(CONSULTA_PERFIL);
@@ -114,14 +119,16 @@ public class CommController {
 
     }
 
-    /**
+    /**********************************************
      * Petició de modificació de perfil al servidor
+     * @param persona
      * @return resposta del sevidor
-     */
+     **********************************************/
     public static ValorsResposta modificaPerfil(Persona persona){
 
         PeticioClient modificaPerfil = new PeticioClient(MODIFICA_PERFIL);
 
+        //Afegim les dades de persona llegides
         modificaPerfil.addDataObject(persona);
         //Afegim el codi de sessió a la petició
         modificaPerfil.addDataObject(SingletonSessio.getInstance().getKey().replace("\"",""));
@@ -134,21 +141,14 @@ public class CommController {
 
     }
 
-
-
-
-    /**
+    /*******************************************
      * Petició de llista d'usuaris al servidor
      * @return result users array; null if error.
-     */
-    public static User[] doListUsers(){
-
-
+     ********************************************/
+    public static User[] listarUsuaris(){
 
         PeticioClient listUsers = new PeticioClient(LLISTAR_USUARIS);
-
         listUsers.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
-
         ValorsResposta resposta=talkToServer(listUsers);
 
         if(resposta==null) return null;
@@ -156,8 +156,10 @@ public class CommController {
         int returnCode=resposta.getReturnCode();
 
         if(returnCode==OK_RETURN_CODE){
+
             User [] users={};
             return ( User []) resposta.getData(0, users.getClass());
+
         }
         else {
             return null;
@@ -165,53 +167,58 @@ public class CommController {
 
     }
 
-    /**
+    /*************************************
      * Petició d'afegir usuari al servidor
      * @param user  Usiari que afegirem
      * @return resposta del servidor
-     */
-    public static ValorsResposta doAddUser(User user){
+     *************************************/
+    public static ValorsResposta afegirUsuari(User user){
 
-        PeticioClient addUser = new PeticioClient(AFEGIR_USUARI);
-        addUser.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
-        addUser.addDataObject(user);
+        PeticioClient afegirUsuari = new PeticioClient(AFEGIR_USUARI);
+        afegirUsuari.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        afegirUsuari.addDataObject(user);
 
-        ValorsResposta resposta=talkToServer(addUser);
+        ValorsResposta resposta=talkToServer(afegirUsuari);
 
         if(resposta==null) return null;
 
         return resposta;
 
     }
-    /**
+
+    /***********************************************
      * Fa la petició de recerca d'usuari al servidor
      * @param username  Nom d'usuari a buscar
      * @return resposta del servidor
-     */
-    public static User doQueryUser(String username){
-        if(username.equals("99")) { // simulates non-existent key
-            return null;
-        }else{
-            return new User(username,"Mock value");
-        }
+     ************************************************/
+    public static ValorsResposta buscaUsuari(String username){
+
+        PeticioClient afegirUsuari = new PeticioClient(BUSCA_USUARI);
+        afegirUsuari.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        afegirUsuari.addPrimitiveData(username);
+        ValorsResposta resposta=talkToServer(afegirUsuari);
+
+        if(resposta==null) return null;
+
+        return resposta;
 
     }
-    /**
+
+    /********************************************************************
     * Envia missatge al servidor i rep la resposta d'aquest.
     * Transformació dels missatges en Json avans i després de l'enviament
     * @param peticio Petició al sevidor
     * @return resposta Resposta del servidor.
-    */
+    *********************************************************************/
     private static ValorsResposta talkToServer(PeticioClient peticio){
+
         try {
             Socket socket = connect();//Conexió amb el sevidor
-
             Gson gson= new Gson();
 
             if(socket==null) return null;
 
             PrintWriter output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-
 
             output.println(gson.toJson(peticio));
 

@@ -24,5 +24,9 @@
             android:id="@+id/busca_usuari"
             android:icon="@drawable/baseline_search_24"
             android:title="@string/busca_usuari" />
+        <item
+            android:id="@+id/llista_usuaris"
+            android:icon="@drawable/baseline_list_24"
+            android:title="@string/llista_usuaris" />
     </group>
 </menu>

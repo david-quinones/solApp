@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Classe d'utilitats pels toasts o tancar i obrir fienstres (intents)
  * @author Juan Antonio
@@ -27,8 +31,7 @@ public class Utility {
     public static void showToast(Activity activity, Context context, String message){
 
         activity.runOnUiThread(new Runnable() {
-            public void run() {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            public void run() {Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -53,4 +56,31 @@ public class Utility {
 
     }
 
+    public static boolean vailidarNifNie(String nif){
+
+        //si es NIE, eliminar la x,y,z inicial para tratarlo como nif
+        if (nif.toUpperCase().startsWith("X")||nif.toUpperCase().startsWith("Y")||nif.toUpperCase().startsWith("Z"))
+            nif = nif.substring(1);
+            Pattern nifPattern = Pattern.compile("(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke])");
+            Matcher m = nifPattern.matcher(nif);
+        if(m.matches()){
+            String letra = m.group(2);
+        //Extraer letra del NIF
+            String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+            int dni = Integer.parseInt(m.group(1));
+            dni = dni % 23;
+            String reference = letras.substring(dni,dni+1);
+
+            if (reference.equalsIgnoreCase(letra)){
+
+                return true;
+
+            }else{
+
+                return false;
+            }
+        }
+        else
+            return false;
+    }
 }
