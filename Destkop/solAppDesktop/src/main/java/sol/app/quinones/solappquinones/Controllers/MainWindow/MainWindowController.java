@@ -57,31 +57,35 @@ public class MainWindowController implements Initializable {
             switch (newV){
                 case "Perfil":
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getPerfilView());
-                    //mainBorderPane.setTop(Model.getInstance().getViewFactory().getMenuTopViewr());
                     mainBorderPane.setTop(null);
-                    Stage stage = (Stage) mainBorderPane.getScene().getWindow();
-                    stage.setTitle(Model.getInstance().getViewFactory().getTitleApp() + " - Perfil");
+                    setStageTitle((Stage) mainBorderPane.getScene().getWindow(), " - Perfil");
                     break;
                 case "Alumne":
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getAlumneView());
-                    stage = (Stage) mainBorderPane.getScene().getWindow();
-                    stage.setTitle(Model.getInstance().getViewFactory().getTitleApp() + " - Alumne");
+                    setStageTitle((Stage) mainBorderPane.getScene().getWindow(), " - Alumne");
                     mainBorderPane.setTop(null);
                     break;
                 case "Professor":
-                    mainBorderPane.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+                    mainBorderPane.setCenter(Model.getInstance().getViewFactory().getProfessorView());
+                    setStageTitle((Stage) mainBorderPane.getScene().getWindow(), " - Professor");
                     mainBorderPane.setTop(null);
                     break;
                 case "Aula":
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getAulaView());
+                    setStageTitle((Stage) mainBorderPane.getScene().getWindow(), " - Aula");
                     mainBorderPane.setTop(null);
                     break;
                 default:
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+                    setStageTitle((Stage) mainBorderPane.getScene().getWindow(), "");
                     mainBorderPane.setTop(null);
                     break;
             }
         });
+    }
+
+    public void setStageTitle(Stage stage, String nameForm){
+        stage.setTitle(Model.getInstance().getViewFactory().getTitleApp() + nameForm);
     }
 
 }

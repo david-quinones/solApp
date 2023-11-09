@@ -1,5 +1,6 @@
 package sol.app.quinones.solappquinones.Controllers;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -9,8 +10,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AulaController implements Initializable, ITopMenuDelegation {
-    public AnchorPane mainAula;
-    public TextField idTextMostra;
+
+    @FXML
+    private AnchorPane mainAula;
+    @FXML
+    private TextField idTextMostra;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
