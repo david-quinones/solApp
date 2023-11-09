@@ -16,7 +16,7 @@ public class UsuariTest {
     @Before
     public void setUp(){
         
-        usuari = new Usuari(1, "nomUsuari", "password", true, false);
+        usuari = new Usuari(1, "nomUsuari", "password", true, false, true);
     }
     
     

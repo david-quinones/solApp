@@ -35,11 +35,8 @@ public class EmpleatDAO {
      * @param empleat dades a insertar
      * @return codi del resultat > 0 insert correcte
      */
-    public int altaEmpleat(Empleat empleat){
+    public int altaEmpleat(Empleat empleat, int idPersona){
         try {
-            PersonaDAO personaDAO = new PersonaDAO(conexio);
-            int idPersona = personaDAO.altaPersona(empleat);
-            
             //Ordre per insertar l'empleat a la base de dades
             String insertarEmpleat = "INSERT INTO empleat (actiu, inici_contracte, final_contracte, persona_id)"
                     + "VALUES (?,?,?,?)";

@@ -22,4 +22,6 @@ probesIntegracio\LoginTest$1.class
 persistencia\EmpleatDAOTest.class
 probesIntegracio\ModificacióPerfilTest.class
 probesIntegracio\ConsultaPersonaTest.class
+probesIntegracio\AltaEmpleatTest$1.class
 utilitats\UtilsTest.class
+probesIntegracio\AltaEmpleatTest.class

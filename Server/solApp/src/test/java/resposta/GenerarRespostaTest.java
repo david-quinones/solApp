@@ -24,8 +24,8 @@ public class GenerarRespostaTest {
      */
     @Before
     public void setUp(){
-        usuariCorrecte = new Usuari(1, "nom_usuari", "password", true, false);
-        usuariFail = new Usuari(1, "nom_usuari", "error", true, false);
+        usuariCorrecte = new Usuari(1, "nom_usuari", "password", true, false,true);
+        usuariFail = new Usuari(1, "nom_usuari", "error", true, false,true);
         gestorSessions = GestorSessions.obtindreInstancia();
     }
 
@@ -112,5 +112,21 @@ public class GenerarRespostaTest {
         empleat = (Empleat) retornDades.getDades(4, Empleat.class);
         assertNotNull(empleat);
  
+    }
+    
+    /**Test per comprovar que la resposta generada al insertar un empleat i l'usuari associat 
+     * es la esperada
+     * 
+     */
+    @Test
+    public void testAltaEmpleat(){
+        //Preparem dades que s'han de donar d'alta
+        Usuari usuari = new Usuari("testResposta", "password", true, false, true);
+        Empleat empleat = new Empleat("testResposta", "cognomResposta1", "cognomResposta2",
+                "1983-02-06", "1111111G", "587458745", "resposta@gmail.com", true, "2000-01-01", "9999-12-31");
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades retornDades = generarResposta.respostaAltaEmpleat(empleat, usuari);
+        //Comprovem que el codi es 1, operació correcte
+        assertEquals(1, retornDades.getCodiResultat());
     }
 }

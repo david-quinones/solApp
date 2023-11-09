@@ -48,12 +48,14 @@ public class EmpleatDAOTest {
      */
     @Test
     public void testAltaEmpleat() {
+        //Id persona associada
+        int personaId = 7;
         //Simulem un objecte Empleat
         Empleat empleat = new Empleat("Pau", "Castell", "Galtes", "1983-08-07",
                 "46797529G", "prova", "prova", true, "2023-10-23", "9999-12-31");
         empleatDAO = new EmpleatDAO(conexio);
         //Cridem al métode per donar d'alta l'empleat
-        int filesAfectades = empleatDAO.altaEmpleat(empleat);
+        int filesAfectades = empleatDAO.altaEmpleat(empleat, personaId);
         //Si l'alta es correcte el número de files afectades será superior a 0.
         assertTrue(filesAfectades > 0);
         

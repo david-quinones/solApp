@@ -54,7 +54,8 @@ public class ControladorResposta {
                 return resposta;
             case "ALTA_EMPLEAT":
                 //Generem resposat a la solicitut d'alta d'un empleat
-                resposta = dadesResposta.respostaAltaEmpleat((Empleat) peticio.getDades(1, Empleat.class));
+                resposta = dadesResposta.respostaAltaEmpleat((Empleat) peticio.getDades(1, Empleat.class),
+                        (Usuari) peticio.getDades(2, Usuari.class));
                 return resposta;
             case "CONSULTA_PERFIL":
                 //Generem resposta amb les dades de la Persona vinculada al usuari
