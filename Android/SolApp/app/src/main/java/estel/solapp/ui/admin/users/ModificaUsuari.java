@@ -1,4 +1,4 @@
-package estel.solapp.ui.admin;
+package estel.solapp.ui.admin.users;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import estel.solapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EliminaUsuari#newInstance} factory method to
+ * Use the {@link ModificaUsuari#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EliminaUsuari extends Fragment {
+public class ModificaUsuari extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class EliminaUsuari extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public EliminaUsuari() {
+    public ModificaUsuari() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class EliminaUsuari extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment EliminaUsuari.
+     * @return A new instance of fragment ModificaUsuari.
      */
     // TODO: Rename and change types and number of parameters
-    public static EliminaUsuari newInstance(String param1, String param2) {
-        EliminaUsuari fragment = new EliminaUsuari();
+    public static ModificaUsuari newInstance(String param1, String param2) {
+        ModificaUsuari fragment = new ModificaUsuari();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class EliminaUsuari extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_elimina_usuari, container, false);
+        return inflater.inflate(R.layout.fragment_modifica_usuari, container, false);
     }
 }

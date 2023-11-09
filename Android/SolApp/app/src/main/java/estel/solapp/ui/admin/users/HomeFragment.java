@@ -1,4 +1,4 @@
-package estel.solapp.ui.admin;
+package estel.solapp.ui.admin.users;
 
 import static estel.solapp.common.Utility.showToast;
 
@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.fragment_home_gestio_usuaris, container, false);
 
         return  view;
     }

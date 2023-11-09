@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/solapp_background"
-    tools:context=".ui.admin.HomeFragment">
+    tools:context=".ui.admin.users.HomeFragment">
 
     <TextView
         android:id="@+id/textView5"

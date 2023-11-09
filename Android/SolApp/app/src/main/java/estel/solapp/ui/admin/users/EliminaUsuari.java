@@ -1,4 +1,4 @@
-package estel.solapp;
+package estel.solapp.ui.admin.users;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import estel.solapp.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link llista_usuaris#newInstance} factory method to
+ * Use the {@link EliminaUsuari#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class llista_usuaris extends Fragment {
+public class EliminaUsuari extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class llista_usuaris extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public llista_usuaris() {
+    public EliminaUsuari() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class llista_usuaris extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment llista_usuaris.
+     * @return A new instance of fragment EliminaUsuari.
      */
     // TODO: Rename and change types and number of parameters
-    public static llista_usuaris newInstance(String param1, String param2) {
-        llista_usuaris fragment = new llista_usuaris();
+    public static EliminaUsuari newInstance(String param1, String param2) {
+        EliminaUsuari fragment = new EliminaUsuari();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class llista_usuaris extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_llista_usuaris, container, false);
+        return inflater.inflate(R.layout.fragment_elimina_usuari, container, false);
     }
 }

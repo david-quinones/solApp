@@ -65,6 +65,8 @@ public class EmpleatDAO {
         return -1;
     }
     
+    
+    
     /**Métode per obtindre una llista amb tots els empleats que consten a la base
      * de dades.
      * 
@@ -98,6 +100,44 @@ public class EmpleatDAO {
         return llistarEmpleats();
     }
     
+    
+    /**Métode per deixar inactiu l'usuari d'un empleat
+     * 
+     * @param empleat que s'ha de desactivar
+     * @return 
+     */
+    public int eliminarEmpleat(int idPersona){
+        int usuariModificat = 0;
+        try {
+            //Sentència per actualizar les dades de l'usuari
+            String desactivarEmpleat = "UPDATE usuari SET isActive = false "
+                    + "WHERE persona_id = ?;";
+            psEmpleat = conexio.prepareStatement(desactivarEmpleat);
+            
+            //Establim les dades per realitzar l'actualització
+            psEmpleat.setInt(1, idPersona);
+            
+            //Comprovem si l'execució es correcte
+            int filesAfectades = psEmpleat.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("L'usuari " + usuariModificat + " de l'empleat " + idPersona + 
+                        " s'ha desactivat correctament");
+                return CORRECTE;
+            }else{
+                LOGGER.info("ERROR al intentar desactivar l'usuari de l'empleat " +
+                        idPersona);
+                return ERROR;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE,
+                    "ERROR al intntar actulitzar l'usuari associat al empleat", ex);
+        }
+        return ERROR;
+    }
+    
+    
+    
     /**Métode per obrindre un objecte Empleat a partir d'un ResultSet de la base de dades
      * 
      * @param dadesObtingudes de la base de dades
@@ -115,6 +155,9 @@ public class EmpleatDAO {
             empleat.setDni(dadesObtingudes.getString("dni"));
             empleat.setTelefon(dadesObtingudes.getString("telefon"));
             empleat.setMail(dadesObtingudes.getString("mail"));
+            empleat.setActiu(dadesObtingudes.getBoolean("actiu"));
+            empleat.setIniciContracte(dadesObtingudes.getString("inici_contracte"));
+            empleat.setIniciContracte(dadesObtingudes.getString("final_contracte"));
             LOGGER.info("Obtingut empleat amb idEmpleat: " + empleat.getIdEmpleat());
             
             return empleat;
@@ -125,4 +168,6 @@ public class EmpleatDAO {
         }
         return empleat;
     }
+    
+    
 }

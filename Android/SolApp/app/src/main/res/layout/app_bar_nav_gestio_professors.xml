@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.professor.NavGestioProfessorsActivity">
+    tools:context=".ui.admin.NavGestioProfessorsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/solapp_background"
             app:popupTheme="@style/Theme.Solapp.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -29,7 +29,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:backgroundTint="#FFFFFF"
+        app:backgroundTint="#FAF9F9"
         app:srcCompat="@drawable/baseline_west_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
