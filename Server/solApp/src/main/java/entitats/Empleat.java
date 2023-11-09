@@ -22,11 +22,11 @@ public class Empleat extends Persona{
      * @param finalContracte 
      */
     public Empleat(int idPersona, String nom, String cognom1, String cognom2, String data_naixement,
-            String dni, String telefon, String mail, int id, boolean actiu, String iniciContracte,
+            String dni, String telefon, String mail, int idEmpleat, boolean actiu, String iniciContracte,
             String finalContracte
             ) {
         super(idPersona, nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
-        this.idEmpleat = id;
+        this.idEmpleat = idEmpleat;
         this.actiu = actiu;
         this.iniciContracte = iniciContracte;
         this.finalContracte = finalContracte;

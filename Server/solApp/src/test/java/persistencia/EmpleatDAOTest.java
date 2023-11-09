@@ -69,9 +69,20 @@ public class EmpleatDAOTest {
         empleatDAO = new EmpleatDAO(conexio);
         ArrayList<Empleat> empleats= empleatDAO.llistarEmpleats();
         assertEquals(1, empleats.get(0).getIdEmpleat());
+        assertEquals(true, empleats.get(0).isActiu());
         assertEquals(2, empleats.get(1).getIdEmpleat());
         assertEquals(3, empleats.get(2).getIdEmpleat());
         assertEquals(4, empleats.get(3).getIdEmpleat());
+    }
+    
+    @Test
+    public void testEliminarEmpleat(){
+        //L'id de la persona s'obtindrà del empleat rebut com a paràmetre
+       int idPersona = 1;
+       EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
+       int resultat = empleatDAO.eliminarEmpleat(idPersona);
+       //Comprovem el resultat obtingut
+        assertEquals(1, resultat);
     }
     
 }
