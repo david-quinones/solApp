@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ import estel.solapp.models.Persona;
 public class PerfilActivity extends AppCompatActivity {
 
     private EditText nomUsuari, nom, cognom1, cognom2, dataNaixement, nif, telefon, email;
-    private  Button modificarPerfilBtn, mofificarBtn;
+    private  Button modificarPerfilBtn, mofificarBtn, enrereBtn;
     private int userId;
 
     private Persona persona;
@@ -67,7 +68,7 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                mofificarBtn.setEnabled(true);
+                mofificarBtn.setVisibility(View.VISIBLE);
                 nom.setFocusableInTouchMode(true);
                 cognom1.setFocusableInTouchMode(true);
                 cognom2.setFocusableInTouchMode(true);
@@ -91,6 +92,18 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
 
+        //Botó per tornar enrere
+        enrereBtn = (Button)findViewById(R.id.enrereBtn);
+        enrereBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Crida al metode per tornar enrere
+               onBackPressed();
+
+            }
+        });
+
     }
     /***************************************
     *Métode per mostrar les dades del perfil
@@ -98,7 +111,6 @@ public class PerfilActivity extends AppCompatActivity {
     public void MostraPerfil(){
 
         //Fem petició per agafar les dades de l'usuari
-        userId=(SingletonSessio.getInstance().getUserConnectat().getId());
         // Creació d'unaltre fil.
         ExecutorService executor = Executors.newSingleThreadExecutor();
         // La petició es fa en unaltre fil
@@ -107,6 +119,7 @@ public class PerfilActivity extends AppCompatActivity {
         try {
             ValorsResposta resposta = future.get();
             Gson gson= new Gson();
+            Log.d("RESPOSTA CONSULTAR PERFIL", gson.toJson(resposta));
             if (resposta==null){
 
                 showToast(this,this, "Error de conexió amb el servidor. ");
@@ -115,6 +128,7 @@ public class PerfilActivity extends AppCompatActivity {
 
                 //Creem una instancia de persona amb les dades de la resposta del servidor
                 persona = (Persona)(resposta.getData(0, Persona.class));
+                userId = persona.getIdPersona();
                 nom.setText(persona.getNom());
                 cognom1.setText(persona.getCognom1());
                 cognom2.setText(persona.getCognom2());
@@ -148,7 +162,7 @@ public class PerfilActivity extends AppCompatActivity {
         }else {//Dades correctes
 
             //Creació de Persona per modificar.
-            persona=new Persona(nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
+            persona=new Persona(userId,nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
                     nif.getText().toString(),telefon.getText().toString(),email.getText().toString());
 
             // Creació d'unaltre fil.
@@ -160,6 +174,7 @@ public class PerfilActivity extends AppCompatActivity {
 
                 ValorsResposta resposta = future.get();
                 Gson gson= new Gson();
+                Log.d("RESPOSTA MODIFICAR PERFIL", gson.toJson(resposta));
                 if (resposta==null){
 
                     showToast(this,this, "Error de conexió amb el servidor. ");
@@ -169,7 +184,7 @@ public class PerfilActivity extends AppCompatActivity {
                     if (resposta.getReturnCode()==CommController.OK_RETURN_CODE){//Codi correcte
 
                         showToast(this,this, "Dades modificades");
-                        //Tornem a deixar com no editables els EditText
+                        //Tornem a deixar com NO editables els EditText
                         mofificarBtn.setClickable(false);
                         nom.setFocusableInTouchMode(false);
                         cognom1.setFocusableInTouchMode(false);
@@ -178,6 +193,7 @@ public class PerfilActivity extends AppCompatActivity {
                         nif.setFocusableInTouchMode(false);
                         telefon.setFocusableInTouchMode(false);
                         email.setFocusableInTouchMode(false);
+                        onBackPressed();
 
                     }else {
 
@@ -200,7 +216,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         if (nom.getText().toString().isEmpty()){error = "La casella nom és buida.\n"; }
         if (cognom1.getText().toString().isEmpty()){error = error + "La casella Primer cognom és buida.\n"; }
-        if (cognom2.getText().toString().isEmpty()){error = error + "La casella Segon cognom és buida.\n"; }
+        if (cognom2.getText().toString().isEmpty()){error = error + "La casella Segón cognom és buida.\n"; }
         if (dataNaixement.getText().toString().isEmpty()){error = error + "La casella Data de neiement és buida.\n"; }
         if (nif.getText().toString().isEmpty()){error = error + "La casella NIF és buida.\n"; }
         if (!Utility.vailidarNifNie(nif.getText().toString())){error=error + "El format del NIF no és vàlid.\n"; }
