@@ -28,4 +28,5 @@
     <string name="tornar_menu">Tornar al menú principal</string>
     <string name="title_activity_nav_gestio_professors">NavGestioProfessorsActivity</string>
     <string name="perfilbtn">Perfil</string>
+    <string name="llista_usuaris">Llista d\'usuaris</string>
 </resources>

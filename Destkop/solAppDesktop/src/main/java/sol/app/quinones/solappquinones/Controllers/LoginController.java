@@ -86,6 +86,7 @@ public class LoginController implements Initializable {
             //send message (convert petition to JSON)
             String respota = socket.sendMessage(JsonUtil.toJson(peticio));
 
+            //TODO si es null controlar
             /*RESPOSTA*/
             //convert to "JSON"
             JSONObject jObj = new JSONObject(respota);
@@ -99,7 +100,7 @@ public class LoginController implements Initializable {
                 //Deserializem l'objecte usuari assignant-lo al Singleton directament
                 singletonConnection.setUserConnectat(Usuari.fromJson(jObj.getJSONArray("dades").get(0).toString()));
                 //Assignem la Key a singleton
-                singletonConnection.setKey(jObj.getJSONArray("dades").get(1).toString());
+                singletonConnection.setKey(jObj.getJSONArray("dades").get(1).toString().replace("\"",""));
 
                 Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
                 Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra

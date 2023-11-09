@@ -25,14 +25,15 @@ import estel.solapp.common.SingletonSessio;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
 
-/**
+/*******************************************************
  * Classe controladora de menú principal d'usuaris admin
  * @author Juan Antonio
- */
+ *******************************************************/
 public class HomeAdminActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
 
@@ -40,78 +41,86 @@ public class HomeAdminActivity extends AppCompatActivity {
         TextView benvinguda;
         benvinguda =((TextView) findViewById(R.id.textBenvinguda));
         benvinguda.setText("Usuari: "+SingletonSessio.getInstance().getUserConnectat().getNomUsuari());
+
     }
 
     /*************************************************************
      *
-     * mETODES PER OBRIR LES VISTES CORRESPONENT ALS EVENTS DE BOTÓ
+     * METODES PER OBRIR LES VISTES CORRESPONENT ALS EVENTS DE BOTÓ
      *
      **************************************************************/
 
-    /**
+    /*************************************
      * Click per anar
      * a la informació del perfil d'usuari
      * @param view vista
-     */
+     *************************************/
     public void goPerfil(View view){
 
         Utility.gotoActivityChild(this, PerfilActivity.class);
+
     }
-    /**
+
+    /****************************************
      * Click per anar
      * al menú navigation de gestió d'usuaris
      * @param view vista
-     */
+     ****************************************/
     public void goGestioUsiaris(View view){
 
         Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+
     }
 
-    /**
+    /********************************************
      * Click per anar
      * al menú navigation de gestió de professors
      * @param view vista
-     */
+     ********************************************/
     public void goGestioProfessors(View view){
 
         Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+
     }
 
-    /**
+    /*****************************************
      * Click per anar
      * al menú navigation de gestió de alumnes
      * @param view vista
-     */
+     *****************************************/
     public void goGestioAlumnes(View view){
 
         Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+
     }
 
-    /**
+    /***************************************
      * Click per anar
      * al menú navigation de gestió de aules
      * @param view vista
-     */
+     ***************************************/
     public void goGestioAules(View view){
 
         Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+
     }
 
-    /**
+    /***********************************************
      * Click per anar
      * al menú navigation de gestió de comunicacions
      * @param view vista
-     */
+     ***********************************************/
     public void goGestioComunicacions(View view){
 
         Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+
     }
 
-    /**
+    /********************
      * Click per
      * Tancar sessió
      * @param view vista
-     */
+     ********************/
     public void doLogout(View view){
 
         Context context = getApplicationContext();
@@ -141,7 +150,9 @@ public class HomeAdminActivity extends AppCompatActivity {
                 } else {
                     showToast(parent, context, "Error tancant sessió!"); //Si el codi no es correcte mostrar missatge error
                 }
+
             }
+
         } catch (ExecutionException | InterruptedException e) {
             showToast(parent, context, "Error (" + e.getMessage() + ")");//Mostrar missatge error si ha fallat
         } finally {
@@ -150,12 +161,14 @@ public class HomeAdminActivity extends AppCompatActivity {
 
     }
 
-    /**
+    /********************************************************************
      * Avis amb un missatge si es vol tancar l'aplicació sense fer logout
-     */
+     ********************************************************************/
     @Override
     public void onBackPressed() {
 
         showToast(this, getApplicationContext(), "S'ha de sortir per tancar sessió");
+
     }
+
 }

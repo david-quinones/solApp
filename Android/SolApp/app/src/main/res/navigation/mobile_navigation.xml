@@ -31,4 +31,9 @@
         android:name="estel.solapp.ui.admin.busca_usuari"
         android:label="Buscar usuari"
         tools:layout="@layout/fragment_busca_usuari" />
+    <fragment
+        android:id="@+id/llista_usuaris"
+        android:name="estel.solapp.llista_usuaris"
+        android:label="fragment_llista_usuaris"
+        tools:layout="@layout/fragment_llista_usuaris" />
 </navigation>

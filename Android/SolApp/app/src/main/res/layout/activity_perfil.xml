@@ -19,9 +19,9 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="117dp"
+        android:layout_width="107dp"
         android:layout_height="107dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
@@ -54,17 +54,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewPerfil" />
 
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="431dp"
-        android:layout_marginTop="9dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/modificarPerfilBtn"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="1dp">
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#FFFDFD"
             android:orientation="vertical">
 
@@ -115,6 +119,156 @@
                 android:singleLine="true"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/borde_edittext"
+                android:text="Primer cognom"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextCognom1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/borde_edittext"
+                android:clickable="true"
+                android:editable="true"
+                android:ems="10"
+                android:enabled="true"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/borde_edittext"
+                android:text="Segon cognom"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextCognom2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/borde_edittext"
+                android:clickable="true"
+                android:editable="true"
+                android:ems="10"
+                android:enabled="true"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/borde_edittext"
+                android:text="Data de naixement"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextDataNaixement"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/borde_edittext"
+                android:clickable="true"
+                android:editable="true"
+                android:ems="10"
+                android:enabled="true"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:inputType="datetime|date"
+                android:singleLine="true"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/borde_edittext"
+                android:text="NIF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextNIF"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/borde_edittext"
+                android:clickable="true"
+                android:editable="true"
+                android:ems="10"
+                android:enabled="true"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/borde_edittext"
+                android:text="Número de telèfon"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextTelefon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/borde_edittext"
+                android:clickable="true"
+                android:editable="true"
+                android:ems="10"
+                android:enabled="true"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:inputType="phone"
+                android:singleLine="true"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/borde_edittext"
+                android:text="Email"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/borde_edittext"
+                android:clickable="true"
+                android:editable="true"
+                android:ems="10"
+                android:enabled="true"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:inputType="text|textEmailAddress"
+                android:singleLine="true"
+                android:textSize="20sp" />
+
             <Button
                 android:id="@+id/modificarlBtn"
                 android:layout_width="wrap_content"
@@ -123,10 +277,10 @@
                 android:layout_marginEnd="112dp"
                 android:backgroundTint="#090909"
                 android:clickable="false"
+                android:enabled="false"
                 android:text="Confirmar canvis"
                 android:textAlignment="center"
                 android:textSize="16sp"
-                android:visibility="visible"
                 app:cornerRadius="1dp"
                 app:icon="@drawable/baseline_done_24"
                 app:iconGravity="top"

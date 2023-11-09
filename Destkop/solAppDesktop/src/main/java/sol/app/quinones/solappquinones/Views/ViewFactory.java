@@ -1,16 +1,23 @@
 package sol.app.quinones.solappquinones.Views;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import sol.app.quinones.solappquinones.Controllers.AulaController;
 import sol.app.quinones.solappquinones.Controllers.ErrorController;
+import sol.app.quinones.solappquinones.Controllers.ITopMenuDelegation;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowController;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MenuController;
+import sol.app.quinones.solappquinones.Controllers.TopMenuController;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
@@ -27,34 +34,110 @@ import java.net.ServerSocket;
  */
 public class ViewFactory {
 
+    private static final String titleApp = "SOLAPP - ESTEL BRESSOL";
     private AnchorPane dashboardView;
+    private AnchorPane perfilView;
+    private HBox menuTopViewr;
+    private AnchorPane aulaView;
+    private AnchorPane alumneView;
 
+    //controlar que clico al menu
+    private final StringProperty seleccioClientItemMenu;
+
+    private TopMenuController topMenuController;
     private ServerComunication socket = new ServerComunication();
 
     /**
-     * Contructor per defecte
+     *
+     * TODO
      */
-    public ViewFactory(){}
+    public ViewFactory(){
+        this.seleccioClientItemMenu = new SimpleStringProperty("");
+    }
+
+    public StringProperty getSeleccioClientItemMenu() {
+        return seleccioClientItemMenu;
+    }
+
+    public AnchorPane getPerfilView() {
+        //if(perfilView == null){
+            try {
+                perfilView = new FXMLLoader(getClass().getResource("/Fxml/PerfilUsuari.fxml")).load();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        //}
+        return perfilView;
+    }
+
+    public HBox getMenuTopViewr(ITopMenuDelegation accions) {
+       // if(menuTopViewr == null){
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MenuAction.fxml"));
+                menuTopViewr = fxmlLoader.load();
+                TopMenuController controller = fxmlLoader.getController();
+                controller.setTopMenuDelegation(accions);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+      //  }
+        return menuTopViewr;
+    }
+
+    /*
+    public HBox getMenuTopViewr() {
+        if(menuTopViewr == null){
+            try{
+                menuTopViewr = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MenuAction.fxml")).load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return menuTopViewr;
+    }*/
+
+    public AnchorPane getAulaView() {
+        //if(aulaView == null){
+            try {
+                aulaView = new FXMLLoader(getClass().getResource("/Fxml/Aula.fxml")).load();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        //}
+        return aulaView;
+    }
+
+    public AnchorPane getAlumneView() {
+        //if(aulaView == null){
+        try {
+            alumneView = new FXMLLoader(getClass().getResource("/Fxml/Alumne.fxml")).load();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        //}
+        return alumneView;
+    }
+
+
 
     /**
-     * Obte i crea la vista Dashboard (actual desus)
+     * Obte i crea la vista Dashboard
      *
      * @return instancia de {@link AnchorPane}
      */
-
-    /*
     public AnchorPane getDashboardView(){
         if(dashboardView == null){
             try{
-                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/Dashboard1.fxml")).load();
+                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/Dashboard_.fxml")).load();
             }catch(Exception e){
                 e.printStackTrace();
             }
         }
-
         return  dashboardView;
     }
-    */
+
+
     /**
      * Mostra finestra inici sessió
      */
@@ -62,6 +145,7 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader, true);
     }
+
 
     /**
      * Mostra la finestra principal (finestra més menus) configurant segons el rol proporcionat
@@ -73,6 +157,7 @@ public class ViewFactory {
         MainWindowController mainWindowController = new MainWindowController(rol);
         loader.setController(mainWindowController);
         createStage(loader, false);
+
     }
 
     /**
@@ -91,7 +176,7 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/Images/logo.png")));
-        stage.setTitle("SOLAPP - ESTEL BRESSOL");
+        stage.setTitle(titleApp);
         if(!login){
             stage.setOnCloseRequest(event -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -115,8 +200,6 @@ public class ViewFactory {
                         event.consume();
                     }
                 });
-
-
             });
         }
 
@@ -132,13 +215,7 @@ public class ViewFactory {
         stage.close();
     }
 
-
-    public void showWindowAula(String rol){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/Dashboard.fxml"));
-        MainWindowController mainWindowController = new MainWindowController(rol);
-        loader.setController(mainWindowController);
-        createStage(loader, false);
+    public static String getTitleApp() {
+        return titleApp;
     }
-
-
 }
