@@ -58,8 +58,10 @@ public class MenuController implements Initializable {
         btn_perfil.setOnAction(event -> openPerfil());
         btn_aula.setOnAction(event -> openAula());
         btn_alumne.setOnAction(event -> openAlumne());
+        btn_professor.setOnAction(event -> openProfessor());
 
     }
+
 
 
     /**
@@ -152,5 +154,10 @@ public class MenuController implements Initializable {
     private void openAula() {
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Aula");
     }
+
+    private void openProfessor() {
+        Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Professor");
+    }
+
 
 }

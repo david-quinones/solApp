@@ -12,9 +12,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import sol.app.quinones.solappquinones.Controllers.AulaController;
 import sol.app.quinones.solappquinones.Controllers.ErrorController;
+import sol.app.quinones.solappquinones.Controllers.ITopMenuDelegation;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowController;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MenuController;
+import sol.app.quinones.solappquinones.Controllers.TopMenuController;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
@@ -31,13 +34,17 @@ import java.net.ServerSocket;
  */
 public class ViewFactory {
 
+    private static final String titleApp = "SOLAPP - ESTEL BRESSOL";
     private AnchorPane dashboardView;
     private AnchorPane perfilView;
     private HBox menuTopViewr;
+    private AnchorPane aulaView;
+    private AnchorPane alumneView;
 
     //controlar que clico al menu
     private final StringProperty seleccioClientItemMenu;
 
+    private TopMenuController topMenuController;
     private ServerComunication socket = new ServerComunication();
 
     /**
@@ -53,16 +60,32 @@ public class ViewFactory {
     }
 
     public AnchorPane getPerfilView() {
-        if(perfilView == null){
+        //if(perfilView == null){
             try {
                 perfilView = new FXMLLoader(getClass().getResource("/Fxml/PerfilUsuari.fxml")).load();
             }catch(Exception e){
                 e.printStackTrace();
             }
-        }
+        //}
         return perfilView;
     }
 
+    public HBox getMenuTopViewr(ITopMenuDelegation accions) {
+       // if(menuTopViewr == null){
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MenuAction.fxml"));
+                menuTopViewr = fxmlLoader.load();
+                TopMenuController controller = fxmlLoader.getController();
+                controller.setTopMenuDelegation(accions);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+      //  }
+        return menuTopViewr;
+    }
+
+    /*
     public HBox getMenuTopViewr() {
         if(menuTopViewr == null){
             try{
@@ -72,6 +95,28 @@ public class ViewFactory {
             }
         }
         return menuTopViewr;
+    }*/
+
+    public AnchorPane getAulaView() {
+        //if(aulaView == null){
+            try {
+                aulaView = new FXMLLoader(getClass().getResource("/Fxml/Aula.fxml")).load();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        //}
+        return aulaView;
+    }
+
+    public AnchorPane getAlumneView() {
+        //if(aulaView == null){
+        try {
+            alumneView = new FXMLLoader(getClass().getResource("/Fxml/Alumne.fxml")).load();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        //}
+        return alumneView;
     }
 
 
@@ -131,7 +176,7 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/Images/logo.png")));
-        stage.setTitle("SOLAPP - ESTEL BRESSOL");
+        stage.setTitle(titleApp);
         if(!login){
             stage.setOnCloseRequest(event -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -170,4 +215,7 @@ public class ViewFactory {
         stage.close();
     }
 
+    public static String getTitleApp() {
+        return titleApp;
+    }
 }

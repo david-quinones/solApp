@@ -22,7 +22,7 @@ public class GestorSessions {
         if(instancia == null){
             instancia = new GestorSessions();
             //NOMES PER FER PROVES
-            Usuari usuari = new Usuari(2, "Pau", "hola", true, false);
+            Usuari usuari = new Usuari(2, "Pau", "hola", true, false,true);
             instancia.agregarSessio(usuari, "sessioProves");
         }
         //Retornem la instancia única del GestorSessions

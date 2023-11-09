@@ -38,7 +38,7 @@ public class LogoutTest {
     @Before
     public void setUp(){
         gestorSessions = GestorSessions.obtindreInstancia();
-        usuari = new Usuari(1,"nom_usuari", "password",true,false);
+        usuari = new Usuari(1,"nom_usuari", "password",true,false,true);
 
         Thread serverThread = new Thread(new Runnable() {
             @Override

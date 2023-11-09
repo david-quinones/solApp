@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import sol.app.quinones.solappquinones.Controllers.TopMenuController;
 import sol.app.quinones.solappquinones.Models.Model;
 
 import java.io.IOException;
@@ -57,9 +59,21 @@ public class MainWindowController implements Initializable {
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getPerfilView());
                     //mainBorderPane.setTop(Model.getInstance().getViewFactory().getMenuTopViewr());
                     mainBorderPane.setTop(null);
+                    Stage stage = (Stage) mainBorderPane.getScene().getWindow();
+                    stage.setTitle(Model.getInstance().getViewFactory().getTitleApp() + " - Perfil");
                     break;
-                case "X":
+                case "Alumne":
+                    mainBorderPane.setCenter(Model.getInstance().getViewFactory().getAlumneView());
+                    stage = (Stage) mainBorderPane.getScene().getWindow();
+                    stage.setTitle(Model.getInstance().getViewFactory().getTitleApp() + " - Alumne");
+                    mainBorderPane.setTop(null);
+                    break;
+                case "Professor":
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+                    mainBorderPane.setTop(null);
+                    break;
+                case "Aula":
+                    mainBorderPane.setCenter(Model.getInstance().getViewFactory().getAulaView());
                     mainBorderPane.setTop(null);
                     break;
                 default:

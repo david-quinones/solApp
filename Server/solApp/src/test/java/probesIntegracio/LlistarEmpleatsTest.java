@@ -19,7 +19,7 @@ import servidor.ServidorSocketListener;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
-/**
+ /**Classe per realitzar el test d'integració de la consulta, llistar Empleats 
  *
  * @author Pau Castell Galtes
  */
@@ -28,10 +28,10 @@ public class LlistarEmpleatsTest {
     private Socket socket;
     private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
     
- /**Classe per realitzar el test d'integració de la consulta, llistar Empleats 
- *
- * @author Pau Castell Galtes
- */
+
+    /**Preparem el servidora abans de cada test
+     * 
+     */
     @Before
     public void setUp(){
         Thread serverThread = new Thread(new Runnable() {
@@ -49,7 +49,6 @@ public class LlistarEmpleatsTest {
         } catch (InterruptedException ex) {
             Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
     
     @After

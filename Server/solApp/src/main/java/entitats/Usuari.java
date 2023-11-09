@@ -10,6 +10,7 @@ public class Usuari {
     private String password;
     private boolean isAdmin;
     private boolean isTeacher;
+    private boolean isActive;
     
     
     //Constructors:
@@ -31,12 +32,30 @@ public class Usuari {
      * @param isAdmin
      * @param isTeacher 
      */
-    public Usuari(int id, String nomUsuari, String password, boolean isAdmin, boolean isTeacher) {
+    public Usuari(int id, String nomUsuari, String password, boolean isAdmin, boolean isTeacher, boolean isActive) {
         this.id = id;
         this.nomUsuari = nomUsuari;
         this.password = password;
         this.isAdmin = isAdmin;
         this.isTeacher = isTeacher;
+        this.isActive = isActive;
+        
+    }
+    
+    /**Constructor sense id
+     * 
+     * @param nomUsuari
+     * @param password
+     * @param isAdmin
+     * @param isTeacher
+     * @param isActive 
+     */
+    public Usuari(String nomUsuari, String password, boolean isAdmin, boolean isTeacher, boolean isActive) {
+        this.nomUsuari = nomUsuari;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.isTeacher = isTeacher;
+        this.isActive = isActive;
         
     }
 
@@ -78,6 +97,14 @@ public class Usuari {
 
     public void setIsTeacher(boolean isTeacher) {
         this.isTeacher = isTeacher;
+    }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
   
 }

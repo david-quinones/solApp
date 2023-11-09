@@ -90,23 +90,49 @@ public class GenerarResposta {
     
     
     
-    /**Métode que genera la resoposta a una solicitud d'alta d'un empleat
+    /**Métode que genera la resoposta a una solicitud d'alta d'un empleat i el seu
+     * usuari associat
      * 
      * @param empleat que es vol donar d'alta
      * @return codi correcte o d'error
      */
-    public RetornDades respostaAltaEmpleat(Empleat empleat){
+    public RetornDades respostaAltaEmpleat(Empleat empleat, Usuari usuari){
+        try {
+            //Si totes les accions no son correctes no es fa cap
+            conexio.setAutoCommit(false);
+            //Obtenim idPersona insertada
+            PersonaDAO personaDAO = new PersonaDAO(conexio);
+            int idPersona = personaDAO.altaPersona(empleat);
             //Instanciem la classe EmpleatDAO
             EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
             //Codi que ens indica quantes files s'han insertat
-            int codiAltaEmpleat = empleatDAO.altaEmpleat(empleat);
+            int codiAltaEmpleat = empleatDAO.altaEmpleat(empleat, idPersona);
+            //Alta del usuari asociat a l'empleat
+            UsuariDAO usuariDAO = new UsuariDAO(conexio);
+            int codiAltaUsuari = usuariDAO.altaUsuari(usuari, idPersona);
             //Comprobem que l'entitat Empleat s'ha insertat
-            if(codiAltaEmpleat > 0){
+            if(codiAltaEmpleat > 0 && codiAltaUsuari > 0){
+                conexio.commit();
+                LOGGER.info("L'empleat i l'usuari s'han insertat correctament");
                 return resposta = new RetornDades(CODI_CORRECTE);
             }else{
+                //Desfem tots els possibles canvis
+                conexio.rollback();
+                LOGGER.warning("ERROR No s'ha pogut insertar l'empleat ni l'usari associat");
                 //Si no s'ha insertat cap fila retornem codi d'error
                 return resposta = new RetornDades(CODI_ERROR);
             }
+        } catch (SQLException ex) {
+            try {
+                conexio.rollback();
+                Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE,
+                        "ERROR al intentar donar d'alta un empleat i el seu usuari", ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+
+        return resposta = new RetornDades(CODI_ERROR);
     }
     
     
