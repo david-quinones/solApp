@@ -10,7 +10,10 @@ public class User {
     private String password;
     private boolean isAdmin;
     private boolean isTeacher;
-    private int personaId;
+    private boolean isActive;
+
+
+
 
 
     //Constructors:
@@ -27,7 +30,7 @@ public class User {
         this.password = password;
     }
 
-    /**
+    /*****************************************************************
      * Constructor per crear la l'objecte Usuari amb tots els atributs
      *
      * @param id id de l'usuari
@@ -35,22 +38,23 @@ public class User {
      * @param password contrasenya
      * @param isAdmin
      * @param isTeacher
-     * @param personaId
-     */
-    public User (int id, String nomUsuari, String password, boolean isAdmin, boolean isTeacher, int personaId) {
+     * @param isActive
+     ******************************************************************/
+    public User (int id, String nomUsuari, String password, boolean isAdmin, boolean isTeacher, boolean isActive) {
 
         this.id = id;
         this.nomUsuari = nomUsuari;
         this.password = password;
         this.isAdmin = isAdmin;
         this.isTeacher = isTeacher;
-        this.personaId = personaId;
+        this.isActive = isActive;
+
 
     }
 
-    /*
+    /*******************
     * Getters i Setters
-     */
+    ********************/
     public int getId() {return id;}
 
     public void setId(int id) {this.id = id;}
@@ -64,16 +68,17 @@ public class User {
     public void setPassword(String password) {this.password = password;}
 
     public boolean isAdmin() {return isAdmin;}
-
     public void setIsAdmin(boolean isAdmin) {this.isAdmin = isAdmin;}
 
     public boolean isTeacher() {return isTeacher;}
 
     public void setIsTeacher(boolean isTeacher) {this.isTeacher = isTeacher;}
 
-    public int getPersonaId() {return personaId;}
+    public boolean isActive() {
+        return isActive;
+    }
 
-    public void setPersonaId(int personaId) {this.personaId = personaId;}
-
-
+    public void setIsActive(boolean isActive) {
+        isActive = isActive;
+    }
 }

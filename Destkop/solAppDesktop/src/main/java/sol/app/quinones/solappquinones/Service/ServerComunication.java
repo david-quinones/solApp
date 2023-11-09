@@ -1,5 +1,8 @@
 package sol.app.quinones.solappquinones.Service;
 
+import sol.app.quinones.solappquinones.Models.Peticio;
+import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -77,5 +80,6 @@ public class ServerComunication {
     protected void setSocket(Socket socket){
         this.socket = socket;
     }
+
 
 }

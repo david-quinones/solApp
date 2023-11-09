@@ -40,6 +40,7 @@ public class ViewFactory {
     private HBox menuTopViewr;
     private AnchorPane aulaView;
     private AnchorPane alumneView;
+    private AnchorPane professorView;
 
     //controlar que clico al menu
     private final StringProperty seleccioClientItemMenu;
@@ -85,18 +86,6 @@ public class ViewFactory {
         return menuTopViewr;
     }
 
-    /*
-    public HBox getMenuTopViewr() {
-        if(menuTopViewr == null){
-            try{
-                menuTopViewr = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MenuAction.fxml")).load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return menuTopViewr;
-    }*/
-
     public AnchorPane getAulaView() {
         //if(aulaView == null){
             try {
@@ -106,6 +95,17 @@ public class ViewFactory {
             }
         //}
         return aulaView;
+    }
+
+    public AnchorPane getProfessorView() {
+        //if(aulaView == null){
+        try {
+            professorView = new FXMLLoader(getClass().getResource("/Fxml/Professor.fxml")).load();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        //}
+        return professorView;
     }
 
     public AnchorPane getAlumneView() {
@@ -215,7 +215,7 @@ public class ViewFactory {
         stage.close();
     }
 
-    public static String getTitleApp() {
+    public String getTitleApp() {
         return titleApp;
     }
 }

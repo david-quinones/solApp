@@ -29,4 +29,11 @@
     <string name="title_activity_nav_gestio_professors">NavGestioProfessorsActivity</string>
     <string name="perfilbtn">Perfil</string>
     <string name="llista_usuaris">Llista d\'usuaris</string>
+    <string name="gestio_professors_menu">Menú de gestió de professors</string>
+    <string name="afegir_professor">Afegir professor</string>
+    <string name="elimina_professor">Eliminar professor</string>
+    <string name="modificar_professor">Modificar professor</string>
+    <string name="modifica_professor">Modificar professor</string>
+    <string name="busca_professor">Buscar professor</string>
+    <string name="llista_professors">Llistar professors</string>
 </resources>

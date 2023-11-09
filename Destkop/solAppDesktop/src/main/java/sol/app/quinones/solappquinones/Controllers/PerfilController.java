@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import sol.app.quinones.solappquinones.Models.Model;
 import sol.app.quinones.solappquinones.Models.Persona;
 import sol.app.quinones.solappquinones.Models.Peticio;
+import sol.app.quinones.solappquinones.Service.ConsultesSocket;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
@@ -127,16 +128,9 @@ public class PerfilController implements Initializable {
 
     private void startDate(){
 
-        peticio.dropDades();
-
-        //peticio a servidor
         try {
-            socket.connect();
-            peticio.setPeticio("CONSULTA_PERFIL");
-            peticio.addDades(SingletonConnection.getInstance().getKey());
 
-            //respota
-            String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
+            String resposta = ConsultesSocket.serverPeticioConsulta("CONSULTA_PERFIL");
 
             JSONObject jsonObject = new JSONObject(resposta);
 
@@ -158,8 +152,6 @@ public class PerfilController implements Initializable {
             }
 
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -197,6 +189,7 @@ public class PerfilController implements Initializable {
         mPersona.setMail(txtMail.getText());
 
     }
+
 
 
 }

@@ -1,8 +1,9 @@
-package estel.solapp.ui.professor;
+package estel.solapp.ui.admin;
 
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -16,9 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import estel.solapp.R;
 import estel.solapp.databinding.ActivityNavGestioProfessorsBinding;
+import estel.solapp.databinding.ActivityNavGestioUsuarisBinding;
 
 public class NavGestioProfessorsActivity extends AppCompatActivity {
 
+    Button retornBtn;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityNavGestioProfessorsBinding binding;
 
@@ -26,35 +29,32 @@ public class NavGestioProfessorsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         binding = ActivityNavGestioProfessorsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         setSupportActionBar(binding.appBarNavGestioProfessors.toolbar);
         binding.appBarNavGestioProfessors.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                onBackPressed();
             }
         });
+
         DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+        NavigationView navigationView = binding.navViewProfessors;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.home_gestio_professors,R.id.afegir_professor,R.id.eliminar_professor,R.id.modificar_professor,R.id.busca_professor,R.id.llistar_professor)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_nav_gestio_professors);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.nav_gestio_professors, menu);
-        return true;
     }
 
     @Override
@@ -63,4 +63,5 @@ public class NavGestioProfessorsActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }

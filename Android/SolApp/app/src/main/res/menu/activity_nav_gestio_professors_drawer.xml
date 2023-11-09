@@ -5,16 +5,28 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/home_gestio_professors"
+            android:icon="@drawable/baseline_home_24"
+            android:title="@string/gestio_professors_menu" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/afegir_professor"
+            android:icon="@drawable/baseline_person_add_alt_1_24"
+            android:title="@string/afegir_professor" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/eliminar_professor"
+            android:icon="@drawable/baseline_person_remove_24"
+            android:title="@string/elimina_professor" />
+        <item
+            android:id="@+id/modificar_professor"
+            android:icon="@drawable/baseline_create_24"
+            android:title="@string/modifica_professor" />
+        <item
+            android:id="@+id/busca_professor"
+            android:icon="@drawable/baseline_search_24"
+            android:title="@string/busca_professor" />
+        <item
+            android:id="@+id/llistar_professor"
+            android:icon="@drawable/baseline_list_24"
+            android:title="@string/llista_professors" />
     </group>
 </menu>
