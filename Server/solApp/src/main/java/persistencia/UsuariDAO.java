@@ -21,8 +21,11 @@ public class UsuariDAO {
     private ConexioBBDD base_dades;
     private Connection conexio;
     private Encriptar seguretat;
-    PreparedStatement ps;
-
+    private PreparedStatement ps;
+    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
+    private static final int CORRECTE = 1;
+    private static final int ERROR = -1;
+    
     /**Constructor de la classe UsuariDAO
      * 
      */
@@ -31,8 +34,6 @@ public class UsuariDAO {
         seguretat = new Encriptar();
 
     }
-    
-    
     
     /**Métode per validar el nom d'usuari i el password rebut amb les dades 
      * emmagatzemades.
@@ -43,7 +44,7 @@ public class UsuariDAO {
 
         try {
             //Consulta a la base de dades
-            String consulta = "SELECT * FROM usuari WHERE nom_usuari = ?";
+            String consulta = "SELECT * FROM usuari WHERE nom_usuari = ? AND isActive = TRUE";
             ps = conexio.prepareStatement(consulta);
             
             //Establim el nom d'usuari rebut a la consulta
@@ -84,6 +85,40 @@ public class UsuariDAO {
             
         }            
         return null;
+    }
+    
+    public int altaUsuari(Usuari usuari, int personaId){
+        try {
+            //Instrucció sql per afegir un nou usuari
+            String insertUsuari = "INSERT INTO usuari (nom_usuari, password, is_admin,"
+                    + " is_teacher, persona_id, isActive) VALUES (?,?,?,?,?,?) ";
+            ps = conexio.prepareStatement(insertUsuari);
+            
+            //Establim dades per a la instrucció
+            ps.setString(1, usuari.getNomUsuari());
+            //Abans d'insertar el password l'encriptem
+            Encriptar encriptar= new Encriptar();
+            String password = encriptar.hashPassword(usuari.getPassword());
+            ps.setString(2, password);
+            ps.setBoolean(3, usuari.isIsAdmin());
+            ps.setBoolean(4, usuari.isIsTeacher());
+            ps.setInt(5, personaId);
+            ps.setBoolean(6, usuari.isIsActive());
+            
+            //Comprovem si s'ha insertat correctament
+            int fileAfectades = ps.executeUpdate();
+            if(fileAfectades > 0){
+                LOGGER.info("L'usuari " + usuari.getNomUsuari() + " s'ha insertat correctament.");
+                return CORRECTE;
+            }else{
+                LOGGER.warning("ERROR al insertar l'usuari amb nom: " + usuari.getNomUsuari());
+                return ERROR;
+            }
+            
+        } catch (SQLException | NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             return -1; 
     }
      
 }

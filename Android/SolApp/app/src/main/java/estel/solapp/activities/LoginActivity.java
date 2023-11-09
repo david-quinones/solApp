@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             ValorsResposta resposta = future.get();
             Gson gson= new Gson();
-            Log.d("RESPOSTA LOGIN", gson.toJson(resposta));
+            Log.d("RESPOSTA LOGIN", gson.toJson(resposta));//Log per veure resposta de servidor
             if (resposta==null){
                 showToast(parent,context, "Error de conexió amb el servidor. ");
 

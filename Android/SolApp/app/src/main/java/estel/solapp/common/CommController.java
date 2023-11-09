@@ -34,7 +34,7 @@ public class CommController {
     public static final String LLISTAR_USUARIS = "LLISTAR_USUARIS";
     public static final String AFEGIR_USUARI = "AFEGIR_USUARI";
     public static final String CONSULTA_PERFIL = "CONSULTA_PERFIL";
-    public static final String MODIFICA_PERFIL = "MODIFICA_PERFIL";
+    public static final String MODIFICAR_PERFIL = "MODIFICAR_PERFIL";
     public static final String BUSCA_USUARI = "BUSCA_USUARI";
 
     /***********************************
@@ -126,12 +126,14 @@ public class CommController {
      **********************************************/
     public static ValorsResposta modificaPerfil(Persona persona){
 
-        PeticioClient modificaPerfil = new PeticioClient(MODIFICA_PERFIL);
+
+        PeticioClient modificaPerfil = new PeticioClient(MODIFICAR_PERFIL);
+
+        //Afegim el codi de sessió a la petició
+        modificaPerfil.addDataObject(SingletonSessio.getInstance().getKey().replace("\"",""));
 
         //Afegim les dades de persona llegides
         modificaPerfil.addDataObject(persona);
-        //Afegim el codi de sessió a la petició
-        modificaPerfil.addDataObject(SingletonSessio.getInstance().getKey().replace("\"",""));
 
         ValorsResposta resposta = talkToServer(modificaPerfil);
 
@@ -145,7 +147,7 @@ public class CommController {
      * Petició de llista d'usuaris al servidor
      * @return result users array; null if error.
      ********************************************/
-    public static User[] listarUsuaris(){
+    public static User[] llistarUsuaris(){
 
         PeticioClient listUsers = new PeticioClient(LLISTAR_USUARIS);
         listUsers.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));

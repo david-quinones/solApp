@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -31,6 +32,11 @@ public class UsuariDAOTest {
                     "Error al conectar amb la base de dades", ex);
         }
 
+    }
+    
+    @After
+    public void tearDown(){
+        baseDades.tancarConexio();
     }
 
     
@@ -64,5 +70,20 @@ public class UsuariDAOTest {
         assertNull(usuariResultat2);
     }
     
+    /**Test per verificar l'alta d'un usuari a la base de dades.
+     * 
+     */
+    @Test
+    public void testAltaUsuari(){
+        //Establim dades per fer el test
+        Usuari usuari  = new Usuari("testAlta", "password", true, false, true);
+        int idPersona = 2;
+        //Executem l'alta d'usuari
+        UsuariDAO usuariDAO = new UsuariDAO(conexio);
+        int resultat = usuariDAO.altaUsuari(usuari, idPersona);
+        //Comprovem resultat
+        assertEquals(1, resultat);
+        
+    }   
 }
 
