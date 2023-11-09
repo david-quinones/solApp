@@ -11,13 +11,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sol.app.quinones.solappquinones.Controllers.AulaController;
-import sol.app.quinones.solappquinones.Controllers.ErrorController;
-import sol.app.quinones.solappquinones.Controllers.ITopMenuDelegation;
+import sol.app.quinones.solappquinones.Controllers.*;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowController;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MenuController;
-import sol.app.quinones.solappquinones.Controllers.TopMenuController;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
@@ -119,6 +117,11 @@ public class ViewFactory {
         return alumneView;
     }
 
+    public void showWindowForm(String title){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormP.fxml"));
+        createStage(loader, true, title, true);
+    }
+
 
 
     /**
@@ -143,7 +146,7 @@ public class ViewFactory {
      */
     public void showLoginWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
-        createStage(loader, true);
+        createStage(loader, true, "", false);
     }
 
 
@@ -156,9 +159,11 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MainWindow.fxml"));
         MainWindowController mainWindowController = new MainWindowController(rol);
         loader.setController(mainWindowController);
-        createStage(loader, false);
+        createStage(loader, false, "", false);
 
     }
+
+
 
     /**
      * Crea i mostra una nova finestra basada amb el FXML proporcionat
@@ -166,7 +171,7 @@ public class ViewFactory {
      * @param loader FXMLLoader per carregar la vista
      * @param login identifica si es la finestra de login o no per realitzar n accio
      */
-    private void createStage(FXMLLoader loader, boolean login) {
+    private void createStage(FXMLLoader loader, boolean login, String title, boolean block) {
         Scene scene = null;
         try{
             scene = new Scene(loader.load());
@@ -176,7 +181,7 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/Images/logo.png")));
-        stage.setTitle(titleApp);
+        stage.setTitle(titleApp + title);
         if(!login){
             stage.setOnCloseRequest(event -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -203,6 +208,10 @@ public class ViewFactory {
             });
         }
 
+        if(block){
+            stage.initModality(Modality.APPLICATION_MODAL);
+        }
+
         stage.show();
     }
 
@@ -218,4 +227,6 @@ public class ViewFactory {
     public String getTitleApp() {
         return titleApp;
     }
+
+
 }

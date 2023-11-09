@@ -15,6 +15,7 @@ public class Usuari {
     private String password;
     private boolean isTeacher;
     private boolean isAdmin;
+    private boolean isActive;
 
     /**
      * Constrctor per defecte
@@ -30,6 +31,7 @@ public class Usuari {
     public Usuari(String username, String password) {
         this.nomUsuari = username;
         this.password = password;
+        this.isActive = true;
     }
 
     /**
