@@ -1,4 +1,4 @@
-package estel.solapp.ui.professor;
+package estel.solapp.ui.admin.users;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import estel.solapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link eliminar_professor#newInstance} factory method to
+ * Use the {@link llista_usuaris#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class eliminar_professor extends Fragment {
+public class llista_usuaris extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class eliminar_professor extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public eliminar_professor() {
+    public llista_usuaris() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class eliminar_professor extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment eliminar_professor.
+     * @return A new instance of fragment llista_usuaris.
      */
     // TODO: Rename and change types and number of parameters
-    public static eliminar_professor newInstance(String param1, String param2) {
-        eliminar_professor fragment = new eliminar_professor();
+    public static llista_usuaris newInstance(String param1, String param2) {
+        llista_usuaris fragment = new llista_usuaris();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class eliminar_professor extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_eliminar_professor, container, false);
+        return inflater.inflate(R.layout.fragment_llista_usuaris, container, false);
     }
 }

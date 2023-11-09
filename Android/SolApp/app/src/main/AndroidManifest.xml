@@ -18,7 +18,7 @@
             android:name=".activities.PerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.professor.NavGestioProfessorsActivity"
+            android:name=".ui.admin.NavGestioProfessorsActivity"
             android:exported="false"
             android:label="@string/title_activity_nav_gestio_professors"
             android:theme="@style/Theme.Solapp.NoActionBar" />

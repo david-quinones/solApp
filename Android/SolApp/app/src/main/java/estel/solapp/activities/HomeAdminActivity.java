@@ -24,6 +24,7 @@ import estel.solapp.common.CommController;
 import estel.solapp.common.SingletonSessio;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
+import estel.solapp.ui.admin.NavGestioProfessorsActivity;
 
 /*******************************************************
  * Classe controladora de menú principal d'usuaris admin
@@ -79,7 +80,7 @@ public class HomeAdminActivity extends AppCompatActivity {
      ********************************************/
     public void goGestioProfessors(View view){
 
-        Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+        Utility.gotoActivityChild(this, NavGestioProfessorsActivity.class);
 
     }
 
