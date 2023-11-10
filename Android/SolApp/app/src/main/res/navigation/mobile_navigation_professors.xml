@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation2"
+    android:label="Afegir Professor"
     app:startDestination="@id/home_gestio_professors">
 
     <fragment
@@ -13,27 +14,27 @@
     <fragment
         android:id="@+id/afegir_professor"
         android:name="estel.solapp.ui.admin.professor.afegir_professor"
-        android:label="fragment_afegir_professor"
+        android:label="Afegir professor"
         tools:layout="@layout/fragment_afegir_professor" />
     <fragment
         android:id="@+id/eliminar_professor"
         android:name="estel.solapp.ui.admin.professor.eliminar_professor"
-        android:label="fragment_eliminar_professor"
+        android:label="Eliminar professor"
         tools:layout="@layout/fragment_eliminar_professor" />
     <fragment
         android:id="@+id/modificar_professor"
         android:name="estel.solapp.ui.admin.professor.modificar_professor"
-        android:label="fragment_modificar_professor"
+        android:label="Modificar professor"
         tools:layout="@layout/fragment_modificar_professor" />
     <fragment
         android:id="@+id/busca_professor"
         android:name="estel.solapp.ui.admin.professor.busca_professor"
-        android:label="fragment_busca_professor"
+        android:label="Busca professor"
         tools:layout="@layout/fragment_busca_professor" />
     <fragment
         android:id="@+id/llistar_professor"
         android:name="estel.solapp.ui.admin.professor.llistar_professor"
-        android:label="fragment_llistar_professor"
+        android:label="Llista de professors"
         tools:layout="@layout/fragment_llistar_professor" />
 
 </navigation>
