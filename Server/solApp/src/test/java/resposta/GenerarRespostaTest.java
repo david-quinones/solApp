@@ -129,4 +129,24 @@ public class GenerarRespostaTest {
         //Comprovem que el codi es 1, operació correcte
         assertEquals(1, retornDades.getCodiResultat());
     }
+    
+    
+    /**Test per comprovar que es genera la resposta adient al eliminar un empleat
+     * 
+     */
+    @Test
+    public void testEliminarEmpleat(){
+        Empleat empleat = new Empleat(1, "testResposta", "cognomResposta1", "cognomResposta2",
+                "1983-02-06", "1111111G", "587458745", "resposta@gmail.com",
+                1, true, "2000-01-01", "9999-12-31");
+        GenerarResposta generarResposta = new GenerarResposta();
+        //Generem la resposta
+        RetornDades retornDades = generarResposta.respostaEliminarEmpleat(empleat);
+        //Comprovem que el codi es correcte
+        assertEquals(1, retornDades.getCodiResultat());
+        //Comprovem possible error
+        Empleat empleat2 = null;
+        retornDades = generarResposta.respostaEliminarEmpleat(empleat2);
+        assertEquals(0, retornDades.getCodiResultat());
+    }
 }

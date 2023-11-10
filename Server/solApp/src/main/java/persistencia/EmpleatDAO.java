@@ -107,7 +107,6 @@ public class EmpleatDAO {
      * @return 
      */
     public int eliminarEmpleat(int idPersona){
-        int usuariModificat = 0;
         try {
             //Sentència per actualizar les dades de l'usuari
             String desactivarEmpleat = "UPDATE usuari SET isActive = false "
@@ -120,11 +119,10 @@ public class EmpleatDAO {
             //Comprovem si l'execució es correcte
             int filesAfectades = psEmpleat.executeUpdate();
             if(filesAfectades > 0){
-                LOGGER.info("L'usuari " + usuariModificat + " de l'empleat " + idPersona + 
-                        " s'ha desactivat correctament");
+                LOGGER.info("L'usuari ha sigut desactivat, idPersona: " + idPersona);
                 return CORRECTE;
             }else{
-                LOGGER.info("ERROR al intentar desactivar l'usuari de l'empleat " +
+                LOGGER.warning("ERROR al intentar desactivar l'usuari de l'empleat " +
                         idPersona);
                 return ERROR;
             }

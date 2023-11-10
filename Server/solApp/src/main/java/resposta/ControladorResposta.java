@@ -71,6 +71,10 @@ public class ControladorResposta {
                 //Generem la resposta amb les dades de tots els empleats
                 resposta = dadesResposta.respostaLlistarEmpleats();
                 return resposta;
+            case "ELIMINAR_EMPLEAT":
+                //Generem la resposta adient al eliminar un empleat
+                Empleat empleat = (Empleat) peticio.getDades(1, Empleat.class);
+                return resposta = dadesResposta.respostaEliminarEmpleat(empleat);
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }

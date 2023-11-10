@@ -94,6 +94,7 @@ public class GenerarResposta {
      * usuari associat
      * 
      * @param empleat que es vol donar d'alta
+     * @param usuari
      * @return codi correcte o d'error
      */
     public RetornDades respostaAltaEmpleat(Empleat empleat, Usuari usuari){
@@ -205,6 +206,30 @@ public class GenerarResposta {
         }
         
         return resposta;
-   
+    }
+    
+    /**Mètode per generar la resposta de la crida eliminar empleat
+     * 
+     * @param empleat que s'ha d'eliminar
+     * @return codi amb el resultat
+     */
+    public RetornDades respostaEliminarEmpleat(Empleat empleat){      
+        //Comprovem que les dades rebudes són vàlides
+        if(empleat != null ){
+            //Obtenim id de la persona associada a l'empleat
+            int idPersona = empleat.getIdPersona();
+            EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
+            int resultat = empleatDAO.eliminarEmpleat(idPersona);
+            if(resultat > 0){
+                LOGGER.info("Empleat amb id " + empleat.getIdEmpleat() + " eliminat.");
+                return resposta = new RetornDades(CODI_CORRECTE);
+            }else{
+                LOGGER.warning("ERROR id no existeix o es cero.");
+                return resposta = new RetornDades(CODI_ERROR);
+            }
+        }else{
+            LOGGER.warning("ERROR: Empleat null");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
     }
 }
