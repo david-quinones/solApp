@@ -18,7 +18,9 @@ resposta\ControladorRespostaTest.class
 probesIntegracio\ModificacióPerfilTest$1.class
 estructurapr\DadesPRTest.class
 probesIntegracio\EliminarEmpleatTest$1.class
+probesIntegracio\ModificarEmpleatTest$1.class
 probesIntegracio\LlistarEmpleatsTest$1.class
+probesIntegracio\ModificarEmpleatTest.class
 probesIntegracio\LoginTest$1.class
 persistencia\EmpleatDAOTest.class
 probesIntegracio\EliminarEmpleatTest.class

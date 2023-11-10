@@ -149,4 +149,29 @@ public class GenerarRespostaTest {
         retornDades = generarResposta.respostaEliminarEmpleat(empleat2);
         assertEquals(0, retornDades.getCodiResultat());
     }
+    
+    
+    /**Test per verificar el comportament del mètode que genera la resposta modificarEmpleat
+     * 
+     */
+    @Test
+    public void testModificarEmpleat(){
+        //Empleat original a la base de dades
+        Empleat empleatOriginal = new Empleat(1,"Pau", "Castell", "Galtes", "1983-08-07",
+                "46797529G", "93703532", "pau@gmail.com", 1,true, "2022-01-01", "2023-12-31");
+        //Es modifica telefon i final contracte
+        Empleat empleatNovesDades = new Empleat(1,"Pau", "Castell", "Galtes", "1983-08-07",
+                "46797529G", "645878955", "pau@gmail.com", 1,true, "2022-01-01", "9999-12-31");
+        //Generem la resposta
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades retornDades = generarResposta.respostaModificarEmpleat(empleatOriginal);
+        //Comprovem que el resultat es l'esperat
+        assertEquals(1, retornDades.getCodiResultat());
+        //Fem el mateix amb un empleat que no existeix
+        Empleat empleatError= new Empleat(55,"Pau", "Castell", "Galtes", "1983-08-07",
+                "46797529G", "645878955", "pau@gmail.com", 1,true, "2022-01-01", "9999-12-31");
+        retornDades = generarResposta.respostaModificarEmpleat(null);
+        assertEquals(0, retornDades.getCodiResultat());
+        
+    }
 }

@@ -232,4 +232,42 @@ public class GenerarResposta {
             return resposta = new RetornDades(CODI_ERROR);
         }
     }
+    
+    
+    /**Mètode per generar la resposta i modificar el empleat
+     * 
+     * @param empleat noves dades del empleat
+     * @return resposta amb el codi corresponent
+     */
+    public RetornDades respostaModificarEmpleat(Empleat empleat){
+        try {
+            //Si totes les accions no son correctes no es fa cap
+            conexio.setAutoCommit(false);
+            //Executem la modificació
+            EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
+            int modificarEmpleat = empleatDAO.modificarEmpleat(empleat);
+            PersonaDAO personaDAO = new PersonaDAO(conexio);
+            int modificarPersona = personaDAO.modificarPerfil(empleat);
+            //Comprovem el resultat obtingut
+            if(modificarEmpleat > 0 && modificarPersona > 0){
+                conexio.commit();
+                LOGGER.info("La resposta s'ha generat correctament amb codi " + CODI_CORRECTE);
+                return resposta = new RetornDades(CODI_CORRECTE);
+            }else{
+                conexio.rollback();
+                LOGGER.warning("No s'ha pogut modificar el empleat. Desfem possibles canvis");
+                return resposta = new RetornDades(CODI_ERROR);
+            }
+        } catch (SQLException ex) {
+            try {
+                conexio.rollback();
+                Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE,
+                        "Error en el commit de la base de dades, desfem possibles canvis", ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE,
+                        "Error en el rollback de la base de dades, desfem possibles canvis", ex1);
+            }
+        }
+        return resposta = new RetornDades(CODI_ERROR);
+    }
 }

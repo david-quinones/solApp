@@ -136,6 +136,49 @@ public class EmpleatDAO {
     
     
     
+    /**Mètode per modificar les dades d'un empleat
+     * 
+     * @param empleat que cal modificar
+     * @return codi del resultat
+     */
+    public int modificarEmpleat(Empleat empleat){
+        try {
+            //Ordre sql per modificar les dades del empleat
+            String updateEmpleat = "UPDATE empleat SET actiu = ?, inici_contracte = ?,"
+                    + " final_contracte = ? WHERE id = ?;";
+            psEmpleat = conexio.prepareStatement(updateEmpleat);
+            
+            //Establim les dades per a la ordre sql
+            if(empleat != null){
+                psEmpleat.setBoolean(1, empleat.isActiu());
+                psEmpleat.setString(2, empleat.getIniciContracte());
+                psEmpleat.setString(3, empleat.getFinalContracte());
+                psEmpleat.setInt(4, empleat.getIdEmpleat());
+            }else{
+                LOGGER.warning("L'objecte empleat es null");
+                return ERROR;
+            }
+
+            //Comprovem que s'ha modificat alguna fila
+            int filesAfectades = psEmpleat.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("L'empleat amb id " + empleat.getIdEmpleat() +
+                        " s'ha modificat correctament.");
+                return CORRECTE;
+            }else{
+                LOGGER.warning("L'id no existeix en la base de dades o es null");
+                return ERROR;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ERROR;
+    }
+    
+    
+    
     /**Métode per obrindre un objecte Empleat a partir d'un ResultSet de la base de dades
      * 
      * @param dadesObtingudes de la base de dades
@@ -166,6 +209,8 @@ public class EmpleatDAO {
         }
         return empleat;
     }
+    
+    
     
     
 }

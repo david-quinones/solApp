@@ -73,8 +73,12 @@ public class ControladorResposta {
                 return resposta;
             case "ELIMINAR_EMPLEAT":
                 //Generem la resposta adient al eliminar un empleat
-                Empleat empleat = (Empleat) peticio.getDades(1, Empleat.class);
-                return resposta = dadesResposta.respostaEliminarEmpleat(empleat);
+                Empleat empleatEliminar = (Empleat) peticio.getDades(1, Empleat.class);
+                return resposta = dadesResposta.respostaEliminarEmpleat(empleatEliminar);
+            case "MODIFICAR_EMPLEAT":
+                //Generem la resposta corresponent a la modificació
+                Empleat empleatModificar = (Empleat) peticio.getDades(1, Empleat.class);
+                return resposta = dadesResposta.respostaModificarEmpleat(empleatModificar);
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }

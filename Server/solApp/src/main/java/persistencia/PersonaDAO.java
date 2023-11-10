@@ -132,8 +132,13 @@ public class PersonaDAO {
     }
     
     public int modificarPerfil(Persona persona){
-        
         try {
+            //Comprovem que l'objecte rebut no sigui null
+            if(persona == null || persona.getIdPersona() < 1){
+                LOGGER.warning("L'objecte Persona es null o falta l'idPersona");
+                return 0;
+            }
+            
             LOGGER.info("Modifiquem les dades de la Perosna amb idPersona " + persona.getIdPersona());
             //Consulta per modificar le dades
             String modificarSQL = "UPDATE persona SET nom = ?, cognom1 = ?, cognom2 = ?, "
@@ -153,7 +158,9 @@ public class PersonaDAO {
             //Executem la modificació i obtenim el número de files afectades
             int filesAfectades = ps.executeUpdate();
             LOGGER.info("Número de files afectades modificació Perfil: " + filesAfectades);
-            
+            if(filesAfectades < 1){
+                LOGGER.warning("L'id de la persona no existeix a la base de dades");
+            }
             return filesAfectades;
             
             

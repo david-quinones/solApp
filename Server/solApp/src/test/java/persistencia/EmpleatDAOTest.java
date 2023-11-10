@@ -75,6 +75,10 @@ public class EmpleatDAOTest {
         assertEquals(4, empleats.get(3).getIdEmpleat());
     }
     
+    
+    /**Test per verificar el correcte funcionament del mètode eliminarEmpleat
+     * 
+     */
     @Test
     public void testEliminarEmpleat(){
         //L'id de la persona s'obtindrà del empleat rebut com a paràmetre
@@ -82,6 +86,23 @@ public class EmpleatDAOTest {
        EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
        int resultat = empleatDAO.eliminarEmpleat(idPersona);
        //Comprovem el resultat obtingut
+        assertEquals(1, resultat);
+    }
+    
+    
+    /**Test per verificar el comportament del mètode modificarEmpleat
+     * 
+     */
+    @Test
+    public void testModificarEmpleat(){
+        Empleat empleatOriginal = new Empleat(1,"Pau", "Castell", "Galtes", "1983-08-07",
+                "46797529G", "93703532", "pau@gmail.com", 1,true, "2022-01-01", "2023-12-31");
+        //Modifiquem data final del contracte
+        Empleat empleatModificat = new Empleat(1,"Pau", "Castell", "Galtes", "1983-08-07",
+                "46797529G", "93703532", "pau@gmail.com", 1,true, "2022-01-01", "9999-12-31");
+        //Executem la modificació
+        EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
+        int resultat = empleatDAO.modificarEmpleat(empleatModificat);
         assertEquals(1, resultat);
     }
     
