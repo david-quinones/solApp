@@ -196,6 +196,7 @@ public class ViewFactory {
                             Peticio peticio = new Peticio("LOGOUT");
                             peticio.addDades(SingletonConnection.getInstance().getKey().replace("\"",""));
                             socket.sendMessage(JsonUtil.toJson(peticio));
+                            Platform.exit();
                         } catch (IOException e) {
                             //tanquem a saco l'aplicació l'usuari es vol desconnectar
                             Platform.exit();

@@ -39,6 +39,20 @@ public class TopMenuController {
         }
     }
 
+    @FXML
+    private void edit(){
+        if(accions != null){
+            accions.onBtnEditar();
+        }
+    }
+
+    @FXML
+    private void delete(){
+        if(accions != null){
+            accions.onBtnEliminar();
+        }
+    }
+
 
     public TopMenuController() {
     }
