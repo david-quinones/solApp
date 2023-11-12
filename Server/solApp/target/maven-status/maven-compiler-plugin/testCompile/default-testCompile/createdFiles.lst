@@ -10,12 +10,15 @@ resposta\GenerarRespostaTest.class
 probesIntegracio\LoginTest.class
 persistencia\UsuariDAOTest.class
 entitats\PersonaTest.class
+persistencia\AlumneDAOTest.class
 probesIntegracio\ConsultaPersonaTest$1.class
 persistencia\PersonaDAOTest.class
 seguretat\EncriptarTest.class
 entitats\UsuariTest.class
+entitats\AlumneTest.class
 resposta\ControladorRespostaTest.class
 probesIntegracio\ModificacióPerfilTest$1.class
+probesIntegracio\LlistarAlumnesTest.class
 estructurapr\DadesPRTest.class
 probesIntegracio\EliminarEmpleatTest$1.class
 probesIntegracio\ModificarEmpleatTest$1.class
@@ -27,5 +30,6 @@ probesIntegracio\EliminarEmpleatTest.class
 probesIntegracio\ModificacióPerfilTest.class
 probesIntegracio\ConsultaPersonaTest.class
 probesIntegracio\AltaEmpleatTest$1.class
+probesIntegracio\LlistarAlumnesTest$1.class
 utilitats\UtilsTest.class
 probesIntegracio\AltaEmpleatTest.class

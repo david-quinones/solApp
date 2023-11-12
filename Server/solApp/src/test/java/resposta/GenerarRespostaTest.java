@@ -1,5 +1,6 @@
 package resposta;
 
+import entitats.Alumne;
 import entitats.Empleat;
 import entitats.Persona;
 import entitats.Usuari;
@@ -171,7 +172,32 @@ public class GenerarRespostaTest {
         Empleat empleatError= new Empleat(55,"Pau", "Castell", "Galtes", "1983-08-07",
                 "46797529G", "645878955", "pau@gmail.com", 1,true, "2022-01-01", "9999-12-31");
         retornDades = generarResposta.respostaModificarEmpleat(null);
-        assertEquals(0, retornDades.getCodiResultat());
-        
+        assertEquals(0, retornDades.getCodiResultat()); 
     }
+    
+    
+    /**Test per comprobar que la resposta es genera correctament amb la llista
+     * dels alumnes
+     * 
+     */
+    @Test
+    public void testLlistarAlumnes(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades retornDades = generarResposta.respostaLlistarAlumnes();
+        //Comprobem codi resultat correcte
+        assertEquals(1, retornDades.getCodiResultat());
+        //Comprobem la cantitat d'empleats de la llista
+        assertEquals(4, retornDades.getDades(0, Integer.class));
+        //comprobem que hi ha 4 alumnes
+        Alumne alumne = (Alumne) retornDades.getDades(1, Alumne.class);
+        assertNotNull(alumne);
+        alumne = (Alumne) retornDades.getDades(2, Alumne.class);
+        assertNotNull(alumne);
+        alumne = (Alumne) retornDades.getDades(3, Alumne.class);
+        assertNotNull(alumne);
+        alumne = (Alumne) retornDades.getDades(4, Alumne.class);
+        assertNotNull(alumne);
+    }
+    
+    
 }

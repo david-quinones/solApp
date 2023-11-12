@@ -270,4 +270,31 @@ public class GenerarResposta {
         }
         return resposta = new RetornDades(CODI_ERROR);
     }
+    
+    /**Mètode per obtindre la resposat a la crida llistar alumnes
+     * 
+     * @return llista amb tots els alumnes
+     */
+    public RetornDades respostaLlistarAlumnes(){
+        ArrayList<Alumne> llistaAlumnes = new ArrayList();
+        AlumneDAO alumneDAO = new AlumneDAO(conexio);
+        //Es demana la llista d'alumnes a AlumneDAO
+        llistaAlumnes= alumneDAO.llistarAlumnes();
+        //Si la llista no está buida omplim la resposta amb els alumnes
+        if(!llistaAlumnes.isEmpty()){           
+            resposta = new RetornDades(CODI_CORRECTE);
+            //Afegim el tamany de l'array list per al client
+            resposta.afegirDades(llistaAlumnes.size());
+            for(Alumne alumne: llistaAlumnes){
+                resposta.afegirDades(alumne);
+            }                      
+            LOGGER.info("Resposta amb la llista d'alumnes");
+            
+        }else{
+            LOGGER.info("Llista d'alumnes buida");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+        
+        return resposta;
+    }
 }

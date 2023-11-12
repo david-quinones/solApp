@@ -1,8 +1,10 @@
 servidor\ServidorSocketListener$GestorClients.class
 Probaclient.class
+entitats\Alumne.class
 persistencia\EmpleatDAO.class
 entitats\Empleat.class
 entitats\Usuari.class
+persistencia\AlumneDAO.class
 persistencia\ConexioBBDD.class
 seguretat\GestorSessions.class
 servidor\ServidorSocketListener.class

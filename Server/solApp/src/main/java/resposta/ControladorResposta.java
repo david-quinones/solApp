@@ -79,6 +79,10 @@ public class ControladorResposta {
                 //Generem la resposta corresponent a la modificació
                 Empleat empleatModificar = (Empleat) peticio.getDades(1, Empleat.class);
                 return resposta = dadesResposta.respostaModificarEmpleat(empleatModificar);
+            case "LLISTAR_ALUMNES":
+                //Generem la resposta amb les dades de tots els alumnes
+                resposta = dadesResposta.respostaLlistarAlumnes();
+                return resposta;
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }

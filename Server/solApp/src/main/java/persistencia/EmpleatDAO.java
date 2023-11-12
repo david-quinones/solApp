@@ -74,7 +74,6 @@ public class EmpleatDAO {
      */
     public ArrayList llistarEmpleats(){
         try {
-            LOGGER.info("Consulta per llistar tots els empleats");
             //Array que contindrà la llista d'empleats
             ArrayList<Empleat> llistaEmpleats = new ArrayList();
             
@@ -198,7 +197,7 @@ public class EmpleatDAO {
             empleat.setMail(dadesObtingudes.getString("mail"));
             empleat.setActiu(dadesObtingudes.getBoolean("actiu"));
             empleat.setIniciContracte(dadesObtingudes.getString("inici_contracte"));
-            empleat.setIniciContracte(dadesObtingudes.getString("final_contracte"));
+            empleat.setFinalContracte(dadesObtingudes.getString("final_contracte"));
             LOGGER.info("Obtingut empleat amb idEmpleat: " + empleat.getIdEmpleat());
             
             return empleat;
