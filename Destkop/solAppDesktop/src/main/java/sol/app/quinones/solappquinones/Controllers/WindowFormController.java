@@ -19,6 +19,7 @@ import sol.app.quinones.solappquinones.Service.SingletonConnection;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,12 +30,12 @@ public class WindowFormController implements Initializable {
     @FXML
     private Label idLbl1,idLbl2,idLbl3,idLbl4,idLbl5,idLbl6,idLbl7,idLbl8,idLbl9,idLbl10,idLbl11,idLbl12;
     @FXML
-    private TextField idTxtFld1,idTxtFld2,idTxtFld3,idTxtFld5,idTxtFld6,idTxtFld7,idTxtFld8,idTxtFld9,idTxtFld10,idTxtFld11,idTxtFld12;
+    private TextField idTxtFld1,idTxtFld2,idTxtFld3,idTxtFld5,idTxtFld6,idTxtFld7,idTxtFld10,idTxtFld11,idTxtFld12;
     @FXML
     private Button idBtnAcceptar;
 
     @FXML
-    private DatePicker idTxtFld4;
+    private DatePicker idTxtFld4,idTxtFld8,idTxtFld9;
 
     private Professor p;
     private Usuari u;
@@ -56,6 +57,9 @@ public class WindowFormController implements Initializable {
     //validar que todos los campos son correctos 1
     //guardar objeto
     private void saveObject() {
+
+        String peticioType = "";
+
         this.p = new Professor(
                 //obligatoris: Nom, Cognom, isActive, dataNeixament (9999/09/09) --> controlador
                 idTxtFld1.getText(),
@@ -65,28 +69,37 @@ public class WindowFormController implements Initializable {
                 idTxtFld5.getText(),
                 idTxtFld6.getText(),
                 idTxtFld7.getText(),
-                idTxtFld8.getText(),
-                idTxtFld9.getText(),
+                idTxtFld8.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+                idTxtFld9.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
                 true
         );
-        //controlar si estan vacios, no hacer nada?? mandar un objeto vacio? siempre obligatorio?
-        this.u = new Usuari(
-                idTxtFld11.getText(),
-                idTxtFld12.getText()
-        );
-        //set usuari non rols
-        this.u.setAdmin(false);
-        this.u.setTeacher(true);
+        if(!idBtnAcceptar.getText().equals("Modificar")){
+            //controlar si estan vacios, no hacer nada?? mandar un objeto vacio? siempre obligatorio?
+            this.u = new Usuari(
+                    idTxtFld11.getText(),
+                    idTxtFld12.getText()
 
-        System.out.println(
-                this.u.getNomUsuari()
-                + " " + this.u.getPassword()
-                + " " + this.p.getNom()
-        );
+            );
+            //set usuari non rols
+            this.u.setAdmin(false);
+            this.u.setTeacher(true);
+
+            System.out.println(
+                    this.u.getNomUsuari()
+                            + " " + this.u.getPassword()
+                            + " " + this.p.getNom()
+            );
+
+            peticioType = "ALTA_EMPLEAT";
+
+        }else{
+            peticioType = "MODIFICAR_EMPLEAT";
+        }
 
         //peticio servidor per guardar objecte
-        boolean isOk = saveDataBd();
+        boolean isOk = saveDataBd(peticioType);
 
+        //TODO
         ProfessorController pc = new ProfessorController();
         pc.crearProfessor(p);
 
@@ -102,22 +115,25 @@ public class WindowFormController implements Initializable {
     public WindowFormController() {
     }
 
-    public boolean saveDataBd(){
-        //proces de crida servidor
+    public boolean saveDataBd(String peticioType){
+
         peticio.dropDades();
-        try {
+
+        try{
             socket.connect();
-            peticio.setPeticio("ALTA_EMPLEAT");
+            peticio.setPeticio(peticioType);
             peticio.addDades(SingletonConnection.getInstance().getKey());
             peticio.addDades(JsonUtil.toJson(p));
-            peticio.addDades(JsonUtil.toJson(u));
+
+            if(peticioType.equalsIgnoreCase("ALTA_EMPLEAT")){
+                peticio.addDades(JsonUtil.toJson(u));
+            }
 
             System.out.println(JsonUtil.toJson(peticio));
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
-            //test deserializar a persona
-
-
+            //TODO
+            //control resposta si es inserir o modificar --> resposta hauria de retron un objecte modificat
             JSONObject jsonObject = new JSONObject(JsonUtil.toJson(peticio));
             Persona persona = Persona.fromJson(jsonObject.getJSONArray("dades").get(1).toString());
             System.out.println(persona.getDni());
@@ -126,14 +142,35 @@ public class WindowFormController implements Initializable {
 
             System.out.println(resposta);
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
+        }catch(Exception e){
+            e.printStackTrace();
         }
+
 
         //retorn estat del guardat
         return true;
+    }
+
+    public void loadObject(Professor obj){
+                idTxtFld1.setText(obj.getNom());
+                idTxtFld2.setText(obj.getCognom1());
+                idTxtFld3.setText(obj.getCognom2());
+                idTxtFld4.setValue(LocalDate.parse(obj.getData_naixement()));
+                idTxtFld5.setText(obj.getDni());
+                idTxtFld6.setText(obj.getTelefon());
+                idTxtFld7.setText(obj.getMail());
+                idTxtFld8.setValue((obj.getIniciContracte() != null && !obj.getIniciContracte().isEmpty()) ? LocalDate.parse(obj.getIniciContracte()) : LocalDate.now());
+                idTxtFld9.setValue((obj.getFinalContracte() != null && !obj.getFinalContracte().isEmpty()) ? LocalDate.parse(obj.getFinalContracte()) : LocalDate.now());
+
+                //idTxtFld8.setValue(LocalDate.parse(obj.getIniciContracte()));
+                //idTxtFld9.setValue(LocalDate.parse(obj.getFinalContracte()));
+
+                //ocultar i guardar change
+                idTxtFld11.setManaged(false);
+                idTxtFld12.setManaged(false);
+                idLbl11.setManaged(false);
+                idLbl12.setManaged(false);
+
+                idBtnAcceptar.setText("Modificar");
     }
 }

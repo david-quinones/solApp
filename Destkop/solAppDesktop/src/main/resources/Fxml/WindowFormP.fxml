@@ -58,13 +58,13 @@
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label fx:id="idLbl8" text="Inici Contracte"/>
-            <TextField fx:id="idTxtFld8"/>
+            <DatePicker fx:id="idTxtFld8"/>
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label fx:id="idLbl9" text="Fi Contracte"/>
-            <TextField fx:id="idTxtFld9"/>
+            <DatePicker fx:id="idTxtFld9"/>
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">

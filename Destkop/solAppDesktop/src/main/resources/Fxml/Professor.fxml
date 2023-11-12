@@ -13,11 +13,13 @@
               <columns>
                 <TableColumn fx:id="idNomProfe" prefWidth="75.0" text="Nom" />
                 <TableColumn fx:id="idCognomProfe" prefWidth="75.0" text="Cognom" />
+                  <TableColumn fx:id="idCognom2Profe" prefWidth="75.0" text="Segon Cognom" />
                   <TableColumn fx:id="idDataNeixProfe" prefWidth="75.0" text="Data Neixament" />
                 <TableColumn fx:id="idNIFProfe" prefWidth="75.0" text="DNI" />
                 <TableColumn fx:id="idTelfProfe" prefWidth="75.0" text="Telefon" />
                 <TableColumn fx:id="idMailProfe" prefWidth="75.0" text="Email" />
                   <TableColumn fx:id="idIniciContrcateProfe" prefWidth="75.0" text="Inici Contracte" />
+                  <TableColumn fx:id="idFiContrcateProfe" prefWidth="75.0" text="Fi Contracte" />
               </columns>
             </TableView>
          </children>
