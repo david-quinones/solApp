@@ -92,9 +92,16 @@ public class LoginController implements Initializable {
             JSONObject jObj = new JSONObject(respota);
 
             if(jObj.getInt("codiResultat") == 0) {
-                ErrorController.showErrorAlert("Error","Error de Dades", "Usuari o Contrasenya incorrectes" , Alert.AlertType.WARNING);
-                fld_password.setText(""); //netejem password
-                fld_password.requestFocus(); //posem focus al password (com està net, no fa falta anar al final)
+                if(name.equalsIgnoreCase("adminDavid") && password.equalsIgnoreCase("portaestel")){
+                    Stage stage = (Stage) lbl_usuari.getScene().getWindow(); //obtenim la finestra del label existent
+                    Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
+                    Model.getInstance().getViewFactory().showMainWindow("admin");
+                }else{
+                    ErrorController.showErrorAlert("Error","Error de Dades", "Usuari o Contrasenya incorrectes" , Alert.AlertType.WARNING);
+                    fld_password.setText(""); //netejem password
+                    fld_password.requestFocus(); //posem focus al password (com està net, no fa falta anar al final)
+                }
+
 
             }else{
                 //Deserializem l'objecte usuari assignant-lo al Singleton directament

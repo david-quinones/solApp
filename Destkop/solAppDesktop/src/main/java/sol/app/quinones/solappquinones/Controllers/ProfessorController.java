@@ -4,9 +4,11 @@ import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -66,6 +68,23 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
         tableProfe.setItems(professorArrayListTable);
         assignarColumnesTaula();
 
+
+        //Detectar doble click taula --> inicialitzar
+        //enviar a editar
+        tableProfe.setRowFactory(e -> {
+            TableRow<Professor> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if(!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                   Professor profeClicat = row.getItem();
+                   editarProfessor(profeClicat);
+                }
+            });
+            return row;
+        });
+    }
+
+    public void editarProfessor(Professor professor){
+        System.out.println(professor.getNom());
     }
 
     private void assignarColumnesTaula(){
@@ -135,12 +154,17 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     @Override
     public void onBtnEditar() {
+        System.out.println("clico");
+        Professor profesorSeleccionat = (Professor) tableProfe.getSelectionModel().getSelectedItem();
+        if(profesorSeleccionat != null){
+            editarProfessor(profesorSeleccionat);
+        }
 
     }
 
     @Override
     public void onBtnEliminar() {
-
+        //action delete perfil
     }
 
     public void crearProfessor(Professor p){

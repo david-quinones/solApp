@@ -4,6 +4,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import sol.app.quinones.solappquinones.Controllers.LoginController;
+import sol.app.quinones.solappquinones.Models.Usuari;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
 
 import java.net.URL;

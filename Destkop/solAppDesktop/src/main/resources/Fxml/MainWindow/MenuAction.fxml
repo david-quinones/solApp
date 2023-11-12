@@ -13,13 +13,13 @@
          </graphic>
          <text>Nou</text>
       </Button>
-      <Button fx:id="btnEdit">
+      <Button fx:id="btnEdit" onAction="#edit">
          <graphic>
             <FontAwesomeIconView glyphName="EDIT" size="20" />
          </graphic>
          <text>Editar</text>
       </Button>
-      <Button fx:id="btnDelete">
+      <Button fx:id="btnDelete" onAction="#delete">
          <graphic>
             <FontAwesomeIconView glyphName="TRASH" size="20" />
          </graphic>
