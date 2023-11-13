@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +28,7 @@ import sol.app.quinones.solappquinones.Service.SingletonConnection;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -50,6 +52,10 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
     private TableColumn idNomProfe;
     @FXML
     private TableColumn idCognomProfe;
+    @FXML
+    private TableColumn idCognom2Profe;
+    @FXML
+    private TableColumn idFiContrcateProfe;
     @FXML
     private AnchorPane mainProfessor;
 
@@ -84,17 +90,19 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
     }
 
     public void editarProfessor(Professor professor){
-        System.out.println(professor.getNom());
+        Model.getInstance().getViewFactory().showWindowForm(" - Editar Professor", professor);
     }
 
     private void assignarColumnesTaula(){
         idNomProfe.setCellValueFactory(new PropertyValueFactory<>("nom"));
         idCognomProfe.setCellValueFactory(new PropertyValueFactory<>("cognom1"));
+        idCognom2Profe.setCellValueFactory(new PropertyValueFactory<>("cognom2"));
         idDataNeixProfe.setCellValueFactory(new PropertyValueFactory<>("data_naixement"));
         idNIFProfe.setCellValueFactory(new PropertyValueFactory<>("dni"));
         idTelfProfe.setCellValueFactory(new PropertyValueFactory<>("telefon"));
         idMailProfe.setCellValueFactory(new PropertyValueFactory<>("mail"));
         idIniciContrcateProfe.setCellValueFactory(new PropertyValueFactory<>("iniciContracte"));
+        idFiContrcateProfe.setCellValueFactory(new PropertyValueFactory<>("finalContracte"));
     }
 
     public void carregarProfessors() {
@@ -102,6 +110,7 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
         String resposta = ConsultesSocket.serverPeticioConsulta("LLISTAR_EMPLEATS");
         if(resposta != null){
             try {
+
                 JSONObject jsonObject = new JSONObject(resposta);
                 if(jsonObject.getInt("codiResultat") != 0){
                     JSONArray arrayProfessors = jsonObject.getJSONArray("dades");
@@ -115,6 +124,7 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
                         stringBuilder.append(p.getNom());
                         stringBuilder.append(", ");
                         //System.out.println(p.getIniciContracte());
+                        //System.out.println(p.getFinalContracte());
                     }
 
                     professorArrayListTable = FXCollections.observableArrayList(professorArrayList);
@@ -142,7 +152,7 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
     @Override
     public void onBtnCrear() {
         //levantar ventana:
-        Model.getInstance().getViewFactory().showWindowForm(" - Crear Empleat");
+        Model.getInstance().getViewFactory().showWindowForm(" - Crear Empleat", null);
 
 
 
@@ -154,7 +164,6 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     @Override
     public void onBtnEditar() {
-        System.out.println("clico");
         Professor profesorSeleccionat = (Professor) tableProfe.getSelectionModel().getSelectedItem();
         if(profesorSeleccionat != null){
             editarProfessor(profesorSeleccionat);

@@ -17,6 +17,7 @@ import sol.app.quinones.solappquinones.Controllers.*;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowController;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MenuController;
 import sol.app.quinones.solappquinones.Models.Peticio;
+import sol.app.quinones.solappquinones.Models.Professor;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
@@ -117,9 +118,9 @@ public class ViewFactory {
         return alumneView;
     }
 
-    public void showWindowForm(String title){
+    public void showWindowForm(String title, Professor professor){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormP.fxml"));
-        createStage(loader, true, title, true);
+        createStage(loader, true, title, true, professor);
     }
 
 
@@ -146,7 +147,7 @@ public class ViewFactory {
      */
     public void showLoginWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
-        createStage(loader, true, "", false);
+        createStage(loader, true, "", false, null);
     }
 
 
@@ -159,7 +160,7 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MainWindow.fxml"));
         MainWindowController mainWindowController = new MainWindowController(rol);
         loader.setController(mainWindowController);
-        createStage(loader, false, "", false);
+        createStage(loader, false, "", false, null);
 
     }
 
@@ -171,13 +172,21 @@ public class ViewFactory {
      * @param loader FXMLLoader per carregar la vista
      * @param login identifica si es la finestra de login o no per realitzar n accio
      */
-    private void createStage(FXMLLoader loader, boolean login, String title, boolean block) {
+    private void createStage(FXMLLoader loader, boolean login, String title, boolean block, Professor professor) {
         Scene scene = null;
         try{
             scene = new Scene(loader.load());
         }catch(Exception e){
             e.printStackTrace();
         }
+
+        //
+        if(professor != null) {
+            WindowFormController windowFormController = loader.getController();
+            windowFormController.loadObject(professor);
+        }
+
+
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/Images/logo.png")));
