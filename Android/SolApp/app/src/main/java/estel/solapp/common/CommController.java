@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import estel.solapp.models.Empleat;
 import estel.solapp.models.Persona;
 import estel.solapp.models.User;
 /****************************************
@@ -36,6 +37,7 @@ public class CommController {
     public static final String CONSULTA_PERFIL = "CONSULTA_PERFIL";
     public static final String MODIFICAR_PERFIL = "MODIFICAR_PERFIL";
     public static final String BUSCA_USUARI = "BUSCA_USUARI";
+    public static final String LLISTAR_EMPLEATS = "LLISTAR_EMPLEATS";
 
     /***********************************
     * Conexió amb el servidor per socket
@@ -188,6 +190,7 @@ public class CommController {
 
     }
 
+
     /***********************************************
      * Fa la petició de recerca d'usuari al servidor
      * @param username  Nom d'usuari a buscar
@@ -199,6 +202,22 @@ public class CommController {
         afegirUsuari.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
         afegirUsuari.addPrimitiveData(username);
         ValorsResposta resposta=talkToServer(afegirUsuari);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició de llista de professors al servidor
+     * @return resultat empleats array; null si error.
+     *************************************************/
+    public static ValorsResposta llistarEmpleats(){
+
+        PeticioClient listEmpleats = new PeticioClient(LLISTAR_EMPLEATS);
+        listEmpleats.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        ValorsResposta resposta=talkToServer(listEmpleats);
 
         if(resposta==null) return null;
 
