@@ -45,7 +45,7 @@ public class AlumneDAOTest {
     }
 
     
-     /**Test per comprobar el métode per llistr empleats
+     /**Test per comprobar el métode per llistar alumnes
      * 
      */
     @Test
@@ -57,6 +57,22 @@ public class AlumneDAOTest {
         assertEquals(2, llistaAlumnes.get(1).getIdAlumne());
         assertEquals(3, llistaAlumnes.get(2).getIdAlumne());
         assertEquals(4, llistaAlumnes.get(3).getIdAlumne());
+    }
+    
+    
+    /**Test per comprovar el funcionament correcte del métode altaAlumne
+     * 
+     */
+    @Test
+    public void testAltaAlumne(){
+        //Id de la persona associada a l'alumne
+        int idPersona = 5;
+        //Simulem objecte alumne
+        Alumne alumne = new Alumne(true, true, true);
+        AlumneDAO alumneDAO = new AlumneDAO(conexio);
+        //Comprovem el resultat de la execució
+        assertEquals(1, alumneDAO.altaAlumne(alumne, idPersona));
+        
     }
     }
     

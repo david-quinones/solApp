@@ -1,6 +1,7 @@
 package probesIntegracio;
 
 import com.google.gson.Gson;
+import entitats.Alumne;
 import entitats.Empleat;
 import entitats.Usuari;
 import estructurapr.PeticioClient;
@@ -20,12 +21,12 @@ import org.junit.Before;
 import persistencia.PersonaDAO;
 import servidor.ServidorSocketListener;
 
-/**Classe per verificar que la crida per donar d'alta un empleat i el seu usuari
- * associat es correcte
+/**Classe per fer la prova d'integració de la crida alta alumne
+ * 
  *
  * @author Pau Castell Galtes
  */
-public class AltaEmpleatTest {
+public class testAltaAlumne {
     private ServidorSocketListener servidor;
     private Socket socket;
     private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
@@ -58,25 +59,26 @@ public class AltaEmpleatTest {
         LOGGER.info("Servidor tancat.");
     }
     
-    /**Test d'integració per comprovar el funcionament correcte de la crida a altaEmpleat
-     * i l'usuari associat
+    
+    /**Test d'integració per comprovar el comportament de la crida alta alumne
+     * 
      */
     @Test
-    public void testAltaEmpleat(){
+    public void testAltaAlumne(){
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
             
             //Preparem dades que s'han de donar d'alta
-        Usuari usuari = new Usuari("testResposta", "password", true, false, true);
-        Empleat empleat = new Empleat("testResposta", "cognomResposta1", "cognomResposta2",
-                "1983-02-06", "1111111G", "587458745", "resposta@gmail.com", true, "01/01/2000", "9999-12-31");
+            Usuari usuari = new Usuari("testAlumneIntegracio", "password", true, false, true);
+            Alumne alumne = new Alumne("AlumneIntegracio", "cognomIntegracio", "cognomIntegracio2",
+                "2022-08-23", "45645645P", "111111111", "alumneInt@gmail.com", true, false, true);
             
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
-            PeticioClient peticio  = new PeticioClient("ALTA_EMPLEAT");
+            PeticioClient peticio  = new PeticioClient("ALTA_ALUMNE");
             peticio.afegirDades(numSessio);
-            peticio.afegirDades(empleat);
+            peticio.afegirDades(alumne);
             peticio.afegirDades(usuari);
             
             //Enviem la petició al servidor en format JSON
@@ -106,25 +108,25 @@ public class AltaEmpleatTest {
     }
     
     
-    /**Test d'integració per comprovar el funcionament correcte de la crida a altaEmpleat
-     * i l'usuari associat en cas d'error (introduïm un dni ja existent)
+    /**Test per comprovar el comportament en una inserció erronea, utilitzarem un usuari
+     * que ja existeix nom usuari = PAU
      */
     @Test
-    public void testAltaEmpleatError(){
+    public void testAltaAlumneErroni(){
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
             
             //Preparem dades que s'han de donar d'alta
-        Usuari usuari = new Usuari("testResposta", "password", true, false, true);
-        Empleat empleat = new Empleat("testResposta", "cognomResposta1", "cognomResposta2",
-                "1983-02-06", "46797529G", "587458745", "resposta@gmail.com", true, "2000-01-01", "9999-12-31");
+            Usuari usuari = new Usuari("PAU", "password", true, false, true);
+            Alumne alumne = new Alumne("AlumneIntegracio", "cognomIntegracio", "cognomIntegracio2",
+                "2022-08-23", "45645645P", "111111111", "alumneInt@gmail.com", true, false, true);
             
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
-            PeticioClient peticio  = new PeticioClient("ALTA_EMPLEAT");
+            PeticioClient peticio  = new PeticioClient("ALTA_ALUMNE");
             peticio.afegirDades(numSessio);
-            peticio.afegirDades(empleat);
+            peticio.afegirDades(alumne);
             peticio.afegirDades(usuari);
             
             //Enviem la petició al servidor en format JSON
@@ -152,4 +154,5 @@ public class AltaEmpleatTest {
             Logger.getLogger(ConsultaPersonaTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-}
+    }
+

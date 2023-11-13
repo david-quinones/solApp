@@ -85,5 +85,18 @@ public class UsuariDAOTest {
         assertEquals(1, resultat);
         
     }   
+    
+    /**Test per verificar el correcte funcionament del mètode eliminarUsuari
+     * 
+     */
+    @Test
+    public void testEliminarUsuari(){
+        //L'id de la persona s'obtindrà del empleat rebut com a paràmetre
+       int idPersona = 30;
+       UsuariDAO usuariDAO = new UsuariDAO(conexio);
+       int resultat = usuariDAO.eliminarUsuari(idPersona);
+       //Comprovem el resultat obtingut
+        assertEquals(1, resultat);
+    }
 }
 

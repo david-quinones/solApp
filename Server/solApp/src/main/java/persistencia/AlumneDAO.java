@@ -61,6 +61,39 @@ public class AlumneDAO {
     }
     
     
+    /**Mètode per insertar entitats de la classe Alumne a la base de dades
+     * 
+     * @param alumne que hi ha que insertar
+     * @param idPersona associada a l'alumne
+     * @return codi estat
+     */
+    public int altaAlumne(Alumne alumne, int idPersona){
+        try {
+            String insertAlumne = "INSERT INTO alumne (actiu, menjador, acollida, persona_id)"
+                    + " VALUES (?,?,?,?);";
+            psAlumne = conexio.prepareStatement(insertAlumne);
+            
+            //Establim les dades que cal insertar
+            psAlumne.setBoolean(1, alumne.isActiu());
+            psAlumne.setBoolean(2,alumne.isMenjador());
+            psAlumne.setBoolean(3, alumne.isAcollida());
+            psAlumne.setInt(4, idPersona);
+            
+            //Comprovem s'hi s'ha insertat correctament
+            int filesAfectades = psAlumne.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("S'ha insertat " + filesAfectades + " alumnes");
+                return CORRECTE;
+            }else{
+                LOGGER.warning("Error al insertar l'alumne");
+                return ERROR;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumneDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ERROR;
+    }
+ 
     
     /**Mètode per obtindre un objecte alumne a partir del ResultSet d'una consulta
      * a la base de dades
