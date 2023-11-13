@@ -48,7 +48,7 @@ public class EmpleatDAO {
             psEmpleat.setString(3, empleat.getFinalContracte());
             psEmpleat.setInt(4, idPersona);
             
-            //Comprobem s'hi s'ha insertat correctement
+            //Comprovem s'hi s'ha insertat correctement
             int filesAfectades = psEmpleat.executeUpdate();
             if(filesAfectades > 0){
                 LOGGER.log(Level.INFO, "S'ha insertat " + filesAfectades + " empleats");
@@ -99,42 +99,7 @@ public class EmpleatDAO {
         return llistarEmpleats();
     }
     
-    
-    /**Métode per deixar inactiu l'usuari d'un empleat
-     * 
-     * @param empleat que s'ha de desactivar
-     * @return 
-     */
-    public int eliminarEmpleat(int idPersona){
-        try {
-            //Sentència per actualizar les dades de l'usuari
-            String desactivarEmpleat = "UPDATE usuari SET isActive = false "
-                    + "WHERE persona_id = ?;";
-            psEmpleat = conexio.prepareStatement(desactivarEmpleat);
-            
-            //Establim les dades per realitzar l'actualització
-            psEmpleat.setInt(1, idPersona);
-            
-            //Comprovem si l'execució es correcte
-            int filesAfectades = psEmpleat.executeUpdate();
-            if(filesAfectades > 0){
-                LOGGER.info("L'usuari ha sigut desactivat, idPersona: " + idPersona);
-                return CORRECTE;
-            }else{
-                LOGGER.warning("ERROR al intentar desactivar l'usuari de l'empleat " +
-                        idPersona);
-                return ERROR;
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE,
-                    "ERROR al intntar actulitzar l'usuari associat al empleat", ex);
-        }
-        return ERROR;
-    }
-    
-    
-    
+
     /**Mètode per modificar les dades d'un empleat
      * 
      * @param empleat que cal modificar

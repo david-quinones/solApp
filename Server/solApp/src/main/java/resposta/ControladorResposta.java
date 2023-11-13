@@ -1,5 +1,6 @@
 package resposta;
 
+import entitats.Alumne;
 import entitats.Empleat;
 import entitats.Persona;
 import entitats.Usuari;
@@ -71,10 +72,10 @@ public class ControladorResposta {
                 //Generem la resposta amb les dades de tots els empleats
                 resposta = dadesResposta.respostaLlistarEmpleats();
                 return resposta;
-            case "ELIMINAR_EMPLEAT":
-                //Generem la resposta adient al eliminar un empleat
-                Empleat empleatEliminar = (Empleat) peticio.getDades(1, Empleat.class);
-                return resposta = dadesResposta.respostaEliminarEmpleat(empleatEliminar);
+            case "ELIMINAR_USUARI":
+                //Generem la resposta adient al desactivar un usuari.
+                Persona personaEliminar = (Persona) peticio.getDades(1, Persona.class);
+                return resposta = dadesResposta.respostaEliminarUsuari(personaEliminar);
             case "MODIFICAR_EMPLEAT":
                 //Generem la resposta corresponent a la modificació
                 Empleat empleatModificar = (Empleat) peticio.getDades(1, Empleat.class);
@@ -82,6 +83,11 @@ public class ControladorResposta {
             case "LLISTAR_ALUMNES":
                 //Generem la resposta amb les dades de tots els alumnes
                 resposta = dadesResposta.respostaLlistarAlumnes();
+                return resposta;
+            case "ALTA_ALUMNE":
+                //Generem la resposta al donar d'alta un alumne
+                resposta = dadesResposta.respostaAltaAlumne((Alumne)peticio.getDades(1, Alumne.class),
+                        (Usuari)peticio.getDades(2, Usuari.class));
                 return resposta;
             default:               
                 return resposta = new RetornDades(CODI_ERROR);

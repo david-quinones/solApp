@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: persistencia.AlumneDAOTest
+Test set: probesIntegracio.testAltaAlumne
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.162 s -- in persistencia.AlumneDAOTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.664 s -- in probesIntegracio.testAltaAlumne

@@ -120,5 +120,39 @@ public class UsuariDAO {
         }
              return -1; 
     }
+    
+
+    /**Mètode per desactivar usuaris, no podrán accedir a l'aplicació
+     * 
+     * @param idPersona vinculada al usuari que es vol desactivar
+     * @return codi amb el resultat
+     */
+    public int eliminarUsuari(int idPersona){
+        try {
+            //Sentència per actualizar les dades de l'usuari
+            String desactivarEmpleat = "UPDATE usuari SET isActive = false "
+                    + "WHERE persona_id = ?;";
+            ps = conexio.prepareStatement(desactivarEmpleat);
+            
+            //Establim les dades per realitzar l'actualització
+            ps.setInt(1, idPersona);
+            
+            //Comprovem si l'execució es correcte
+            int filesAfectades = ps.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("L'usuari ha sigut desactivat, idPersona: " + idPersona);
+                return CORRECTE;
+            }else{
+                LOGGER.warning("ERROR al intentar desactivar l'usuari, amb id persona: " +
+                        idPersona);
+                return ERROR;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE,
+                    "ERROR al intntar actulitzar l'usuari associat al empleat", ex);
+        }
+        return ERROR;
+    }
      
 }
