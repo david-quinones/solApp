@@ -135,7 +135,8 @@ public class EmpleatDAO {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE,
+                    "ERROR al intentar modificar l'empleat", ex);
         }
         
         return ERROR;

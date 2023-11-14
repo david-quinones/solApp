@@ -74,5 +74,23 @@ public class AlumneDAOTest {
         assertEquals(1, alumneDAO.altaAlumne(alumne, idPersona));
         
     }
+    
+    
+    /**Test per comprovar que la modificació s'executa correctament
+     * 
+     */
+    @Test
+    public void testModificarAlumne(){
+        //Dades que utilitzarem per la proba
+        Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "123456789", "juan@gmail.com",1 , true, true, false);
+        //Modifiquem el teléfon i menjador ara serà false
+        Alumne alumneModificat = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "999999999", "juan@gmail.com",1 , true, false, false);
+        //Executem la modificació
+        AlumneDAO alumneDAO = new AlumneDAO(conexio);
+        int filesAfectades = alumneDAO.modificarAlumne(alumneModificat);
+        assertEquals(1, filesAfectades);
+    }
     }
     

@@ -7,6 +7,7 @@ probesIntegracio\LogoutTest$1.class
 entitats\EmpleatTest.class
 probesIntegracio\LlistarEmpleatsTest.class
 resposta\GenerarRespostaTest.class
+probesIntegracio\testModificarAlumne$1.class
 probesIntegracio\LoginTest.class
 persistencia\UsuariDAOTest.class
 entitats\PersonaTest.class
@@ -17,6 +18,7 @@ seguretat\EncriptarTest.class
 entitats\UsuariTest.class
 entitats\AlumneTest.class
 probesIntegracio\testAltaAlumne$1.class
+probesIntegracio\testModificarAlumne.class
 resposta\ControladorRespostaTest.class
 probesIntegracio\ModificacióPerfilTest$1.class
 probesIntegracio\LlistarAlumnesTest.class
