@@ -43,7 +43,6 @@ public class GenerarRespostaTest {
         //Respota login error
         retornDades = generarResposta.respostaLogin(usuariFail);
         assertEquals(retornDades.getCodiResultat(), 0);
- 
     }
 
     
@@ -212,6 +211,30 @@ public class GenerarRespostaTest {
         RetornDades retornDades = generarResposta.respostaAltaAlumne(alumne, usuari);
         //Comprovem que el codi es 1, operació correcte
         assertEquals(1, retornDades.getCodiResultat());
+    }
+    
+    
+    /**Test per comprovar la resposta generada a la crida modificar_alumne
+     * 
+     */
+    @Test
+    public void testModificarAlumne(){
+        //Dades que utilitzarem per la proba
+        Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "123456789", "juan@gmail.com",1 , true, true, false);
+        //Modifiquem el teléfon i menjador ara serà false
+        Alumne alumneModificat = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "999999999", "juan@gmail.com",1 , true, false, false);
+        //Generem la resposta
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades retornDades = generarResposta.respostaModificarAlumne(alumneModificat);
+        //Comprovem que el resultat es l'esperat
+        assertEquals(1, retornDades.getCodiResultat());
+        //Fem el mateix amb un alumne que no existeix
+        Alumne alumneError= new Alumne(80, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "123456789", "juan@gmail.com",1 , true, true, false);
+        retornDades = generarResposta.respostaModificarAlumne(alumneError);
+        assertEquals(0, retornDades.getCodiResultat()); 
     }
     
     
