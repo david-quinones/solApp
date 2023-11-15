@@ -221,12 +221,13 @@ public class PerfilActivity extends AppCompatActivity {
         if (nom.getText().toString().isEmpty()){error = "La casella nom és buida.\n"; }
         if (cognom1.getText().toString().isEmpty()){error = error + "La casella Primer cognom és buida.\n"; }
         if (cognom2.getText().toString().isEmpty()){error = error + "La casella Segón cognom és buida.\n"; }
-        if (dataNaixement.getText().toString().isEmpty()){error = error + "La casella Data de neiement és buida.\n"; }
+        if (dataNaixement.getText().toString().isEmpty()){error = error + "La casella Data de naixement és buida.\n"; }
         if (nif.getText().toString().isEmpty()){error = error + "La casella NIF és buida.\n"; }
-        if (!Utility.vailidarNifNie(nif.getText().toString())){error=error + "El format del NIF no és vàlid.\n"; }
-        if (dataNaixement.getText().toString().isEmpty()){error = error + "La casella de data de neixement és buida.\n"; }
+        //if (!Utility.vailidarNifNie(nif.getText().toString())){error=error + "El format del NIF no és vàlid.\n"; }
+        if (!Utility.validarData(dataNaixement.getText().toString())) {error= error + "El format de la data ha de ser aaaa-mm-dd";}
         if (telefon.getText().toString().isEmpty()){error = error + "La casella Telèfon es buida.\n"; }
         if (email.getText().toString().isEmpty()){error = error + "La casella Email es buida.\n"; }
+        if (!Utility.validarEmail(email.getText().toString())) {error = error + "El emailintroduït no és correcte";}
 
         return (error);
 
