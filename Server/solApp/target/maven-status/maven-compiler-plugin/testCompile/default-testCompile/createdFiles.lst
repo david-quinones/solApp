@@ -1,3 +1,4 @@
+probesIntegracio\LlistarUsuarisTest.class
 seguretat\GestorSessionsTest.class
 estructurapr\PeticioClientTest.class
 probesIntegracio\LogoutTest.class
@@ -20,6 +21,7 @@ entitats\AlumneTest.class
 probesIntegracio\testAltaAlumne$1.class
 probesIntegracio\testModificarAlumne.class
 resposta\ControladorRespostaTest.class
+probesIntegracio\LlistarUsuarisTest$1.class
 probesIntegracio\ModificacióPerfilTest$1.class
 probesIntegracio\LlistarAlumnesTest.class
 estructurapr\DadesPRTest.class
@@ -35,5 +37,7 @@ probesIntegracio\ConsultaPersonaTest.class
 probesIntegracio\testAltaAlumne.class
 probesIntegracio\AltaEmpleatTest$1.class
 probesIntegracio\LlistarAlumnesTest$1.class
+probesIntegracio\ModificarUsuariTest.class
 utilitats\UtilsTest.class
 probesIntegracio\AltaEmpleatTest.class
+probesIntegracio\ModificarUsuariTest$1.class

@@ -219,7 +219,7 @@ public class GenerarRespostaTest {
      */
     @Test
     public void testModificarAlumne(){
-        //Dades que utilitzarem per la proba
+        //Dades que utilitzarem per la prova
         Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
                 null, "123456789", "juan@gmail.com",1 , true, true, false);
         //Modifiquem el teléfon i menjador ara serà false
@@ -235,6 +235,50 @@ public class GenerarRespostaTest {
                 null, "123456789", "juan@gmail.com",1 , true, true, false);
         retornDades = generarResposta.respostaModificarAlumne(alumneError);
         assertEquals(0, retornDades.getCodiResultat()); 
+    }
+    
+    
+    
+    /**Test per comprovar el comportament del mètode respostaModificarUsuari
+     * 
+     */
+    @Test
+    public void testModificarUsuari(){
+        //Dades que utilitzarem per la prova
+        Usuari usuariOriginal = new Usuari(1, "nom_usuari", "password", true, false, true);
+        //Modifiquem nom usuari i password
+        Usuari usuariModificat = new Usuari(1, "nom_usuariProva", "prova", true, false, true);
+        //Generem la resposta
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades retornDades = generarResposta.respostaModificarUsuari(usuariModificat);
+        //Comprovem que el resultat es l'esperat
+        assertEquals(1, retornDades.getCodiResultat());
+        //Fem el mateix amb un usuari que no existeix
+        Usuari usuariError = new Usuari(155, "nom", "password", true, false, true);
+        retornDades = generarResposta.respostaModificarUsuari(usuariError);
+        assertEquals(0, retornDades.getCodiResultat()); 
+    }
+    
+    
+    /**Test per comprovar el funcionament del mètode respostaLlistarUsuari
+     * 
+     */
+    @Test
+    public void testLlistarUsuaris(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades retornDades = generarResposta.respostaLlistarUsuaris();
+        //Comprobem codi resultat correcte
+        assertEquals(1, retornDades.getCodiResultat());
+        //Comprobem la cantitat d'empleats de la llista
+        assertEquals(3, retornDades.getDades(0, Integer.class));
+        //comprobem que hi ha 4 alumnes
+        Usuari usuari = (Usuari) retornDades.getDades(1, Usuari.class);
+        assertNotNull(usuari);
+        usuari = (Usuari) retornDades.getDades(2, Usuari.class);
+        assertNotNull(usuari);
+        usuari = (Usuari) retornDades.getDades(3, Usuari.class);
+        assertNotNull(usuari);
+
     }
     
     

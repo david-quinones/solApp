@@ -89,11 +89,20 @@ public class ControladorResposta {
                 //Generem la resposta a la crida modificar_alumne
                 resposta = dadesResposta.respostaModificarAlumne((Alumne)peticio.getDades(1, Alumne.class));
                 return resposta;
+            case "LLISTAR_USUARIS":
+                //Generem la resposta a la crida llistar_usuaris
+                resposta = dadesResposta.respostaLlistarUsuaris();
+                return resposta;
+            case "MODIFICAR_USUARI":
+                //Generem resposta a la crida modificar_usuari
+                resposta = dadesResposta.respostaModificarUsuari((Usuari)peticio.getDades(1, Usuari.class));
+                return resposta;
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }
  
     }
+    
 
     /**Métode per comprobar que la sessió existeix abans de donar una resposta
      * 

@@ -2,8 +2,6 @@ package probesIntegracio;
 
 import com.google.gson.Gson;
 import entitats.Alumne;
-import entitats.Empleat;
-import entitats.Usuari;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
 import java.io.BufferedReader;
@@ -21,17 +19,17 @@ import org.junit.Before;
 import persistencia.PersonaDAO;
 import servidor.ServidorSocketListener;
 
-/**Classe per fer la prova d'integració de la crida alta alumne
- * 
+/**Classe per realitzar el test d'integració de la crida modificar_alumne
  *
  * @author Pau Castell Galtes
  */
-public class testAltaAlumne {
+public class ModificarAlumneTest {
     private ServidorSocketListener servidor;
     private Socket socket;
     private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
     
-    /**Preparem el servidora abans de cada test
+    
+    /**Iniciem el servidor en un fil diferent per poder fer el test
      * 
      */
     @Before
@@ -59,27 +57,26 @@ public class testAltaAlumne {
         LOGGER.info("Servidor tancat.");
     }
     
-    
-    /**Test d'integració per comprovar el comportament de la crida alta alumne
+    /**Test per comprovar el comportament en cas d'una modificació vàlida.
      * 
      */
     @Test
-    public void testAltaAlumne(){
+    public void testModificarAlumneCorrecte(){
+        //Dades que utilitzarem per la proba
+        Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "123456789", "juan@gmail.com",1 , true, true, false);
+        //Modifiquem el teléfon i menjador ara serà false
+        Alumne alumneModificat = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "999999999", "juan@gmail.com",1 , true, false, false);
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
             
-            //Preparem dades que s'han de donar d'alta
-            Usuari usuari = new Usuari("testAlumneIntegracio", "password", true, false, true);
-            Alumne alumne = new Alumne("AlumneIntegracio", "cognomIntegracio", "cognomIntegracio2",
-                "2022-08-23", "45645645P", "111111111", "alumneInt@gmail.com", true, false, true);
-            
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
-            PeticioClient peticio  = new PeticioClient("ALTA_ALUMNE");
+            PeticioClient peticio  = new PeticioClient("MODIFICAR_ALUMNE");
             peticio.afegirDades(numSessio);
-            peticio.afegirDades(alumne);
-            peticio.afegirDades(usuari);
+            peticio.afegirDades(alumneModificat);
             
             //Enviem la petició al servidor en format JSON
             Gson gson = new Gson();
@@ -91,43 +88,44 @@ public class testAltaAlumne {
             //Legim les dades rebudes del servidor
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String llegir = input.readLine();
-            RetornDades retorn = gson.fromJson(llegir, RetornDades.class);          
-            //Obtenim de la resposta el codi del resultat
+            RetornDades retorn = gson.fromJson(llegir, RetornDades.class);
             LOGGER.info("Dades rebudes per part del servidor.");
-            
-            //Si la inserció es correcte el resultat del codiResultat serà 1
-            assertEquals(1, retorn.getCodiResultat());
-            LOGGER.info("Resultat esperat 1, resultat obtingut : " + retorn.getCodiResultat());
             
             socket.close();
             LOGGER.info("Socket del client tancat.");
-
+            
+            System.out.println("Comprovem les dades rebudes");
+            assertEquals(1, retorn.getCodiResultat());
+            LOGGER.info("Codi del resultat esperat 1, codi rebut: " + retorn.getCodiResultat());
+            
+            
         } catch (IOException ex) {
-            Logger.getLogger(ConsultaPersonaTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModificacióPerfilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     
-    /**Test per comprovar el comportament en una inserció erronea, utilitzarem un usuari
-     * que ja existeix nom usuari = PAU
+    /**Test per comprovar el comportament en cas d'una modificació erronea.
+     * 
      */
     @Test
-    public void testAltaAlumneErroni(){
+    public void testModificarEmpleatError(){
+        //Dades que utilitzarem per la proba
+        Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "123456789", "juan@gmail.com",1 , true, true, false);
+        //El id de l'alumne modificat no existeix
+        Alumne alumneModificat = new Alumne(89, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "999999999", "juan@gmail.com",1 , true, false, false);
+
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
             
-            //Preparem dades que s'han de donar d'alta
-            Usuari usuari = new Usuari("PAU", "password", true, false, true);
-            Alumne alumne = new Alumne("AlumneIntegracio", "cognomIntegracio", "cognomIntegracio2",
-                "2022-08-23", "45645645P", "111111111", "alumneInt@gmail.com", true, false, true);
-            
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
-            PeticioClient peticio  = new PeticioClient("ALTA_ALUMNE");
+            PeticioClient peticio  = new PeticioClient("MODIFICAR_ALUMNE");
             peticio.afegirDades(numSessio);
-            peticio.afegirDades(alumne);
-            peticio.afegirDades(usuari);
+            peticio.afegirDades(alumneModificat);
             
             //Enviem la petició al servidor en format JSON
             Gson gson = new Gson();
@@ -139,20 +137,20 @@ public class testAltaAlumne {
             //Legim les dades rebudes del servidor
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String llegir = input.readLine();
-            RetornDades retorn = gson.fromJson(llegir, RetornDades.class);          
-            //Obtenim la resposta del servidor
+            RetornDades retorn = gson.fromJson(llegir, RetornDades.class);
             LOGGER.info("Dades rebudes per part del servidor.");
-            
-            //Si la inserció es erronea el resultat es 0
-            assertEquals(0, retorn.getCodiResultat());
-            LOGGER.info("Resultat esperat 0, resultat obtingut : " + retorn.getCodiResultat());
             
             socket.close();
             LOGGER.info("Socket del client tancat.");
-
+            
+            System.out.println("Comprovem les dades rebudes");
+            assertEquals(0, retorn.getCodiResultat());
+            LOGGER.info("Codi del resultat esperat 0, codi rebut: " + retorn.getCodiResultat());
+            
+            
         } catch (IOException ex) {
-            Logger.getLogger(ConsultaPersonaTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModificacióPerfilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    }
+}
 

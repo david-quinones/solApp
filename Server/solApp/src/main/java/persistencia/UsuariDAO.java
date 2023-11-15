@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -153,6 +154,112 @@ public class UsuariDAO {
                     "ERROR al intntar actulitzar l'usuari associat al empleat", ex);
         }
         return ERROR;
+    }
+    
+    
+    /**Mètode que retorna una llista d'usuaris de la base de dades
+     * 
+     * @return llista d'usuaris.
+     */
+    public ArrayList llistarUsuaris(){
+        //Array que contindrà la llista d'usuaris
+        ArrayList<Usuari> llistaUsuaris = new ArrayList();
+        try {
+            //Consulta a la base de dades
+            String consultaSQL = "SELECT * FROM usuari;";
+            //Executem la consulta
+            ps = conexio.prepareStatement(consultaSQL);
+            ResultSet rs = ps.executeQuery();
+            //Omplim l'array amb les dades rebudes
+            while(rs.next()){
+                llistaUsuaris.add(obtindreUsuari(rs));
+            }
+            
+            return llistaUsuaris;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE, 
+                    "ERROR al intentar obtindre una llista d'usuaris", ex);
+        }
+        
+        return llistarUsuaris();
+    }
+    
+    
+    
+    /**Mètode per modificar les dades d'un usuari existent a la base de dades.
+     * 
+     * @param usuari amb les dades noves
+     * @return codi amb el resultat
+     */
+    public int modificarUsuari(Usuari usuari){
+        try {
+            //Ordre SQL per modificar un usuari de la bbdd
+            String updateUsuari = "UPDATE usuari SET nom_usuari = ?, password = ?, "
+                    + "is_admin = ?, is_teacher = ?, isActive = ? WHERE id = ?;";
+            ps = conexio.prepareStatement(updateUsuari);
+            
+            if(usuari != null){
+                //Establim les dades per a la modificació
+                ps.setString(1, usuari.getNomUsuari());
+                //Obtenim el hash del password rebut
+                Encriptar encriptar= new Encriptar();
+                String password = encriptar.hashPassword(usuari.getPassword());
+                ps.setString(2, password);
+                ps.setBoolean(3, usuari.isIsAdmin());
+                ps.setBoolean(4, usuari.isIsTeacher());
+                ps.setBoolean(5, usuari.isIsActive());
+                ps.setInt(6, usuari.getId());
+                
+            }else{
+                LOGGER.warning("L'objecte usuari es null");
+                return ERROR;
+            }
+            
+            //Comprovem les files afectades
+            int filesAfectades = ps.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("L'usuari " + usuari.getId() + " s'ha modificat correctament.");
+                return CORRECTE;
+            }else{
+                LOGGER.warning("L'usuari no s'ha modificat, el id no existeix o es null");
+                return ERROR;
+            }
+
+        } catch (SQLException | NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE,
+                    "Error al modificar l'usuari: " + usuari.getId(), ex);
+        }
+        
+        return ERROR;
+    }
+    
+    
+    
+    /**Mètode per obtenir objecte Usuari a partir d'un ResultSet de la base de dades
+     * 
+     * @param dades obtingudes de la bbdd
+     * @return objecte Usuari
+     */
+    public Usuari obtindreUsuari(ResultSet dades){
+        //Instanciem un Usuari sense paràmetres
+        Usuari usuari = new Usuari();
+        try {            
+            usuari.setId(dades.getInt("id"));
+            usuari.setNomUsuari(dades.getString("nom_usuari"));
+            usuari.setPassword(dades.getString("password"));
+            usuari.setIsAdmin(dades.getBoolean("is_admin"));
+            usuari.setIsTeacher(dades.getBoolean("is_teacher"));
+            usuari.setIdPersona(dades.getInt("persona_id"));
+            usuari.setIsActive(dades.getBoolean("isActive"));
+            LOGGER.info("Obtingut usuari amb idUsuari: " + usuari.getId());
+            
+            return usuari;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return usuari;
     }
      
 }

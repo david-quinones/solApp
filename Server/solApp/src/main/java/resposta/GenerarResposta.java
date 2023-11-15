@@ -382,6 +382,55 @@ public class GenerarResposta {
         }
         return resposta = new RetornDades(CODI_ERROR);
     }
+    
+    
+    
+    /**Mètode per generar la resposat a la crida llistar usuaris
+     * 
+     * @return llista amb els usuaris de la bbdd
+     */
+    public RetornDades respostaLlistarUsuaris(){
+        ArrayList<Usuari> llistaUsuaris = new ArrayList();
+        UsuariDAO usuariDAO = new UsuariDAO(conexio);
+        //Es demana la llista d'usuaris a UsuariDAO
+        llistaUsuaris= usuariDAO.llistarUsuaris();
+        //Si la llista no está buida omplim la resposta amb els alumnes
+        if(!llistaUsuaris.isEmpty()){           
+            resposta = new RetornDades(CODI_CORRECTE);
+            //Afegim el tamany de l'array list per al client
+            resposta.afegirDades(llistaUsuaris.size());
+            for(Usuari usuari: llistaUsuaris){
+                resposta.afegirDades(usuari);
+            }                      
+            LOGGER.info("Resposta amb la llista d'usuaris");
+            
+        }else{
+            LOGGER.info("Llista d'usuaris buida");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+        
+        return resposta;
+    }
+    
+    
+    /**Mètode per generar la resposta a la crida modificar usuari
+     * 
+     * @param usuari amb les dades noves
+     * @return codi del resultat
+     */
+    public RetornDades respostaModificarUsuari(Usuari usuari){
+        //Executem la modificació
+        UsuariDAO usuariDAO = new UsuariDAO(conexio);
+        int modificarUsuari = usuariDAO.modificarUsuari(usuari);
+        //Comprovem el resultat obtingut
+        if(modificarUsuari > 0){
+            LOGGER.info("La resposta s'ha generat correctament amb codi " + CODI_CORRECTE);
+            return resposta = new RetornDades(CODI_CORRECTE);
+        }else{
+            LOGGER.warning("No s'ha pogut modificar l'usuari.");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+    }
         
     }
 

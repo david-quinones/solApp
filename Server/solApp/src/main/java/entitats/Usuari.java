@@ -10,6 +10,7 @@ public class Usuari {
     private String password;
     private boolean isAdmin;
     private boolean isTeacher;
+    private int idPersona;
     private boolean isActive;
     
     
@@ -59,6 +60,12 @@ public class Usuari {
         
     }
 
+    /**Constructor sense paràmetres
+     * 
+     */
+    public Usuari() {
+    }
+
     public int getId() {
         return id;
     }
@@ -105,6 +112,14 @@ public class Usuari {
 
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public int getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
     }
   
 }
