@@ -210,6 +210,10 @@ public class PerfilActivity extends AppCompatActivity {
         }
 
     }
+
+    /***************************************************
+    * Mètode per controlar camps buits i format de dades
+    ****************************************************/
     public String controlDades(){
 
         String error = "";

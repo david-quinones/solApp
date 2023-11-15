@@ -3,6 +3,7 @@ package estel.solapp.common;
 import static estel.solapp.common.Utility.showToast;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -37,6 +38,7 @@ public class CommController {
     public static final String CONSULTA_PERFIL = "CONSULTA_PERFIL";
     public static final String MODIFICAR_PERFIL = "MODIFICAR_PERFIL";
     public static final String BUSCA_USUARI = "BUSCA_USUARI";
+    public static final String ALTA_EMPLEAT = "ALTA_EMPLEAT";
     public static final String LLISTAR_EMPLEATS = "LLISTAR_EMPLEATS";
 
     /***********************************
@@ -202,6 +204,28 @@ public class CommController {
         afegirUsuari.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
         afegirUsuari.addPrimitiveData(username);
         ValorsResposta resposta=talkToServer(afegirUsuari);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició de alta de professors al servidor
+     * @param empleat
+     * @param user
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta afegirEmpleat(Empleat empleat, User user){
+
+        PeticioClient altaEmpleat = new PeticioClient(ALTA_EMPLEAT);
+        altaEmpleat.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        altaEmpleat.addDataObject(empleat);
+        altaEmpleat.addDataObject(user);
+        Gson gson= new Gson();
+        Log.d("PETICIO ALTA PROFE", gson.toJson(altaEmpleat));
+        ValorsResposta resposta=talkToServer(altaEmpleat);
 
         if(resposta==null) return null;
 
