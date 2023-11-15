@@ -211,6 +211,7 @@ public class CommController {
 
     /*************************************************
      * Petició de llista de professors al servidor
+     * Només enviem el codi de sesseió al servidor
      * @return resultat empleats array; null si error.
      *************************************************/
     public static ValorsResposta llistarEmpleats(){
