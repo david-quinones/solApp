@@ -126,7 +126,7 @@ public class Usuari {
      *
      * @return boolea
      */
-    public boolean isTeacher() {
+    public boolean getIsTeacher() {
         return isTeacher;
     }
 
@@ -142,7 +142,7 @@ public class Usuari {
      *
      * @return boolea
      */
-    public boolean isAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 
@@ -152,5 +152,13 @@ public class Usuari {
      */
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

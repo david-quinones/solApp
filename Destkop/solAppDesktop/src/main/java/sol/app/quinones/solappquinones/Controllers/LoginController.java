@@ -113,9 +113,9 @@ public class LoginController implements Initializable {
                 Model.getInstance().getViewFactory().closeStage(stage); //tanquem la finestra
 
                 //mirem rol de l'usuari per obrir un menu o un altre
-                if (singletonConnection.getUserConnectat().isAdmin()){
+                if (singletonConnection.getUserConnectat().getIsAdmin()){
                     Model.getInstance().getViewFactory().showMainWindow("admin"); //mostrem la finesta nova
-                }else if (singletonConnection.getUserConnectat().isTeacher()){
+                }else if (singletonConnection.getUserConnectat().getIsTeacher()){
                     Model.getInstance().getViewFactory().showMainWindow("teacher"); //mostrem la finesta nova
                 }else{
                     Model.getInstance().getViewFactory().showMainWindow("user"); //mostrem la finesta nova

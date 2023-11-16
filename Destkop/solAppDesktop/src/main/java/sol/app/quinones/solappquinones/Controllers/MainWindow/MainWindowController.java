@@ -75,6 +75,11 @@ public class MainWindowController implements Initializable {
                     setStageTitle((Stage) mainBorderPane.getScene().getWindow(), " - Aula");
                     mainBorderPane.setTop(null);
                     break;
+                case "Usuari":
+                    mainBorderPane.setCenter(Model.getInstance().getViewFactory().getUserView());
+                    setStageTitle((Stage) mainBorderPane.getScene().getWindow(), " - Usuaris");
+                    mainBorderPane.setTop(null);
+                    break;
                 default:
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getDashboardView());
                     setStageTitle((Stage) mainBorderPane.getScene().getWindow(), "");

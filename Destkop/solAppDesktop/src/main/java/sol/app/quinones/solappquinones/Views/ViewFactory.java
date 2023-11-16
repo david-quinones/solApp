@@ -14,8 +14,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sol.app.quinones.solappquinones.Controllers.*;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowController;
+import sol.app.quinones.solappquinones.Controllers.Professor.ProfessorController;
+import sol.app.quinones.solappquinones.Controllers.Professor.WindowFormProfessorController;
+import sol.app.quinones.solappquinones.Controllers.Usuari.UsuariController;
+import sol.app.quinones.solappquinones.Controllers.Usuari.WindowsFormUsuariController;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Models.Professor;
+import sol.app.quinones.solappquinones.Models.Usuari;
+import sol.app.quinones.solappquinones.Models.VistaController;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
@@ -37,6 +43,7 @@ public class ViewFactory {
     private AnchorPane aulaView;
     private AnchorPane alumneView;
     private AnchorPane professorView;
+    private AnchorPane userView;
 
     //controlar que clico al menu
     private final StringProperty seleccioClientItemMenu;
@@ -67,19 +74,23 @@ public class ViewFactory {
         return perfilView;
     }
 
-    public HBox getMenuTopViewr(ITopMenuDelegation accions) {
+    public VistaController<TopMenuController> getMenuTopViewr(ITopMenuDelegation accions) {
        // if(menuTopViewr == null){
+        HBox view;
+        TopMenuController controller;
+
             try{
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MenuAction.fxml"));
                 menuTopViewr = fxmlLoader.load();
-                TopMenuController controller = fxmlLoader.getController();
+                //view = fxmlLoader.load();
+                controller = fxmlLoader.getController();
                 controller.setTopMenuDelegation(accions);
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
       //  }
-        return menuTopViewr;
+        return new VistaController<>(menuTopViewr, controller);
     }
 
     public AnchorPane getAulaView() {
@@ -103,6 +114,16 @@ public class ViewFactory {
         //}
         return professorView;
     }
+    public AnchorPane getUserView() {
+        //if(aulaView == null){
+        try {
+            userView = new FXMLLoader(getClass().getResource("/Fxml/Usuari.fxml")).load();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        //}
+        return userView;
+    }
 
     public AnchorPane getAlumneView() {
         //if(aulaView == null){
@@ -115,12 +136,26 @@ public class ViewFactory {
         return alumneView;
     }
 
-    public void showWindowForm(String title, Professor professor, ProfessorController professorController){
+    public void showWindowFormProfessor(String title, Professor professor, ProfessorController professorController){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormProfessor.fxml"));
         createStage(loader, true, title, true, professor);
         //una vez cargada la stage
         WindowFormProfessorController windowFormProfessorController = loader.getController();
         windowFormProfessorController.setProfessorController(professorController);
+
+        //TODO
+        //pasar aqui professor? carrega bé?¿ truere de stage, aixi només controla finestres
+    }
+
+
+    public void showWindowFormUser(String title, Usuari u, UsuariController usuariController){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormUser.fxml"));
+        createStage(loader, true, title, true, null);
+        //una vez cargada la stage
+        WindowsFormUsuariController windowsFormUsuariController = loader.getController();
+        windowsFormUsuariController.setUsuariController(usuariController);
+
+        windowsFormUsuariController.loadObject(u);
 
         //TODO
         //pasar aqui professor? carrega bé?¿ truere de stage, aixi només controla finestres
@@ -189,9 +224,6 @@ public class ViewFactory {
             WindowFormProfessorController windowFormProfessorController = loader.getController();
             windowFormProfessorController.loadObject(professor);
         }
-
-
-
 
         Stage stage = new Stage();
         stage.setScene(scene);

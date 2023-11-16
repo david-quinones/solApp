@@ -1,4 +1,4 @@
-package sol.app.quinones.solappquinones.Controllers;
+package sol.app.quinones.solappquinones.Controllers.Professor;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -96,9 +96,7 @@ public class WindowFormProfessorController implements Initializable {
         String peticioType = "";
 
         //controlar idEmpleat --> si existeix assigno sino existeix 0
-        int idPersona = idTxtFld10.getText() != null && !idTxtFld10.getText().trim().isEmpty()
-                ? Integer.parseInt(idTxtFld10.getText().trim())
-                : 0;
+        int idPersona = idTxtFld10.getText() != null && !idTxtFld10.getText().trim().isEmpty() ? Integer.parseInt(idTxtFld10.getText().trim()) : 0;
 
         this.p = new Professor(
                 //obligatoris: Nom, Cognom, isActive, dataNeixament (9999/09/09) --> controlador
