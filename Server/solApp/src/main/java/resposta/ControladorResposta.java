@@ -1,8 +1,6 @@
 package resposta;
 
-import entitats.Empleat;
-import entitats.Persona;
-import entitats.Usuari;
+import entitats.*;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
 import java.util.logging.Logger;
@@ -46,8 +44,7 @@ public class ControladorResposta {
             //Demanem les dades a dadesResposta en funció de l'ordre de la petició
             case "LOGIN":
                 resposta = dadesResposta.respostaLogin((Usuari) peticio.getDades(0, Usuari.class));
-                return resposta;
-                
+                return resposta;   
             case "LOGOUT":
                 //Generem resposta de LOGOUT amb el número de sessió rebut.
                 resposta = dadesResposta.respostaLogout(numSessio);
@@ -71,10 +68,10 @@ public class ControladorResposta {
                 //Generem la resposta amb les dades de tots els empleats
                 resposta = dadesResposta.respostaLlistarEmpleats();
                 return resposta;
-            case "ELIMINAR_EMPLEAT":
-                //Generem la resposta adient al eliminar un empleat
-                Empleat empleatEliminar = (Empleat) peticio.getDades(1, Empleat.class);
-                return resposta = dadesResposta.respostaEliminarEmpleat(empleatEliminar);
+            case "ELIMINAR_USUARI":
+                //Generem la resposta adient al desactivar un usuari.
+                Persona personaEliminar = (Persona) peticio.getDades(1, Persona.class);
+                return resposta = dadesResposta.respostaEliminarUsuari(personaEliminar);
             case "MODIFICAR_EMPLEAT":
                 //Generem la resposta corresponent a la modificació
                 Empleat empleatModificar = (Empleat) peticio.getDades(1, Empleat.class);
@@ -83,11 +80,29 @@ public class ControladorResposta {
                 //Generem la resposta amb les dades de tots els alumnes
                 resposta = dadesResposta.respostaLlistarAlumnes();
                 return resposta;
+            case "ALTA_ALUMNE":
+                //Generem la resposta al donar d'alta un alumne
+                resposta = dadesResposta.respostaAltaAlumne((Alumne)peticio.getDades(1, Alumne.class),
+                        (Usuari)peticio.getDades(2, Usuari.class));
+                return resposta;
+            case "MODIFICAR_ALUMNE":
+                //Generem la resposta a la crida modificar_alumne
+                resposta = dadesResposta.respostaModificarAlumne((Alumne)peticio.getDades(1, Alumne.class));
+                return resposta;
+            case "LLISTAR_USUARIS":
+                //Generem la resposta a la crida llistar_usuaris
+                resposta = dadesResposta.respostaLlistarUsuaris();
+                return resposta;
+            case "MODIFICAR_USUARI":
+                //Generem resposta a la crida modificar_usuari
+                resposta = dadesResposta.respostaModificarUsuari((Usuari)peticio.getDades(1, Usuari.class));
+                return resposta;
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }
  
     }
+    
 
     /**Métode per comprobar que la sessió existeix abans de donar una resposta
      * 
@@ -108,8 +123,6 @@ public class ControladorResposta {
             }
         }
         return peticio.getPeticio();
-        
     }
-    
-    
+  
 }

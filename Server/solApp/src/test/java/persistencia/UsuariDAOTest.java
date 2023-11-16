@@ -1,8 +1,10 @@
 package persistencia;
 
+import entitats.Alumne;
 import entitats.Usuari;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -85,5 +87,48 @@ public class UsuariDAOTest {
         assertEquals(1, resultat);
         
     }   
+    
+    /**Test per verificar el correcte funcionament del mètode eliminarUsuari
+     * 
+     */
+    @Test
+    public void testEliminarUsuari(){
+        //L'id de la persona s'obtindrà del empleat rebut com a paràmetre
+       int idPersona = 30;
+       UsuariDAO usuariDAO = new UsuariDAO(conexio);
+       int resultat = usuariDAO.eliminarUsuari(idPersona);
+       //Comprovem el resultat obtingut
+        assertEquals(1, resultat);
+    }
+    
+    
+    /**Test per verificar el comportament del mètode llistar_usuaris
+     * 
+     */
+    @Test
+    public void testLlistarUsuaris(){
+        usuariDAO = new UsuariDAO(conexio);
+        ArrayList<Usuari> llistaUsuaris= usuariDAO.llistarUsuaris();
+        assertEquals(1, llistaUsuaris.get(0).getId());
+        assertEquals(2, llistaUsuaris.get(1).getId());
+        assertEquals(18, llistaUsuaris.get(2).getId());
+ 
+    }
+    
+    
+    /**Test per verificar el comportament del mètode modificar_usuari
+     * 
+     */
+    @Test
+    public void testModificarUsuari(){
+        //Dades que utilitzarem per la prova
+        Usuari usuariOriginal = new Usuari(1, "nom_usuari", "password", true, false, true);
+        //Modifiquem nom usuari i password
+        Usuari usuariModificat = new Usuari(1, "nom_usuariProva", "prova", true, false, true);
+        //Executem la modificació
+        UsuariDAO usuariDAO = new UsuariDAO(conexio);
+        int filesAfectades = usuariDAO.modificarUsuari(usuariModificat);
+        assertEquals(1, filesAfectades);
+    }
 }
 

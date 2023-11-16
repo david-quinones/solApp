@@ -61,6 +61,82 @@ public class AlumneDAO {
     }
     
     
+    /**Mètode per insertar entitats de la classe Alumne a la base de dades
+     * 
+     * @param alumne que hi ha que insertar
+     * @param idPersona associada a l'alumne
+     * @return codi estat
+     */
+    public int altaAlumne(Alumne alumne, int idPersona){
+        try {
+            String insertAlumne = "INSERT INTO alumne (actiu, menjador, acollida, persona_id)"
+                    + " VALUES (?,?,?,?);";
+            psAlumne = conexio.prepareStatement(insertAlumne);
+            
+            //Establim les dades que cal insertar
+            psAlumne.setBoolean(1, alumne.isActiu());
+            psAlumne.setBoolean(2,alumne.isMenjador());
+            psAlumne.setBoolean(3, alumne.isAcollida());
+            psAlumne.setInt(4, idPersona);
+            
+            //Comprovem s'hi s'ha insertat correctament
+            int filesAfectades = psAlumne.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("S'ha insertat " + filesAfectades + " alumnes");
+                return CORRECTE;
+            }else{
+                LOGGER.warning("Error al insertar l'alumne");
+                return ERROR;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumneDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ERROR;
+    }
+    
+    
+    /**Mètode per modificar un alumne existent a la base de dades
+     * 
+     * @param alumne que s'ha de modificar
+     * @return codi amb el resultat
+     */
+    public int modificarAlumne(Alumne alumne){
+        try {
+            //Ordre sql per modificar les dades del alumne
+            String updateAlumne = "UPDATE alumne SET actiu = ?, menjador = ?,"
+                    + " acollida = ? WHERE id = ?;";
+            psAlumne = conexio.prepareStatement(updateAlumne);
+            
+            //Establim les dades per a la ordre sql
+            if(alumne != null){
+                psAlumne.setBoolean(1, alumne.isActiu());
+                psAlumne.setBoolean(2, alumne.isMenjador());
+                psAlumne.setBoolean(3, alumne.isAcollida());
+                psAlumne.setInt(4, alumne.getIdAlumne());
+            }else{
+                LOGGER.warning("L'objecte alumne es null");
+                return ERROR;
+            }
+
+            //Comprovem que s'ha modificat alguna fila
+            int filesAfectades = psAlumne.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("L'alumne amb id " + alumne.getIdAlumne()+
+                        " s'ha modificat correctament.");
+                return CORRECTE;
+            }else{
+                LOGGER.warning("L'id no existeix en la base de dades o es null");
+                return ERROR;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE,
+                    "ERROR al intentar modificar l'alumne", ex);
+        }
+        
+        return ERROR;
+    }
+ 
     
     /**Mètode per obtindre un objecte alumne a partir del ResultSet d'una consulta
      * a la base de dades

@@ -10,6 +10,259 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ScrollView
+            android:background="@color/solapp_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="8dp">
+
+                <EditText
+                    android:id="@+id/editTextUsuari"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:ems="12"
+                    android:hint="Usuari"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextContrasenya"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="12"
+                    android:hint="Contrasenya"
+                    android:inputType="text|textPassword"
+                    android:maxLength="20"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextNom"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="12"
+                    android:hint="Nom"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextCognom1"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="12"
+                    android:hint="Primer cognom"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextCognom2"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="12"
+                    android:hint="Segón cognom"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextDataNaixement"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="6"
+                    android:hint="Naixement"
+                    android:inputType="datetime|date"
+                    android:maxLength="10"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextDNI"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="6"
+                    android:hint="NIF"
+                    android:inputType="text"
+                    android:maxLength="9"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextTelefon"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="7"
+                    android:hint="Telèfon"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextEmail"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="15"
+                    android:hint="e-mail"
+                    android:inputType="text|textEmailAddress"
+                    android:maxLength="25"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextInici"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="6"
+                    android:hint="Data inici"
+                    android:inputType="datetime|date"
+                    android:maxLength="10"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/editTextFi"
+                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="6"
+                    android:hint="Data fi"
+                    android:inputType="datetime|date"
+                    android:maxLength="10"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="8dp">
+
+                    <Button
+                        android:id="@+id/altaBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="#090909"
+                        android:clickable="true"
+                        android:enabled="true"
+                        android:text="Donar d'alta"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:visibility="visible"
+                        app:cornerRadius="1dp"
+                        app:icon="@drawable/baseline_person_add_alt_1_24"
+                        app:iconGravity="top"
+                        app:iconTint="#FFFFFF" />
+
+                    <Button
+                        android:id="@+id/esborrarBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="#090909"
+                        android:clickable="true"
+                        android:enabled="true"
+                        android:text="Esborrar dades"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:visibility="visible"
+                        app:cornerRadius="1dp"
+                        app:icon="@android:drawable/ic_delete"
+                        app:iconGravity="top"
+                        app:iconTint="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="Ompliu totes les caselles"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
@@ -21,5 +274,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

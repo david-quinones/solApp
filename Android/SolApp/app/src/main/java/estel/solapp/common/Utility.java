@@ -3,10 +3,15 @@ package estel.solapp.common;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,16 +61,21 @@ public class Utility {
 
     }
 
+    /*************************************
+    * Metode per validar el format del DNI
+    * @param nif
+    * Return si es un NIF vàlid
+    **************************************/
     public static boolean vailidarNifNie(String nif){
 
-        //si es NIE, eliminar la x,y,z inicial para tratarlo como nif
+        //si es NIE, eliminar la x,y,z inicial per tratarlo com nif
         if (nif.toUpperCase().startsWith("X")||nif.toUpperCase().startsWith("Y")||nif.toUpperCase().startsWith("Z"))
             nif = nif.substring(1);
             Pattern nifPattern = Pattern.compile("(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke])");
             Matcher m = nifPattern.matcher(nif);
         if(m.matches()){
             String letra = m.group(2);
-        //Extraer letra del NIF
+        //Extreure lletra del NIF
             String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
             int dni = Integer.parseInt(m.group(1));
             dni = dni % 23;
@@ -83,4 +93,37 @@ public class Utility {
         else
             return false;
     }
+
+    /****************************************************
+     * Metode per validar el format de la data
+     * @param data
+     * Return si es valid el format de la data aaaa-mm-dd
+     ****************************************************/
+    public static Boolean validarData(String data) {
+
+        Pattern pattern = Pattern
+                .compile ("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$");
+
+        Matcher mather = pattern.matcher(data);
+
+        return (mather.find());
+    }
+
+    /*****************************************
+     * Metode per validar el format de l'email
+     * @param email
+     * Return si es valid el email
+     *****************************************/
+    public static boolean validarEmail (String email){
+
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+        Matcher mather = pattern.matcher(email);
+
+        return (mather.find());
+
+    }
+
 }

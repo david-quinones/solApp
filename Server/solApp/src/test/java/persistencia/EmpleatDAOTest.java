@@ -75,21 +75,7 @@ public class EmpleatDAOTest {
         assertEquals(4, empleats.get(3).getIdEmpleat());
     }
     
-    
-    /**Test per verificar el correcte funcionament del mètode eliminarEmpleat
-     * 
-     */
-    @Test
-    public void testEliminarEmpleat(){
-        //L'id de la persona s'obtindrà del empleat rebut com a paràmetre
-       int idPersona = 1;
-       EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
-       int resultat = empleatDAO.eliminarEmpleat(idPersona);
-       //Comprovem el resultat obtingut
-        assertEquals(1, resultat);
-    }
-    
-    
+ 
     /**Test per verificar el comportament del mètode modificarEmpleat
      * 
      */
@@ -105,5 +91,6 @@ public class EmpleatDAOTest {
         int resultat = empleatDAO.modificarEmpleat(empleatModificat);
         assertEquals(1, resultat);
     }
+    
     
 }

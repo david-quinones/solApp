@@ -25,7 +25,8 @@ public class Alumne extends Persona{
      * @param telefon
      * @param mail 
      */
-    public Alumne(int idAlumne, boolean actiu, boolean menjador, boolean acollida, int id, String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail) {
+    public Alumne(int id, String nom, String cognom1, String cognom2, String data_naixement, 
+            String dni, String telefon, String mail,int idAlumne, boolean actiu, boolean menjador, boolean acollida) {
         super(id, nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.idAlumne = idAlumne;
         this.actiu = actiu;
@@ -46,12 +47,28 @@ public class Alumne extends Persona{
      * @param telefon
      * @param mail 
      */
-    public Alumne(boolean actiu, boolean menjador, boolean acollida, String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail) {
+    public Alumne(String nom, String cognom1, String cognom2, String data_naixement, 
+            String dni, String telefon, String mail,boolean actiu, boolean menjador, boolean acollida) {
         super(nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.actiu = actiu;
         this.menjador = menjador;
         this.acollida = acollida;
     }
+
+    
+    /**Constructor que servirà per fer proves
+     * 
+     * @param actiu
+     * @param menjador
+     * @param acollida 
+     */
+    public Alumne(boolean actiu, boolean menjador, boolean acollida) {
+        this.actiu = actiu;
+        this.menjador = menjador;
+        this.acollida = acollida;
+    }
+    
+    
 
     public Alumne() {
     }

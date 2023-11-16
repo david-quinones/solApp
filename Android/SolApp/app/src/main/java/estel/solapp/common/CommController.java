@@ -3,6 +3,7 @@ package estel.solapp.common;
 import static estel.solapp.common.Utility.showToast;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -14,6 +15,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import estel.solapp.models.Empleat;
 import estel.solapp.models.Persona;
 import estel.solapp.models.User;
 /****************************************
@@ -36,6 +38,8 @@ public class CommController {
     public static final String CONSULTA_PERFIL = "CONSULTA_PERFIL";
     public static final String MODIFICAR_PERFIL = "MODIFICAR_PERFIL";
     public static final String BUSCA_USUARI = "BUSCA_USUARI";
+    public static final String ALTA_EMPLEAT = "ALTA_EMPLEAT";
+    public static final String LLISTAR_EMPLEATS = "LLISTAR_EMPLEATS";
 
     /***********************************
     * Conexió amb el servidor per socket
@@ -188,6 +192,7 @@ public class CommController {
 
     }
 
+
     /***********************************************
      * Fa la petició de recerca d'usuari al servidor
      * @param username  Nom d'usuari a buscar
@@ -199,6 +204,45 @@ public class CommController {
         afegirUsuari.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
         afegirUsuari.addPrimitiveData(username);
         ValorsResposta resposta=talkToServer(afegirUsuari);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició de alta de professors al servidor
+     * @param empleat
+     * @param user
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta afegirEmpleat(Empleat empleat, User user){
+
+        PeticioClient altaEmpleat = new PeticioClient(ALTA_EMPLEAT);
+        altaEmpleat.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        altaEmpleat.addDataObject(empleat);
+        altaEmpleat.addDataObject(user);
+        Gson gson= new Gson();
+        Log.d("PETICIO ALTA PROFE", gson.toJson(altaEmpleat));
+        ValorsResposta resposta=talkToServer(altaEmpleat);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició de llista de professors al servidor
+     * Només enviem el codi de sesseió al servidor
+     * @return resultat empleats array; null si error.
+     *************************************************/
+    public static ValorsResposta llistarEmpleats(){
+
+        PeticioClient listEmpleats = new PeticioClient(LLISTAR_EMPLEATS);
+        listEmpleats.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        ValorsResposta resposta=talkToServer(listEmpleats);
 
         if(resposta==null) return null;
 

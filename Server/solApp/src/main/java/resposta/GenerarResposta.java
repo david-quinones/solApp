@@ -208,27 +208,27 @@ public class GenerarResposta {
         return resposta;
     }
     
-    /**Mètode per generar la resposta de la crida eliminar empleat
+    /**Mètode per generar la resposta de la crida eliminar usuari
      * 
-     * @param empleat que s'ha d'eliminar
+     * @param persona associada al usuari que s'ha d'eliminar
      * @return codi amb el resultat
      */
-    public RetornDades respostaEliminarEmpleat(Empleat empleat){      
+    public RetornDades respostaEliminarUsuari(Persona persona){      
         //Comprovem que les dades rebudes són vàlides
-        if(empleat != null ){
+        if(persona != null ){
             //Obtenim id de la persona associada a l'empleat
-            int idPersona = empleat.getIdPersona();
-            EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
-            int resultat = empleatDAO.eliminarEmpleat(idPersona);
+            int idPersona = persona.getIdPersona();
+            UsuariDAO usuariDAO = new UsuariDAO(conexio);
+            int resultat = usuariDAO.eliminarUsuari(idPersona);
             if(resultat > 0){
-                LOGGER.info("Empleat amb id " + empleat.getIdEmpleat() + " eliminat.");
+                LOGGER.info("Usuari amb id persona " + persona.getIdPersona() + " eliminat.");
                 return resposta = new RetornDades(CODI_CORRECTE);
             }else{
                 LOGGER.warning("ERROR id no existeix o es cero.");
                 return resposta = new RetornDades(CODI_ERROR);
             }
         }else{
-            LOGGER.warning("ERROR: Empleat null");
+            LOGGER.warning("ERROR: Persona null");
             return resposta = new RetornDades(CODI_ERROR);
         }
     }
@@ -297,4 +297,140 @@ public class GenerarResposta {
         
         return resposta;
     }
-}
+    
+    
+    /**Mètode per afegir a la base de dades un alumne, la persona associada i l'usuari
+     * que tindrà i generar la resposta.
+     * @param alumne que s'ha d'insertar
+     * @param usuari associat a l'alumne
+     * @return 
+     */
+    public RetornDades respostaAltaAlumne(Alumne alumne, Usuari usuari){
+        try {
+            //Si totes les accions no son correctes no es fa cap
+            conexio.setAutoCommit(false);
+            //Obtenim idPersona insertada
+            PersonaDAO personaDAO = new PersonaDAO(conexio);
+            int idPersona = personaDAO.altaPersona(alumne);
+            //Instanciem la classe AlumneDAO
+            AlumneDAO alumneDAO = new AlumneDAO(conexio);
+            //Codi que ens indica quantes files s'han insertat
+            int codiAltaAlumne = alumneDAO.altaAlumne(alumne, idPersona);
+            //Alta del usuari asociat a l'alumne
+            UsuariDAO usuariDAO = new UsuariDAO(conexio);
+            int codiAltaUsuari = usuariDAO.altaUsuari(usuari, idPersona);
+            //Comprobem que l'entitat Alumne s'ha insertat
+            if(codiAltaAlumne > 0 && codiAltaUsuari > 0){
+                conexio.commit();
+                LOGGER.info("L'alumne i l'usuari s'han insertat correctament");
+                return resposta = new RetornDades(CODI_CORRECTE);
+            }else{
+                //Desfem tots els possibles canvis
+                conexio.rollback();
+                LOGGER.warning("ERROR No s'ha pogut insertar l'alumne ni l'usari associat");
+                //Si no s'ha insertat cap fila retornem codi d'error
+                return resposta = new RetornDades(CODI_ERROR);
+            }
+        } catch (SQLException ex) {
+            try {
+                conexio.rollback();
+                Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE,
+                        "ERROR al intentar donar d'alta un alumne i el seu usuari", ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+
+        return resposta = new RetornDades(CODI_ERROR);
+    }
+    
+    
+    
+    /**Mètode que genera la resposta que s'enviarà al client a la crida modificar_alumne
+     * 
+     * @param alumne que s'ha de modificar
+     * @return codi amb el resultat
+     */
+    public RetornDades respostaModificarAlumne(Alumne alumne){
+        try {
+            //Si totes les accions no son correctes no es fa cap
+            conexio.setAutoCommit(false);
+            //Executem la modificació
+            AlumneDAO alumneDAO = new AlumneDAO(conexio);
+            int modificarAlumne = alumneDAO.modificarAlumne(alumne);
+            PersonaDAO personaDAO = new PersonaDAO(conexio);
+            int modificarPersona = personaDAO.modificarPerfil(alumne);
+            //Comprovem el resultat obtingut
+            if(modificarAlumne > 0 && modificarPersona > 0){
+                conexio.commit();
+                LOGGER.info("La resposta s'ha generat correctament amb codi " + CODI_CORRECTE);
+                return resposta = new RetornDades(CODI_CORRECTE);
+            }else{
+                conexio.rollback();
+                LOGGER.warning("No s'ha pogut modificar l'alumne. Desfem possibles canvis");
+                return resposta = new RetornDades(CODI_ERROR);
+            }
+        } catch (SQLException ex) {
+            try {
+                conexio.rollback();
+                Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE,
+                        "Error en el commit de la base de dades, desfem possibles canvis", ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE,
+                        "Error en el rollback de la base de dades, desfem possibles canvis", ex1);
+            }
+        }
+        return resposta = new RetornDades(CODI_ERROR);
+    }
+    
+    
+    
+    /**Mètode per generar la resposat a la crida llistar usuaris
+     * 
+     * @return llista amb els usuaris de la bbdd
+     */
+    public RetornDades respostaLlistarUsuaris(){
+        ArrayList<Usuari> llistaUsuaris = new ArrayList();
+        UsuariDAO usuariDAO = new UsuariDAO(conexio);
+        //Es demana la llista d'usuaris a UsuariDAO
+        llistaUsuaris= usuariDAO.llistarUsuaris();
+        //Si la llista no está buida omplim la resposta amb els alumnes
+        if(!llistaUsuaris.isEmpty()){           
+            resposta = new RetornDades(CODI_CORRECTE);
+            //Afegim el tamany de l'array list per al client
+            resposta.afegirDades(llistaUsuaris.size());
+            for(Usuari usuari: llistaUsuaris){
+                resposta.afegirDades(usuari);
+            }                      
+            LOGGER.info("Resposta amb la llista d'usuaris");
+            
+        }else{
+            LOGGER.info("Llista d'usuaris buida");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+        
+        return resposta;
+    }
+    
+    
+    /**Mètode per generar la resposta a la crida modificar usuari
+     * 
+     * @param usuari amb les dades noves
+     * @return codi del resultat
+     */
+    public RetornDades respostaModificarUsuari(Usuari usuari){
+        //Executem la modificació
+        UsuariDAO usuariDAO = new UsuariDAO(conexio);
+        int modificarUsuari = usuariDAO.modificarUsuari(usuari);
+        //Comprovem el resultat obtingut
+        if(modificarUsuari > 0){
+            LOGGER.info("La resposta s'ha generat correctament amb codi " + CODI_CORRECTE);
+            return resposta = new RetornDades(CODI_CORRECTE);
+        }else{
+            LOGGER.warning("No s'ha pogut modificar l'usuari.");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+    }
+        
+    }
+

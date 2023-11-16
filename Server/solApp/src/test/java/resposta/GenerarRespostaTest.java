@@ -43,7 +43,6 @@ public class GenerarRespostaTest {
         //Respota login error
         retornDades = generarResposta.respostaLogin(usuariFail);
         assertEquals(retornDades.getCodiResultat(), 0);
- 
     }
 
     
@@ -132,22 +131,21 @@ public class GenerarRespostaTest {
     }
     
     
-    /**Test per comprovar que es genera la resposta adient al eliminar un empleat
+    /**Test per comprovar que es genera la resposta adient al desactivar un usuari
      * 
      */
     @Test
-    public void testEliminarEmpleat(){
-        Empleat empleat = new Empleat(1, "testResposta", "cognomResposta1", "cognomResposta2",
-                "1983-02-06", "1111111G", "587458745", "resposta@gmail.com",
-                1, true, "2000-01-01", "9999-12-31");
+    public void testEliminarUsuari(){
+        Persona persona = new Persona(1, "testResposta", "cognomResposta1", "cognomResposta2",
+                "1983-02-06", "1111111G", "587458745", "resposta@gmail.com");
         GenerarResposta generarResposta = new GenerarResposta();
         //Generem la resposta
-        RetornDades retornDades = generarResposta.respostaEliminarEmpleat(empleat);
+        RetornDades retornDades = generarResposta.respostaEliminarUsuari(persona);
         //Comprovem que el codi es correcte
         assertEquals(1, retornDades.getCodiResultat());
         //Comprovem possible error
-        Empleat empleat2 = null;
-        retornDades = generarResposta.respostaEliminarEmpleat(empleat2);
+        Persona persona2 = null;
+        retornDades = generarResposta.respostaEliminarUsuari(persona2);
         assertEquals(0, retornDades.getCodiResultat());
     }
     
@@ -197,6 +195,90 @@ public class GenerarRespostaTest {
         assertNotNull(alumne);
         alumne = (Alumne) retornDades.getDades(4, Alumne.class);
         assertNotNull(alumne);
+    }
+    
+    
+    /**Test per comprovar el comportament al generar una resposta alta alumne.
+     * 
+     */
+    @Test
+    public void testAltaAlumne(){
+        //Preparem dades que s'han de donar d'alta
+        Usuari usuari = new Usuari("testAlumne", "password", true, false, true);
+        Alumne alumne = new Alumne("testAlumne", "cognomAlumne", "cognomAlumne2",
+                "2021-08-06", "8748555H", "111111111", "alumne@gmail.com", true, false, false);
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades retornDades = generarResposta.respostaAltaAlumne(alumne, usuari);
+        //Comprovem que el codi es 1, operació correcte
+        assertEquals(1, retornDades.getCodiResultat());
+    }
+    
+    
+    /**Test per comprovar la resposta generada a la crida modificar_alumne
+     * 
+     */
+    @Test
+    public void testModificarAlumne(){
+        //Dades que utilitzarem per la prova
+        Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "123456789", "juan@gmail.com",1 , true, true, false);
+        //Modifiquem el teléfon i menjador ara serà false
+        Alumne alumneModificat = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "999999999", "juan@gmail.com",1 , true, false, false);
+        //Generem la resposta
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades retornDades = generarResposta.respostaModificarAlumne(alumneModificat);
+        //Comprovem que el resultat es l'esperat
+        assertEquals(1, retornDades.getCodiResultat());
+        //Fem el mateix amb un alumne que no existeix
+        Alumne alumneError= new Alumne(80, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "123456789", "juan@gmail.com",1 , true, true, false);
+        retornDades = generarResposta.respostaModificarAlumne(alumneError);
+        assertEquals(0, retornDades.getCodiResultat()); 
+    }
+    
+    
+    
+    /**Test per comprovar el comportament del mètode respostaModificarUsuari
+     * 
+     */
+    @Test
+    public void testModificarUsuari(){
+        //Dades que utilitzarem per la prova
+        Usuari usuariOriginal = new Usuari(1, "nom_usuari", "password", true, false, true);
+        //Modifiquem nom usuari i password
+        Usuari usuariModificat = new Usuari(1, "nom_usuariProva", "prova", true, false, true);
+        //Generem la resposta
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades retornDades = generarResposta.respostaModificarUsuari(usuariModificat);
+        //Comprovem que el resultat es l'esperat
+        assertEquals(1, retornDades.getCodiResultat());
+        //Fem el mateix amb un usuari que no existeix
+        Usuari usuariError = new Usuari(155, "nom", "password", true, false, true);
+        retornDades = generarResposta.respostaModificarUsuari(usuariError);
+        assertEquals(0, retornDades.getCodiResultat()); 
+    }
+    
+    
+    /**Test per comprovar el funcionament del mètode respostaLlistarUsuari
+     * 
+     */
+    @Test
+    public void testLlistarUsuaris(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades retornDades = generarResposta.respostaLlistarUsuaris();
+        //Comprobem codi resultat correcte
+        assertEquals(1, retornDades.getCodiResultat());
+        //Comprobem la cantitat d'empleats de la llista
+        assertEquals(3, retornDades.getDades(0, Integer.class));
+        //comprobem que hi ha 4 alumnes
+        Usuari usuari = (Usuari) retornDades.getDades(1, Usuari.class);
+        assertNotNull(usuari);
+        usuari = (Usuari) retornDades.getDades(2, Usuari.class);
+        assertNotNull(usuari);
+        usuari = (Usuari) retornDades.getDades(3, Usuari.class);
+        assertNotNull(usuari);
+
     }
     
     

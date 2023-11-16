@@ -45,7 +45,7 @@ public class AlumneDAOTest {
     }
 
     
-     /**Test per comprobar el métode per llistr empleats
+     /**Test per comprobar el métode per llistar alumnes
      * 
      */
     @Test
@@ -57,6 +57,40 @@ public class AlumneDAOTest {
         assertEquals(2, llistaAlumnes.get(1).getIdAlumne());
         assertEquals(3, llistaAlumnes.get(2).getIdAlumne());
         assertEquals(4, llistaAlumnes.get(3).getIdAlumne());
+    }
+    
+    
+    /**Test per comprovar el funcionament correcte del métode altaAlumne
+     * 
+     */
+    @Test
+    public void testAltaAlumne(){
+        //Id de la persona associada a l'alumne
+        int idPersona = 5;
+        //Simulem objecte alumne
+        Alumne alumne = new Alumne(true, true, true);
+        AlumneDAO alumneDAO = new AlumneDAO(conexio);
+        //Comprovem el resultat de la execució
+        assertEquals(1, alumneDAO.altaAlumne(alumne, idPersona));
+        
+    }
+    
+    
+    /**Test per comprovar que la modificació s'executa correctament
+     * 
+     */
+    @Test
+    public void testModificarAlumne(){
+        //Dades que utilitzarem per la proba
+        Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "123456789", "juan@gmail.com",1 , true, true, false);
+        //Modifiquem el teléfon i menjador ara serà false
+        Alumne alumneModificat = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
+                null, "999999999", "juan@gmail.com",1 , true, false, false);
+        //Executem la modificació
+        AlumneDAO alumneDAO = new AlumneDAO(conexio);
+        int filesAfectades = alumneDAO.modificarAlumne(alumneModificat);
+        assertEquals(1, filesAfectades);
     }
     }
     

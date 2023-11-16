@@ -24,7 +24,7 @@ import servidor.ServidorSocketListener;
  *
  * @author Pau Castell Galtes
  */
-public class EliminarEmpleatTest {
+public class EliminarUsuariTest {
     private ServidorSocketListener servidor;
     private Socket socket;
     private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
@@ -65,7 +65,7 @@ public class EliminarEmpleatTest {
      * 
      */
     @Test
-    public void testEliminarEmpleat(){
+    public void testEliminarUsuari(){
         Empleat empleat = new Empleat(1, "testResposta", "cognomResposta1", "cognomResposta2",
                 "1983-02-06", "1111111G", "587458745", "resposta@gmail.com",
                 1, true, "2000-01-01", "9999-12-31");
@@ -75,7 +75,7 @@ public class EliminarEmpleatTest {
             
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
-            PeticioClient peticio  = new PeticioClient("ELIMINAR_EMPLEAT");
+            PeticioClient peticio  = new PeticioClient("ELIMINAR_USUARI");
             peticio.afegirDades(numSessio);
             peticio.afegirDades(empleat);
             
@@ -109,7 +109,7 @@ public class EliminarEmpleatTest {
      * 
      */
     @Test
-    public void testEliminarEmpleatError(){
+    public void testEliminarUsuariError(){
         //Empleat inexistent
         Empleat empleat = new Empleat(55, "testResposta", "cognomResposta1", "cognomResposta2",
                 "1983-02-06", "1111111G", "587458745", "resposta@gmail.com",
@@ -120,7 +120,7 @@ public class EliminarEmpleatTest {
             
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
-            PeticioClient peticio  = new PeticioClient("ELIMINAR_EMPLEAT");
+            PeticioClient peticio  = new PeticioClient("ELIMINAR_USUARI");
             peticio.afegirDades(numSessio);
             peticio.afegirDades(empleat);
             
