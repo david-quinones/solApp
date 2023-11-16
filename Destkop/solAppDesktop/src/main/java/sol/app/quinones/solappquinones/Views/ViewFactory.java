@@ -3,7 +3,6 @@ package sol.app.quinones.solappquinones.Views;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -15,7 +14,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sol.app.quinones.solappquinones.Controllers.*;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowController;
-import sol.app.quinones.solappquinones.Controllers.MainWindow.MenuController;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Models.Professor;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
@@ -23,7 +21,6 @@ import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 
 
 /**
@@ -118,9 +115,15 @@ public class ViewFactory {
         return alumneView;
     }
 
-    public void showWindowForm(String title, Professor professor){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormP.fxml"));
+    public void showWindowForm(String title, Professor professor, ProfessorController professorController){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormProfessor.fxml"));
         createStage(loader, true, title, true, professor);
+        //una vez cargada la stage
+        WindowFormProfessorController windowFormProfessorController = loader.getController();
+        windowFormProfessorController.setProfessorController(professorController);
+
+        //TODO
+        //pasar aqui professor? carrega bé?¿ truere de stage, aixi només controla finestres
     }
 
 
@@ -181,10 +184,13 @@ public class ViewFactory {
         }
 
         //
+
         if(professor != null) {
-            WindowFormController windowFormController = loader.getController();
-            windowFormController.loadObject(professor);
+            WindowFormProfessorController windowFormProfessorController = loader.getController();
+            windowFormProfessorController.loadObject(professor);
         }
+
+
 
 
         Stage stage = new Stage();

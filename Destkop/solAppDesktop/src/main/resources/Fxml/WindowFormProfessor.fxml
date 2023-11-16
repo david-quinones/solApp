@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -9,92 +10,88 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.DatePicker?>
-<AnchorPane fx:id="mainWindowForm" prefHeight="300.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sol.app.quinones.solappquinones.Controllers.WindowFormController">
-   <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane fx:id="mainWindowForm" prefHeight="300.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.WindowFormProfessorController">
+   <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <HBox prefHeight="100.0" prefWidth="200.0">
-         <Label fx:id="idLbl1" text="Nom"/>
-         <TextField fx:id="idTxtFld1"/>
+         <Label fx:id="idLbl1" text="Nom" />
+         <TextField fx:id="idTxtFld1" promptText="David" />
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl2" text="Cognom"/>
-            <TextField fx:id="idTxtFld2"/>
+            <Label fx:id="idLbl2" text="Cognom" />
+            <TextField fx:id="idTxtFld2" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl3" text="Segon Cognom"/>
-            <TextField fx:id="idTxtFld3"/>
+            <Label fx:id="idLbl3" text="Segon Cognom" />
+            <TextField fx:id="idTxtFld3" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl4" text="Data Neixament"/>
-            <DatePicker fx:id="idTxtFld4"/>
+            <Label fx:id="idLbl4" text="Data Neixament" />
+            <DatePicker fx:id="idTxtFld4" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl5" text="DNI"/>
-            <TextField fx:id="idTxtFld5"/>
+            <Label fx:id="idLbl5" text="DNI" />
+            <TextField fx:id="idTxtFld5" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl6" text="Telefon"/>
-            <TextField fx:id="idTxtFld6"/>
+            <Label fx:id="idLbl6" text="Telefon" />
+            <TextField fx:id="idTxtFld6" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl7" text="Mail"/>
-            <TextField fx:id="idTxtFld7"/>
+            <Label fx:id="idLbl7" text="Mail" />
+            <TextField fx:id="idTxtFld7" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl8" text="Inici Contracte"/>
-            <DatePicker fx:id="idTxtFld8"/>
+            <Label fx:id="idLbl8" text="Inici Contracte" />
+            <DatePicker fx:id="idTxtFld8" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl9" text="Fi Contracte"/>
-            <DatePicker fx:id="idTxtFld9"/>
+            <Label fx:id="idLbl9" text="Fi Contracte" />
+            <DatePicker fx:id="idTxtFld9" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl10"/>
-            <TextField fx:id="idTxtFld10"/>
+            <Label fx:id="idLbl10" />
+            <TextField fx:id="idTxtFld10" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl11" text="Usuari"/>
-            <TextField fx:id="idTxtFld11"/>
+            <Label fx:id="idLbl11" text="Usuari" />
+            <TextField fx:id="idTxtFld11" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="idLbl12" text="Password"/>
-            <PasswordField fx:id="idTxtFld12"/>
+            <Label fx:id="idLbl12" text="Password" />
+            <PasswordField fx:id="idTxtFld12" />
          </children>
       </HBox>
       <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button fx:id="idBtnAcceptar" mnemonicParsing="false" text="Crear">
                <opaqueInsets>
-                  <Insets right="50.0"/>
+                  <Insets right="50.0" />
                </opaqueInsets>
             </Button>
          </children>
          <opaqueInsets>
-            <Insets right="15.0"/>
+            <Insets right="15.0" />
          </opaqueInsets>
       </HBox>
    </VBox>

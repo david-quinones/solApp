@@ -2,29 +2,24 @@ package sol.app.quinones.solappquinones.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.json.JSONException;
 import org.json.JSONObject;
 import sol.app.quinones.solappquinones.Models.*;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class WindowFormController implements Initializable {
+public class WindowFormProfessorController implements Initializable {
     public AnchorPane mainWindowForm;
     public TextField idTextMostra;
     @FXML
@@ -37,10 +32,14 @@ public class WindowFormController implements Initializable {
     @FXML
     private DatePicker idTxtFld4,idTxtFld8,idTxtFld9;
 
+    private int idEmpleat;
+
     private Professor p;
     private Usuari u;
     private Peticio peticio = new Peticio();
     private ServerComunication socket = new ServerComunication();
+
+    private ProfessorController professorController;
 
 
     //si es ok respuesta -> close + update grid (done)
@@ -51,17 +50,59 @@ public class WindowFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idTxtFld10.setVisible(false);
+
+        idTxtFld4.setEditable(false);
+        idTxtFld8.setEditable(false);
+        idTxtFld9.setEditable(false);
+
+        aplicarNetejaStylError();
+
         idBtnAcceptar.setOnAction(event -> saveObject());
+    }
+
+    private void aplicarNetejaStylError() {
+        //styl with error
+        idTxtFld5.setOnMouseClicked(event -> {
+            idTxtFld5.setStyle("");
+        });
+        idTxtFld5.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if(newVal){idTxtFld5.setStyle("");}
+        });
+
+        //sett promp text all camps TODO
+        idTxtFld5.setPromptText("41548690H");
+
+
+
     }
 
     //validar que todos los campos son correctos 1
     //guardar objeto
     private void saveObject() {
 
+        //TODO validar dades
+        if(!validarDNI(idTxtFld5.getText())){
+            System.out.println("DNI INCORRECTE");
+            idTxtFld5.setStyle("-fx-border-color: red;");
+            return;
+        }
+        if(!isDatePickerValid()){
+            System.out.println("fechas incorrecteas");
+            return;
+        }
+
+
+
         String peticioType = "";
+
+        //controlar idEmpleat --> si existeix assigno sino existeix 0
+        int idPersona = idTxtFld10.getText() != null && !idTxtFld10.getText().trim().isEmpty()
+                ? Integer.parseInt(idTxtFld10.getText().trim())
+                : 0;
 
         this.p = new Professor(
                 //obligatoris: Nom, Cognom, isActive, dataNeixament (9999/09/09) --> controlador
+                idPersona,
                 idTxtFld1.getText(),
                 idTxtFld2.getText(),
                 idTxtFld3.getText(),
@@ -69,6 +110,7 @@ public class WindowFormController implements Initializable {
                 idTxtFld5.getText(),
                 idTxtFld6.getText(),
                 idTxtFld7.getText(),
+                idEmpleat,
                 idTxtFld8.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
                 idTxtFld9.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
                 true
@@ -99,20 +141,16 @@ public class WindowFormController implements Initializable {
         //peticio servidor per guardar objecte
         boolean isOk = saveDataBd(peticioType);
 
-        //TODO
-        ProfessorController pc = new ProfessorController();
-        pc.crearProfessor(p);
-
         if(isOk){
             Stage actual = (Stage)idTxtFld12.getScene().getWindow();
             actual.close();
-            pc.carregarProfessors();
+            professorController.carregarProfessors();
         }
 
 
     }
 
-    public WindowFormController() {
+    public WindowFormProfessorController() {
     }
 
     public boolean saveDataBd(String peticioType){
@@ -161,6 +199,8 @@ public class WindowFormController implements Initializable {
                 idTxtFld7.setText(obj.getMail());
                 idTxtFld8.setValue((obj.getIniciContracte() != null && !obj.getIniciContracte().isEmpty()) ? LocalDate.parse(obj.getIniciContracte()) : LocalDate.now());
                 idTxtFld9.setValue((obj.getFinalContracte() != null && !obj.getFinalContracte().isEmpty()) ? LocalDate.parse(obj.getFinalContracte()) : LocalDate.now());
+                idTxtFld10.setText(String.valueOf(obj.getIdPersona()));
+                idEmpleat = obj.getIdEmpleat();
 
                 //idTxtFld8.setValue(LocalDate.parse(obj.getIniciContracte()));
                 //idTxtFld9.setValue(LocalDate.parse(obj.getFinalContracte()));
@@ -172,5 +212,47 @@ public class WindowFormController implements Initializable {
                 idLbl12.setManaged(false);
 
                 idBtnAcceptar.setText("Modificar");
+    }
+
+    public void setProfessorController(ProfessorController professorController){
+        this.professorController = professorController;
+    }
+
+
+    //validadors:
+    private boolean isFormatValid(){
+        if(
+                idTxtFld1.getText().trim().isEmpty()
+                || idTxtFld2.getText().trim().isEmpty()
+                || idTxtFld3.getText().trim().isEmpty()
+                || idTxtFld5.getText().trim().isEmpty()
+                || idTxtFld6.getText().trim().isEmpty()
+                || idTxtFld7.getText().trim().isEmpty()
+
+        ) return false;
+
+        return true;
+    }
+
+    private boolean isDatePickerValid(){
+
+        if(idTxtFld4.getValue() == null) return false;
+        if(idTxtFld8.getValue() == null) return false;
+        if(idTxtFld9.getValue() == null) return false;
+
+        return true;
+    }
+
+    private boolean validarDNI(String dni){
+        return dni.matches("[0-9]{8}[A-Za-z]"); //41548690
+    }
+
+    private boolean validarTelf(String telf){
+        return telf.matches("[0-9]{9}");
+    }
+
+    //emil?
+    private boolean validarMail(String mail){
+        return mail.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
     }
 }

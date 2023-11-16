@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ProfessorController implements Initializable, ITopMenuDelegation {
@@ -65,7 +66,7 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     private ArrayList<Professor> professorArrayList = new ArrayList<>();
 
-    private ObservableList<Professor> professorArrayListTable;
+    private ObservableList<Professor> professorArrayListTable = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,7 +91,7 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
     }
 
     public void editarProfessor(Professor professor){
-        Model.getInstance().getViewFactory().showWindowForm(" - Editar Professor", professor);
+        Model.getInstance().getViewFactory().showWindowForm(" - Editar Professor", professor, this);
     }
 
     private void assignarColumnesTaula(){
@@ -107,6 +108,8 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     public void carregarProfessors() {
 
+        professorArrayListTable.clear();
+
         String resposta = ConsultesSocket.serverPeticioConsulta("LLISTAR_EMPLEATS");
         if(resposta != null){
             try {
@@ -115,19 +118,17 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
                 if(jsonObject.getInt("codiResultat") != 0){
                     JSONArray arrayProfessors = jsonObject.getJSONArray("dades");
                     for(int i = 1; i < jsonObject.getJSONArray("dades").length(); i++){
-                        professorArrayList.add(Professor.fromJson(arrayProfessors.get(i).toString()));
+                        professorArrayListTable.add(Professor.fromJson(arrayProfessors.get(i).toString()));
                     }
 
                     //TODO Delete
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for(Professor p : professorArrayList) {
-                        stringBuilder.append(p.getNom());
-                        stringBuilder.append(", ");
-                        //System.out.println(p.getIniciContracte());
-                        //System.out.println(p.getFinalContracte());
+
+                    for(Professor p : professorArrayListTable) {
+                        //System.out.println(p.getIdEmpleat());
+                        //System.out.println(p.getIdPersona());
                     }
 
-                    professorArrayListTable = FXCollections.observableArrayList(professorArrayList);
+                    //professorArrayListTable = FXCollections.observableArrayList(professorArrayList);
 
                     //idTextMostra.setText(stringBuilder.toString());
 
@@ -152,7 +153,7 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
     @Override
     public void onBtnCrear() {
         //levantar ventana:
-        Model.getInstance().getViewFactory().showWindowForm(" - Crear Empleat", null);
+        Model.getInstance().getViewFactory().showWindowForm(" - Crear Empleat", null, this);
 
 
 
@@ -177,7 +178,7 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
     }
 
     public void crearProfessor(Professor p){
-        //actualitzara vista amb el professor creat
+        professorArrayListTable.add(p);
     }
 
 }
