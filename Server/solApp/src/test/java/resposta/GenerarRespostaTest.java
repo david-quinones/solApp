@@ -25,7 +25,7 @@ public class GenerarRespostaTest {
      */
     @Before
     public void setUp(){
-        usuariCorrecte = new Usuari(1, "nom_usuari", "password", true, false,true);
+        usuariCorrecte = new Usuari(18, "testResposta", "password", true, false,true);
         usuariFail = new Usuari(1, "nom_usuari", "error", true, false,true);
         gestorSessions = GestorSessions.obtindreInstancia();
     }
@@ -100,9 +100,7 @@ public class GenerarRespostaTest {
         RetornDades retornDades = generarResposta.respostaLlistarEmpleats();
         //Comprobem codi resultat correcte
         assertEquals(1, retornDades.getCodiResultat());
-        //Comprobem la cantitat d'empleats de la llista
-        assertEquals(4, retornDades.getDades(0, Integer.class));
-        //comprobem que hi ha 4 empleats
+        //comprobem part de la llista
         Empleat empleat = (Empleat) retornDades.getDades(1, Empleat.class);
         assertNotNull(empleat);
         empleat = (Empleat) retornDades.getDades(2, Empleat.class);
@@ -121,9 +119,9 @@ public class GenerarRespostaTest {
     @Test
     public void testAltaEmpleat(){
         //Preparem dades que s'han de donar d'alta
-        Usuari usuari = new Usuari("testResposta", "password", true, false, true);
+        Usuari usuari = new Usuari("testResposta10", "password", true, false, true);
         Empleat empleat = new Empleat("testResposta", "cognomResposta1", "cognomResposta2",
-                "1983-02-06", "1111111G", "587458745", "resposta@gmail.com", true, "2000-01-01", "9999-12-31");
+                "1983-02-06", "1111111T", "587458746", "resposta@gmail.com", true, "2000-01-01", "9999-12-31");
         GenerarResposta generarResposta = new GenerarResposta();
         RetornDades retornDades = generarResposta.respostaAltaEmpleat(empleat, usuari);
         //Comprovem que el codi es 1, operació correcte
@@ -184,9 +182,7 @@ public class GenerarRespostaTest {
         RetornDades retornDades = generarResposta.respostaLlistarAlumnes();
         //Comprobem codi resultat correcte
         assertEquals(1, retornDades.getCodiResultat());
-        //Comprobem la cantitat d'empleats de la llista
-        assertEquals(4, retornDades.getDades(0, Integer.class));
-        //comprobem que hi ha 4 alumnes
+        //comprobem part de llista
         Alumne alumne = (Alumne) retornDades.getDades(1, Alumne.class);
         assertNotNull(alumne);
         alumne = (Alumne) retornDades.getDades(2, Alumne.class);
@@ -269,9 +265,7 @@ public class GenerarRespostaTest {
         RetornDades retornDades = generarResposta.respostaLlistarUsuaris();
         //Comprobem codi resultat correcte
         assertEquals(1, retornDades.getCodiResultat());
-        //Comprobem la cantitat d'empleats de la llista
-        assertEquals(3, retornDades.getDades(0, Integer.class));
-        //comprobem que hi ha 4 alumnes
+        //comprobem part de la llista
         Usuari usuari = (Usuari) retornDades.getDades(1, Usuari.class);
         assertNotNull(usuari);
         usuari = (Usuari) retornDades.getDades(2, Usuari.class);

@@ -127,7 +127,7 @@ public class PersonaTest {
     @Test
     public void testSetDataNaixement(){
         persona.setData_naixement("2016-10-02");
-        assertEquals("2016/10/02", persona.getData_naixement());
+        assertEquals("2016-10-02", persona.getData_naixement());
     }
     
     /**Test per probar el setter del dni

@@ -95,7 +95,7 @@ public class LlistarAlumnesTest {
             LOGGER.info("Codi del resultat espertat = 1, codi rebut: " + retorn.getCodiResultat());
             //Número de elements Empleats rebuts
             int numeroAlumnes = (int) retorn.getDades(0, Integer.class);
-            assertEquals(4, numeroAlumnes);
+            assertEquals(5, numeroAlumnes);
             LOGGER.info("Número d'alumnes esperats 4, número d'alumnes rebuts: " + numeroAlumnes);
             //Comprobem que els alumnes rebuts són els esperats
             Alumne alumne = (Alumne) retorn.getDades(1, Alumne.class);
@@ -110,6 +110,9 @@ public class LlistarAlumnesTest {
             alumne = (Alumne) retorn.getDades(4, Alumne.class);
             assertEquals(4, alumne.getIdAlumne());
             LOGGER.info("Id = 4 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
+            alumne = (Alumne) retorn.getDades(5, Alumne.class);
+            assertEquals(5, alumne.getIdAlumne());
+            LOGGER.info("Id = 5 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
 
             socket.close();
             LOGGER.info("Socket del client tancat.");
