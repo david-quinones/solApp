@@ -39,6 +39,7 @@ public class CommController {
     public static final String MODIFICAR_PERFIL = "MODIFICAR_PERFIL";
     public static final String BUSCA_USUARI = "BUSCA_USUARI";
     public static final String ALTA_EMPLEAT = "ALTA_EMPLEAT";
+    public static final String ELIMINAR_EMPLEAT = "ELIMINAR_EMPLEAT";
     public static final String LLISTAR_EMPLEATS = "LLISTAR_EMPLEATS";
 
     /***********************************
@@ -233,6 +234,25 @@ public class CommController {
 
     }
 
+    /*************************************************
+     * Petició d'eliminar professor al servidor
+     * @param empleat
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta eliminarEmpleat(Empleat empleat){
+
+        PeticioClient altaEmpleat = new PeticioClient(ELIMINAR_EMPLEAT);
+        altaEmpleat.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        altaEmpleat.addDataObject(empleat);
+        Gson gson= new Gson();
+        Log.d("PETICIO ALTA PROFE", gson.toJson(altaEmpleat));
+        ValorsResposta resposta=talkToServer(altaEmpleat);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
     /*************************************************
      * Petició de llista de professors al servidor
      * Només enviem el codi de sesseió al servidor
