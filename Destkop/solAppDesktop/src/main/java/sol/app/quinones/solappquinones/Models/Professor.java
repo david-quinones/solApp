@@ -17,6 +17,13 @@ public class Professor extends Persona {
         this.actiu = actiu;
     }
 
+    public Professor(int idPersona, String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail, String iniciContracte, String finalContracte, boolean actiu) {
+        super(idPersona, nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
+        this.iniciContracte = iniciContracte;
+        this.finalContracte = finalContracte;
+        this.actiu = actiu;
+    }
+
     public Professor(int idPersona, String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail, int idEmpleat, String iniciContracte, String finalContracte, boolean actiu) {
         super(idPersona, nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.idEmpleat = idEmpleat;

@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 public class TopMenuController {
 
     @FXML
-    private Button addButton;
+    private Button btnAdd;
 
     @FXML
     private Button editButton;
@@ -64,5 +64,8 @@ public class TopMenuController {
 
     }
 
-    // Métodos de eventos para cada botón según se necesite
+    public void disableCrearBoto(boolean disable){
+        btnAdd.setDisable(disable);
+    }
+
 }

@@ -1,4 +1,4 @@
-package sol.app.quinones.solappquinones.Controllers;
+package sol.app.quinones.solappquinones.Controllers.Professor;
 
 import javafx.collections.*;
 import javafx.fxml.FXML;
@@ -6,29 +6,25 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sol.app.quinones.solappquinones.Controllers.ITopMenuDelegation;
+import sol.app.quinones.solappquinones.Controllers.TopMenuController;
+import sol.app.quinones.solappquinones.Controllers.Usuari.UsuariController;
 import sol.app.quinones.solappquinones.Models.Model;
-import sol.app.quinones.solappquinones.Models.Persona;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Models.Professor;
+import sol.app.quinones.solappquinones.Models.VistaController;
 import sol.app.quinones.solappquinones.Service.ConsultesSocket;
-import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
-import sol.app.quinones.solappquinones.Service.SingletonConnection;
 
-import java.io.IOException;
 import java.net.URL;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -65,11 +61,18 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     private ArrayList<Professor> professorArrayList = new ArrayList<>();
 
-    private ObservableList<Professor> professorArrayListTable;
+    private ObservableList<Professor> professorArrayListTable = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        vBoxMainProfessor.getChildren().add(0, Model.getInstance().getViewFactory().getMenuTopViewr(this));
+
+        VistaController<TopMenuController> vistaController = Model.getInstance().getViewFactory().getMenuTopViewr(this);
+        HBox topMenuView = vistaController.getView();
+        TopMenuController topMenuController = vistaController.getController();
+        topMenuController.disableCrearBoto(false);
+        vBoxMainProfessor.getChildren().add(0, topMenuView);
+
+        //vBoxMainProfessor.getChildren().add(0, Model.getInstance().getViewFactory().getMenuTopViewr(this));
         carregarProfessors();
         tableProfe.setItems(professorArrayListTable);
         assignarColumnesTaula();
@@ -90,7 +93,7 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
     }
 
     public void editarProfessor(Professor professor){
-        Model.getInstance().getViewFactory().showWindowForm(" - Editar Professor", professor);
+        Model.getInstance().getViewFactory().showWindowFormProfessor(" - Editar Professor", professor, this);
     }
 
     private void assignarColumnesTaula(){
@@ -107,6 +110,8 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     public void carregarProfessors() {
 
+        professorArrayListTable.clear();
+
         String resposta = ConsultesSocket.serverPeticioConsulta("LLISTAR_EMPLEATS");
         if(resposta != null){
             try {
@@ -115,24 +120,15 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
                 if(jsonObject.getInt("codiResultat") != 0){
                     JSONArray arrayProfessors = jsonObject.getJSONArray("dades");
                     for(int i = 1; i < jsonObject.getJSONArray("dades").length(); i++){
-                        professorArrayList.add(Professor.fromJson(arrayProfessors.get(i).toString()));
+                        professorArrayListTable.add(Professor.fromJson(arrayProfessors.get(i).toString()));
                     }
 
                     //TODO Delete
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for(Professor p : professorArrayList) {
-                        stringBuilder.append(p.getNom());
-                        stringBuilder.append(", ");
-                        //System.out.println(p.getIniciContracte());
-                        //System.out.println(p.getFinalContracte());
+
+                    for(Professor p : professorArrayListTable) {
+                        //System.out.println(p.getIdEmpleat());
+                        //System.out.println(p.getIdPersona());
                     }
-
-                    professorArrayListTable = FXCollections.observableArrayList(professorArrayList);
-
-                    //idTextMostra.setText(stringBuilder.toString());
-
-
-
 
                 }else{
                     //lanzar excpt
@@ -152,14 +148,7 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
     @Override
     public void onBtnCrear() {
         //levantar ventana:
-        Model.getInstance().getViewFactory().showWindowForm(" - Crear Empleat", null);
-
-
-
-        //capturar respuesta
-        //actualizar vista
-
-        // test de màs (cargar de nuevo vista, hay el elemento creado?)
+        Model.getInstance().getViewFactory().showWindowFormProfessor(" - Crear Empleat", null, this);
     }
 
     @Override
@@ -173,11 +162,19 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     @Override
     public void onBtnEliminar() {
-        //action delete perfil
+        Professor profesorSeleccionat = (Professor) tableProfe.getSelectionModel().getSelectedItem();
+        if(profesorSeleccionat != null) {
+            deleteProfessor(profesorSeleccionat);
+        }
     }
 
     public void crearProfessor(Professor p){
-        //actualitzara vista amb el professor creat
+        professorArrayListTable.add(p);
+    }
+
+    private void deleteProfessor(Professor p){
+        UsuariController usuariController = new UsuariController();
+        usuariController.deleteUser(p);
     }
 
 }
