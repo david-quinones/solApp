@@ -1,66 +1,187 @@
 package estel.solapp.ui.admin.professor;
 
+import static estel.solapp.common.Utility.showToast;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.gson.Gson;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import estel.solapp.R;
+import estel.solapp.common.CommController;
+import estel.solapp.common.SingletonSessio;
+import estel.solapp.common.Utility;
+import estel.solapp.common.ValorsResposta;
+import estel.solapp.models.Empleat;
+import estel.solapp.models.Persona;
+import estel.solapp.models.User;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link afegir_professor#newInstance} factory method to
- * create an instance of this fragment.
- */
+/***********************************************
+ * Fragment per donar d'alta empleats-professors
+ ***********************************************/
 public class afegir_professor extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private EditText nomUsuari,contrasenya, nom, cognom1, cognom2, dataNaixement, nif, telefon, email, dataInici, dataFi;
+    private Button altaBtn, esborrarBtn;
+    private Empleat empleat;
+    private User usuari;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public afegir_professor() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment afegir_professor.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static afegir_professor newInstance(String param1, String param2) {
-        afegir_professor fragment = new afegir_professor();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_afegir_professor, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_afegir_professor, container, false);
+
+        //Asignació de tots els EditText
+        nomUsuari = view.findViewById(R.id.editTextUsuari);
+        contrasenya = view.findViewById(R.id.editTextContrasenya);
+        nom = view.findViewById(R.id.editTextNom);
+        cognom1 = view.findViewById(R.id.editTextCognom1);
+        cognom2 = view.findViewById(R.id.editTextCognom2);
+        dataNaixement = view.findViewById(R.id.editTextDataNaixement);
+        nif = view.findViewById(R.id.editTextDNI);
+        telefon = view.findViewById(R.id.editTextTelefon);
+        email = view.findViewById(R.id.editTextEmail);
+        dataInici= view.findViewById(R.id.editTextInici);
+        dataFi = view.findViewById(R.id.editTextFi);
+
+        //Botó de alta de professor.
+        altaBtn = view.findViewById(R.id.altaBtn);
+        altaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Crida al metode per donar d'alta un professor
+                afegirProfessor();
+
+            }
+        });
+
+        //Botó per tornar enrere
+        esborrarBtn = view.findViewById(R.id.esborrarBtn);
+        esborrarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Crida al metode per esborrar dades
+                esborrarDades();
+
+            }
+        });
+
+        // Infla el layout d'aquest fragment
+        return view;
     }
+
+    /*********************************************************
+     * Mètode per fer fer peticio de donar d'alta un professor
+     *********************************************************/
+    public void afegirProfessor(){
+
+        //Control de dades.
+
+        String error = controlDades();
+
+        if (!error.equals("")){
+
+            Utility.showToast(this.getActivity(),this.getContext(),error);
+
+        }else {//Dades correctes
+
+            //Creació de Empleat i usuari per donar d'alta.
+            empleat = new Empleat(nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
+                    nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),true,dataInici.getText().toString(),dataFi.getText().toString());
+            usuari = new User(nomUsuari.getText().toString(),contrasenya.getText().toString());
+
+            // Creació d'unaltre fil.
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            // La petició es fa en unaltre fil
+            Future<ValorsResposta> future = executor.submit(()->{return CommController.afegirEmpleat(empleat, usuari);});
+            // Procesar resposta del servidor
+            try {
+
+                ValorsResposta resposta = future.get();
+                Gson gson= new Gson();
+                Log.d("RESPOSTA ALTA PROFE", gson.toJson(resposta));
+                if (resposta==null){
+
+                    showToast(this.getActivity(),this.getContext(), "Error de conexió amb el servidor. ");
+
+                }else{
+
+                    if (resposta.getReturnCode()==CommController.OK_RETURN_CODE){//Codi correcte
+
+                        showToast(this.getActivity(),this.getContext(), "Empleat donat d'alta amb èxit");
+
+
+                    }else {
+
+                        showToast(this.getActivity(),this.getContext(), "No s'ha pogut donar d'alta l'empleat");
+
+                    }
+                }
+            } catch (ExecutionException e) {
+                showToast(this.getActivity(),this.getContext(), "Error ("+e.getMessage()+")");
+            } catch (InterruptedException e) {
+                showToast(this.getActivity(),this.getContext(), "Error ("+e.getMessage()+")");
+            }
+
+        }
+
+    }
+
+    /***************************************************
+     * Mètode per borrar les dades
+     ****************************************************/
+    public void esborrarDades(){
+
+        nomUsuari.setText("");contrasenya.setText("");nom.setText("");cognom1.setText("");cognom2.setText("");dataNaixement.setText("");
+        nif.setText("");telefon.setText("");email.setText("");dataInici.setText("");dataFi.setText("");
+
+    }
+
+    /***************************************************
+     * Mètode per controlar camps buits i format de dades
+     ****************************************************/
+    public String controlDades(){
+
+        String error = "";
+
+        if (nom.getText().toString().isEmpty()){error = "La casella nom és buida.\n"; }
+        if (cognom1.getText().toString().isEmpty()){error = error + "La casella Primer cognom és buida.\n"; }
+        if (cognom2.getText().toString().isEmpty()){error = error + "La casella Segón cognom és buida.\n"; }
+        if (dataNaixement.getText().toString().isEmpty()){error = error + "La casella Data de naixement és buida.\n"; }
+        if (!Utility.validarData(dataNaixement.getText().toString())) {error= error + "El format de la data ha de ser aaaa-mm-dd";}
+        if (nif.getText().toString().isEmpty()){error = error + "La casella NIF és buida.\n"; }
+        //if (!Utility.vailidarNifNie(nif.getText().toString())){error=error + "El format del NIF no és vàlid.\n";}
+        if (telefon.getText().toString().isEmpty()){error = error + "La casella Telèfon es buida.\n"; }
+        if (email.getText().toString().isEmpty()){error = error + "La casella Email es buida.\n"; }
+        if (!Utility.validarEmail(email.getText().toString())) {error = error + "El emailintroduït no és correcte";}
+        if (dataInici.getText().toString().isEmpty()){error = error + "La casella Data d'inici és buida.\n"; }
+        if (!Utility.validarData(dataInici.getText().toString())) {error= error + "El format de la data ha de ser aaaa-mm-dd";}
+        if (dataFi.getText().toString().isEmpty()){error = error + "La casella Data d'inici és buida.\n"; }
+        if (!Utility.validarData(dataFi.getText().toString())) {error= error + "El format de la data ha de ser aaaa-mm-dd";}
+
+        return (error);
+
+    }
+
 }
