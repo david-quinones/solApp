@@ -26,8 +26,8 @@ public class UsariTest {
         assertEquals(1,usuari.getId());
         assertEquals("IOC", usuari.getNomUsuari());
         assertEquals("Ioc2023", usuari.getPassword());
-        assertTrue(usuari.isTeacher());
-        assertFalse(usuari.isAdmin());
+        assertTrue(usuari.getIsTeacher());
+        assertFalse(usuari.getIsAdmin());
     }
 
     /**
@@ -47,8 +47,8 @@ public class UsariTest {
         assertEquals(20231020,usuari.getId());
         assertEquals("david", usuari.getNomUsuari());
         assertEquals("quinones", usuari.getPassword());
-        assertTrue(usuari.isTeacher());
-        assertTrue(usuari.isAdmin());
+        assertTrue(usuari.getIsTeacher());
+        assertTrue(usuari.getIsAdmin());
     }
 
     /**
@@ -64,8 +64,8 @@ public class UsariTest {
         assertEquals(1992,usuari.getId());
         assertEquals("david", usuari.getNomUsuari());
         assertEquals("david", usuari.getPassword());
-        assertFalse(usuari.isTeacher());
-        assertTrue(usuari.isAdmin());
+        assertFalse(usuari.getIsTeacher());
+        assertTrue(usuari.getIsAdmin());
     }
 
 }

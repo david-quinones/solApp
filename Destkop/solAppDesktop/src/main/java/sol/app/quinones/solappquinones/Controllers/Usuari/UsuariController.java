@@ -27,24 +27,15 @@ import java.util.ResourceBundle;
 public class UsuariController implements Initializable, ITopMenuDelegation {
 
     @FXML
-    private TableColumn idNomUser;
-    @FXML
-    private TableColumn idPassword;
-    @FXML
-    private TableColumn idIsAdmin;
-    @FXML
-    private TableColumn idIsTeacher;
-    @FXML
-    private TableColumn idIsActive;
-    private Peticio peticio = new Peticio();
-    private ServerComunication socket = new ServerComunication();
-    private ObservableList<Usuari> usersArrayListTable = FXCollections.observableArrayList();
-
-
+    private TableColumn idNomUser, idIsAdmin, idIsTeacher, idIsActive;
     @FXML
     private VBox vBoxMainUsuaris;
     @FXML
     private TableView tableUsers;
+
+    private Peticio peticio = new Peticio();
+    private ServerComunication socket = new ServerComunication();
+    private ObservableList<Usuari> usersArrayListTable = FXCollections.observableArrayList();
 
 
 
@@ -62,8 +53,6 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
         carregarUsuaris();
         tableUsers.setItems(usersArrayListTable);
         assignarColumnesTaula();
-
-        //buscar com deshabilitar el boto que injecto
 
 
         //Detectar doble click taula --> inicialitzar
@@ -87,7 +76,6 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
 
     private void assignarColumnesTaula() {
         idNomUser.setCellValueFactory(new PropertyValueFactory<>("nomUsuari"));
-        idPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
         idIsAdmin.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
         idIsTeacher.setCellValueFactory(new PropertyValueFactory<>("isTeacher"));
         idIsActive.setCellValueFactory(new PropertyValueFactory<>("isActive"));
@@ -148,7 +136,7 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
 
 
 
-    private void carregarUsuaris() {
+    public void carregarUsuaris() {
         //netegem llista
         usersArrayListTable.clear();
 
@@ -202,11 +190,19 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
 
     @Override
     public void onBtnEditar() {
-
+        Usuari userSeleccionat = (Usuari) tableUsers.getSelectionModel().getSelectedItem();
+        if(userSeleccionat != null){
+            editarUsuari(userSeleccionat);
+        }
     }
 
     @Override
     public void onBtnEliminar() {
+        Usuari userSeleccionat = (Usuari) tableUsers.getSelectionModel().getSelectedItem();
+        if(userSeleccionat != null) {
+            //deleteUser(userSeleccionat);
+            //TODO quan hi hagi cerques
+        }
 
     }
 

@@ -12,7 +12,6 @@
                 <TableView fx:id="tableUsers" prefHeight="723.0" prefWidth="850.0">
                     <columns>
                         <TableColumn fx:id="idNomUser" prefWidth="75.0" text="Nom" />
-                        <TableColumn fx:id="idPassword" prefWidth="75.0" text="Contrasenya" />
                         <TableColumn fx:id="idIsAdmin" prefWidth="75.0" text="Admin" />
                         <TableColumn fx:id="idIsTeacher" prefWidth="75.0" text="Professor" />
                         <TableColumn fx:id="idIsActive" prefWidth="75.0" text="Actiu" />
