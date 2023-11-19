@@ -22,6 +22,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador del formulari d'alumne
+ * Gestió de la logica de la UI a la creació i edició d'un alumne
+ *
+ * @author david
+ */
 public class WindowsFormAlumneController implements Initializable {
 
     @FXML
@@ -45,28 +51,44 @@ public class WindowsFormAlumneController implements Initializable {
     private Peticio peticio = new Peticio();
     private ServerComunication socket = new ServerComunication();
 
+    /**
+     * Estableix el controladr d'alumnes
+     * @param alumneController controlador d'alumne a assignar
+     */
     public void setUsuariController(AlumneController alumneController) {
         this.alumneController = alumneController;
     }
 
 
+    /**
+     * Inicizlita el controlador. Configura camps
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //amagar txtFld
         idTxtFld10.setVisible(false);
+        //Posar datePicker no editable (aixi no es pot escriure i no hi ha errors, (menys controls))
         idTxtFld4.setEditable(false);
 
-        //aplicar syle error DNI
+        //aplicar syle clen error
         aplicarCleanStyle();
 
+        //assigna accio de guardar al boto d'acceptar
         idBtnAcceptar.setOnAction(e -> saveObject());
     }
 
+    /**
+     * Aplica estil al camps per resejetr errors
+     */
     private void aplicarCleanStyle() {
+        //Configura events per netejar l'esticl
         //dni
-        idTxtFld5.setOnMouseClicked(event -> {
+        idTxtFld5.setOnMouseClicked(event -> { //event cliar
             idTxtFld5.setStyle("");
         });
-        idTxtFld5.focusedProperty().addListener((obs, oldVal, newVal) -> {
+        idTxtFld5.focusedProperty().addListener((obs, oldVal, newVal) -> { //event rebre focus
             if(newVal){idTxtFld5.setStyle("");}
         });
         //tlf
@@ -87,10 +109,14 @@ public class WindowsFormAlumneController implements Initializable {
         //TODO
     }
 
+    /**
+     * Guarda l'objecte alumne creat/modificat
+     * Realitza una previa validació de dades i gestiona la crida al servidor
+     */
     private void saveObject() {
         String tipusPeticio;
 
-        //validar dades
+        //validar dades i establir estil d'error
         if(!ValidadorCamps.validarDNI(idTxtFld5.getText())){
             System.out.println("DNI INCORRECTE");
             idTxtFld5.setStyle("-fx-border-color: red;");
@@ -109,7 +135,7 @@ public class WindowsFormAlumneController implements Initializable {
             return;
         }
 
-        //crear objecte
+        //crear objecte amb els camps del formulari
         this.a = new Alumne(
 
                 idBtnAcceptar.getText().equalsIgnoreCase("Crear") ? 0 : alumneCarregat.getIdPersona(),
@@ -124,6 +150,7 @@ public class WindowsFormAlumneController implements Initializable {
                 //idBtnAcceptar.getText().equalsIgnoreCase("Crear") ? 0 : alumneCarregat.getIdAlumne()
         );
 
+        //controlar si es crear o editar per afegir usuari
         if (!idBtnAcceptar.getText().equals("Modificar")) {
             //controlar si estan vacios, no hacer nada?? mandar un objeto vacio? siempre obligatorio?
             this.u = new Usuari(
@@ -135,14 +162,17 @@ public class WindowsFormAlumneController implements Initializable {
             this.u.setAdmin(false);
             this.u.setTeacher(false);
 
+            //establim tipus petició si hem entrat es crear (perque hi ha usuari) sino, modificar
             tipusPeticio = "ALTA_ALUMNE";
         } else {
             tipusPeticio = "MODIFICAR_ALUMNE";
-            a.setIdPersona(alumneCarregat.getIdPersona());
+            a.setIdPersona(alumneCarregat.getIdPersona()); //assignem el idPersona, de quan hem carregat l'alumne
         }
 
+        //fem la crida al servidor per guardar
         boolean guardat = saveObjectDb(tipusPeticio);
 
+        //control i tractat de la respota de intentar guardar al servidor
         if(guardat){
             tancarFinestra();
         }else{
@@ -160,12 +190,20 @@ public class WindowsFormAlumneController implements Initializable {
         }
     }
 
+    /**
+     * Tanca finestra actual i recarrega la llista d'alumnes del controlador que li hem passat
+     */
     public void tancarFinestra(){
         Stage stage = (Stage) idTxtFld10.getScene().getWindow();
         stage.close();
         alumneController.loadAlumnes();
     }
 
+    /**
+     *Fa la crida per guardar l'objcet
+     * @param tipusPeticio tipus petició (alta o modificació)
+     * @return true si es exitos
+     */
     private boolean saveObjectDb(String tipusPeticio) {
         peticio.dropDades();
 
@@ -196,7 +234,10 @@ public class WindowsFormAlumneController implements Initializable {
         }
     }
 
-    //
+    /**
+     * Carregem l'alumne a la finestra quan s'ha de modificar
+     * @param alum alumne a carregar
+     */
     public void loadAlumne(Alumne alum) {
         idTxtFld1.setText(alum.getNom());
         idTxtFld2.setText(alum.getCognom1());
@@ -220,6 +261,10 @@ public class WindowsFormAlumneController implements Initializable {
         idAlumne = alum.getIdAlumne();
     }
 
+    /**
+     * metode per controlar si el camp esta ple (date)
+     * @return true si es valid
+     */
     private boolean isDatePickerValid(){
         if(idTxtFld4.getValue() == null) return false;
         return true;

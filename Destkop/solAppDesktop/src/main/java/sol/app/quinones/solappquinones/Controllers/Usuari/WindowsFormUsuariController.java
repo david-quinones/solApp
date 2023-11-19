@@ -16,6 +16,13 @@ import sol.app.quinones.solappquinones.Service.SingletonConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador per la finestra del formulari dels usuaris
+ *
+ * Implementa la finestra dels usuaris per la modificació del mateix
+ *
+ * @author david
+ */
 public class WindowsFormUsuariController implements Initializable {
 
     @FXML
@@ -31,16 +38,28 @@ public class WindowsFormUsuariController implements Initializable {
     private ServerComunication socket = new ServerComunication();
 
 
+    /**
+     * Estableix controlador dels usuaris
+     * @param usuariController Controlador de usuari principal
+     */
     public void setUsuariController(UsuariController usuariController) {
         this.usuariController = usuariController;
-
     }
 
+    /**
+     * Inicializador del controlador i configuració de botons, dades UI
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idBtnAcceptar.setOnAction(event -> guardarObjecte());
     }
 
+    /**
+     * Desa objetce usuari
+     * Logica per agafar les dades de la finestra i convertir en objecte i cridar metode que fa petició servidor
+     */
     private void guardarObjecte() {
 
         //carregar l'usuari
@@ -63,10 +82,13 @@ public class WindowsFormUsuariController implements Initializable {
             actual.close();
             usuariController.carregarUsuaris();
         }
-
-
-
     }
+
+    /**
+     * Fa crida al API per guardar la modificacions de l'usuari
+     * @param u Usuari a guardar
+     * @return true si es existos
+     */
 
     private boolean saveUserDb(Usuari u) {
 
@@ -98,6 +120,10 @@ public class WindowsFormUsuariController implements Initializable {
         return true;
     }
 
+    /**
+     * Carrega a la finestra l'usuari passat
+     * @param u Usuari que s'ha de carregar
+     */
     public void loadObject(Usuari u) {
         //carregar als camps l'objecte
         idTxtFld1.setText(u.getNomUsuari());
@@ -109,6 +135,7 @@ public class WindowsFormUsuariController implements Initializable {
         //modificar el nom
         idBtnAcceptar.setText("Modificar");
 
+        //Assignem objecte per tindre la infor completa si s'escau (la principal)
         userLoad = u;
     }
 

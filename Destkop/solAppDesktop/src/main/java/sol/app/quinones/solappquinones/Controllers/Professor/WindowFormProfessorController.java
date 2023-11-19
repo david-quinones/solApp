@@ -20,34 +20,37 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/**
+ * Controladr del formulari de professors
+ * Gestiona la logica de la UI a la creació i edicó del professor
+ *
+ * @author david
+ */
 public class WindowFormProfessorController implements Initializable {
     public AnchorPane mainWindowForm;
-    public TextField idTextMostra;
+
     @FXML
     private Label idLbl1,idLbl2,idLbl3,idLbl4,idLbl5,idLbl6,idLbl7,idLbl8,idLbl9,idLbl10,idLbl11,idLbl12;
     @FXML
     private TextField idTxtFld1,idTxtFld2,idTxtFld3,idTxtFld5,idTxtFld6,idTxtFld7,idTxtFld10,idTxtFld11,idTxtFld12;
     @FXML
     private Button idBtnAcceptar;
-
     @FXML
     private DatePicker idTxtFld4,idTxtFld8,idTxtFld9;
 
     private int idEmpleat;
-
     private Professor p;
     private Usuari u;
     private Peticio peticio = new Peticio();
     private ServerComunication socket = new ServerComunication();
-
     private ProfessorController professorController;
 
-
-    //si es ok respuesta -> close + update grid (done)
-
-    //contolar tot els camps
-    //bloquear ventana de atras mientras esta està abierta (done)
-
+    /**
+     * Inicialitza el controlador, configura els camps i les accions
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idTxtFld10.setVisible(false);
@@ -55,18 +58,22 @@ public class WindowFormProfessorController implements Initializable {
         idTxtFld4.setEditable(false);
         idTxtFld8.setEditable(false);
         idTxtFld9.setEditable(false);
-
+        // Aplica estils per netejar els erors
         aplicarNetejaStylError();
-
+        // asignació accio event guardar (cliar)
         idBtnAcceptar.setOnAction(event -> saveObject());
     }
 
+    /**
+     * Aplica estil de neteja als errors dels camps d'entrada
+     * Elimina els estils quan s'interactua amb els camps
+     */
     private void aplicarNetejaStylError() {
         //styl with error
-        idTxtFld5.setOnMouseClicked(event -> {
+        idTxtFld5.setOnMouseClicked(event -> { //event cliar
             idTxtFld5.setStyle("");
         });
-        idTxtFld5.focusedProperty().addListener((obs, oldVal, newVal) -> {
+        idTxtFld5.focusedProperty().addListener((obs, oldVal, newVal) -> { //event focus
             if(newVal){idTxtFld5.setStyle("");}
         });
         //tlf
@@ -83,16 +90,16 @@ public class WindowFormProfessorController implements Initializable {
         idTxtFld7.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if(newVal){idTxtFld7.setStyle("");}
         });
+        // TODO
 
-        //sett promp text all camps TODO
+        //assignar Prompt
         //idTxtFld5.setPromptText("41548690H");
-
-
-
     }
 
-    //validar que todos los campos son correctos 1
-    //guardar objeto
+    /**
+     * Guarda objecte professor
+     * Valida els camps i fa la petició a la api per guardar objecte
+     */
     private void saveObject() {
 
         //TODO validar dades
@@ -165,13 +172,16 @@ public class WindowFormProfessorController implements Initializable {
             actual.close();
             professorController.carregarProfessors();
         }
-
-
     }
 
     public WindowFormProfessorController() {
     }
 
+    /**
+     *  Metode per cridar lapi i guaradr professor
+     * @param peticioType tipus de petició a fer (modifcar o crear)
+     * @return true si operació ha sigut correcte
+     */
     public boolean saveDataBd(String peticioType){
 
         peticio.dropDades();
@@ -186,11 +196,12 @@ public class WindowFormProfessorController implements Initializable {
                 peticio.addDades(JsonUtil.toJson(u));
             }
 
-            System.out.println(JsonUtil.toJson(peticio));
+            //System.out.println(JsonUtil.toJson(peticio));
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
             //TODO
             //control resposta si es inserir o modificar --> resposta hauria de retron un objecte modificat
+            /*
             JSONObject jsonObject = new JSONObject(JsonUtil.toJson(peticio));
             Persona persona = Persona.fromJson(jsonObject.getJSONArray("dades").get(1).toString());
             System.out.println(persona.getDni());
@@ -198,16 +209,24 @@ public class WindowFormProfessorController implements Initializable {
 
 
             System.out.println(resposta);
+            */
+            JSONObject jsonObject = new JSONObject(resposta);
+
+            if(jsonObject.getInt("codiResultat") != 0){
+                return true;
+            }else{
+                return false;
+            }
 
         }catch(Exception e){
-            e.printStackTrace();
+            return  false;
         }
-
-
-        //retorn estat del guardat
-        return true;
     }
 
+    /**
+     * Carrega el professor a la finestra quan s'ha de modifcar
+     * @param obj professor a carregar
+     */
     public void loadObject(Professor obj){
                 idTxtFld1.setText(obj.getNom());
                 idTxtFld2.setText(obj.getCognom1());
@@ -233,11 +252,19 @@ public class WindowFormProfessorController implements Initializable {
                 idBtnAcceptar.setText("Modificar");
     }
 
+    /**
+     * Estableix el controlador del professr
+     * @param professorController controlador del professor a assignar
+     */
     public void setProfessorController(ProfessorController professorController){
         this.professorController = professorController;
     }
 
-
+    /**
+     * Valida si el format d'entrada es valid
+     *
+     * @return true, si els camps estan plens
+     */
     //validadors:
     private boolean isFormatValid(){
         if(
@@ -253,8 +280,11 @@ public class WindowFormProfessorController implements Initializable {
         return true;
     }
 
+    /**
+     * metode per controlar si el camp esta ple (date)
+     * @return true si es valid
+     */
     private boolean isDatePickerValid(){
-
         if(idTxtFld4.getValue() == null) return false;
         if(idTxtFld8.getValue() == null) return false;
         if(idTxtFld9.getValue() == null) return false;

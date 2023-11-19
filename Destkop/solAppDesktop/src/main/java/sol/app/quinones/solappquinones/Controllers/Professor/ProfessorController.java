@@ -30,6 +30,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador per la vista de professor
+ *
+ * Encarregada de gestionar les interaccions de l'usuari amb la vista
+ * Realitza operacions correcsponents amb la informaicó
+ *
+ * @author david
+ */
 public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     @FXML
@@ -58,17 +66,28 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     private ObservableList<Professor> professorArrayListTable = FXCollections.observableArrayList();
 
+    /**
+     * Inicialitza el controlador configurant UI
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        //Obtenim el controlador i la vista del menu superior, pasaem al gestor el controlador d'aquesta clase
         VistaController<TopMenuController> vistaController = Model.getInstance().getViewFactory().getMenuTopViewr(this);
+        //Extraem la vista del menu sueperoir
         HBox topMenuView = vistaController.getView();
+        //Obtenim el controlader de la vista superior
         TopMenuController topMenuController = vistaController.getController();
+        //Indiquem si hem deshabilitar el bnoto de crear
         topMenuController.disableCrearBoto(false);
+        //add menu superior a la main view
         vBoxMainProfessor.getChildren().add(0, topMenuView);
-
+        //carregem els professors per la taula
         carregarProfessors();
+        //load professors a la taual
         tableProfe.setItems(professorArrayListTable);
+        //assign columns
         assignarColumnesTaula();
 
 
@@ -86,10 +105,18 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
         });
     }
 
+    /**
+     * Obre editor amb dades del professor seleccionat
+     * @param professor
+     */
     public void editarProfessor(Professor professor){
         Model.getInstance().getViewFactory().showWindowFormProfessor(" - Editar Professor", professor, this);
     }
 
+    /**
+     * Assignació de les columnes de la taula professor
+     * Configura la relació de l'objecte amb els camps a mostarr
+     */
     private void assignarColumnesTaula(){
         idNomProfe.setCellValueFactory(new PropertyValueFactory<>("nom"));
         idCognomProfe.setCellValueFactory(new PropertyValueFactory<>("cognom1"));
@@ -102,6 +129,9 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
         idFiContrcateProfe.setCellValueFactory(new PropertyValueFactory<>("finalContracte"));
     }
 
+    /**
+     * Carrega la llista de professor des del Servidor (realitza una crida "API)
+     */
     public void carregarProfessors() {
 
         professorArrayListTable.clear();
@@ -132,12 +162,20 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     }
 
+    /**
+     *  Acció en premer el boto crear
+     *  Obre editor per tal de crear un nou Professor
+     */
     @Override
     public void onBtnCrear() {
         //levantar ventana:
         Model.getInstance().getViewFactory().showWindowFormProfessor(" - Crear Empleat", null, this);
     }
 
+    /**
+     * Gestionar l'acció del boto editar
+     * S'executa quan es prem el boto amb un professor seleccionat de la tuala
+     */
     @Override
     public void onBtnEditar() {
         Professor profesorSeleccionat = (Professor) tableProfe.getSelectionModel().getSelectedItem();
@@ -147,6 +185,10 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     }
 
+    /**
+     * Gestiona l'accio del boto d'eliminar
+     * En premer el boto, passa al metode professor a elminar
+     */
     @Override
     public void onBtnEliminar() {
         Professor profesorSeleccionat = (Professor) tableProfe.getSelectionModel().getSelectedItem();
@@ -155,6 +197,10 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
         }
     }
 
+    /**
+     * Elimina el professor seleccionat de la llista
+     * @param p professor que es vol inactivar
+     */
     private void deleteProfessor(Professor p){
         UsuariController usuariController = new UsuariController();
         boolean borrat = usuariController.deleteUser(p);

@@ -11,16 +11,16 @@ public class TopMenuController {
     private Button btnAdd;
 
     @FXML
-    private Button editButton;
+    private Button btnEdit;
 
     @FXML
-    private Button deleteButton;
+    private Button btnDelete;
 
     @FXML
-    private TextField searchField;
+    private TextField txtSearch;
 
     @FXML
-    private Button searchButton;
+    private Button btnSearch;
 
 
 
@@ -60,6 +60,9 @@ public class TopMenuController {
 
     @FXML
     public void initialize() {
+        //TODO
+        txtSearch.setDisable(true);
+        btnSearch.setDisable(true);
 
 
     }

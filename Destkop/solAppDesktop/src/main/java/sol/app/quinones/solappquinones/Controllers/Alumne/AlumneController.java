@@ -26,6 +26,14 @@ import sol.app.quinones.solappquinones.Service.ConsultesSocket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador de la vista d'alumne
+ *
+ * Encarregada de gestionar les interacions de l'usuari amb la vista
+ * Realitzar les operacions corresponents amb la infromació
+ *
+ * @author david
+ */
 public class AlumneController implements Initializable, ITopMenuDelegation {
 
     @FXML
@@ -37,14 +45,24 @@ public class AlumneController implements Initializable, ITopMenuDelegation {
 
     private ObservableList<Alumne> alumneArrayListTable = FXCollections.observableArrayList();
 
-
-
+    /**
+     * Inicilaitza el controlador configurant UI
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //Obtenim el controlador i vista del menu superior, pasant el controlador de la clase com a paramtere
         VistaController<TopMenuController> vistaController = Model.getInstance().getViewFactory().getMenuTopViewr(this);
+        //Extreiem la vista del menu superior
         HBox topMenuView = vistaController.getView();
+        //Obtenim el controlador de la vista superior
         TopMenuController topMenuController = vistaController.getController();
+        //Indiquem si s'ha de deshabilitar el boto superior de crear
         topMenuController.disableCrearBoto(false);
+        //afeguime l menu suoperior a la vista principal
         vBoxMainAlumne.getChildren().add(0, topMenuView);
 
         //Load array for table
@@ -60,6 +78,7 @@ public class AlumneController implements Initializable, ITopMenuDelegation {
         tableAlumne.setRowFactory(e -> {
             TableRow<Alumne> row = new TableRow<>();
             row.setOnMouseClicked(ev -> {
+                //seleccio no es vuida, boto esquerra, dos clics ? --> entrem
                 if(!row.isEmpty() && ev.getButton() == MouseButton.PRIMARY && ev.getClickCount() == 2) {
                     Alumne alumClicat = row.getItem();
                     editAlumne(alumClicat);
@@ -73,11 +92,19 @@ public class AlumneController implements Initializable, ITopMenuDelegation {
 
     }
 
+    /**
+     * Obre editor(view) amb les dades de un alumne seleccionat
+     * @param alumClicat alumne seleccionat per editar
+     */
     private void editAlumne(Alumne alumClicat) {
         Model.getInstance().getViewFactory().showWindowFormAlumne(" - Editar Alumne", alumClicat, this);
     }
 
+    /**
+     * Assignació de les columnes a la taula d'alumnes
+     */
     private void assignarColumnesTable() {
+        //Configurem la relació amb l'objecte del que ha de mostrar
         idNomAlumne.setCellValueFactory(new PropertyValueFactory<>("nom"));
         idCognomAlumne.setCellValueFactory(new PropertyValueFactory<>("cognom1"));
         idCognom2Alumne.setCellValueFactory(new PropertyValueFactory<>("cognom2"));
@@ -87,12 +114,16 @@ public class AlumneController implements Initializable, ITopMenuDelegation {
         idMailAlumne.setCellValueFactory(new PropertyValueFactory<>("mail"));
     }
 
+    /**
+     * Carrega la llista d'alumnes des del Servidor (realitza una crida "API)
+     *
+     */
     public void loadAlumnes() {
-
+        //netejem array
         alumneArrayListTable.clear();
-
+        //fem consula "API"
         String resposta = ConsultesSocket.serverPeticioConsulta("LLISTAR_ALUMNES");
-
+        //llegim respota i tractem, afegim a l'array cada objecte que ens retorna
         if(resposta != null ) {
             try{
                 JSONObject jsonObject = new JSONObject(resposta);
@@ -109,11 +140,12 @@ public class AlumneController implements Initializable, ITopMenuDelegation {
             }
         }
 
-
-
-
     }
 
+    /**
+     * Acció en premer el boto crear
+     * Obre editor per tal de crear un nou Alumne
+     */
     @Override
     public void onBtnCrear() {
 
@@ -121,6 +153,10 @@ public class AlumneController implements Initializable, ITopMenuDelegation {
 
     }
 
+    /**
+     * Gestionar l'acció del boto editar
+     * S'executa quan es prem el boto amb un alumne seleccionat de la tuala
+     */
     @Override
     public void onBtnEditar() {
         Alumne alumneClicat = (Alumne) tableAlumne.getSelectionModel().getSelectedItem();
@@ -130,6 +166,10 @@ public class AlumneController implements Initializable, ITopMenuDelegation {
 
     }
 
+    /**
+     * Gestiona l'accio del boto d'eliminar
+     * En premer el boto, passa al metode l'alumne a elminar
+     */
     @Override
     public void onBtnEliminar() {
         Alumne alumneClicat = (Alumne) tableAlumne.getSelectionModel().getSelectedItem();
@@ -138,6 +178,11 @@ public class AlumneController implements Initializable, ITopMenuDelegation {
         }
     }
 
+    /**
+     * Elimina (inactiva) l'alumne seleccionat a la llista
+     *
+     * @param alumneClicat alumne que es vol inactivar
+     */
     private void deleteAlumne(Alumne alumneClicat) {
         UsuariController usuariController = new UsuariController();
         boolean borrat = usuariController.deleteUser(alumneClicat);
@@ -146,7 +191,7 @@ public class AlumneController implements Initializable, ITopMenuDelegation {
             ErrorController.showErrorAlert(
                     "DESACTIVAR USUARI",
                     "",
-                    "Usuari inactiu",
+                    "Usuari inactivat",
                     Alert.AlertType.INFORMATION
             );
         }else{

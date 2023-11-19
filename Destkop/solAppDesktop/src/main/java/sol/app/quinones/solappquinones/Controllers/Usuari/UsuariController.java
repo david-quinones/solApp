@@ -24,6 +24,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador per la gesitó s'usuaris
+ *
+ * Realitza les operacions corresponents amb lea informació
+ *
+ * @author david
+ */
 public class UsuariController implements Initializable, ITopMenuDelegation {
 
     @FXML
@@ -37,18 +44,28 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
     private ServerComunication socket = new ServerComunication();
     private ObservableList<Usuari> usersArrayListTable = FXCollections.observableArrayList();
 
-
+    /**
+     * Inicilaiza el controlador configrant UI
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        //Obtenim controlador i vista menu superior i li passem el controlador
         VistaController<TopMenuController> vistaController = Model.getInstance().getViewFactory().getMenuTopViewr(this);
+        //extreiem la vista del menu superior
         HBox topMenuView = vistaController.getView();
+        //obtenim controlador
         TopMenuController topMenuController = vistaController.getController();
+        //deshabiltem boto crear
         topMenuController.disableCrearBoto(true);
+        //add vista principal menu superior
         vBoxMainUsuaris.getChildren().add(0, topMenuView);
-
+        //carregem usuaris a array
         carregarUsuaris();
+        //assigem a la taula
         tableUsers.setItems(usersArrayListTable);
+        //establim relació taula -> columna -> object usuer
         assignarColumnesTaula();
 
 
@@ -67,17 +84,26 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
 
     }
 
+    /**
+     * Edita usuari seleccionat
+     * Obre finestra amb l'info de l'usuari seleccionat
+     * @param u Usuari seleccionat per editar
+     */
     private void editarUsuari(Usuari u) {
         Model.getInstance().getViewFactory().showWindowFormUser(" - Editar Usuari", u, this);
     }
 
+    /**
+     * Assigna les columnes a la tauala
+     * Mapeja la relació columnes -> atributs objecte
+     */
     private void assignarColumnesTaula() {
         idNomUser.setCellValueFactory(new PropertyValueFactory<>("nomUsuari"));
         idIsAdmin.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
         idIsTeacher.setCellValueFactory(new PropertyValueFactory<>("isTeacher"));
         idIsActive.setCellValueFactory(new PropertyValueFactory<>("isActive"));
 
-        //assignar checkbox
+        //assignar checkbox segons la info
         idIsAdmin.setCellFactory(col -> new TableCell<Usuari, Boolean>() {
             private final CheckBox checkBox = new CheckBox();
             @Override
@@ -85,11 +111,9 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
                 super.updateItem(item, empty);
                 if(empty || item == null){
                     setGraphic(null);
-
                 } else {
                     setGraphic(checkBox);
                     checkBox.setSelected(item);
-
                 }
                 checkBox.setDisable(true);
             }
@@ -128,7 +152,9 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
     }
 
 
-
+    /**
+     * Carrega els usuaris fent la crida al server i mostra taula,
+     */
     public void carregarUsuaris() {
         //netegem llista
         usersArrayListTable.clear();
@@ -162,11 +188,18 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
 
     }
 
+    /**
+     * desus, acció crear
+     */
     @Override
     public void onBtnCrear() {
 
     }
 
+    /**
+     * Acció a executar el clicar sobre editar
+     * Obte l'usuari seleccionat de la tuala i crida ediarUsuari
+     */
     @Override
     public void onBtnEditar() {
         Usuari userSeleccionat = (Usuari) tableUsers.getSelectionModel().getSelectedItem();
@@ -175,6 +208,10 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
         }
     }
 
+    /**
+     * No implementada (funcioal)
+     * Acció que executa el cliar el boto d'eliminar
+     */
     @Override
     public void onBtnEliminar() {
         Usuari userSeleccionat = (Usuari) tableUsers.getSelectionModel().getSelectedItem();
@@ -185,6 +222,12 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
 
     }
 
+    /**
+     * Elimina (inactiva) usuari seleccionat
+     * Realitza la logica necessaria per eliminar un usuari del sistema (inactivar)
+     * @param persona Persona a eliminar (convertida a usuari)
+     * @return true si ha estat exitos
+     */
     public boolean deleteUser(Persona persona) {
 
         peticio.dropDades();
@@ -196,7 +239,7 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
             //add object
             peticio.addDades(JsonUtil.toJson(persona));
 
-            System.out.println(JsonUtil.toJson(peticio));
+            //System.out.println(JsonUtil.toJson(peticio));
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
             //si es 1 return true
             // else false

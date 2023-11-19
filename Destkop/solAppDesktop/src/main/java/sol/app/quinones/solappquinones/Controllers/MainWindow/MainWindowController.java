@@ -89,6 +89,11 @@ public class MainWindowController implements Initializable {
         });
     }
 
+    /**
+     * Assigna el titul a les diferents finestres depenent de la pantalla de manteniment que estem
+     * @param stage
+     * @param nameForm
+     */
     public void setStageTitle(Stage stage, String nameForm){
         stage.setTitle(Model.getInstance().getViewFactory().getTitleApp() + nameForm);
     }
