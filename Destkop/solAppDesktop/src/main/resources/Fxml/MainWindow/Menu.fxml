@@ -43,7 +43,7 @@
                   </Button>
                   <Button fx:id="btn_aula" mnemonicParsing="false" text="Aules">
                      <graphic>
-                        <FontAwesomeIconView glyphName="PEOPLE_ROOF" size="20" />
+                        <FontAwesomeIconView glyphName="CLIPBOARD" size="20" />
                      </graphic>
                   </Button>
                   <Button fx:id="btn_comunicacio" mnemonicParsing="false" text="Comunicació">
