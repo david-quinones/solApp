@@ -51,7 +51,7 @@ public class PerfilActivity extends AppCompatActivity {
         nomUsuari.setText(SingletonSessio.getInstance().getUserConnectat().getNomUsuari());
         nom = (EditText) findViewById(R.id.editTextNom);
         cognom1 = (EditText) findViewById(R.id.editTextCognom1);
-        cognom2 = (EditText) findViewById(R.id.editTextCognom2);
+        cognom2 = (EditText) findViewById(R.id.editTextCognom22);
         dataNaixement = (EditText) findViewById(R.id.editTextDataNaixement);
         nif = (EditText) findViewById(R.id.editTextNIF);
         telefon = (EditText) findViewById(R.id.editTextTelefon);

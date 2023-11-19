@@ -94,7 +94,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/editTextCognom2"
+                    android:id="@+id/editTextCognom22"
                     style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

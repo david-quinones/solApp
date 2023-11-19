@@ -2,7 +2,6 @@ package estel.solapp.ui.admin.professor;
 
 import static estel.solapp.common.Utility.showToast;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,11 +26,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import estel.solapp.R;
-import estel.solapp.activities.LoginActivity;
 import estel.solapp.common.CommController;
 import estel.solapp.common.ValorsResposta;
 import estel.solapp.models.Empleat;
-import estel.solapp.models.User;
 
 /************************************
  * Metode que llista els professors
@@ -68,7 +64,7 @@ public class eliminar_professor extends Fragment {
         nif = view.findViewById(R.id.textViewNif);
         dataInici = view.findViewById(R.id.textViewInici);
         dataFi = view.findViewById(R.id.textViewFi);
-        taulaProfessors = view.findViewById(R.id.taula_elimina_professor);
+        taulaProfessors = view.findViewById(R.id.taula_modifica_professor);
         taulaProfessors.removeAllViews();
 
         llistarProfessors();//Mostra la llista de professors per escollir
@@ -108,6 +104,7 @@ public class eliminar_professor extends Fragment {
 
             }else{
 
+                taulaProfessors.removeAllViews();
                 //Capçelera de la taula
                 //*********************
 
@@ -203,32 +200,40 @@ public class eliminar_professor extends Fragment {
      *********************************************/
     public void alertEliminarProfessor(){
 
-        // Dialeg per preguntar a l'usuari si vol eliminar el professor
+        if (nom.getText().length()==0) {
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.getContext());
-        alertDialog.setMessage("Estas segur que vols eliminar el professor?");
-        alertDialog.setTitle("Atenció!");
-        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
-        alertDialog.setCancelable(false);
-        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int which)
+            showToast(this.getActivity(), this.getContext(), "Seleccioni un professor de la llista. ");
+
+        }else {
+
+            // Dialeg per preguntar a l'usuari si vol eliminar el professor
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.getContext());
+            alertDialog.setMessage("Estàs segur que vols eliminar el professor?");
+            alertDialog.setTitle("Atenció!");
+            alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+            alertDialog.setCancelable(false);
+            alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener()
             {
-                // Resposta si crida a eliminar professor
-                eliminarProfessor();
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    // Resposta si crida a eliminar professor
+                    eliminarProfessor();
 
-            }
-        });
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int which)
+                }
+            });
+            alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener()
             {
-                // Resposta "no" no fa res
-            }
-        });
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    // Resposta "no" no fa res
+                }
+            });
 
-        // Obrir dialeg
-        alertDialog.show();
+            // Obrir dialeg
+            alertDialog.show();
+
+        }
 
     }
 

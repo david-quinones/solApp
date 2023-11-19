@@ -204,7 +204,7 @@
             app:layout_constraintTop_toBottomOf="@+id/eliminarBtn">
 
             <TableLayout
-                android:id="@+id/taula_elimina_professor"
+                android:id="@+id/taula_modifica_professor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"

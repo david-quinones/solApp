@@ -22,11 +22,9 @@ import java.util.concurrent.Future;
 
 import estel.solapp.R;
 import estel.solapp.common.CommController;
-import estel.solapp.common.SingletonSessio;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
 import estel.solapp.models.Empleat;
-import estel.solapp.models.Persona;
 import estel.solapp.models.User;
 
 /***********************************************
@@ -55,7 +53,7 @@ public class afegir_professor extends Fragment {
         contrasenya = view.findViewById(R.id.editTextContrasenya);
         nom = view.findViewById(R.id.editTextNom);
         cognom1 = view.findViewById(R.id.editTextCognom1);
-        cognom2 = view.findViewById(R.id.editTextCognom2);
+        cognom2 = view.findViewById(R.id.editTextCognom22);
         dataNaixement = view.findViewById(R.id.editTextDataNaixement);
         nif = view.findViewById(R.id.editTextDNI);
         telefon = view.findViewById(R.id.editTextTelefon);
