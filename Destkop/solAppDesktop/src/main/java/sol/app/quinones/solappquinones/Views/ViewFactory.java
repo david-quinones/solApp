@@ -137,7 +137,7 @@ public class ViewFactory {
 
     public void showWindowFormProfessor(String title, Professor professor, ProfessorController professorController){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormProfessor.fxml"));
-        createStage(loader, true, title, true, professor);
+        createStage(loader, true, title, true, professor, null);
         //una vez cargada la stage
         WindowFormProfessorController windowFormProfessorController = loader.getController();
         windowFormProfessorController.setProfessorController(professorController);
@@ -148,12 +148,10 @@ public class ViewFactory {
 
     public void showWindowFormAlumne(String title, Alumne a, AlumneController alumneController){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormAlumne.fxml"));
-        createStage(loader, true, title, true, null);
+        createStage(loader, true, title, true, null, a);
         //una vez cargada la stage
         WindowsFormAlumneController windowsFormAlumneController = loader.getController();
         windowsFormAlumneController.setUsuariController(alumneController);
-
-        windowsFormAlumneController.loadObject(a);
 
         //TODO
         //pasar aqui professor? carrega bé?¿ truere de stage, aixi només controla finestres
@@ -162,10 +160,12 @@ public class ViewFactory {
 
     public void showWindowFormUser(String title, Usuari u, UsuariController usuariController){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormUser.fxml"));
-        createStage(loader, true, title, true, null);
+        createStage(loader, true, title, true, null, null);
         //una vez cargada la stage
+
         WindowsFormUsuariController windowsFormUsuariController = loader.getController();
         windowsFormUsuariController.setUsuariController(usuariController);
+
 
         windowsFormUsuariController.loadObject(u);
 
@@ -197,7 +197,7 @@ public class ViewFactory {
      */
     public void showLoginWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
-        createStage(loader, true, "", false, null);
+        createStage(loader, true, "", false, null, null);
     }
 
 
@@ -210,7 +210,7 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MainWindow.fxml"));
         MainWindowController mainWindowController = new MainWindowController(rol);
         loader.setController(mainWindowController);
-        createStage(loader, false, "", false, null);
+        createStage(loader, false, "", false, null, null);
 
     }
 
@@ -222,7 +222,7 @@ public class ViewFactory {
      * @param loader FXMLLoader per carregar la vista
      * @param login identifica si es la finestra de login o no per realitzar n accio
      */
-    private void createStage(FXMLLoader loader, boolean login, String title, boolean block, Professor professor) {
+    private void createStage(FXMLLoader loader, boolean login, String title, boolean block, Professor professor, Alumne alumne) {
         Scene scene = null;
         try{
             scene = new Scene(loader.load());
@@ -236,6 +236,11 @@ public class ViewFactory {
             WindowFormProfessorController windowFormProfessorController = loader.getController();
             windowFormProfessorController.loadObject(professor);
         }
+        if(alumne != null) {
+            WindowsFormAlumneController windowsFormAlumneController = loader.getController();
+            windowsFormAlumneController.loadAlumne(alumne);
+        }
+
 
         Stage stage = new Stage();
         stage.setScene(scene);

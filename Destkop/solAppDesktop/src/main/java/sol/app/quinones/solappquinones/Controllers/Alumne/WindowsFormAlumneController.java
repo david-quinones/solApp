@@ -40,7 +40,7 @@ public class WindowsFormAlumneController implements Initializable {
     private Alumne a;
     private Usuari u;
     private Alumne alumneCarregat;
-    private int idEmpleat;
+    private int idAlumne;
     private Peticio peticio = new Peticio();
     private ServerComunication socket = new ServerComunication();
 
@@ -48,10 +48,6 @@ public class WindowsFormAlumneController implements Initializable {
         this.alumneController = alumneController;
     }
 
-    public void loadObject(Alumne a) {
-
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,10 +60,12 @@ public class WindowsFormAlumneController implements Initializable {
     private void saveObject() {
         String tipusPeticio;
 
+
         //validar dades
 
         //crear objecte
         this.a = new Alumne(
+
                 idBtnAcceptar.getText().equalsIgnoreCase("Crear") ? 0 : alumneCarregat.getIdPersona(),
                 idTxtFld1.getText(),
                 idTxtFld2.getText(),
@@ -76,7 +74,7 @@ public class WindowsFormAlumneController implements Initializable {
                 idTxtFld5.getText(),
                 idTxtFld6.getText(),
                 idTxtFld7.getText(),
-                idEmpleat
+                idAlumne
                 //idBtnAcceptar.getText().equalsIgnoreCase("Crear") ? 0 : alumneCarregat.getIdAlumne()
         );
 
@@ -94,6 +92,7 @@ public class WindowsFormAlumneController implements Initializable {
             tipusPeticio = "ALTA_ALUMNE";
         } else {
             tipusPeticio = "MODIFICAR_ALUMNE";
+            a.setIdPersona(alumneCarregat.getIdPersona());
         }
 
         boolean guardat = saveObjectDb(tipusPeticio);
@@ -175,5 +174,6 @@ public class WindowsFormAlumneController implements Initializable {
 
         //assignar alumne a variable
         alumneCarregat = alum;
+        idAlumne = alum.getIdAlumne();
     }
 }
