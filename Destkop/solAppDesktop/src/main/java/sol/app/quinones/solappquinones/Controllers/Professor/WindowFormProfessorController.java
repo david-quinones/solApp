@@ -69,6 +69,20 @@ public class WindowFormProfessorController implements Initializable {
         idTxtFld5.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if(newVal){idTxtFld5.setStyle("");}
         });
+        //tlf
+        idTxtFld6.setOnMouseClicked(event -> {
+            idTxtFld6.setStyle("");
+        });
+        idTxtFld6.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if(newVal){idTxtFld6.setStyle("");}
+        });
+        //email
+        idTxtFld7.setOnMouseClicked(event -> {
+            idTxtFld7.setStyle("");
+        });
+        idTxtFld7.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if(newVal){idTxtFld7.setStyle("");}
+        });
 
         //sett promp text all camps TODO
         //idTxtFld5.setPromptText("41548690H");
@@ -89,6 +103,14 @@ public class WindowFormProfessorController implements Initializable {
         }
         if(!isDatePickerValid()){
             System.out.println("fechas incorrecteas");
+            return;
+        }
+        if(!ValidadorCamps.validarTelf(idTxtFld6.getText())){
+            idTxtFld6.setStyle("-fx-border-color: red");
+            return;
+        }
+        if(!ValidadorCamps.validarMail(idTxtFld7.getText())){
+            idTxtFld7.setStyle("-fx-border-color: red");
             return;
         }
 
