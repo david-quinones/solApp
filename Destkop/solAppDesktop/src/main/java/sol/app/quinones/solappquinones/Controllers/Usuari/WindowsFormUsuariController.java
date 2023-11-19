@@ -48,6 +48,8 @@ public class WindowsFormUsuariController implements Initializable {
                 userLoad.getId(),
                 idTxtFld1.getText(),
                 idTxtFld2.getText(),
+                //TODO
+                //idTxtFld2.getText().equals(userLoad.getPassword()) ? null : idTxtFld2.getText(),
                 idBoxProfessor.isSelected(),
                 idBoxAdmin.isSelected(),
                 idBoxActiu.isSelected()
@@ -76,6 +78,8 @@ public class WindowsFormUsuariController implements Initializable {
             peticio.setPeticio("MODIFICAR_USUARI");
             peticio.addDades(SingletonConnection.getInstance().getKey());
             peticio.addDades(JsonUtil.toJson(u));
+
+            System.out.println(JsonUtil.toJson(peticio));
 
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 

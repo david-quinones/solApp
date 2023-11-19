@@ -150,7 +150,7 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
                 JSONObject jsonObject = new JSONObject(resposta);
 
                 /*TEST IMPRESSIÓ VEURE DADES*/
-                System.out.println(resposta);
+                //System.out.println(resposta);
 
                 //comprovem el codi resultat de la resposta
                 if(jsonObject.getInt("codiResultat") != 0){

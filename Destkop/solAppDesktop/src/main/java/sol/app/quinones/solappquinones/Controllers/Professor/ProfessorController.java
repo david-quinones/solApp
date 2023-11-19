@@ -3,6 +3,7 @@ package sol.app.quinones.solappquinones.Controllers.Professor;
 import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -14,6 +15,7 @@ import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sol.app.quinones.solappquinones.Controllers.ErrorController;
 import sol.app.quinones.solappquinones.Controllers.ITopMenuDelegation;
 import sol.app.quinones.solappquinones.Controllers.TopMenuController;
 import sol.app.quinones.solappquinones.Controllers.Usuari.UsuariController;
@@ -174,7 +176,23 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
 
     private void deleteProfessor(Professor p){
         UsuariController usuariController = new UsuariController();
-        usuariController.deleteUser(p);
+        boolean borrat = usuariController.deleteUser(p);
+
+        if(borrat){
+            ErrorController.showErrorAlert(
+                    "DESACTIVAR USUARI",
+                    "",
+                    "Usuari inactiu",
+                    Alert.AlertType.INFORMATION
+            );
+        }else{
+            ErrorController.showErrorAlert(
+                    "DESACTIVAR USUARI",
+                    "",
+                    "Error al inactivar usauri",
+                    Alert.AlertType.ERROR
+            );
+        }
     }
 
 }

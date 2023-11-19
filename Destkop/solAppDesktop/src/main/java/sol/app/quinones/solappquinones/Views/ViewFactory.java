@@ -13,15 +13,14 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sol.app.quinones.solappquinones.Controllers.*;
+import sol.app.quinones.solappquinones.Controllers.Alumne.AlumneController;
+import sol.app.quinones.solappquinones.Controllers.Alumne.WindowsFormAlumneController;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowController;
 import sol.app.quinones.solappquinones.Controllers.Professor.ProfessorController;
 import sol.app.quinones.solappquinones.Controllers.Professor.WindowFormProfessorController;
 import sol.app.quinones.solappquinones.Controllers.Usuari.UsuariController;
 import sol.app.quinones.solappquinones.Controllers.Usuari.WindowsFormUsuariController;
-import sol.app.quinones.solappquinones.Models.Peticio;
-import sol.app.quinones.solappquinones.Models.Professor;
-import sol.app.quinones.solappquinones.Models.Usuari;
-import sol.app.quinones.solappquinones.Models.VistaController;
+import sol.app.quinones.solappquinones.Models.*;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
@@ -142,6 +141,19 @@ public class ViewFactory {
         //una vez cargada la stage
         WindowFormProfessorController windowFormProfessorController = loader.getController();
         windowFormProfessorController.setProfessorController(professorController);
+
+        //TODO
+        //pasar aqui professor? carrega bé?¿ truere de stage, aixi només controla finestres
+    }
+
+    public void showWindowFormAlumne(String title, Alumne a, AlumneController alumneController){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormAlumne.fxml"));
+        createStage(loader, true, title, true, null);
+        //una vez cargada la stage
+        WindowsFormAlumneController windowsFormAlumneController = loader.getController();
+        windowsFormAlumneController.setUsuariController(alumneController);
+
+        windowsFormAlumneController.loadObject(a);
 
         //TODO
         //pasar aqui professor? carrega bé?¿ truere de stage, aixi només controla finestres

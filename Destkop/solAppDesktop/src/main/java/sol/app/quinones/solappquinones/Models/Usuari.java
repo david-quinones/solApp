@@ -80,6 +80,14 @@ public class Usuari {
         this.isActive = isActive;
     }
 
+    public Usuari(int id, String username, boolean isTeacher, boolean isAdmin, boolean isActive) {
+        this.id = id;
+        this.nomUsuari = username;
+        this.isTeacher = isTeacher;
+        this.isAdmin = isAdmin;
+        this.isActive = isActive;
+    }
+
 
     /**
      * Converteix una cadena "JSON" a un objecte Usuari
