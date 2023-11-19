@@ -22,8 +22,6 @@ public class ConsultesSocket {
             peticio.addDades(SingletonConnection.getInstance().getKey());
             resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
-            //System.out.println("Test peticio envio: " + JsonUtil.toJson(peticio));
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

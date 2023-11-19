@@ -79,8 +79,6 @@ public class WindowsFormUsuariController implements Initializable {
             peticio.addDades(SingletonConnection.getInstance().getKey());
             peticio.addDades(JsonUtil.toJson(u));
 
-            System.out.println(JsonUtil.toJson(peticio));
-
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
             if(resposta != null){

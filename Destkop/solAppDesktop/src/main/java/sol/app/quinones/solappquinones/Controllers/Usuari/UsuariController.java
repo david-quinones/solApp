@@ -38,9 +38,6 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
     private ObservableList<Usuari> usersArrayListTable = FXCollections.observableArrayList();
 
 
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -128,10 +125,6 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
             }
         });
 
-
-
-
-
     }
 
 
@@ -149,9 +142,6 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
                 //pasem respota a JSON
                 JSONObject jsonObject = new JSONObject(resposta);
 
-                /*TEST IMPRESSIÓ VEURE DADES*/
-                //System.out.println(resposta);
-
                 //comprovem el codi resultat de la resposta
                 if(jsonObject.getInt("codiResultat") != 0){
                     //si es ok, recorrem l'array creant objecte del tipus usuari i passant al arrayList de la taula
@@ -161,25 +151,14 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
                         usersArrayListTable.add(Usuari.fromJson(arrayUsers.get(i).toString()));
                     }
 
-/*
-                    for(Usuari user : usersArrayListTable){
-                        System.out.println(user.getIsAdmin());
-                    }
-
- */
-
-
-
                 } else{
-                    //controlar si es que no
+                    //TODO
                 }
-
 
             }catch(Exception e) {
 
             }
         }
-
 
     }
 

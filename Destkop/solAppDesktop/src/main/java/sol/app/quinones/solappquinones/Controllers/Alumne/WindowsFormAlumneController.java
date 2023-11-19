@@ -133,7 +133,6 @@ public class WindowsFormAlumneController implements Initializable {
                 peticio.addDades(JsonUtil.toJson(u));
             }
 
-
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
             JSONObject jsOb = new JSONObject(resposta);
@@ -143,8 +142,6 @@ public class WindowsFormAlumneController implements Initializable {
             }else{
                 return false;
             }
-            //System.out.println(resposta);
-            //Alumne alumne = Alumne.fromJson(jsOb.getJSONArray("dades").get(1).toString());
 
         } catch (IOException e) {
             return false;

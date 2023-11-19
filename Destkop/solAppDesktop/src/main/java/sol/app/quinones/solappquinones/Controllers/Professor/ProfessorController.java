@@ -54,14 +54,7 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
     private TableColumn idCognom2Profe;
     @FXML
     private TableColumn idFiContrcateProfe;
-    @FXML
-    private AnchorPane mainProfessor;
 
-
-    private Peticio peticio = new Peticio();
-    private ServerComunication socket = new ServerComunication();
-
-    private ArrayList<Professor> professorArrayList = new ArrayList<>();
 
     private ObservableList<Professor> professorArrayListTable = FXCollections.observableArrayList();
 
@@ -74,7 +67,6 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
         topMenuController.disableCrearBoto(false);
         vBoxMainProfessor.getChildren().add(0, topMenuView);
 
-        //vBoxMainProfessor.getChildren().add(0, Model.getInstance().getViewFactory().getMenuTopViewr(this));
         carregarProfessors();
         tableProfe.setItems(professorArrayListTable);
         assignarColumnesTaula();
@@ -125,13 +117,6 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
                         professorArrayListTable.add(Professor.fromJson(arrayProfessors.get(i).toString()));
                     }
 
-                    //TODO Delete
-
-                    for(Professor p : professorArrayListTable) {
-                        //System.out.println(p.getIdEmpleat());
-                        //System.out.println(p.getIdPersona());
-                    }
-
                 }else{
                     //lanzar excpt
                     return;
@@ -168,10 +153,6 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
         if(profesorSeleccionat != null) {
             deleteProfessor(profesorSeleccionat);
         }
-    }
-
-    public void crearProfessor(Professor p){
-        professorArrayListTable.add(p);
     }
 
     private void deleteProfessor(Professor p){

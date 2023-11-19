@@ -77,9 +77,6 @@ public class PerfilController implements Initializable {
             //respota
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
-            System.out.println(resposta);
-
-
             JSONObject jsonObject = new JSONObject(resposta);
 
             if(jsonObject.getInt("codiResultat") == 0){
@@ -91,18 +88,7 @@ public class PerfilController implements Initializable {
                 persona = mPersona;
                 mPersona = null;
                 initData();
-
-
-
-
-
-
-
-                //instanciar el controlador de la vista para passar los datos y recuperar-los
             }
-
-
-
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -115,14 +101,11 @@ public class PerfilController implements Initializable {
     private void cancelarActualitzarDades() {
         // Lógica para manejar la cancelación
         initData();
-
-
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //mainPerfil.getChildren().add(0, Model.getInstance().getViewFactory().getMenuTopViewr(this));
         startDate();
     }
 
@@ -141,14 +124,7 @@ public class PerfilController implements Initializable {
                 persona = Persona.fromJson(jsonObject.getJSONArray("dades").get(0).toString());
 
                 initData();
-                //mostrar a finestra les dades
 
-
-
-
-
-
-                //instanciar el controlador de la vista para passar los datos y recuperar-los
             }
 
 
