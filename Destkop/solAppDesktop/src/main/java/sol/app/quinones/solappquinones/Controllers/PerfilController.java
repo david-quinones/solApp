@@ -23,6 +23,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/**
+ * Controla la gestió del perfil de l'usuari que esta loginat
+ *
+ * Poder visualitzar i ediar la informaicó
+ *
+ * @author david
+ */
 public class PerfilController implements Initializable {
 
     @FXML
@@ -57,8 +64,20 @@ public class PerfilController implements Initializable {
     private Peticio peticio = new Peticio();
     private ServerComunication socket = new ServerComunication();
 
+    /**
+     * Inicializa el controlador, configura i carrega a UI les dades del perfil
+     * @param url
+     * @param resourceBundle
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        startDate();
+    }
 
-    // Métodos para manejar acciones, como actualizar los datos
+    /**
+     * Acció Boto d'actualitzar les dades del perfil --> info acció informada al FXML
+     * Fa petició api per actualitzar les dades que hi ha actualment als camps
+     */
     @FXML
     private void actualitzarDades() {
 
@@ -71,8 +90,6 @@ public class PerfilController implements Initializable {
             peticio.addDades(SingletonConnection.getInstance().getKey());
             setNewPerson();
             peticio.addDades(JsonUtil.toJson(mPersona));
-
-            System.out.println(JsonUtil.toJson(peticio));
 
             //respota
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
@@ -97,18 +114,19 @@ public class PerfilController implements Initializable {
         }
     }
 
+    /**
+     * Cancela l'edició dels camps --> info acció informada al FXML
+     * Retorna l'objecte a l'estat inicial
+     */
     @FXML
     private void cancelarActualitzarDades() {
         // Lógica para manejar la cancelación
         initData();
     }
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        startDate();
-    }
-
+    /**
+     * Carrega les dades inicials al perfil fent contula API
+     */
     private void startDate(){
 
         try {
@@ -134,15 +152,25 @@ public class PerfilController implements Initializable {
 
     }
 
+    /**
+     * Retorna persona sssociada al perfil
+     * @return Persona perfil
+     */
     public Persona getPersona() {
         return persona;
     }
 
+    /**
+     * Estableix persona associada perfil
+     * @param persona PErsona perfil
+     */
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
 
-    // Método para inicializar los datos en los campos
+    /**
+     * Inicializa les dades de la persona a la finestra (load)
+     */
     public void initData() {
         this.idPersona = persona.getIdPersona();
         txtNom.setText(persona.getNom());
@@ -154,6 +182,10 @@ public class PerfilController implements Initializable {
         txtMail.setText(persona.getMail());
     }
 
+    /**
+     * Obte els camps de la finestra i estableix la nova persona
+     * Prepara l'objecvte persona amb le smodificaions
+     */
     public void setNewPerson() {
         mPersona.setIdPersona(this.idPersona);
         mPersona.setNom(txtNom.getText());
@@ -163,9 +195,6 @@ public class PerfilController implements Initializable {
         mPersona.setDni(txtDni.getText());
         mPersona.setTelefon(txtTelefon.getText());
         mPersona.setMail(txtMail.getText());
-
     }
-
-
 
 }

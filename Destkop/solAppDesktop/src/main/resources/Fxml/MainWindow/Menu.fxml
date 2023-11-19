@@ -38,22 +38,22 @@
                   </Button>
                   <Button fx:id="btn_professor" mnemonicParsing="false" text="Professors">
                      <graphic>
-                        <FontAwesomeIconView size="20" />
+                        <FontAwesomeIconView glyphName="BOOK" size="20" />
                      </graphic>
                   </Button>
                   <Button fx:id="btn_aula" mnemonicParsing="false" text="Aules">
                      <graphic>
-                        <FontAwesomeIconView size="20" />
+                        <FontAwesomeIconView glyphName="PEOPLE_ROOF" size="20" />
                      </graphic>
                   </Button>
                   <Button fx:id="btn_comunicacio" mnemonicParsing="false" text="Comunicació">
                      <graphic>
-                        <FontAwesomeIconView size="20" />
+                        <FontAwesomeIconView glyphName="ENVELOPE" size="20" />
                      </graphic>
                   </Button>
                   <Button fx:id="btn_esdeveniment" mnemonicParsing="false" text="Esdeveniments">
                      <graphic>
-                        <FontAwesomeIconView size="20" />
+                        <FontAwesomeIconView glyphName="CALENDAR" size="20" />
                      </graphic>
                   </Button>
                   <Line endX="130.0" />

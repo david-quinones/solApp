@@ -49,15 +49,18 @@ public class MainWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        //estabelix el rol al contrlador del menu (per saber quins menus s'han de mostrar)
         mainMenuController.setRol(this.rol);
 
-        //listener to menu acction
+        //Add listener a la propietat de seleccio del menu
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().addListener((observableValue, oldV, newV) -> {
             switch (newV){
+                //depenendt del valor (StringProp de View)
                 case "Perfil":
+                    //carregar al centre la vista
                     mainBorderPane.setCenter(Model.getInstance().getViewFactory().getPerfilView());
                     mainBorderPane.setTop(null);
+                    //Actualitzar el titul de la finestra
                     setStageTitle((Stage) mainBorderPane.getScene().getWindow(), " - Perfil");
                     break;
                 case "Alumne":
