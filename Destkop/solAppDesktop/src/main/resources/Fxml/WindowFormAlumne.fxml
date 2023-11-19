@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="mainWindowForm" prefHeight="300.0" prefWidth="350.0" styleClass="main_view" stylesheets="@../Styles/WindowsForm.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.Professor.WindowFormProfessorController">
+<AnchorPane fx:id="mainWindowForm" prefHeight="300.0" prefWidth="350.0" styleClass="main_view" stylesheets="@../Styles/WindowsForm.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.Alumne.WindowsFormAlumneController">
    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <HBox prefHeight="100.0" prefWidth="200.0">
          <Label fx:id="idLbl1" text="Nom" />
@@ -50,18 +50,6 @@
          <children>
             <Label fx:id="idLbl7" text="Mail" />
             <TextField fx:id="idTxtFld7" />
-         </children>
-      </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Label fx:id="idLbl8" text="Inici Contracte" />
-            <DatePicker fx:id="idTxtFld8" />
-         </children>
-      </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Label fx:id="idLbl9" text="Fi Contracte" />
-            <DatePicker fx:id="idTxtFld9" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">

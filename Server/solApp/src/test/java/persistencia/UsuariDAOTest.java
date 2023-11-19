@@ -78,7 +78,7 @@ public class UsuariDAOTest {
     @Test
     public void testAltaUsuari(){
         //Establim dades per fer el test
-        Usuari usuari  = new Usuari("testAlta", "password", true, false, true);
+        Usuari usuari  = new Usuari("NouUsuari", "password", false, true, true);
         int idPersona = 2;
         //Executem l'alta d'usuari
         UsuariDAO usuariDAO = new UsuariDAO(conexio);
@@ -94,7 +94,7 @@ public class UsuariDAOTest {
     @Test
     public void testEliminarUsuari(){
         //L'id de la persona s'obtindrà del empleat rebut com a paràmetre
-       int idPersona = 30;
+       int idPersona = 2;
        UsuariDAO usuariDAO = new UsuariDAO(conexio);
        int resultat = usuariDAO.eliminarUsuari(idPersona);
        //Comprovem el resultat obtingut
@@ -112,6 +112,8 @@ public class UsuariDAOTest {
         assertEquals(1, llistaUsuaris.get(0).getId());
         assertEquals(2, llistaUsuaris.get(1).getId());
         assertEquals(18, llistaUsuaris.get(2).getId());
+        assertEquals(22, llistaUsuaris.get(3).getId());
+        assertEquals(23, llistaUsuaris.get(4).getId());
  
     }
     
@@ -122,9 +124,9 @@ public class UsuariDAOTest {
     @Test
     public void testModificarUsuari(){
         //Dades que utilitzarem per la prova
-        Usuari usuariOriginal = new Usuari(1, "nom_usuari", "password", true, false, true);
+        Usuari usuariOriginal = new Usuari(23, "NouUsuari", "password", false, true, false);
         //Modifiquem nom usuari i password
-        Usuari usuariModificat = new Usuari(1, "nom_usuariProva", "prova", true, false, true);
+        Usuari usuariModificat = new Usuari(23, "NouUsuariModificat", "password", false, true, true);
         //Executem la modificació
         UsuariDAO usuariDAO = new UsuariDAO(conexio);
         int filesAfectades = usuariDAO.modificarUsuari(usuariModificat);

@@ -42,6 +42,18 @@ public class Empleat extends Persona{
     public Empleat(){
         
     }
+
+    /**Constructor que ens permet fer proves més àgils
+     * 
+     * @param actiu
+     * @param iniciContracte
+     * @param finalContracte 
+     */
+    public Empleat(boolean actiu, String iniciContracte, String finalContracte) {
+        this.actiu = actiu;
+        this.iniciContracte = iniciContracte;
+        this.finalContracte = finalContracte;
+    }
     
     
     //Getters i Setters

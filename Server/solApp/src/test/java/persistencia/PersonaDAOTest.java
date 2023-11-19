@@ -46,7 +46,7 @@ public class PersonaDAOTest {
     public void testAltaPersona() {
             personaDAO = new PersonaDAO(conexio);
             //Simulem un objecte persona
-            Persona persona = new Persona("Pau", "Castell", "Galtes", "1983-08-07", "46797529G", "prova", "prova");
+            Persona persona = new Persona("Test", "Unitari", "PauCastell", "1983-08-07", "00000000K", "test", "test");
             //Executem el métode
             int idPersona = personaDAO.altaPersona(persona);
             //Comprobem el resultat
@@ -60,9 +60,10 @@ public class PersonaDAOTest {
     @Test
     public void testConsultaPersona(){
         personaDAO = new PersonaDAO(conexio);
-        Persona persona = personaDAO.consultaPersona(2);
-        assertEquals(1, persona.getIdPersona());
-        assertEquals("Castell", persona.getCognom1());
+        int idUsuari = 22;
+        Persona persona = personaDAO.consultaPersona(idUsuari);
+        assertEquals(38, persona.getIdPersona());
+        assertEquals("PauCastell", persona.getCognom2());
     }
     
     /**Test per comprobar que la modificació de les dades d'una Persona s'ha fet
@@ -71,16 +72,13 @@ public class PersonaDAOTest {
     @Test
     public void testModificarPerfil(){
         //Establim les dades amb les que farem la prova
-        Persona original = new Persona(2, "NomPersona", "CognomPersona1", "CognomPersona2",
-                "2000-01-01", "1111111H", "999999999", "provapersona@gmail.com");
-        Persona modificacio = new Persona(2, "PauCastellGaltes", "CognomPersona1", "CognomPersona2",
-                "2000-01-01", "1111111H", "999999999", "provapersona@gmail.com");
+        Persona original = new Persona(38, "Test", "Unitari", "PauCastell",
+                "1983-08-07", "00000000K", "test", "test");
+        Persona modificacio = new Persona(38, "TestModificat", "UnitariModificat", "PauCastellModificat",
+                "1983-08-07", "00000000K", "Modificat", "Modificat");
         PersonaDAO personaDAO = new PersonaDAO(conexio);
         int filesAfectades = personaDAO.modificarPerfil(modificacio);
-        assertTrue(filesAfectades > 0);
-        //Tornem a deixar les dades originals
-        filesAfectades = personaDAO.modificarPerfil(original);
-        assertTrue(filesAfectades > 0);    
+        assertTrue(filesAfectades > 0);  
     }
     
 }

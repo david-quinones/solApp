@@ -1,0 +1,49 @@
+/* main Style */
+.main_view {
+    -fx-background-color: #EEEEEE;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+
+.main_view VBox {
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+    -fx-padding: 20px;
+}
+
+.main_view Label {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #132A13;
+    -fx-text-alignment: center;
+    -fx-alignment: center-left;
+}
+
+.main_view TextField, DatePicker, PasswordField {
+    -fx-background-color: #FFFFFF;
+    -fx-pref-height: 35;
+    -fx-font-size: 1.2em;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 3,0,0,3);
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-alignment: center-left;
+}
+
+.main_view HBox {
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
+}
+
+.main_view Button {
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-cursor: hand;
+}
+
+.main_view Button:hover {
+    -fx-background-color: #253f25;
+}
+
+

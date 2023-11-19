@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="resposta.GenerarRespostaTest" time="0.621" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="resposta.GenerarRespostaTest" time="1.063" tests="13" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,9 +15,9 @@
     <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\openjdk-17.0.1_windows-x64_bin\jdk-17.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\pau\AppData\Local\Temp\surefire9849254178245554931\surefirebooter-20231115100024945_3.jar C:\Users\pau\AppData\Local\Temp\surefire9849254178245554931 2023-11-15T10-00-24_806-jvmRun1 surefire-20231115100024945_1tmp surefire_0-20231115100024945_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\pau\AppData\Local\Temp\surefire6718085167566122466\surefirebooter-20231117104818903_3.jar C:\Users\pau\AppData\Local\Temp\surefire6718085167566122466 2023-11-17T10-48-18_760-jvmRun1 surefire-20231117104818903_1tmp surefire_0-20231117104818903_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="resposta.GenerarRespostaTest#testLlistarUsuaris"/>
+    <property name="test" value="resposta.GenerarRespostaTest"/>
     <property name="surefire.test.class.path" value="C:\Users\pau\Documents\GitHub\solApp\Server\solApp\target\test-classes;C:\Users\pau\Documents\GitHub\solApp\Server\solApp\target\classes;C:\Users\pau\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\pau\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\pau\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\pau\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\pau\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\pau\.m2\repository\org\mockito\mockito-all\1.9.5\mockito-all-1.9.5.jar;C:\Users\pau\.m2\repository\org\dbunit\dbunit\2.7.3\dbunit-2.7.3.jar;C:\Users\pau\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\pau\.m2\repository\org\postgresql\postgresql\42.3.1\postgresql-42.3.1.jar;C:\Users\pau\.m2\repository\org\checkerframework\checker-qual\3.5.0\checker-qual-3.5.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\jdbc\ojdbc8\19.3.0.0\ojdbc8-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\jdbc\ucp\19.3.0.0\ucp-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\security\oraclepki\19.3.0.0\oraclepki-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\security\osdt_cert\19.3.0.0\osdt_cert-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\security\osdt_core\19.3.0.0\osdt_core-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\ha\simplefan\19.3.0.0\simplefan-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\ha\ons\19.3.0.0\ons-19.3.0.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\pau"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\pau\AppData\Local\Temp\surefire9849254178245554931\surefirebooter-20231115100024945_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\pau\AppData\Local\Temp\surefire6718085167566122466\surefirebooter-20231117104818903_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.1+12-39"/>
@@ -58,17 +58,187 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testLlistarUsuaris" classname="resposta.GenerarRespostaTest" time="0.564">
-    <system-err><![CDATA[nov 15, 2023 10:00:25 A. M. persistencia.ConexioBBDD conectar
+  <testcase name="testAltaAlumne" classname="resposta.GenerarRespostaTest" time="0.583">
+    <system-err><![CDATA[nov 17, 2023 10:48:19 A. M. persistencia.ConexioBBDD conectar
 INFO: Connexió a la base de dades.
-nov 15, 2023 10:00:25 A. M. persistencia.UsuariDAO obtindreUsuari
+nov 17, 2023 10:48:19 A. M. persistencia.PersonaDAO altaPersona
+INFO: Persona insertada correctament amb id: 52
+nov 17, 2023 10:48:19 A. M. persistencia.AlumneDAO altaAlumne
+INFO: S'ha insertat 1 alumnes
+nov 17, 2023 10:48:19 A. M. persistencia.UsuariDAO altaUsuari
+INFO: L'usuari testAlumne s'ha insertat correctament.
+nov 17, 2023 10:48:19 A. M. resposta.GenerarResposta respostaAltaAlumne
+INFO: L'alumne i l'usuari s'han insertat correctament
+]]></system-err>
+  </testcase>
+  <testcase name="testModificarAlumne" classname="resposta.GenerarRespostaTest" time="0.043">
+    <system-err><![CDATA[nov 17, 2023 10:48:19 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+nov 17, 2023 10:48:19 A. M. persistencia.AlumneDAO modificarAlumne
+INFO: L'alumne amb id 1 s'ha modificat correctament.
+nov 17, 2023 10:48:19 A. M. persistencia.PersonaDAO modificarPerfil
+INFO: Modifiquem les dades de la Perosna amb idPersona 31
+nov 17, 2023 10:48:19 A. M. persistencia.PersonaDAO modificarPerfil
+INFO: Número de files afectades modificació Perfil: 1
+nov 17, 2023 10:48:19 A. M. resposta.GenerarResposta respostaModificarAlumne
+INFO: La resposta s'ha generat correctament amb codi 1
+nov 17, 2023 10:48:19 A. M. persistencia.AlumneDAO modificarAlumne
+INFO: L'alumne amb id 1 s'ha modificat correctament.
+nov 17, 2023 10:48:19 A. M. persistencia.PersonaDAO modificarPerfil
+INFO: Modifiquem les dades de la Perosna amb idPersona 80
+nov 17, 2023 10:48:19 A. M. persistencia.PersonaDAO modificarPerfil
+INFO: Número de files afectades modificació Perfil: 0
+nov 17, 2023 10:48:19 A. M. persistencia.PersonaDAO modificarPerfil
+WARNING: L'id de la persona no existeix a la base de dades
+nov 17, 2023 10:48:19 A. M. resposta.GenerarResposta respostaModificarAlumne
+WARNING: No s'ha pogut modificar l'alumne. Desfem possibles canvis
+]]></system-err>
+  </testcase>
+  <testcase name="testLlistarEmpleats" classname="resposta.GenerarRespostaTest" time="0.096">
+    <system-err><![CDATA[nov 17, 2023 10:48:19 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+nov 17, 2023 10:48:19 A. M. persistencia.EmpleatDAO obtindreEmpleat
+INFO: Obtingut empleat amb idEmpleat: 1
+nov 17, 2023 10:48:19 A. M. persistencia.EmpleatDAO obtindreEmpleat
+INFO: Obtingut empleat amb idEmpleat: 2
+nov 17, 2023 10:48:19 A. M. persistencia.EmpleatDAO obtindreEmpleat
+INFO: Obtingut empleat amb idEmpleat: 3
+nov 17, 2023 10:48:19 A. M. persistencia.EmpleatDAO obtindreEmpleat
+INFO: Obtingut empleat amb idEmpleat: 4
+nov 17, 2023 10:48:19 A. M. resposta.GenerarResposta respostaLlistarEmpleats
+INFO: Resposta amb la llista d'empleats
+]]></system-err>
+  </testcase>
+  <testcase name="testModificarUsuari" classname="resposta.GenerarRespostaTest" time="0.042">
+    <system-err><![CDATA[nov 17, 2023 10:48:20 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO modificarUsuari
+INFO: L'usuari 1 s'ha modificat correctament.
+nov 17, 2023 10:48:20 A. M. resposta.GenerarResposta respostaModificarUsuari
+INFO: La resposta s'ha generat correctament amb codi 1
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO modificarUsuari
+WARNING: L'usuari no s'ha modificat, el id no existeix o es null
+nov 17, 2023 10:48:20 A. M. resposta.GenerarResposta respostaModificarUsuari
+WARNING: No s'ha pogut modificar l'usuari.
+]]></system-err>
+  </testcase>
+  <testcase name="testModificarEmpleat" classname="resposta.GenerarRespostaTest" time="0.047">
+    <system-err><![CDATA[nov 17, 2023 10:48:20 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+nov 17, 2023 10:48:20 A. M. persistencia.EmpleatDAO modificarEmpleat
+INFO: L'empleat amb id 1 s'ha modificat correctament.
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO modificarPerfil
+INFO: Modifiquem les dades de la Perosna amb idPersona 1
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO modificarPerfil
+INFO: Número de files afectades modificació Perfil: 1
+nov 17, 2023 10:48:20 A. M. resposta.GenerarResposta respostaModificarEmpleat
+INFO: La resposta s'ha generat correctament amb codi 1
+nov 17, 2023 10:48:20 A. M. persistencia.EmpleatDAO modificarEmpleat
+WARNING: L'objecte empleat es null
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO modificarPerfil
+WARNING: L'objecte Persona es null o falta l'idPersona
+nov 17, 2023 10:48:20 A. M. resposta.GenerarResposta respostaModificarEmpleat
+WARNING: No s'ha pogut modificar el empleat. Desfem possibles canvis
+]]></system-err>
+  </testcase>
+  <testcase name="testAltaEmpleat" classname="resposta.GenerarRespostaTest" time="0.032">
+    <system-err><![CDATA[nov 17, 2023 10:48:20 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO altaPersona
+INFO: Persona insertada correctament amb id: 53
+nov 17, 2023 10:48:20 A. M. persistencia.EmpleatDAO altaEmpleat
+INFO: S'ha insertat 1 empleats
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO altaUsuari
+INFO: L'usuari testResposta10 s'ha insertat correctament.
+nov 17, 2023 10:48:20 A. M. resposta.GenerarResposta respostaAltaEmpleat
+INFO: L'empleat i l'usuari s'han insertat correctament
+]]></system-err>
+  </testcase>
+  <testcase name="testLlistarAlumnes" classname="resposta.GenerarRespostaTest" time="0.028">
+    <system-err><![CDATA[nov 17, 2023 10:48:20 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+nov 17, 2023 10:48:20 A. M. persistencia.AlumneDAO obtindreAlumne
+INFO: Obtingut alumne amb id: 1
+nov 17, 2023 10:48:20 A. M. persistencia.AlumneDAO obtindreAlumne
+INFO: Obtingut alumne amb id: 2
+nov 17, 2023 10:48:20 A. M. persistencia.AlumneDAO obtindreAlumne
+INFO: Obtingut alumne amb id: 3
+nov 17, 2023 10:48:20 A. M. persistencia.AlumneDAO obtindreAlumne
+INFO: Obtingut alumne amb id: 4
+nov 17, 2023 10:48:20 A. M. persistencia.AlumneDAO obtindreAlumne
+INFO: Obtingut alumne amb id: 5
+nov 17, 2023 10:48:20 A. M. persistencia.AlumneDAO obtindreAlumne
+INFO: Obtingut alumne amb id: 8
+nov 17, 2023 10:48:20 A. M. resposta.GenerarResposta respostaLlistarAlumnes
+INFO: Resposta amb la llista d'alumnes
+]]></system-err>
+  </testcase>
+  <testcase name="testRespostaLogin" classname="resposta.GenerarRespostaTest" time="0.032">
+    <system-err><![CDATA[nov 17, 2023 10:48:20 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+]]></system-err>
+  </testcase>
+  <testcase name="testModificarPersona" classname="resposta.GenerarRespostaTest" time="0.021">
+    <system-err><![CDATA[nov 17, 2023 10:48:20 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO modificarPerfil
+INFO: Modifiquem les dades de la Perosna amb idPersona 2
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO modificarPerfil
+INFO: Número de files afectades modificació Perfil: 1
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO modificarPerfil
+INFO: Modifiquem les dades de la Perosna amb idPersona 2
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO modificarPerfil
+INFO: Número de files afectades modificació Perfil: 1
+]]></system-err>
+  </testcase>
+  <testcase name="testLlistarUsuaris" classname="resposta.GenerarRespostaTest" time="0.027">
+    <system-err><![CDATA[nov 17, 2023 10:48:20 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO obtindreUsuari
 INFO: Obtingut usuari amb idUsuari: 1
-nov 15, 2023 10:00:25 A. M. persistencia.UsuariDAO obtindreUsuari
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO obtindreUsuari
 INFO: Obtingut usuari amb idUsuari: 2
-nov 15, 2023 10:00:25 A. M. persistencia.UsuariDAO obtindreUsuari
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO obtindreUsuari
 INFO: Obtingut usuari amb idUsuari: 18
-nov 15, 2023 10:00:25 A. M. resposta.GenerarResposta respostaLlistarUsuaris
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO obtindreUsuari
+INFO: Obtingut usuari amb idUsuari: 22
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO obtindreUsuari
+INFO: Obtingut usuari amb idUsuari: 23
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO obtindreUsuari
+INFO: Obtingut usuari amb idUsuari: 29
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO obtindreUsuari
+INFO: Obtingut usuari amb idUsuari: 37
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO obtindreUsuari
+INFO: Obtingut usuari amb idUsuari: 38
+nov 17, 2023 10:48:20 A. M. resposta.GenerarResposta respostaLlistarUsuaris
 INFO: Resposta amb la llista d'usuaris
+]]></system-err>
+  </testcase>
+  <testcase name="testRespostaLogout" classname="resposta.GenerarRespostaTest" time="0.012">
+    <system-err><![CDATA[nov 17, 2023 10:48:20 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+]]></system-err>
+  </testcase>
+  <testcase name="testEliminarUsuari" classname="resposta.GenerarRespostaTest" time="0.024">
+    <system-err><![CDATA[nov 17, 2023 10:48:20 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+nov 17, 2023 10:48:20 A. M. persistencia.UsuariDAO eliminarUsuari
+INFO: L'usuari ha sigut desactivat, idPersona: 1
+nov 17, 2023 10:48:20 A. M. resposta.GenerarResposta respostaEliminarUsuari
+INFO: Usuari amb id persona 1 eliminat.
+nov 17, 2023 10:48:20 A. M. resposta.GenerarResposta respostaEliminarUsuari
+WARNING: ERROR: Persona null
+]]></system-err>
+  </testcase>
+  <testcase name="testConsultaPersona" classname="resposta.GenerarRespostaTest" time="0.022">
+    <system-err><![CDATA[nov 17, 2023 10:48:20 A. M. persistencia.ConexioBBDD conectar
+INFO: Connexió a la base de dades.
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO consultaPersona
+INFO: Obtenim dades de la persona a partir de l'usuari amb idUsuari: 2
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO obtindrePersona
+INFO: Obtinguda persona amb idPersona: 1
+nov 17, 2023 10:48:20 A. M. persistencia.PersonaDAO consultaPersona
+INFO: Obtenim dades de la persona a partir de l'usuari amb idUsuari: 0
 ]]></system-err>
   </testcase>
 </testsuite>

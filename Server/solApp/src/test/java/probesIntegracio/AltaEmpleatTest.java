@@ -68,9 +68,9 @@ public class AltaEmpleatTest {
             LOGGER.info("Client connectat al servidor");
             
             //Preparem dades que s'han de donar d'alta
-        Usuari usuari = new Usuari("testResposta", "password", true, false, true);
-        Empleat empleat = new Empleat("testResposta", "cognomResposta1", "cognomResposta2",
-                "1983-02-06", "1111111G", "587458745", "resposta@gmail.com", true, "01/01/2000", "9999-12-31");
+        Usuari usuari = new Usuari("TestIntegracio", "TestPassword", true, false, true);
+        Empleat empleat = new Empleat("TestIntegracio", "TestIntegracio", "TestIntegracio",
+                "1983-02-06", "1111111G", "587458745", "TestIntegracio@gmail.com", true, "2000-01-01", "9999-12-31");
             
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
@@ -116,8 +116,8 @@ public class AltaEmpleatTest {
             LOGGER.info("Client connectat al servidor");
             
             //Preparem dades que s'han de donar d'alta
-        Usuari usuari = new Usuari("testResposta", "password", true, false, true);
-        Empleat empleat = new Empleat("testResposta", "cognomResposta1", "cognomResposta2",
+        Usuari usuari = new Usuari("Error", "password", true, false, true);
+        Empleat empleat = new Empleat("Error", "cognomResposta1", "cognomResposta2",
                 "1983-02-06", "46797529G", "587458745", "resposta@gmail.com", true, "2000-01-01", "9999-12-31");
             
             //PETICIO DEL CLIENT AL SERVIDOR

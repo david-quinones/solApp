@@ -63,8 +63,6 @@ public class MenuController implements Initializable {
 
     }
 
-
-
     /**
      * Estableix el rol de l'usuari i asjuta la visibilitat dels elements del menu
      * @param rol
@@ -142,24 +140,38 @@ public class MenuController implements Initializable {
     }
 
     /**
-     * Obre el perfil de l'usuari per veure i editar les seves dades principals
+     * Obre la vista del perfil de l'usuari iniciat a l'aplicació
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
      */
     public void openPerfil(){
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Perfil");
     }
 
+    /**
+     * Obre la vista de l'Alumne
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
+     */
     private void openAlumne() {
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Alumne");
     }
-
+    /**
+     * Obre la vista de l'Aula
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
+     */
     private void openAula() {
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Aula");
     }
-
+    /**
+     * Obre la vista del professor
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
+     */
     private void openProfessor() {
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Professor");
     }
-
+    /**
+     * Obre la vista del llistat d'usuaris
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
+     */
     private void openUserList() {
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Usuari");
     }

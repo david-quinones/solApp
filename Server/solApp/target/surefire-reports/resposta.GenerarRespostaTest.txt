@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: resposta.GenerarRespostaTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.621 s -- in resposta.GenerarRespostaTest
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.063 s -- in resposta.GenerarRespostaTest

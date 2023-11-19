@@ -13,15 +13,14 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sol.app.quinones.solappquinones.Controllers.*;
+import sol.app.quinones.solappquinones.Controllers.Alumne.AlumneController;
+import sol.app.quinones.solappquinones.Controllers.Alumne.WindowsFormAlumneController;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowController;
 import sol.app.quinones.solappquinones.Controllers.Professor.ProfessorController;
 import sol.app.quinones.solappquinones.Controllers.Professor.WindowFormProfessorController;
 import sol.app.quinones.solappquinones.Controllers.Usuari.UsuariController;
 import sol.app.quinones.solappquinones.Controllers.Usuari.WindowsFormUsuariController;
-import sol.app.quinones.solappquinones.Models.Peticio;
-import sol.app.quinones.solappquinones.Models.Professor;
-import sol.app.quinones.solappquinones.Models.Usuari;
-import sol.app.quinones.solappquinones.Models.VistaController;
+import sol.app.quinones.solappquinones.Models.*;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
@@ -52,17 +51,26 @@ public class ViewFactory {
     private ServerComunication socket = new ServerComunication();
 
     /**
-     *
-     * TODO
+     * Construcctor del ViewFactory
+     * Inicialitza la propietat de seleccio del item del menu
      */
     public ViewFactory(){
         this.seleccioClientItemMenu = new SimpleStringProperty("");
     }
 
+    /**
+     * Obte la propietat de seleccio del item del menu
+     *
+      * @return respresencació de la seleccio del item del menu
+     */
     public StringProperty getSeleccioClientItemMenu() {
         return seleccioClientItemMenu;
     }
 
+    /**
+     *  Obte i crea la vista del perfil d'usuari
+     *  @return Inciancia corresponent a la vista del peril
+     */
     public AnchorPane getPerfilView() {
         //if(perfilView == null){
             try {
@@ -74,6 +82,11 @@ public class ViewFactory {
         return perfilView;
     }
 
+    /**
+     *  Carrega i retorna el controlador de la vista al menu superior
+     * @param accions Implementació de ItopMenuController per manejar les accions dels botons
+     * @return Vsta i controlador del menu superior
+     */
     public VistaController<TopMenuController> getMenuTopViewr(ITopMenuDelegation accions) {
        // if(menuTopViewr == null){
         HBox view;
@@ -93,6 +106,10 @@ public class ViewFactory {
         return new VistaController<>(menuTopViewr, controller);
     }
 
+    /**
+     *  Obte i crea la vista de l'aula
+     *  @return Inciancia corresponent a la vista de l'aula
+     */
     public AnchorPane getAulaView() {
         //if(aulaView == null){
             try {
@@ -104,6 +121,10 @@ public class ViewFactory {
         return aulaView;
     }
 
+    /**
+     *  Obte i crea la vista de professors
+     *  @return Inciancia corresponent a la vista del profesor
+     */
     public AnchorPane getProfessorView() {
         //if(aulaView == null){
         try {
@@ -114,6 +135,10 @@ public class ViewFactory {
         //}
         return professorView;
     }
+    /**
+     *  Obte i crea la vista de uusuaris
+     *  @return Inciancia corresponent a la vista d'usauris
+     */
     public AnchorPane getUserView() {
         //if(aulaView == null){
         try {
@@ -125,6 +150,10 @@ public class ViewFactory {
         return userView;
     }
 
+    /**
+     *  Obte i crea la vista dels alumnes
+     *  @return Inciancia corresponent a la vista de l'alumne
+     */
     public AnchorPane getAlumneView() {
         //if(aulaView == null){
         try {
@@ -136,9 +165,16 @@ public class ViewFactory {
         return alumneView;
     }
 
+    /**
+     *  Mostra la finestra del formulari del professor
+     *  Crea i mostra una finestra per l'edidicó o creació
+     * @param title Titul de la finestra
+     * @param professor Objecte professor per carregar a la finestra
+     * @param professorController Controlador associat a la finestra de professor
+     */
     public void showWindowFormProfessor(String title, Professor professor, ProfessorController professorController){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormProfessor.fxml"));
-        createStage(loader, true, title, true, professor);
+        createStage(loader, true, title, true, professor, null);
         //una vez cargada la stage
         WindowFormProfessorController windowFormProfessorController = loader.getController();
         windowFormProfessorController.setProfessorController(professorController);
@@ -147,20 +183,40 @@ public class ViewFactory {
         //pasar aqui professor? carrega bé?¿ truere de stage, aixi només controla finestres
     }
 
+    /**
+     * Mostra la finestra del formulari de l'alumne
+     * Crea i mostra una finestra per l'edidicó o creació
+     * @param title titul de la finestra
+     * @param a Objecte Alumne per accaregar a la finestra
+     * @param alumneController Controlador associat a lka finestra de l'laumne
+     */
+    public void showWindowFormAlumne(String title, Alumne a, AlumneController alumneController){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormAlumne.fxml"));
+        createStage(loader, true, title, true, null, a);
+        //una vez cargada la stage
+        WindowsFormAlumneController windowsFormAlumneController = loader.getController();
+        windowsFormAlumneController.setUsuariController(alumneController);
 
+    }
+
+    /**
+     * Motsra la finestra del formulari dels usuaris
+     * Crea i mostra una finestra per l'dificó
+     * @param title Titul de la finestra
+     * @param u Objecte usuari per carregar a la finestra
+     * @param usuariController Controladro associat a la finesra usuari
+     */
     public void showWindowFormUser(String title, Usuari u, UsuariController usuariController){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormUser.fxml"));
-        createStage(loader, true, title, true, null);
+        createStage(loader, true, title, true, null, null);
         //una vez cargada la stage
+
         WindowsFormUsuariController windowsFormUsuariController = loader.getController();
         windowsFormUsuariController.setUsuariController(usuariController);
 
         windowsFormUsuariController.loadObject(u);
 
-        //TODO
-        //pasar aqui professor? carrega bé?¿ truere de stage, aixi només controla finestres
     }
-
 
 
     /**
@@ -185,7 +241,7 @@ public class ViewFactory {
      */
     public void showLoginWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
-        createStage(loader, true, "", false, null);
+        createStage(loader, true, "", false, null, null);
     }
 
 
@@ -198,7 +254,7 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MainWindow.fxml"));
         MainWindowController mainWindowController = new MainWindowController(rol);
         loader.setController(mainWindowController);
-        createStage(loader, false, "", false, null);
+        createStage(loader, false, "", false, null, null);
 
     }
 
@@ -210,7 +266,7 @@ public class ViewFactory {
      * @param loader FXMLLoader per carregar la vista
      * @param login identifica si es la finestra de login o no per realitzar n accio
      */
-    private void createStage(FXMLLoader loader, boolean login, String title, boolean block, Professor professor) {
+    private void createStage(FXMLLoader loader, boolean login, String title, boolean block, Professor professor, Alumne alumne) {
         Scene scene = null;
         try{
             scene = new Scene(loader.load());
@@ -224,6 +280,11 @@ public class ViewFactory {
             WindowFormProfessorController windowFormProfessorController = loader.getController();
             windowFormProfessorController.loadObject(professor);
         }
+        if(alumne != null) {
+            WindowsFormAlumneController windowsFormAlumneController = loader.getController();
+            windowsFormAlumneController.loadAlumne(alumne);
+        }
+
 
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -272,6 +333,10 @@ public class ViewFactory {
         stage.close();
     }
 
+    /**
+     * Retorna el titul actual a la finestra
+     * @return
+     */
     public String getTitleApp() {
         return titleApp;
     }
