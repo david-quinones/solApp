@@ -14,6 +14,7 @@ import sol.app.quinones.solappquinones.Models.Usuari;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
+import sol.app.quinones.solappquinones.Service.ValidadorCamps;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,14 +55,36 @@ public class WindowsFormAlumneController implements Initializable {
         idTxtFld10.setVisible(false);
         idTxtFld4.setEditable(false);
 
+        //aplicar syle error DNI
+        aplicarCleanStyle();
+
         idBtnAcceptar.setOnAction(e -> saveObject());
+    }
+
+    private void aplicarCleanStyle() {
+        //dni
+        idTxtFld5.setOnMouseClicked(event -> {
+            idTxtFld5.setStyle("");
+        });
+        idTxtFld5.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if(newVal){idTxtFld5.setStyle("");}
+        });
+        //TODO
     }
 
     private void saveObject() {
         String tipusPeticio;
 
-
         //validar dades
+        if(!ValidadorCamps.validarDNI(idTxtFld5.getText())){
+            System.out.println("DNI INCORRECTE");
+            idTxtFld5.setStyle("-fx-border-color: red;");
+            return;
+        }
+        if(!isDatePickerValid()){
+            System.out.println("fechas incorrecteas");
+            return;
+        }
 
         //crear objecte
         this.a = new Alumne(
@@ -172,5 +195,10 @@ public class WindowsFormAlumneController implements Initializable {
         //assignar alumne a variable
         alumneCarregat = alum;
         idAlumne = alum.getIdAlumne();
+    }
+
+    private boolean isDatePickerValid(){
+        if(idTxtFld4.getValue() == null) return false;
+        return true;
     }
 }

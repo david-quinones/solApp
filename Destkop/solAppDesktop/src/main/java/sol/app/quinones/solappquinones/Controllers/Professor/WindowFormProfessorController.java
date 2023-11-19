@@ -13,6 +13,7 @@ import sol.app.quinones.solappquinones.Models.*;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
+import sol.app.quinones.solappquinones.Service.ValidadorCamps;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -70,7 +71,7 @@ public class WindowFormProfessorController implements Initializable {
         });
 
         //sett promp text all camps TODO
-        idTxtFld5.setPromptText("41548690H");
+        //idTxtFld5.setPromptText("41548690H");
 
 
 
@@ -81,7 +82,7 @@ public class WindowFormProfessorController implements Initializable {
     private void saveObject() {
 
         //TODO validar dades
-        if(!validarDNI(idTxtFld5.getText())){
+        if(!ValidadorCamps.validarDNI(idTxtFld5.getText())){
             System.out.println("DNI INCORRECTE");
             idTxtFld5.setStyle("-fx-border-color: red;");
             return;
@@ -90,8 +91,6 @@ public class WindowFormProfessorController implements Initializable {
             System.out.println("fechas incorrecteas");
             return;
         }
-
-
 
         String peticioType = "";
 
@@ -241,16 +240,4 @@ public class WindowFormProfessorController implements Initializable {
         return true;
     }
 
-    private boolean validarDNI(String dni){
-        return dni.matches("[0-9]{8}[A-Za-z]"); //41548690
-    }
-
-    private boolean validarTelf(String telf){
-        return telf.matches("[0-9]{9}");
-    }
-
-    //emil?
-    private boolean validarMail(String mail){
-        return mail.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
-    }
 }

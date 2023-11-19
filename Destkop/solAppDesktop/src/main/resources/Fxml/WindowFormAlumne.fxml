@@ -14,7 +14,7 @@
    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <HBox prefHeight="100.0" prefWidth="200.0">
          <Label fx:id="idLbl1" text="Nom" />
-         <TextField fx:id="idTxtFld1" promptText="David" />
+         <TextField fx:id="idTxtFld1" />
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
