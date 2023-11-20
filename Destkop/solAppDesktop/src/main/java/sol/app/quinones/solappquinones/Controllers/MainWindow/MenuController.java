@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.json.JSONException;
@@ -41,6 +42,7 @@ public class MenuController implements Initializable {
     public Button btn_aula;
     public Button btn_comunicacio;
     public Button btn_esdeveniment;
+    public ImageView image;
 
     private String rol;
     private ServerComunication socket = new ServerComunication();
@@ -60,7 +62,17 @@ public class MenuController implements Initializable {
         btn_alumne.setOnAction(event -> openAlumne());
         btn_professor.setOnAction(event -> openProfessor());
         btn_user.setOnAction(event -> openUserList());
+        image.setOnMouseClicked(event -> loadDashboard());
 
+    }
+
+    /**
+     * Metode per anar al dashboard prinicpal de l'aplicació
+     * En clicar la imatge superior del menu, fara aquest canvi
+     *
+     */
+    private void loadDashboard() {
+        Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Dashboard");
     }
 
     /**

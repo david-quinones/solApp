@@ -2,13 +2,11 @@ package sol.app.quinones.solappquinones.Controllers.Professor;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.json.JSONObject;
+import sol.app.quinones.solappquinones.Controllers.ErrorController;
 import sol.app.quinones.solappquinones.Models.*;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
@@ -152,12 +150,6 @@ public class WindowFormProfessorController implements Initializable {
             this.u.setAdmin(false);
             this.u.setTeacher(true);
 
-            System.out.println(
-                    this.u.getNomUsuari()
-                            + " " + this.u.getPassword()
-                            + " " + this.p.getNom()
-            );
-
             peticioType = "ALTA_EMPLEAT";
 
         }else{
@@ -171,6 +163,13 @@ public class WindowFormProfessorController implements Initializable {
             Stage actual = (Stage)idTxtFld12.getScene().getWindow();
             actual.close();
             professorController.carregarProfessors();
+        }else{
+            ErrorController.showErrorAlert(
+                    "ERROR EN DESAR EL PROFESSOR",
+                    "",
+                    "El professor amb DNI " + this.p.getDni() + " ja existeix al sistema.",
+                    Alert.AlertType.WARNING
+            );
         }
     }
 
