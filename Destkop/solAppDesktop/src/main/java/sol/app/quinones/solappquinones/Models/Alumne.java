@@ -8,7 +8,7 @@ import com.google.gson.Gson;
  *
  * @author david
  */
-public class Alumne extends Persona{
+public class Alumne extends Persona {
 
     private int idAlumne;
     private boolean menjador, actiu, acollida;

@@ -106,10 +106,8 @@ public class WindowFormProfessorController implements Initializable {
             idTxtFld5.setStyle("-fx-border-color: red;");
             return;
         }
-        if(!isDatePickerValid()){
-            System.out.println("fechas incorrecteas");
-            return;
-        }
+        if(!isDatePickerValid()){}
+
         if(!ValidadorCamps.validarTelf(idTxtFld6.getText())){
             idTxtFld6.setStyle("-fx-border-color: red");
             return;
@@ -281,12 +279,13 @@ public class WindowFormProfessorController implements Initializable {
 
     /**
      * metode per controlar si el camp esta ple (date)
+     * 21/11 canvi, si es null posem data d'avui
      * @return true si es valid
      */
     private boolean isDatePickerValid(){
-        if(idTxtFld4.getValue() == null) return false;
-        if(idTxtFld8.getValue() == null) return false;
-        if(idTxtFld9.getValue() == null) return false;
+        if(idTxtFld4.getValue() == null) idTxtFld4.setValue(LocalDate.parse(LocalDate.now().toString()));
+        if(idTxtFld8.getValue() == null) idTxtFld8.setValue(LocalDate.parse(LocalDate.now().toString()));
+        if(idTxtFld9.getValue() == null) idTxtFld9.setValue(LocalDate.parse(LocalDate.now().toString()));
 
         return true;
     }
