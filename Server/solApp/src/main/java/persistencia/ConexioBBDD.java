@@ -14,7 +14,7 @@ public class ConexioBBDD {
     private static final String JDBD_URL = "jdbc:mysql://localhost:3306/escola_bressol";
     private static final String USUARI =  "root";
     private static final String PASSWORD = "1234";
-    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ConexioBBDD.class.getName());
     private Connection conexio;
     
     

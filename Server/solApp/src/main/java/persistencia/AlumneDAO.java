@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class AlumneDAO {
     private Connection conexio;
     private PreparedStatement psAlumne;
-    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Alumne.class.getName());
     private static final int CORRECTE = 1;
     private static final int ERROR = -1;
 
@@ -103,16 +103,15 @@ public class AlumneDAO {
     public int modificarAlumne(Alumne alumne){
         try {
             //Ordre sql per modificar les dades del alumne
-            String updateAlumne = "UPDATE alumne SET actiu = ?, menjador = ?,"
+            String updateAlumne = "UPDATE alumne SET menjador = ?,"
                     + " acollida = ? WHERE id = ?;";
             psAlumne = conexio.prepareStatement(updateAlumne);
             
             //Establim les dades per a la ordre sql
             if(alumne != null){
-                psAlumne.setBoolean(1, alumne.isActiu());
-                psAlumne.setBoolean(2, alumne.isMenjador());
-                psAlumne.setBoolean(3, alumne.isAcollida());
-                psAlumne.setInt(4, alumne.getIdAlumne());
+                psAlumne.setBoolean(1, alumne.isMenjador());
+                psAlumne.setBoolean(2, alumne.isAcollida());
+                psAlumne.setInt(3, alumne.getIdAlumne());
             }else{
                 LOGGER.warning("L'objecte alumne es null");
                 return ERROR;
@@ -120,7 +119,8 @@ public class AlumneDAO {
 
             //Comprovem que s'ha modificat alguna fila
             int filesAfectades = psAlumne.executeUpdate();
-            if(filesAfectades > 0){
+            int filesAfectadeUsuariAssociat = modificarUsuariAsociat(alumne.getIdPersona(),alumne.isActiu());
+            if(filesAfectades > 0 && filesAfectadeUsuariAssociat > 0){
                 LOGGER.info("L'alumne amb id " + alumne.getIdAlumne()+
                         " s'ha modificat correctament.");
                 return CORRECTE;
@@ -168,6 +168,36 @@ public class AlumneDAO {
                     "ERROR al obtindre les dades d'alumnes del ResultSet", ex);
         }
         return alumne;
+    }
+    
+    /**Mètode per modificar l'estat actiu de l'usuari associat a l'alumne
+     * 
+     * @param personaId
+     * @param actiu
+     * @return 
+     */
+    public int modificarUsuariAsociat (int personaId, boolean actiu){
+        try {
+            String modificarUsuari = "UPDATE usuari SET actiu = ?"
+                    + " WHERE persona_id = ?;";
+            psAlumne = conexio.prepareStatement(modificarUsuari);
+            //Establim les dades per a la consulta
+            psAlumne.setBoolean(1, actiu);
+            psAlumne.setInt(2, personaId);
+            
+            int filesAfectades = psAlumne.executeUpdate();
+            //Comprovem les files afectades
+            if(filesAfectades > 0){
+                LOGGER.info("S'ha modificat l'usuari associat a l'alumne");
+                return CORRECTE;
+            }else{
+                LOGGER.warning("ERROR al intentar modificar l'usuari associat a l'alumne");
+                return ERROR;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+        return ERROR;
     }
     
     

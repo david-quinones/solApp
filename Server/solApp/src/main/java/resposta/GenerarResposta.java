@@ -25,7 +25,7 @@ public class GenerarResposta {
     private GestorSessions sessions = GestorSessions.obtindreInstancia();
     private ConexioBBDD base_dades;
     private Connection conexio;
-    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(GenerarResposta.class.getName());
     
     public GenerarResposta(){
         try {

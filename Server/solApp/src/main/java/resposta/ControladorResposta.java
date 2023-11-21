@@ -18,7 +18,7 @@ public class ControladorResposta {
     private RetornDades resposta;
     private String numSessio;
     private GestorSessions sessions = GestorSessions.obtindreInstancia();
-    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ControladorResposta.class.getName());
     private static final int CODI_ERROR = 0;
 
     /**Constructor que rep la petició del client i inicialitza la clase dadesResposta

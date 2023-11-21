@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class EmpleatDAO {
     private Connection conexio;
     private PreparedStatement psEmpleat;
-    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(EmpleatDAO.class.getName());
     private static final int CORRECTE = 1;
     private static final int ERROR = -1;
     
@@ -108,24 +108,24 @@ public class EmpleatDAO {
     public int modificarEmpleat(Empleat empleat){
         try {
             //Ordre sql per modificar les dades del empleat
-            String updateEmpleat = "UPDATE empleat SET actiu = ?, inici_contracte = ?,"
+            String updateEmpleat = "UPDATE empleat SET inici_contracte = ?,"
                     + " final_contracte = ? WHERE id = ?;";
             psEmpleat = conexio.prepareStatement(updateEmpleat);
             
             //Establim les dades per a la ordre sql
             if(empleat != null){
-                psEmpleat.setBoolean(1, empleat.isActiu());
-                psEmpleat.setString(2, empleat.getIniciContracte());
-                psEmpleat.setString(3, empleat.getFinalContracte());
-                psEmpleat.setInt(4, empleat.getIdEmpleat());
+                psEmpleat.setString(1, empleat.getIniciContracte());
+                psEmpleat.setString(2, empleat.getFinalContracte());
+                psEmpleat.setInt(3, empleat.getIdEmpleat());
             }else{
                 LOGGER.warning("L'objecte empleat es null");
                 return ERROR;
-            }
-
+            }       
+  
             //Comprovem que s'ha modificat alguna fila
             int filesAfectades = psEmpleat.executeUpdate();
-            if(filesAfectades > 0){
+            int filesUsuariAssociat = modificarUsuariAsociat(empleat.getIdPersona(), empleat.isActiu());
+            if(filesAfectades > 0 && filesUsuariAssociat > 0){
                 LOGGER.info("L'empleat amb id " + empleat.getIdEmpleat() +
                         " s'ha modificat correctament.");
                 return CORRECTE;
@@ -176,6 +176,37 @@ public class EmpleatDAO {
     }
     
     
+    
+    /**Mètode per modificar l'estat actiu de l'usuari associat a l'empleat
+     * 
+     * @param personaId
+     * @param actiu
+     * @return 
+     */
+    public int modificarUsuariAsociat (int personaId, boolean actiu){
+        try {
+            String modificarUsuari = "UPDATE usuari SET actiu = ?"
+                    + " WHERE persona_id = ?;";
+            psEmpleat = conexio.prepareStatement(modificarUsuari);
+            
+            //Establim les dades per a la consulta
+            psEmpleat.setBoolean(1, actiu);
+            psEmpleat.setInt(2, personaId);
+            
+            int filesAfectades = psEmpleat.executeUpdate();
+            //Comprovem les files afectades
+            if(filesAfectades > 0){
+                LOGGER.info("S'ha modificat l'usuari associat a l'empleat");
+                return CORRECTE;
+            }else{
+                LOGGER.warning("ERROR al intentar modificar l'usuari associat a l'empleat");
+                return ERROR;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+        return ERROR;
+    }
     
     
 }

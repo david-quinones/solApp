@@ -23,7 +23,7 @@ public class UsuariDAO {
     private Connection conexio;
     private Encriptar seguretat;
     private PreparedStatement ps;
-    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(UsuariDAO.class.getName());
     private static final int CORRECTE = 1;
     private static final int ERROR = -1;
     

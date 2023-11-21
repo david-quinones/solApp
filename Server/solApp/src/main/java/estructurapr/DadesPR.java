@@ -2,13 +2,14 @@ package estructurapr;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**Clase que contindrà les dades de les peticions i respostes de les crides
  * al servidor
  * @author Pau Castell Galtes
  */
-public class DadesPR {
+public class DadesPR implements Serializable{
     
     private ArrayList<String> dades = new ArrayList<>();
     
