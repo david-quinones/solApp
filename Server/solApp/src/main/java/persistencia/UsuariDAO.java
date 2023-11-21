@@ -45,7 +45,7 @@ public class UsuariDAO {
 
         try {
             //Consulta a la base de dades
-            String consulta = "SELECT * FROM usuari WHERE nom_usuari = ? AND isActive = TRUE";
+            String consulta = "SELECT * FROM usuari WHERE nom_usuari = ? AND actiu = TRUE";
             ps = conexio.prepareStatement(consulta);
             
             //Establim el nom d'usuari rebut a la consulta
@@ -92,7 +92,7 @@ public class UsuariDAO {
         try {
             //Instrucció sql per afegir un nou usuari
             String insertUsuari = "INSERT INTO usuari (nom_usuari, password, is_admin,"
-                    + " is_teacher, persona_id, isActive) VALUES (?,?,?,?,?,?) ";
+                    + " is_teacher, persona_id, actiu) VALUES (?,?,?,?,?,?) ";
             ps = conexio.prepareStatement(insertUsuari);
             
             //Establim dades per a la instrucció
@@ -131,7 +131,7 @@ public class UsuariDAO {
     public int eliminarUsuari(int idPersona){
         try {
             //Sentència per actualizar les dades de l'usuari
-            String desactivarEmpleat = "UPDATE usuari SET isActive = false "
+            String desactivarEmpleat = "UPDATE usuari SET actiu = false "
                     + "WHERE persona_id = ?;";
             ps = conexio.prepareStatement(desactivarEmpleat);
             
@@ -196,15 +196,23 @@ public class UsuariDAO {
         try {
             //Ordre SQL per modificar un usuari de la bbdd
             String updateUsuari = "UPDATE usuari SET nom_usuari = ?, password = ?, "
-                    + "is_admin = ?, is_teacher = ?, isActive = ? WHERE id = ?;";
+                    + "is_admin = ?, is_teacher = ?, actiu = ? WHERE id = ?;";
             ps = conexio.prepareStatement(updateUsuari);
+            
+            //Si la contraseña es la mateixa no fem un hash
+                String password = "";
+                Usuari usuariOriginal = consultaUsuari(usuari.getId());
+                if(!usuariOriginal.getPassword().equals(usuari.getPassword())){
+                    //Obtenim el hash del password rebut
+                    Encriptar encriptar= new Encriptar();
+                    password = encriptar.hashPassword(usuari.getPassword());
+                } else{
+                    password = usuariOriginal.getPassword();
+                }
             
             if(usuari != null){
                 //Establim les dades per a la modificació
-                ps.setString(1, usuari.getNomUsuari());
-                //Obtenim el hash del password rebut
-                Encriptar encriptar= new Encriptar();
-                String password = encriptar.hashPassword(usuari.getPassword());
+                ps.setString(1, usuari.getNomUsuari());               
                 ps.setString(2, password);
                 ps.setBoolean(3, usuari.isIsAdmin());
                 ps.setBoolean(4, usuari.isIsTeacher());
@@ -251,7 +259,7 @@ public class UsuariDAO {
             usuari.setIsAdmin(dades.getBoolean("is_admin"));
             usuari.setIsTeacher(dades.getBoolean("is_teacher"));
             usuari.setIdPersona(dades.getInt("persona_id"));
-            usuari.setIsActive(dades.getBoolean("isActive"));
+            usuari.setIsActive(dades.getBoolean("actiu"));
             LOGGER.info("Obtingut usuari amb idUsuari: " + usuari.getId());
             
             return usuari;
@@ -259,6 +267,38 @@ public class UsuariDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return usuari;
+    }
+    
+    
+    
+    /**Mètode per obtindre un usuari de la base de dades a partir del seu id
+     * 
+     * @param idUsuari
+     * @return 
+     */
+    public Usuari consultaUsuari(int idUsuari){
+        Usuari usuari = null;
+        try {
+            //Consulta per obtenir un usuari
+            String consultaUsuari = "SELECT * FROM usuari WHERE id = ?;";
+            PreparedStatement psConsulta = conexio.prepareStatement(consultaUsuari);
+            
+            //Establim dades per a la consulta
+            psConsulta.setInt(1, idUsuari);
+            //Obtenim el resultat
+            ResultSet rs = psConsulta.executeQuery();
+            //Comprovem dades
+            if(rs.next()){
+                LOGGER.info("L'usuari s'ha obtingut correctament");
+                usuari = obtindreUsuari(rs);
+            }else{
+                LOGGER.warning("ERROR no s'ha trobat cap usuari amb aquest id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuariDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return usuari;
     }
      
