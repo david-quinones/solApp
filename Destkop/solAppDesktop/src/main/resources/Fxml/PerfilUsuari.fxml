@@ -58,7 +58,7 @@
             <HBox alignment="CENTER_RIGHT" spacing="10">
                <children>
                   <Button minWidth="100" onAction="#actualitzarDades" text="Actualitzar" HBox.hgrow="ALWAYS" />
-                  <Button minWidth="100" onAction="#cancelarActualitzarDades" text="Cancelar" HBox.hgrow="ALWAYS" />
+                  <Button minWidth="100" onAction="#cancelarActualitzarDades" styleClass="cancel_button" text="Cancelar" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

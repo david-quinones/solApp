@@ -39,6 +39,8 @@ public class CommController {
     public static final String MODIFICAR_PERFIL = "MODIFICAR_PERFIL";
     public static final String BUSCA_USUARI = "BUSCA_USUARI";
     public static final String ALTA_EMPLEAT = "ALTA_EMPLEAT";
+
+    public static final String MODIFICAR_EMPLEAT = "MODIFICAR_EMPLEAT";
     public static final String ELIMINAR_EMPLEAT = "ELIMINAR_EMPLEAT";
     public static final String LLISTAR_EMPLEATS = "LLISTAR_EMPLEATS";
 
@@ -239,14 +241,34 @@ public class CommController {
      * @param empleat
      * * @return resultat OK/NOK; null si error.
      *************************************************/
+    public static ValorsResposta modificarEmpleat(Empleat empleat){
+
+        PeticioClient modificaEmpleat = new PeticioClient(MODIFICAR_EMPLEAT);
+        modificaEmpleat.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        modificaEmpleat.addDataObject(empleat);
+        Gson gson= new Gson();
+        Log.d("PETICIO MODIFICA PROFE", gson.toJson(modificaEmpleat));
+        ValorsResposta resposta=talkToServer(modificaEmpleat);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició d'eliminar professor al servidor
+     * @param empleat
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
     public static ValorsResposta eliminarEmpleat(Empleat empleat){
 
-        PeticioClient altaEmpleat = new PeticioClient(ELIMINAR_EMPLEAT);
-        altaEmpleat.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
-        altaEmpleat.addDataObject(empleat);
+        PeticioClient eliminaEmpleat = new PeticioClient(ELIMINAR_EMPLEAT);
+        eliminaEmpleat.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        eliminaEmpleat.addDataObject(empleat);
         Gson gson= new Gson();
-        Log.d("PETICIO ALTA PROFE", gson.toJson(altaEmpleat));
-        ValorsResposta resposta=talkToServer(altaEmpleat);
+        Log.d("PETICIO ALTA PROFE", gson.toJson(eliminaEmpleat));
+        ValorsResposta resposta=talkToServer(eliminaEmpleat);
 
         if(resposta==null) return null;
 

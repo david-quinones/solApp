@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 
-
-<AnchorPane fx:id="mainAlumne" prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.Alumne.AlumneController">
-    <children>
-        <TextField fx:id="idTextMostra" layoutX="301.0" layoutY="91.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="90.0" />
-    </children>
+<AnchorPane fx:id="mainAlumne" prefHeight="750.0" prefWidth="850.0" styleClass="grid_view" stylesheets="@../Styles/GridEntities.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.Alumne.AlumneController">
+<children>
+    <VBox fx:id="vBoxMainAlumne" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <children>
+            <TableView fx:id="tableAlumne" prefHeight="750.0" prefWidth="850.0">
+                <columns>
+                    <TableColumn fx:id="idNomAlumne" prefWidth="75.0" text="Nom" />
+                    <TableColumn fx:id="idCognomAlumne" prefWidth="75.0" text="Cognom" />
+                    <TableColumn fx:id="idCognom2Alumne" prefWidth="75.0" text="Segon Cognom" />
+                    <TableColumn fx:id="idDataNeixAlumne" prefWidth="75.0" text="Data Neixament" />
+                    <TableColumn fx:id="idNIFAlumne" prefWidth="75.0" text="DNI" />
+                    <TableColumn fx:id="idTelfAlumne" prefWidth="75.0" text="Telefon" />
+                    <TableColumn fx:id="idMailAlumne" prefWidth="75.0" text="Email" />
+                </columns>
+            </TableView>
+        </children>
+    </VBox>
+</children>
 </AnchorPane>
+

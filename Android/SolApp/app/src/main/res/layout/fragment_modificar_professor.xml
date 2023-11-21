@@ -8,19 +8,328 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/solapp_background">
+
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Dades del professor"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
+            android:background="#FFFFFF"
             android:text="Torna enrere"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Nom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <EditText
+            android:id="@+id/editTextNom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="11"
+            android:focusableInTouchMode="false"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView21"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Primer cognom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+        <EditText
+            android:id="@+id/editTextCognom1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="11"
+            android:focusableInTouchMode="false"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView23"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNom" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="NIF"
+            app:layout_constraintStart_toEndOf="@+id/editTextNom"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <EditText
+            android:id="@+id/editTextNif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="6"
+            android:focusableInTouchMode="false"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView25"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Segón cognom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+
+        <EditText
+            android:id="@+id/editTextCognom22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="11"
+            android:focusableInTouchMode="false"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView27"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCognom1" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Data inici"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+        <EditText
+            android:id="@+id/editTextInici"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="6"
+            android:focusableInTouchMode="false"
+            android:inputType="datetime|date"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView28"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Data fi"
+            app:layout_constraintStart_toEndOf="@+id/editTextInici"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
+
+        <EditText
+            android:id="@+id/editTextFi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="6"
+            android:focusableInTouchMode="false"
+            android:inputType="datetime|date"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView29"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Telefon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+        <EditText
+            android:id="@+id/editTextTelefon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="6"
+            android:focusableInTouchMode="false"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView30"
+            app:layout_constraintTop_toBottomOf="@+id/editTextInici" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="e-mail"
+            app:layout_constraintStart_toEndOf="@+id/editTextTelefon"
+            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="11"
+            android:focusableInTouchMode="false"
+            android:inputType="text|textEmailAddress"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView31"
+            app:layout_constraintTop_toBottomOf="@+id/editTextFi" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Data naixement"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+        <EditText
+            android:id="@+id/editTextDataNaixement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="6"
+            android:focusableInTouchMode="false"
+            android:inputType="datetime|date"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView32"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTelefon" />
+
+        <Button
+            android:id="@+id/modificarBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#090909"
+            android:clickable="true"
+            android:enabled="true"
+            android:text="Modificar dades"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:cornerRadius="1dp"
+            app:icon="@drawable/baseline_create_24"
+            app:iconGravity="top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+        <Button
+            android:id="@+id/confirmarBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#090909"
+            android:clickable="false"
+            android:enabled="false"
+            android:text="Desa el canvis"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:cornerRadius="1dp"
+            app:icon="@drawable/baseline_save_24"
+            app:iconGravity="top"
+            app:iconTint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDataNaixement" />
+
+        <ScrollView
+            android:id="@+id/VSmodificar_professor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modificarBtn">
+
+            <TableLayout
+                android:id="@+id/taula_modifica_professor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:gravity="center_horizontal">
+
+            </TableLayout>
+        </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

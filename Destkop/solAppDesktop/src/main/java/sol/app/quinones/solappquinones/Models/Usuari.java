@@ -62,6 +62,32 @@ public class Usuari {
         this.isAdmin = isAdmin;
     }
 
+    /**
+     * Contstructor que estableix Id, nomusuari, contrasenya, boolen segon rol
+     * @param id
+     * @param username
+     * @param password
+     * @param isTeacher
+     * @param isAdmin
+     * @parm isAtive
+     */
+    public Usuari(int id, String username, String password, boolean isTeacher, boolean isAdmin, boolean isActive) {
+        this.id = id;
+        this.nomUsuari = username;
+        this.password = password;
+        this.isTeacher = isTeacher;
+        this.isAdmin = isAdmin;
+        this.isActive = isActive;
+    }
+
+    public Usuari(int id, String username, boolean isTeacher, boolean isAdmin, boolean isActive) {
+        this.id = id;
+        this.nomUsuari = username;
+        this.isTeacher = isTeacher;
+        this.isAdmin = isAdmin;
+        this.isActive = isActive;
+    }
+
 
     /**
      * Converteix una cadena "JSON" a un objecte Usuari

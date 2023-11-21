@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +49,11 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_accedir.setOnAction(event -> onLogin()); //en apretar, accedim al metode
+        fld_password.setOnKeyPressed(e -> {
+            if(e.getCode() == KeyCode.ENTER) {
+                onLogin();
+            }
+        });
     }
 
     /**

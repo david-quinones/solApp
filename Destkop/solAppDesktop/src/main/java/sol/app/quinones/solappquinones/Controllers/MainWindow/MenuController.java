@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.json.JSONException;
@@ -41,6 +42,7 @@ public class MenuController implements Initializable {
     public Button btn_aula;
     public Button btn_comunicacio;
     public Button btn_esdeveniment;
+    public ImageView image;
 
     private String rol;
     private ServerComunication socket = new ServerComunication();
@@ -60,10 +62,18 @@ public class MenuController implements Initializable {
         btn_alumne.setOnAction(event -> openAlumne());
         btn_professor.setOnAction(event -> openProfessor());
         btn_user.setOnAction(event -> openUserList());
+        image.setOnMouseClicked(event -> loadDashboard());
 
     }
 
-
+    /**
+     * Metode per anar al dashboard prinicpal de l'aplicació
+     * En clicar la imatge superior del menu, fara aquest canvi
+     *
+     */
+    private void loadDashboard() {
+        Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Dashboard");
+    }
 
     /**
      * Estableix el rol de l'usuari i asjuta la visibilitat dels elements del menu
@@ -142,24 +152,38 @@ public class MenuController implements Initializable {
     }
 
     /**
-     * Obre el perfil de l'usuari per veure i editar les seves dades principals
+     * Obre la vista del perfil de l'usuari iniciat a l'aplicació
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
      */
     public void openPerfil(){
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Perfil");
     }
 
+    /**
+     * Obre la vista de l'Alumne
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
+     */
     private void openAlumne() {
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Alumne");
     }
-
+    /**
+     * Obre la vista de l'Aula
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
+     */
     private void openAula() {
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Aula");
     }
-
+    /**
+     * Obre la vista del professor
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
+     */
     private void openProfessor() {
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Professor");
     }
-
+    /**
+     * Obre la vista del llistat d'usuaris
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
+     */
     private void openUserList() {
         Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Usuari");
     }

@@ -1,0 +1,53 @@
+/* Main Style */
+.grid_view {
+    -fx-background-color: #EEEEEE;
+    -fx-spacing: 10;
+}
+
+/* Style TableView */
+.grid_view TableView {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #AAAAAA;
+    -fx-border-width: 1;
+}
+
+/* Style columnes Table */
+.grid_view TableColumn {
+    -fx-background-color: #EEEEEE;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #132A13;
+    -fx-alignment: center;
+    -fx-pref-width: 150px;
+}
+
+/* Stile celes table */
+.grid_view TableCell {
+    -fx-font-size: 1em;
+    -fx-alignment: center-right;
+}
+
+/* Style capçalera taula*/
+.grid_view .column-header {
+    -fx-background-color: #AEDFF7;
+    -fx-text-fill: #132A13;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-font-size: 1.2em;
+}
+
+.grid_view .column-header .label{
+    -fx-pref-width: 150px;
+}
+
+
+.grid_view VBox {
+    -fx-alignment: top_center;
+    -fx-spacing: 10;
+}
+
+
+.grid_view .table-view:focused .table-row-cell:focused:selected {
+    -fx-background-color: #132A13;
+    -fx-text-fill: white;
+}
