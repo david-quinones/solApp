@@ -37,7 +37,7 @@ public class ServerComunicationTest  {
         //Configurem els mocks (simular connexió)
         Socket socketMock = mock(Socket.class);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("cara_zapato".getBytes());
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("resposta".getBytes());
 
         when(socketMock.getOutputStream()).thenReturn(byteArrayOutputStream);
         when(socketMock.getInputStream()).thenReturn(byteArrayInputStream);
@@ -55,7 +55,7 @@ public class ServerComunicationTest  {
         String resposta = serverComunication.sendMessage("envio missatge, arriba?");
 
         //capturar resposta i comprovem que ok
-        assertEquals("cara_zapato", resposta);
+        assertEquals("resposta", resposta);
         assertEquals("envio missatge, arriba?\r\n", byteArrayOutputStream.toString());
 
     }
