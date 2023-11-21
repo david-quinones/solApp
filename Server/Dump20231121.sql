@@ -34,7 +34,7 @@ CREATE TABLE `alumne` (
   KEY `fk_aula` (`aula_id`),
   CONSTRAINT `fk_aula` FOREIGN KEY (`aula_id`) REFERENCES `aula` (`id`),
   CONSTRAINT `fk_persona` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `alumne` (
 
 LOCK TABLES `alumne` WRITE;
 /*!40000 ALTER TABLE `alumne` DISABLE KEYS */;
-INSERT INTO `alumne` VALUES (1,1,1,0,31,NULL),(2,1,0,1,32,NULL),(3,1,1,1,33,NULL),(4,1,0,0,34,NULL);
+INSERT INTO `alumne` VALUES (1,0,0,0,31,NULL),(2,1,0,1,32,NULL),(3,1,1,1,33,NULL),(4,1,0,0,34,NULL),(5,1,1,1,5,NULL),(8,0,0,0,52,NULL);
 /*!40000 ALTER TABLE `alumne` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,6 +58,7 @@ CREATE TABLE `aula` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) DEFAULT NULL,
   `professor_id` int DEFAULT NULL,
+  `nombre_alumnes` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `professor_id` (`professor_id`),
   CONSTRAINT `aula_ibfk_1` FOREIGN KEY (`professor_id`) REFERENCES `empleat` (`id`)
@@ -89,7 +90,7 @@ CREATE TABLE `empleat` (
   PRIMARY KEY (`id`),
   KEY `persona_id` (`persona_id`),
   CONSTRAINT `empleat_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +99,7 @@ CREATE TABLE `empleat` (
 
 LOCK TABLES `empleat` WRITE;
 /*!40000 ALTER TABLE `empleat` DISABLE KEYS */;
-INSERT INTO `empleat` VALUES (1,1,'2022-01-01','2023-12-31',1),(2,1,'2021-06-15','2024-06-14',2),(3,1,'2020-12-01',NULL,3),(4,1,'2023-01-01',NULL,4);
+INSERT INTO `empleat` VALUES (1,1,'2022-01-01','9999-12-31',1),(2,1,'2021-06-15','2024-06-14',2),(3,1,'2020-12-01',NULL,3),(4,1,'2023-01-01',NULL,4),(31,1,'2000-01-01','9999-12-31',53);
 /*!40000 ALTER TABLE `empleat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +121,7 @@ CREATE TABLE `persona` (
   `mail` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `dni` (`dni`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +130,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'Pau','Castell','Galtes','1983-08-07','46797529G','93703532','pau@gmail.com'),(2,'PauCastellGaltes','CognomPersona1','CognomPersona2','2000-01-01','1245874L','999999999','provapersona@gmail.com'),(3,'Carlos','González','Rodríguez','1988-12-10','54321678C','654987321','carlos@example.com'),(4,'Ana','Martínez','Sánchez','1992-03-08','87651234D','789654321','ana@example.com'),(5,'Pablo','Jiménez','Pérez','1995-07-12','43218765E','159753468','pablo@example.com'),(6,'Juan','Pérez','García','1990-05-15','12345678A','123456789','juan@example.com'),(7,'María','López','Fernández','1985-09-23','87654321B','987654321','maria@example.com'),(30,'prova2','prova2',NULL,'2000-01-01',NULL,NULL,NULL),(31,'Juan','Gomez','Lopez','2022-02-15',NULL,'123456789','juan@gmail.com'),(32,'Maria','Perez','Rodriguez','2021-09-10','12756678A','987654321','maria@gmail.com'),(33,'Pedro','Martinez','Gutierrez','2023-04-20','98765432B','654321987','pedro@gmail.com'),(34,'Laura','Garcia','Fernandez','2022-08-22',NULL,'789456123','laura@gmail.com');
+INSERT INTO `persona` VALUES (1,'Pau','Castell','Galtes','1983-08-07','46797529G','645878955','pau@gmail.com'),(2,'NomPersona','CognomPersona1','CognomPersona2','2000-01-01','1111111H','999999999','provapersona@gmail.com'),(3,'Carlos','González','Rodríguez','1988-12-10','54321678C','654987321','carlos@example.com'),(4,'Ana','Martínez','Sánchez','1992-03-08','87651234D','789654321','ana@example.com'),(5,'Pablo','Jiménez','Pérez','1995-07-12','43218765E','159753468','pablo@example.com'),(6,'Juan','Pérez','García','1990-05-15','12345678A','123456789','juan@example.com'),(7,'María','López','Fernández','1985-09-23','87654321B','987654321','maria@example.com'),(30,'prova2','prova2',NULL,'2000-01-01',NULL,NULL,NULL),(31,'Juan','Gomez','Lopez','2022-02-15',NULL,'999999999','juan@gmail.com'),(32,'Maria','Perez','Rodriguez','2021-09-10','12756678A','987654321','maria@gmail.com'),(33,'Pedro','Martinez','Gutierrez','2023-04-20','98765432B','654321987','pedro@gmail.com'),(34,'Laura','Garcia','Fernandez','2022-08-22',NULL,'789456123','laura@gmail.com'),(38,'TestModificat','UnitariModificat','PauCastellModificat','1983-08-07','00000000K','Modificat','Modificat'),(44,'TestIntegracio','TestIntegracio','TestIntegracio','1983-02-06','1111111G','587458745','TestIntegracio@gmail.com'),(52,'testAlumne','cognomAlumne','cognomAlumne2','2021-08-06','8748555H','111111111','alumne@gmail.com'),(53,'testResposta','cognomResposta1','cognomResposta2','1983-02-06','1111111T','587458746','resposta@gmail.com');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,11 +148,12 @@ CREATE TABLE `usuari` (
   `is_admin` tinyint(1) DEFAULT '0',
   `is_teacher` tinyint(1) unsigned zerofill DEFAULT '0',
   `persona_id` int DEFAULT NULL,
-  `isActive` tinyint NOT NULL,
+  `actiu` tinyint NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `nom_usuari_UNIQUE` (`nom_usuari`),
   KEY `persona_id` (`persona_id`),
   CONSTRAINT `usuari_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +162,7 @@ CREATE TABLE `usuari` (
 
 LOCK TABLES `usuari` WRITE;
 /*!40000 ALTER TABLE `usuari` DISABLE KEYS */;
-INSERT INTO `usuari` VALUES (1,'nom_usuari','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,NULL,1),(2,'PAU','siHZ27CDp/M0KNfCo8MZiuklYU1wIQ4ocWzKp81N23k=',1,0,1,1),(18,'testResposta','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,30,1);
+INSERT INTO `usuari` VALUES (1,'nom_usuariProva','Ylil4Ot3KRHU+SvltdsOFFEe2+AdHQ3dHVosuduaVro=',1,0,NULL,1),(2,'PAU','siHZ27CDp/M0KNfCo8MZiuklYU1wIQ4ocWzKp81N23k=',1,0,1,1),(18,'testResposta2','u//vhnk6QOPfMuE7eVnaxcprcGCNr3blor2hfdexoIY=',1,0,31,0),(22,'testConsulta','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,38,1),(23,'NouUsuariModificat','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',0,1,2,1),(29,'IntegracioModificat','Ylil4Ot3KRHU+SvltdsOFFEe2+AdHQ3dHVosuduaVro=',1,0,44,0),(37,'testAlumne','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,52,0),(38,'testResposta10','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,53,1);
 /*!40000 ALTER TABLE `usuari` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -173,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-12 17:54:29
+-- Dump completed on 2023-11-21 11:31:06
