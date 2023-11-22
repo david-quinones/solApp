@@ -10,8 +10,7 @@ public class Aula {
     private int id;
     private String nomAula;
     private Empleat empleat;
-    private int nombreAlumnes;
-    private ArrayList<Alumne> alumnes;
+    private ArrayList<Alumne> alumnes = new ArrayList<>();
 
     /**Constructors segons cada necessitat.
      * 

@@ -68,7 +68,7 @@ public class AlumneDAOTest {
         //Id de la persona associada a l'alumne
         int idPersona = 5;
         //Simulem objecte alumne
-        Alumne alumne = new Alumne(true, true, true);
+        Alumne alumne = new Alumne(true, true, true,1);
         AlumneDAO alumneDAO = new AlumneDAO(conexio);
         //Comprovem el resultat de la execució
         assertEquals(1, alumneDAO.altaAlumne(alumne, idPersona));
@@ -83,10 +83,10 @@ public class AlumneDAOTest {
     public void testModificarAlumne(){
         //Dades que utilitzarem per la proba
         Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "123456789", "juan@gmail.com",1 , true, true, false);
+                null, "123456789", "juan@gmail.com",1 , true, true, false,1);
         //Modifiquem el teléfon i menjador ara serà false
         Alumne alumneModificat = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "999999999", "juan@gmail.com",1 , true, false, false);
+                null, "999999999", "juan@gmail.com",1 , true, false, false,1);
         //Executem la modificació
         AlumneDAO alumneDAO = new AlumneDAO(conexio);
         int filesAfectades = alumneDAO.modificarAlumne(alumneModificat);

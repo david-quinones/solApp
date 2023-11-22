@@ -64,10 +64,10 @@ public class ModificarAlumneTest {
     public void testModificarAlumneCorrecte(){
         //Dades que utilitzarem per la proba
         Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "123456789", "juan@gmail.com",1 , true, true, false);
+                null, "123456789", "juan@gmail.com",1 , true, true, false,1);
         //Modifiquem el teléfon i menjador ara serà false
         Alumne alumneModificat = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "999999999", "juan@gmail.com",1 , true, false, false);
+                null, "999999999", "juan@gmail.com",1 , true, false, false,1);
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
@@ -112,10 +112,10 @@ public class ModificarAlumneTest {
     public void testModificarEmpleatError(){
         //Dades que utilitzarem per la proba
         Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "123456789", "juan@gmail.com",1 , true, true, false);
+                null, "123456789", "juan@gmail.com",1 , true, true, false,1);
         //El id de l'alumne modificat no existeix
         Alumne alumneModificat = new Alumne(89, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "999999999", "juan@gmail.com",1 , true, false, false);
+                null, "999999999", "juan@gmail.com",1 , true, false, false,1);
 
         try {
             socket = new Socket("localhost",9999);

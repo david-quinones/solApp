@@ -21,7 +21,7 @@ public class EmpleatDAO {
     private static final int CORRECTE = 1;
     private static final int ERROR = -1;
     
-    /**Constructor heredat de la classe PersonaDAO
+    /**Constructor de la clase
      * 
      * @param conexio
      */

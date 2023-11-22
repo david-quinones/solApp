@@ -8,6 +8,7 @@ probesIntegracio\LogoutTest$1.class
 entitats\EmpleatTest.class
 probesIntegracio\LlistarEmpleatsTest.class
 resposta\GenerarRespostaTest.class
+probesIntegracio\AltaAulaTest$1.class
 probesIntegracio\LoginTest.class
 persistencia\UsuariDAOTest.class
 entitats\PersonaTest.class
@@ -20,6 +21,7 @@ entitats\AlumneTest.class
 resposta\ControladorRespostaTest.class
 probesIntegracio\LlistarUsuarisTest$1.class
 probesIntegracio\ModificacióPerfilTest$1.class
+probesIntegracio\AltaAulaTest.class
 probesIntegracio\LlistarAlumnesTest.class
 estructurapr\DadesPRTest.class
 probesIntegracio\AltaAlumneTest$1.class
@@ -36,6 +38,7 @@ persistencia\EmpleatDAOTest.class
 probesIntegracio\ModificacióPerfilTest.class
 probesIntegracio\ConsultaPersonaTest.class
 probesIntegracio\AltaEmpleatTest$1.class
+persistencia\AulaDAOTest.class
 probesIntegracio\LlistarAlumnesTest$1.class
 probesIntegracio\ModificarUsuariTest.class
 utilitats\UtilsTest.class

@@ -431,6 +431,35 @@ public class GenerarResposta {
             return resposta = new RetornDades(CODI_ERROR);
         }
     }
+    
+    
+    
+    /**Mètode per retornar les dades a la crida altaAula
+     * 
+     * @param aula que s'ha de donar d'alta
+     * @return resposta
+     */
+    public RetornDades respostaAltaAula(Aula aula){
+        //Executem l'alta del aula
+        AulaDAO aulaDAO = new AulaDAO(conexio);
+        int altaAula = aulaDAO.altaAula(aula);
+        //Comprovem el resultat
+        if(altaAula > 0){
+            ArrayList<Alumne> llistaAlumnes = aula.getAlumnes();
+            if(!llistaAlumnes.isEmpty()){
+                AlumneDAO alumneDAO = new AlumneDAO(conexio);
+                for(Alumne alumne: llistaAlumnes){
+                    alumneDAO.afegirAlumneAula(alumne, altaAula);
+                }
+            }else{
+                LOGGER.info("La llista d'alumnes està buida");
+            }            
+        }else{
+            LOGGER.warning("L'alta de l'aula no s'ha realitzat");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+        return resposta = new RetornDades(CODI_CORRECTE);
+    }
         
     }
 

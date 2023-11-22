@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,14 +105,21 @@ public class AlumneDAO {
         try {
             //Ordre sql per modificar les dades del alumne
             String updateAlumne = "UPDATE alumne SET menjador = ?,"
-                    + " acollida = ? WHERE id = ?;";
+                    + " acollida = ? aula_id = ? WHERE id = ?;";
             psAlumne = conexio.prepareStatement(updateAlumne);
             
             //Establim les dades per a la ordre sql
             if(alumne != null){
                 psAlumne.setBoolean(1, alumne.isMenjador());
                 psAlumne.setBoolean(2, alumne.isAcollida());
-                psAlumne.setInt(3, alumne.getIdAlumne());
+                //Comprovem si l'id de l'aula es null
+                Integer aulaId = alumne.getIdAula();
+                if(aulaId != null){
+                    psAlumne.setInt(3, alumne.getIdAula());
+                }else{
+                    psAlumne.setNull(3, Types.INTEGER);
+                }               
+                psAlumne.setInt(4, alumne.getIdAlumne());
             }else{
                 LOGGER.warning("L'objecte alumne es null");
                 return ERROR;
@@ -197,6 +205,45 @@ public class AlumneDAO {
         } catch (SQLException ex) {
             Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE, null, ex);
         }     
+        return ERROR;
+    }
+    
+    
+    
+    /**Mètode per afegir alumnes a una aula
+     * 
+     * @param alumne
+     * @param idAula
+     * @return 
+     */
+    public int afegirAlumneAula (Alumne alumne, int idAula){
+        try {
+            //Instrucció per modificar la base de dades
+            String afegirAlumne = "UPDATE alumne SET aula_id = ? WHERE id = ?;";
+            psAlumne = conexio.prepareStatement(afegirAlumne);
+            
+            //Establim les dades per fer la modificació
+            psAlumne.setInt(1, idAula);
+            if(alumne.getIdAlumne() > 0){
+                psAlumne.setInt(2, alumne.getIdAlumne());
+            }else{
+                LOGGER.warning("El camp idAlumne està buit.");
+                return ERROR;
+            }
+
+            //Comprovem que la execució es correcte
+            int filesAfectades = psAlumne.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("Alumne amb id " + alumne.getIdAlumne() + " afegit a aula amb id: " + idAula);
+                return CORRECTE;
+            }else{
+                LOGGER.warning("ERROR al itentar afegir alumne a l'aula");
+                return ERROR;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumneDAO.class.getName()).log(Level.SEVERE,
+                    "ERROR al intentar afegir un alumne a una aula", ex);
+        }
         return ERROR;
     }
     
