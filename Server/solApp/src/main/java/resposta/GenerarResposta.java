@@ -480,6 +480,34 @@ public class GenerarResposta {
             return resposta = new RetornDades(CODI_ERROR);
         }
     }
-        
+    
+    
+    /**Mètode per generar la resposta corresponent a la crida modificar_aula
+     * 
+     * @param aula que s'ha de modificar
+     * @return resposta amb el resultat
+     */
+    public RetornDades respostaModificarAula(Aula aula){
+        ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
+        AulaDAO aulaDAO = new AulaDAO(conexio);
+        //Executem la modificació
+        int modificarAula = aulaDAO.modificarAula(aula);
+        if(modificarAula > 0){
+            llistaAlumnes = aula.getAlumnes();
+            if(!llistaAlumnes.isEmpty()){
+                AlumneDAO alumneDAO = new AlumneDAO(conexio);
+                for(Alumne alumne: llistaAlumnes){
+                    alumneDAO.afegirAlumneAula(alumne, aula.getId());
+                }
+            }else{
+                LOGGER.info("La llista d'alumnes està buida");
+            }            
+        }else{
+            LOGGER.warning("La modificació no s'ha pogut realitzar");
+            return resposta = new RetornDades(CODI_ERROR);
+            }
+        return resposta = new RetornDades(CODI_CORRECTE);
+        }
     }
+        
 

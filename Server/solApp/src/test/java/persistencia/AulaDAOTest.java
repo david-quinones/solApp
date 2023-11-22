@@ -82,4 +82,22 @@ public class AulaDAOTest {
         assertTrue(eliminarAula > 0);
     }
     
+    
+    @Test
+    public void testModificarAula(){
+        //Noves dades de l'aula
+        Aula aula = new Aula();
+        aula.setId(2);
+        aula.setNomAula("TestModificacio");
+        
+        AulaDAO aulaDAO = new AulaDAO(conexio);
+        int resultat = aulaDAO.modificarAula(aula);
+        assertTrue(resultat > 0);
+        
+        //Aula amb un id que no existeix
+        aula.setId(254);
+        resultat = aulaDAO.modificarAula(aula);
+        assertTrue(resultat < 0);
+    }
+    
 }

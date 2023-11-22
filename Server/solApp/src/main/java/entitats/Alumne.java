@@ -60,12 +60,22 @@ public class Alumne extends Persona{
      * @param idAula 
      */
     public Alumne(String nom, String cognom1, String cognom2, String data_naixement, 
+            String dni, String telefon, String mail,boolean actiu, boolean menjador, boolean acollida) {
+        super(nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
+        this.actiu = actiu;
+        this.menjador = menjador;
+        this.acollida = acollida;
+
+    }
+    
+    public Alumne(String nom, String cognom1, String cognom2, String data_naixement, 
             String dni, String telefon, String mail,boolean actiu, boolean menjador, boolean acollida, int idAula) {
         super(nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.actiu = actiu;
         this.menjador = menjador;
         this.acollida = acollida;
         this.idAula = idAula;
+
     }
 
     

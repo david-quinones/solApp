@@ -64,10 +64,10 @@ public class ModificarAlumneTest {
     public void testModificarAlumneCorrecte(){
         //Dades que utilitzarem per la proba
         Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "123456789", "juan@gmail.com",1 , true, true, false,1);
+                null, "123456789", "juan@gmail.com",1 , true, true, false);
         //Modifiquem el teléfon i menjador ara serà false
         Alumne alumneModificat = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "999999999", "juan@gmail.com",1 , true, false, false,1);
+                null, "999999999", "juan@gmail.com",1 , true, false, false);
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");

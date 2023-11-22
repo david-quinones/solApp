@@ -101,5 +101,41 @@ public class AulaDAO {
         }
         return ERROR;
     }
+    
+    
+    /**Mètode per modifcar les dades d'una aula a la base de dades
+     * 
+     * @param aula que s'ha de modificar
+     * @return resultat de la crida
+     */
+    public int modificarAula(Aula aula){
+        try {
+            String modificarAula = "UPDATE aula SET nom = ?, professor_id = ? "
+                    + "WHERE id = ?;";
+            psAula = conexio.prepareStatement(modificarAula);
+            
+            //Establim les dades per fer la modificació
+            psAula.setString(1, aula.getNomAula());
+            if(aula.getEmpleat() != null){
+                psAula.setInt(2, aula.getEmpleat().getIdEmpleat());
+            }else{
+                psAula.setNull(2, Types.INTEGER);
+            }
+            psAula.setInt(3, aula.getId());
+            
+            //Comprovem execució
+            int filesAfectades = psAula.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("L'aula amb id " + aula.getId() + " s'ha modificat correctament");
+                return CORRECTE;
+            }else{
+                LOGGER.warning("No s'ha pogut modifcar l'aula id no existeix o es null");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, 
+                    "ERROR al intentar modifcar l'aula", ex);
+        }
+        return ERROR;
+    }
 
 }

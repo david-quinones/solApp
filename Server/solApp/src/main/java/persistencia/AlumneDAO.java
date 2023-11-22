@@ -70,15 +70,21 @@ public class AlumneDAO {
      */
     public int altaAlumne(Alumne alumne, int idPersona){
         try {
-            String insertAlumne = "INSERT INTO alumne (actiu, menjador, acollida, persona_id)"
-                    + " VALUES (?,?,?,?);";
+            String insertAlumne = "INSERT INTO alumne (actiu, menjador, acollida, persona_id, aula_id)"
+                    + " VALUES (?,?,?,?,?);";
             psAlumne = conexio.prepareStatement(insertAlumne);
             
             //Establim les dades que cal insertar
             psAlumne.setBoolean(1, alumne.isActiu());
             psAlumne.setBoolean(2,alumne.isMenjador());
             psAlumne.setBoolean(3, alumne.isAcollida());
+            Integer idAula = alumne.getIdAula();
             psAlumne.setInt(4, idPersona);
+            if(idAula > 0){
+                psAlumne.setInt(5, alumne.getIdAula());
+            }else{
+                psAlumne.setNull(5, Types.INTEGER);
+            }
             
             //Comprovem s'hi s'ha insertat correctament
             int filesAfectades = psAlumne.executeUpdate();
@@ -105,7 +111,7 @@ public class AlumneDAO {
         try {
             //Ordre sql per modificar les dades del alumne
             String updateAlumne = "UPDATE alumne SET menjador = ?,"
-                    + " acollida = ? aula_id = ? WHERE id = ?;";
+                    + " acollida = ? , aula_id = ? WHERE id = ?;";
             psAlumne = conexio.prepareStatement(updateAlumne);
             
             //Establim les dades per a la ordre sql
@@ -114,7 +120,8 @@ public class AlumneDAO {
                 psAlumne.setBoolean(2, alumne.isAcollida());
                 //Comprovem si l'id de l'aula es null
                 Integer aulaId = alumne.getIdAula();
-                if(aulaId != null){
+                System.out.println(aulaId + "  " + alumne.getIdAula());
+                if(aulaId > 0){
                     psAlumne.setInt(3, alumne.getIdAula());
                 }else{
                     psAlumne.setNull(3, Types.INTEGER);
@@ -167,6 +174,11 @@ public class AlumneDAO {
             alumne.setActiu(dades.getBoolean("actiu"));
             alumne.setMenjador(dades.getBoolean("menjador"));
             alumne.setAcollida(dades.getBoolean("acollida"));
+            if(dades.getObject("aula_id") != null){
+                alumne.setIdAula(dades.getInt("aula_id"));
+            }else{
+                alumne.setIdAula(0);
+            }
             LOGGER.info("Obtingut alumne amb id: " + alumne.getIdAlumne());
             
             return alumne;
