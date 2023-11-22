@@ -66,5 +66,40 @@ public class AulaDAO {
         
         return ERROR;
     }
+    
+    
+    
+    /**Mètode per eliminar una aula de la base de dades sempre que no tingui alumnes associats
+     * 
+     * @param idAula que s'ha d'eliminar
+     * @return codi del resultat
+     */
+    public int eliminarAula(int idAula){
+        try {
+            //Delete de la base de dades sempre que l'aula no tingui alumnes associats
+            String eliminarAula = "DELETE FROM aula WHERE id = ? "
+                    + "AND (SELECT COUNT(*) FROM ALUMNE WHERE aula_id = ?) = 0;";
+            psAula = conexio.prepareStatement(eliminarAula);
+            
+            //Establim les dades per al delete
+            psAula.setInt(1, idAula);
+            psAula.setInt(2, idAula);
+            
+            //Comprovem execució
+            int filesAfectades = psAula.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("L'aula amb id " + idAula + " s'ha eliminat correctament");
+                return CORRECTE;
+                
+            }else{
+                LOGGER.warning("L'aula no s'ha pogut eliminar, te alumnes associats o l'id no es correcte");
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, 
+                    "ERROR al intentar eliminar l'aula de la base de dades", ex);
+        }
+        return ERROR;
+    }
 
 }

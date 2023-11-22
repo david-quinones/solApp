@@ -66,4 +66,20 @@ public class AulaDAOTest {
         assertTrue(resultat > 0);
     }
     
+    
+    /**Test per comprovar el correcte funcinament de eliminar_aula
+     * 
+     */
+    @Test
+    public void testEliminarAula(){
+        AulaDAO aulaDAO = new AulaDAO(conexio);
+        //Afegim id aula amb alumnes associats
+        int eliminarAula = aulaDAO.eliminarAula(4);
+        //El resultat tindria que ser erroni
+        assertTrue(eliminarAula < 0);
+        //El resultat ha de ser correcte
+        eliminarAula = aulaDAO.eliminarAula(3);
+        assertTrue(eliminarAula > 0);
+    }
+    
 }

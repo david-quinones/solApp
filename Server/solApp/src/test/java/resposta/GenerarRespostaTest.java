@@ -302,4 +302,23 @@ public class GenerarRespostaTest {
         assertEquals(1, resposta.getCodiResultat());
         
     }
+    
+    
+    
+    /**Test per comprovar la resposta de la crida eliminar_aula
+     * 
+     */
+    @Test
+    public void testEliminarAula(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        Aula aula = new Aula();
+        aula.setId(4);
+        //No es pot esborrar l'aula
+        RetornDades resposta = generarResposta.respostaEliminarAula(aula);
+        assertEquals(0, resposta.getCodiResultat());
+        //L'aula es pot esborrar
+        aula.setId(5);
+        resposta = generarResposta.respostaEliminarAula(aula);
+        assertEquals(1, resposta.getCodiResultat());
+    }
 }

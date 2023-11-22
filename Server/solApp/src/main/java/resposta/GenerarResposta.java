@@ -460,6 +460,26 @@ public class GenerarResposta {
         }
         return resposta = new RetornDades(CODI_CORRECTE);
     }
+    
+    
+    /**Mètode per generar la resposta corresponent a la crida eliminar_aula
+     * 
+     * @param aula que s'ha d'eliminar
+     * @return resposta amb codi del resultat
+     */
+    public RetornDades respostaEliminarAula(Aula aula){
+        AulaDAO aulaDAO = new AulaDAO(conexio);
+        //Executem la consulta
+        int eliminarAula = aulaDAO.eliminarAula(aula.getId());
+        //Comprovem resultat i enviem resposta corresponent.
+        if(eliminarAula > 0){
+            LOGGER.info("S'ha genereat la resposta eliminarAula aula eliminada.");
+            return resposta = new RetornDades(CODI_CORRECTE);
+        }else{
+            LOGGER.warning("No s'ha pogut eliminar l'aula");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+    }
         
     }
 

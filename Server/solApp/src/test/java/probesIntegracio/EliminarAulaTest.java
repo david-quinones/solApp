@@ -13,14 +13,13 @@ import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import persistencia.PersonaDAO;
 import servidor.ServidorSocketListener;
 
-/**Classe per fer les proves d'integració de la crida alta_aula
+/**Classe per fer les proves d'integració de la crida eliminar_Aula
  *
  * @author Pau Castell Galtes
  */
-public class AltaAulaTest {
+public class EliminarAulaTest {
     private ServidorSocketListener servidor;
     private Socket socket;
     private static final Logger LOGGER = Logger.getLogger(AltaAulaTest.class.getName());
@@ -54,36 +53,23 @@ public class AltaAulaTest {
     }
     
     
-    /**Test d'integració per comprovar el funcionament correcte de la crida a alta_aula
+    /**Test d'integració per comprovar el funcionament correcte de la crida a eliminar_aula
+     * amb un resultat correcte
      * 
      */
     @Test
-    public void testAltaAula(){
+    public void testEliminarAulaCorrecte(){
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
             
-            //Preparem dades que s'han de donar d'alta
-            //Empleat assignat a l'aula
-            Empleat empleat = new Empleat(1,"Pau", "Castell", "Galtes", "1983-08-07",
-                "46797529G", "93703532", "pau@gmail.com", 1,true, "2022-01-01", "2023-12-31");
-            //Aula que es donarà d'alta
+            //Preparem dades de l'aula que s'ha d'eliminar
             Aula aula = new Aula();
-            aula.setNomAula("TestResposta");
-            aula.setEmpleat(empleat);
-            //ArrayList d'alumnes
-            ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
-             Alumne alumne1 = new Alumne(33, "Pedro", "Martinez", "Gutierrez", "2023-04-20", "98765432B", 
-                "654321987", "pedro@gmail.com", 3, true, true, true);
-            Alumne alumne2 = new Alumne(34, "Laura", "Garcia", "Fernandez", "2022-08-22", null, 
-                "789456123", "laura@gmail.com", 4, true, false, false);
-            llistaAlumnes.add(alumne1);
-            llistaAlumnes.add(alumne2);
-            aula.setAlumnes(llistaAlumnes);
+            aula.setId(5);
             
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
-            PeticioClient peticio  = new PeticioClient("ALTA_AULA");
+            PeticioClient peticio  = new PeticioClient("ELIMINAR_AULA");
             peticio.afegirDades(numSessio);
             peticio.afegirDades(aula);
 
@@ -101,7 +87,7 @@ public class AltaAulaTest {
             //Obtenim la resposta del servidor
             LOGGER.info("Dades rebudes per part del servidor.");
             
-            //Si la inserció es erronea el resultat es 0
+            //Si s'elimina correctament el resultat es 1
             assertEquals(1, retorn.getCodiResultat());
             LOGGER.info("Resultat esperat 1, resultat obtingut : " + retorn.getCodiResultat());
             
@@ -112,4 +98,54 @@ public class AltaAulaTest {
             Logger.getLogger(ConsultaPersonaTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
+    
+    /**Test per comprovar la crida eliminar_aula amb un resultat erroni
+     * 
+     */
+    @Test
+    public void testEliminarAulaError(){
+        try {
+            socket = new Socket("localhost",9999);
+            LOGGER.info("Client connectat al servidor");
+            
+            //Preparem dades de l'aula que s'ha d'eliminar
+            Aula aula = new Aula();
+            //Aquesta aula té alumnes associats
+            aula.setId(4);
+            
+            //PETICIO DEL CLIENT AL SERVIDOR
+            String numSessio = "sessioProves";
+            PeticioClient peticio  = new PeticioClient("ELIMINAR_AULA");
+            peticio.afegirDades(numSessio);
+            peticio.afegirDades(aula);
+
+            //Enviem la petició al servidor en format JSON
+            Gson gson = new Gson();
+            PrintWriter output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()),true);
+            output.println(gson.toJson(peticio));
+            LOGGER.info("Petició enviada al servidor.");
+            
+            //RESPOSTA DEL SERVIDOR QUE REP EL CLIENT
+            //Legim les dades rebudes del servidor
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String llegir = input.readLine();
+            RetornDades retorn = gson.fromJson(llegir, RetornDades.class);          
+            //Obtenim la resposta del servidor
+            LOGGER.info("Dades rebudes per part del servidor.");
+            
+            //Si no es pot eliminar el resultat es 0
+            assertEquals(0, retorn.getCodiResultat());
+            LOGGER.info("Resultat esperat 1, resultat obtingut : " + retorn.getCodiResultat());
+            
+            socket.close();
+            LOGGER.info("Socket del client tancat.");
+
+        } catch (IOException ex) {
+            Logger.getLogger(ConsultaPersonaTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
 }

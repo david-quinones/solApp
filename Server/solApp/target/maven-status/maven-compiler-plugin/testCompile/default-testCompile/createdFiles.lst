@@ -6,6 +6,7 @@ estructurapr\RetornDadesTest.class
 persistencia\ConexioBBDDTest.class
 probesIntegracio\LogoutTest$1.class
 entitats\EmpleatTest.class
+probesIntegracio\EliminarAulaTest$1.class
 probesIntegracio\LlistarEmpleatsTest.class
 resposta\GenerarRespostaTest.class
 probesIntegracio\AltaAulaTest$1.class
@@ -20,6 +21,7 @@ entitats\UsuariTest.class
 entitats\AlumneTest.class
 resposta\ControladorRespostaTest.class
 probesIntegracio\LlistarUsuarisTest$1.class
+probesIntegracio\EliminarAulaTest.class
 probesIntegracio\ModificacióPerfilTest$1.class
 probesIntegracio\AltaAulaTest.class
 probesIntegracio\LlistarAlumnesTest.class

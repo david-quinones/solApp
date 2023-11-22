@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: persistencia.AulaDAOTest
+Test set: probesIntegracio.EliminarAulaTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.578 s -- in persistencia.AulaDAOTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.631 s -- in probesIntegracio.EliminarAulaTest
