@@ -431,6 +431,83 @@ public class GenerarResposta {
             return resposta = new RetornDades(CODI_ERROR);
         }
     }
-        
+    
+    
+    
+    /**Mètode per retornar les dades a la crida altaAula
+     * 
+     * @param aula que s'ha de donar d'alta
+     * @return resposta
+     */
+    public RetornDades respostaAltaAula(Aula aula){
+        //Executem l'alta del aula
+        AulaDAO aulaDAO = new AulaDAO(conexio);
+        int altaAula = aulaDAO.altaAula(aula);
+        //Comprovem el resultat
+        if(altaAula > 0){
+            ArrayList<Alumne> llistaAlumnes = aula.getAlumnes();
+            if(!llistaAlumnes.isEmpty()){
+                AlumneDAO alumneDAO = new AlumneDAO(conexio);
+                for(Alumne alumne: llistaAlumnes){
+                    alumneDAO.afegirAlumneAula(alumne, altaAula);
+                }
+            }else{
+                LOGGER.info("La llista d'alumnes està buida");
+            }            
+        }else{
+            LOGGER.warning("L'alta de l'aula no s'ha realitzat");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+        return resposta = new RetornDades(CODI_CORRECTE);
     }
+    
+    
+    /**Mètode per generar la resposta corresponent a la crida eliminar_aula
+     * 
+     * @param aula que s'ha d'eliminar
+     * @return resposta amb codi del resultat
+     */
+    public RetornDades respostaEliminarAula(Aula aula){
+        AulaDAO aulaDAO = new AulaDAO(conexio);
+        //Executem la consulta
+        int eliminarAula = aulaDAO.eliminarAula(aula.getId());
+        //Comprovem resultat i enviem resposta corresponent.
+        if(eliminarAula > 0){
+            LOGGER.info("S'ha genereat la resposta eliminarAula aula eliminada.");
+            return resposta = new RetornDades(CODI_CORRECTE);
+        }else{
+            LOGGER.warning("No s'ha pogut eliminar l'aula");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+    }
+    
+    
+    /**Mètode per generar la resposta corresponent a la crida modificar_aula
+     * 
+     * @param aula que s'ha de modificar
+     * @return resposta amb el resultat
+     */
+    public RetornDades respostaModificarAula(Aula aula){
+        ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
+        AulaDAO aulaDAO = new AulaDAO(conexio);
+        //Executem la modificació
+        int modificarAula = aulaDAO.modificarAula(aula);
+        if(modificarAula > 0){
+            llistaAlumnes = aula.getAlumnes();
+            if(!llistaAlumnes.isEmpty()){
+                AlumneDAO alumneDAO = new AlumneDAO(conexio);
+                for(Alumne alumne: llistaAlumnes){
+                    alumneDAO.afegirAlumneAula(alumne, aula.getId());
+                }
+            }else{
+                LOGGER.info("La llista d'alumnes està buida");
+            }            
+        }else{
+            LOGGER.warning("La modificació no s'ha pogut realitzar");
+            return resposta = new RetornDades(CODI_ERROR);
+            }
+        return resposta = new RetornDades(CODI_CORRECTE);
+        }
+    }
+        
 

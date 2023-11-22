@@ -28,7 +28,7 @@ import servidor.ServidorSocketListener;
 public class AltaEmpleatTest {
     private ServidorSocketListener servidor;
     private Socket socket;
-    private static final Logger LOGGER = Logger.getLogger(PersonaDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AltaEmpleatTest.class.getName());
     
     /**Preparem el servidora abans de cada test
      * 

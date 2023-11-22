@@ -97,6 +97,14 @@ public class ControladorResposta {
                 //Generem resposta a la crida modificar_usuari
                 resposta = dadesResposta.respostaModificarUsuari((Usuari)peticio.getDades(1, Usuari.class));
                 return resposta;
+            case "ALTA_AULA":
+                //Generem resposta a la crida alta_aula
+                resposta = dadesResposta.respostaAltaAula((Aula) peticio.getDades(1, Aula.class));
+                return resposta;
+            case "ELIMINAR_AULA":
+                //Generem resposta a la crida eliminar_aula
+                resposta = dadesResposta.respostaEliminarAula((Aula) peticio.getDades(1, Aula.class));
+                return resposta;
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }

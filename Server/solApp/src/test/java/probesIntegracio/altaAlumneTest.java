@@ -1,16 +1,10 @@
 package probesIntegracio;
 
 import com.google.gson.Gson;
-import entitats.Alumne;
-import entitats.Empleat;
-import entitats.Usuari;
+import entitats.*;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,6 +67,7 @@ public class AltaAlumneTest {
             Usuari usuari = new Usuari("testAlumneIntegracio", "password", true, false, true);
             Alumne alumne = new Alumne("AlumneIntegracio", "cognomIntegracio", "cognomIntegracio2",
                 "2022-08-23", "45645645P", "111111111", "alumneInt@gmail.com", true, false, true);
+
             
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
@@ -120,7 +115,7 @@ public class AltaAlumneTest {
             //Preparem dades que s'han de donar d'alta
             Usuari usuari = new Usuari("PAU", "password", true, false, true);
             Alumne alumne = new Alumne("AlumneIntegracio", "cognomIntegracio", "cognomIntegracio2",
-                "2022-08-23", "45645645P", "111111111", "alumneInt@gmail.com", true, false, true);
+                "2022-08-23", "45645645P", "111111111", "alumneInt@gmail.com", true, false, true,1);
             
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";

@@ -1,6 +1,7 @@
 package resposta;
 
 import entitats.Alumne;
+import entitats.Aula;
 import entitats.Empleat;
 import entitats.Persona;
 import entitats.Usuari;
@@ -202,7 +203,7 @@ public class GenerarRespostaTest {
         //Preparem dades que s'han de donar d'alta
         Usuari usuari = new Usuari("testAlumne", "password", true, false, true);
         Alumne alumne = new Alumne("testAlumne", "cognomAlumne", "cognomAlumne2",
-                "2021-08-06", "8748555H", "111111111", "alumne@gmail.com", true, false, false);
+                "2021-08-06", "8748555H", "111111111", "alumne@gmail.com", true, false, false,1);
         GenerarResposta generarResposta = new GenerarResposta();
         RetornDades retornDades = generarResposta.respostaAltaAlumne(alumne, usuari);
         //Comprovem que el codi es 1, operació correcte
@@ -217,10 +218,10 @@ public class GenerarRespostaTest {
     public void testModificarAlumne(){
         //Dades que utilitzarem per la prova
         Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "123456789", "juan@gmail.com",1 , true, true, false);
+                null, "123456789", "juan@gmail.com",1 , true, true, false,1);
         //Modifiquem el teléfon i menjador ara serà false
         Alumne alumneModificat = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "999999999", "juan@gmail.com",1 , true, false, false);
+                null, "999999999", "juan@gmail.com",1 , true, false, false,1);
         //Generem la resposta
         GenerarResposta generarResposta = new GenerarResposta();
         RetornDades retornDades = generarResposta.respostaModificarAlumne(alumneModificat);
@@ -228,7 +229,7 @@ public class GenerarRespostaTest {
         assertEquals(1, retornDades.getCodiResultat());
         //Fem el mateix amb un alumne que no existeix
         Alumne alumneError= new Alumne(80, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "123456789", "juan@gmail.com",1 , true, true, false);
+                null, "123456789", "juan@gmail.com",1 , true, true, false,1);
         retornDades = generarResposta.respostaModificarAlumne(alumneError);
         assertEquals(0, retornDades.getCodiResultat()); 
     }
@@ -276,4 +277,48 @@ public class GenerarRespostaTest {
     }
     
     
+    //***************************** TEA 4 *********************************************
+    
+    @Test
+    public void testAltaAula(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        //Es crea una aula
+        Aula aula = new Aula();
+        aula.setNomAula("TestResposta");
+        Empleat empleat = new Empleat(1,"Pau", "Castell", "Galtes", "1983-08-07",
+                "46797529G", "93703532", "pau@gmail.com", 1,true, "2022-01-01", "2023-12-31");
+        aula.setEmpleat(empleat);
+        //ArrayList d'alumnes
+        ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
+        Alumne alumne1 = new Alumne(33, "Pedro", "Martinez", "Gutierrez", "2023-04-20", "98765432B", 
+                "654321987", "pedro@gmail.com", 3, true, true, true);
+        Alumne alumne2 = new Alumne(34, "Laura", "Garcia", "Fernandez", "2022-08-22", null, 
+                "789456123", "laura@gmail.com", 4, true, false, false);
+        llistaAlumnes.add(alumne1);
+        llistaAlumnes.add(alumne2);
+        aula.setAlumnes(llistaAlumnes);
+        
+        RetornDades resposta = generarResposta.respostaAltaAula(aula);
+        assertEquals(1, resposta.getCodiResultat());
+        
+    }
+    
+    
+    
+    /**Test per comprovar la resposta de la crida eliminar_aula
+     * 
+     */
+    @Test
+    public void testEliminarAula(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        Aula aula = new Aula();
+        aula.setId(4);
+        //No es pot esborrar l'aula
+        RetornDades resposta = generarResposta.respostaEliminarAula(aula);
+        assertEquals(0, resposta.getCodiResultat());
+        //L'aula es pot esborrar
+        aula.setId(5);
+        resposta = generarResposta.respostaEliminarAula(aula);
+        assertEquals(1, resposta.getCodiResultat());
+    }
 }

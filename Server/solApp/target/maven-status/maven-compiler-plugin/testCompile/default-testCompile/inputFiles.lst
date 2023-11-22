@@ -17,14 +17,17 @@ C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegraci
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\resposta\GenerarRespostaTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\persistencia\EmpleatDAOTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\entitats\UsuariTest.java
+C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegracio\EliminarAulaTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegracio\ModificarEmpleatTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegracio\LlistarAlumnesTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\persistencia\PersonaDAOTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\persistencia\UsuariDAOTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegracio\LogoutTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegracio\ModificarAlumneTest.java
+C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegracio\AltaAulaTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegracio\EliminarUsuariTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegracio\LlistarUsuarisTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\persistencia\AlumneDAOTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegracio\AltaAlumneTest.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\probesIntegracio\ModificarUsuariTest.java
+C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\test\java\persistencia\AulaDAOTest.java

@@ -1,4 +1,5 @@
 servidor\ServidorSocketListener$GestorClients.class
+persistencia\AulaDAO.class
 entitats\Empleat.class
 entitats\Usuari.class
 persistencia\AlumneDAO.class
