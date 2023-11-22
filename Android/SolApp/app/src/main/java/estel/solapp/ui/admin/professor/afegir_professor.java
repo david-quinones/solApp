@@ -107,7 +107,7 @@ public class afegir_professor extends Fragment {
             //Creació de Empleat i usuari per donar d'alta.
             empleat = new Empleat(nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
                     nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),true,dataInici.getText().toString(),dataFi.getText().toString());
-            usuari = new User(nomUsuari.getText().toString(),contrasenya.getText().toString());
+            usuari = new User(nomUsuari.getText().toString(),contrasenya.getText().toString(),false,true,false);
 
             // Creació d'unaltre fil.
             ExecutorService executor = Executors.newSingleThreadExecutor();

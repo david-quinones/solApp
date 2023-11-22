@@ -268,6 +268,19 @@
             app:layout_constraintStart_toEndOf="@+id/textView32"
             app:layout_constraintTop_toBottomOf="@+id/editTextTelefon" />
 
+        <CheckBox
+            android:id="@+id/cBisactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:enabled="false"
+            android:text="Actiu"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/editTextCognom1"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNif" />
+
         <Button
             android:id="@+id/modificarBtn"
             android:layout_width="wrap_content"
@@ -308,7 +321,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextDataNaixement" />
 
         <ScrollView
-            android:id="@+id/VSmodificar_professor"
+            android:id="@+id/VSmodificar_Usuaris"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -321,7 +334,7 @@
             app:layout_constraintTop_toBottomOf="@+id/modificarBtn">
 
             <TableLayout
-                android:id="@+id/taula_modifica_professor"
+                android:id="@+id/taula_modifica_usuaris"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -329,6 +342,9 @@
 
             </TableLayout>
         </ScrollView>
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

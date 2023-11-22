@@ -12,16 +12,6 @@
         tools:layout="@layout/fragment_home_gestio_usuaris" />
 
     <fragment
-        android:id="@+id/afegir_usuari"
-        android:name="estel.solapp.ui.admin.users.AfegirUsuari"
-        android:label="Afegir usuari"
-        tools:layout="@layout/fragment_afegir_usuari" />
-    <fragment
-        android:id="@+id/elimina_usuari"
-        android:name="estel.solapp.ui.admin.users.EliminaUsuari"
-        android:label="Eliminar usuari"
-        tools:layout="@layout/fragment_elimina_usuari" />
-    <fragment
         android:id="@+id/modifica_usuari"
         android:name="estel.solapp.ui.admin.users.modifica_usuari"
         android:label="Modificar Usuari"
@@ -34,6 +24,6 @@
     <fragment
         android:id="@+id/llista_usuaris"
         android:name="estel.solapp.ui.admin.users.llista_usuaris"
-        android:label="fragment_llista_usuaris"
+        android:label="Llista d'usuaris"
         tools:layout="@layout/fragment_llista_usuaris" />
 </navigation>

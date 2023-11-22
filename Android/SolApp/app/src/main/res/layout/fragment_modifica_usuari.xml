@@ -8,18 +8,220 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/solapp_background">
+
+
+        <EditText
+            android:id="@+id/editTextConfirmContrasenya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="11"
+            android:focusableInTouchMode="false"
+            android:inputType="text|textPassword"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView26"
+            app:layout_constraintTop_toBottomOf="@+id/editTextcontrasenya" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Confirma contrasenya"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+        <CheckBox
+            android:id="@+id/cBisProfessor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:enabled="false"
+            android:focusableInTouchMode="false"
+            android:paddingHorizontal="4dp"
+            android:text="Professor"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/cBisactive"
+            app:layout_constraintStart_toEndOf="@+id/cBisAdmin"
+            app:layout_constraintTop_toBottomOf="@+id/editTextConfirmContrasenya" />
+
+        <CheckBox
+            android:id="@+id/cBisAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:enabled="false"
+            android:focusableInTouchMode="false"
+            android:paddingHorizontal="4dp"
+            android:text="Admin"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+        <EditText
+            android:id="@+id/editTextcontrasenya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="11"
+            android:focusableInTouchMode="false"
+            android:inputType="text|textPassword"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView24"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNomUsuari" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Contrasenya"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+        <EditText
+            android:id="@+id/editTextNomUsuari"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:ems="11"
+            android:focusableInTouchMode="false"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView21"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Dades de l'usuari"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
+            android:background="#FFFFFF"
             android:text="Torna enrere"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Nom Usuari"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+
+        <CheckBox
+            android:id="@+id/cBisactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FFFFFF"
+            android:enabled="false"
+            android:focusableInTouchMode="false"
+            android:paddingHorizontal="4dp"
+            android:text="Actiu"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextConfirmContrasenya" />
+
+        <Button
+            android:id="@+id/modificarBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#090909"
+            android:clickable="true"
+            android:enabled="true"
+            android:text="Modificar dades"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:cornerRadius="1dp"
+            app:icon="@drawable/baseline_create_24"
+            app:iconGravity="top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cBisAdmin" />
+
+        <Button
+            android:id="@+id/confirmarBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#090909"
+            android:clickable="false"
+            android:enabled="false"
+            android:text="Desa el canvis"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:cornerRadius="1dp"
+            app:icon="@drawable/baseline_save_24"
+            app:iconGravity="top"
+            app:iconTint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cBisactive" />
+
+        <ScrollView
+            android:id="@+id/VSmodificar_Usuaris"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmarBtn">
+
+            <TableLayout
+                android:id="@+id/taula_modifica_usuaris"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:gravity="center_horizontal">
+
+            </TableLayout>
+        </ScrollView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

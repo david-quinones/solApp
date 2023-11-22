@@ -13,9 +13,6 @@ public class User {
     private boolean isActive;
 
 
-
-
-
     //Constructors:
 
     /**
@@ -49,6 +46,24 @@ public class User {
         this.isTeacher = isTeacher;
         this.isActive = isActive;
 
+    }
+
+    /*****************************************************************
+     * Constructor per crear la l'objecte Usuari amb tots els atributs
+     *
+     * @param nomUsuari nom d'usuari
+     * @param password contrasenya
+     * @param isAdmin
+     * @param isTeacher
+     * @param isActive
+     ******************************************************************/
+    public User (String nomUsuari, String password, boolean isAdmin, boolean isTeacher, boolean isActive) {
+
+        this.nomUsuari = nomUsuari;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.isTeacher = isTeacher;
+        this.isActive = isActive;
 
     }
 

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -40,6 +41,8 @@ public class modificar_professor extends Fragment {
 
     private TextView nom, cognom1, cognom2, nif, dataInici, dataFi, telefon, dataNaixement, email;
     private Button modificar, confirmar;
+
+    private CheckBox isactive;
     private TableLayout taulaProfessors;
     private boolean alternar=true;
 
@@ -68,7 +71,8 @@ public class modificar_professor extends Fragment {
         telefon = view.findViewById(R.id.editTextTelefon);
         email = view.findViewById(R.id.editTextEmail);
         dataNaixement = view.findViewById(R.id.editTextDataNaixement);
-        taulaProfessors = view.findViewById(R.id.taula_modifica_professor);
+        isactive = view.findViewById(R.id.cBisactive);
+        taulaProfessors = view.findViewById(R.id.taula_modifica_usuaris);
         taulaProfessors.removeAllViews();
 
         llistarProfessors();//Mostra la llista de professors per escollir
@@ -207,6 +211,7 @@ public class modificar_professor extends Fragment {
         dataNaixement.setText(empleat.getData_naixement());
         idEmpleat= empleat.getIdEmpleat();
         idPersona = empleat.getIdPersona();
+        isactive.setChecked(empleat.isActiu());
 
     }
 
@@ -263,7 +268,7 @@ public class modificar_professor extends Fragment {
 
             //Creació de Empleat i usuari per donar d'alta.
             Empleat empleat = new Empleat(idPersona,nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
-                    nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),idEmpleat,true,dataInici.getText().toString(),dataFi.getText().toString());
+                    nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),idEmpleat,isactive.isChecked(),dataInici.getText().toString(),dataFi.getText().toString());
 
 
             // Creació d'unaltre fil.
@@ -328,6 +333,7 @@ public class modificar_professor extends Fragment {
             email.setFocusableInTouchMode(set);
             dataNaixement.setFocusableInTouchMode(set);
             confirmar.setEnabled(set);
+            isactive.setEnabled(set);
         }
 
     }

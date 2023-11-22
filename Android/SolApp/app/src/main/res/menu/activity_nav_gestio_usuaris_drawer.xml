@@ -9,14 +9,6 @@
             android:icon="@drawable/baseline_home_24"
             android:title="@string/gestio_usuaris_menu" />
         <item
-            android:id="@+id/afegir_usuari"
-            android:icon="@drawable/baseline_person_add_alt_1_24"
-            android:title="@string/afegir_usuari" />
-        <item
-            android:id="@+id/elimina_usuari"
-            android:icon="@drawable/baseline_person_remove_24"
-            android:title="@string/elimina_usuari" />
-        <item
             android:id="@+id/modifica_usuari"
             android:icon="@drawable/baseline_create_24"
             android:title="@string/modifica_usuari" />
