@@ -132,12 +132,13 @@ public class MenuController implements Initializable {
             JSONObject jsonObject = new JSONObject(resposta);
             if(jsonObject.getInt("codiResultat") == 1){
 
+                //llibrear vista anterior
+                Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Dashboard");
                 //liberar token si dice ok server
                 SingletonConnection.getInstance().closeConnection();
                 //Tancar finestra actual i obrir login
                 Model.getInstance().getViewFactory().closeStage((Stage) btn_perfil.getScene().getWindow());
                 Model.getInstance().getViewFactory().showLoginWindow();
-
             }else{
                 ErrorController.showErrorAlert("Missatge Informatiu", null, "No es pot desvincular amb el servidor, es força tancar l'aplicació", Alert.AlertType.INFORMATION);
                 Platform.exit();

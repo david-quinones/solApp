@@ -16,6 +16,7 @@ import sol.app.quinones.solappquinones.Service.ConsultesSocket;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
+import sol.app.quinones.solappquinones.Service.ValidadorCamps;
 
 import java.io.IOException;
 import java.net.URL;
@@ -71,6 +72,7 @@ public class PerfilController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        dpDataNaixement.setEditable(false);
         startDate();
     }
 
@@ -80,6 +82,25 @@ public class PerfilController implements Initializable {
      */
     @FXML
     private void actualitzarDades() {
+
+        //comprovar dades:
+        if(!ValidadorCamps.validarDNI(txtDni.getText())){
+            System.out.println("DNI INCORRECTE");
+            txtDni.setStyle("-fx-border-color: red;");
+            return;
+        }
+        if(dpDataNaixement.getValue() == null){
+            dpDataNaixement.setValue(LocalDate.parse(LocalDate.now().toString()));
+            return;
+        }
+        if(!ValidadorCamps.validarTelf(txtTelefon.getText())){
+            txtTelefon.setStyle("-fx-border-color: red");
+            return;
+        }
+        if(!ValidadorCamps.validarMail(txtMail.getText())){
+            txtMail.setStyle("-fx-border-color: red");
+            return;
+        }
 
         peticio.dropDades();
 
@@ -103,7 +124,7 @@ public class PerfilController implements Initializable {
             }else{
                 //vcreem el nou objetcte persona
                 persona = mPersona;
-                mPersona = null;
+                //mPersona = null;
                 initData();
             }
 

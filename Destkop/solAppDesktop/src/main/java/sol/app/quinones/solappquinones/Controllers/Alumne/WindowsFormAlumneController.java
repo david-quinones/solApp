@@ -178,14 +178,12 @@ public class WindowsFormAlumneController implements Initializable {
         }else{
             ErrorController.showErrorAlert(
                     "ERROR AL TRACTAR ALUMNE",
-                    "",
                     tipusPeticio.equalsIgnoreCase("ALTA_ALUMNE")
                             ? " No s'ha pogut guardar l'alumne"
                             : " No s'ah pogut modificar l'alumne",
-                    //"No s'ha pogut guardar / Modificar",
+                    "El DNI " + idTxtFld5.getText() + " ja existeix al sistema",
                     Alert.AlertType.INFORMATION
             );
-            tancarFinestra();
 
         }
     }
