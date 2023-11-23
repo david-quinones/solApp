@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_llistar_alumnes" />
     <fragment
         android:id="@+id/buscarAlumne"
-        android:name="estel.solapp.buscarAlumne"
+        android:name="estel.solapp.ui.admin.Alumnes.buscarAlumne"
         android:label="fragment_buscar_alumne"
         tools:layout="@layout/fragment_buscar_alumne" />
 
