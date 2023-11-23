@@ -65,7 +65,7 @@ public class modificar_professor extends Fragment {
         nom = view.findViewById(R.id.editTextNom);
         cognom1 = view.findViewById(R.id.editTextCognom1);
         cognom2 = view.findViewById(R.id.editTextCognom22);
-        nif = view.findViewById(R.id.editTextNif);
+        nif = view.findViewById(R.id.editTextDNI);
         dataInici = view.findViewById(R.id.editTextInici);
         dataFi = view.findViewById(R.id.editTextFi);
         telefon = view.findViewById(R.id.editTextTelefon);
@@ -77,7 +77,7 @@ public class modificar_professor extends Fragment {
 
         llistarProfessors();//Mostra la llista de professors per escollir
 
-        modificar = view.findViewById(R.id.modificarBtn);
+        modificar = view.findViewById(R.id.altaBtn);
         modificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +87,7 @@ public class modificar_professor extends Fragment {
             }
         });
 
-        confirmar = view.findViewById(R.id.confirmarBtn);
+        confirmar = view.findViewById(R.id.esborrarBtn);
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

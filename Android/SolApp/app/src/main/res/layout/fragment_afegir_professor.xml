@@ -1,273 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.admin.professor.afegir_professor">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/solapp_background">
 
-        <ScrollView
-            android:background="@color/solapp_background"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+
+        <Button
+            android:id="@+id/altaBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView10"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8">
+            android:backgroundTint="#090909"
+            android:clickable="true"
+            android:enabled="true"
+            android:text="Alta professor"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:cornerRadius="1dp"
+            app:icon="@drawable/baseline_face_24"
+            app:iconGravity="top"
+            app:layout_constraintBottom_toTopOf="@+id/imageView4"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="8dp">
-
-                <EditText
-                    android:id="@+id/editTextUsuari"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:ems="12"
-                    android:hint="Usuari"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextContrasenya"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="12"
-                    android:hint="Contrasenya"
-                    android:inputType="text|textPassword"
-                    android:maxLength="20"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextNom"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="12"
-                    android:hint="Nom"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextCognom1"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="12"
-                    android:hint="Primer cognom"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextCognom22"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="12"
-                    android:hint="Segón cognom"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextDataNaixement"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="6"
-                    android:hint="Naixement"
-                    android:inputType="datetime|date"
-                    android:maxLength="10"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextDNI"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="6"
-                    android:hint="NIF"
-                    android:inputType="text"
-                    android:maxLength="9"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextTelefon"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="7"
-                    android:hint="Telèfon"
-                    android:inputType="number"
-                    android:maxLength="11"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextEmail"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="15"
-                    android:hint="e-mail"
-                    android:inputType="text|textEmailAddress"
-                    android:maxLength="25"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextInici"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="6"
-                    android:hint="Data inici"
-                    android:inputType="datetime|date"
-                    android:maxLength="10"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextFi"
-                    style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="6"
-                    android:hint="Data fi"
-                    android:inputType="datetime|date"
-                    android:maxLength="10"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="8dp">
-
-                    <Button
-                        android:id="@+id/altaBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:backgroundTint="#090909"
-                        android:clickable="true"
-                        android:enabled="true"
-                        android:text="Donar d'alta"
-                        android:textAlignment="center"
-                        android:textSize="16sp"
-                        android:visibility="visible"
-                        app:cornerRadius="1dp"
-                        app:icon="@drawable/baseline_person_add_alt_1_24"
-                        app:iconGravity="top"
-                        app:iconTint="#FFFFFF" />
-
-                    <Button
-                        android:id="@+id/esborrarBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:backgroundTint="#090909"
-                        android:clickable="true"
-                        android:enabled="true"
-                        android:text="Esborrar dades"
-                        android:textAlignment="center"
-                        android:textSize="16sp"
-                        android:visibility="visible"
-                        app:cornerRadius="1dp"
-                        app:icon="@android:drawable/ic_delete"
-                        app:iconGravity="top"
-                        app:iconTint="#FFFFFF" />
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
+        <Button
+            android:id="@+id/esborrarBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#090909"
+            android:clickable="true"
+            android:enabled="true"
+            android:text="Esborrar dades"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:cornerRadius="1dp"
+            app:icon="@android:drawable/btn_dialog"
+            app:iconGravity="top"
+            app:iconTint="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="#FFFFFF"
-            android:gravity="center"
-            android:text="Ompliu totes les caselles"
+            android:text="Ompli  tot el formulari"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF"
             android:text="Torna enrere"
             android:textAlignment="center"
             android:textSize="20sp"
@@ -275,5 +76,357 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/altaBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editTextUsuari"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="11"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="Usuari"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editTextConfirmaContrasenya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="11"
+                    android:focusableInTouchMode="true"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView33"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextContrasenya" />
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="Confirma contrasenya"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+
+                <EditText
+                    android:id="@+id/editTextContrasenya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="11"
+                    android:focusableInTouchMode="true"
+                    android:inputType="text|textPassword"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView22"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextUsuari" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="Contrasenya"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="Nom"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+                <EditText
+                    android:id="@+id/editTextNom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="11"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView21"
+                    app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="Primer cognom"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+                <EditText
+                    android:id="@+id/editTextCognom1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="11"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView23"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextNom" />
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="NIF"
+                    app:layout_constraintStart_toEndOf="@+id/editTextNom"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextConfirmaContrasenya" />
+
+                <EditText
+                    android:id="@+id/editTextDNI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="6"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView25"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextConfirmaContrasenya" />
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="Segón cognom"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+
+                <EditText
+                    android:id="@+id/editTextCognom22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="11"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView27"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCognom1" />
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="Data inici"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+                <EditText
+                    android:id="@+id/editTextInici"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="6"
+                    android:focusableInTouchMode="true"
+                    android:inputType="datetime|date"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView28"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
+
+                <TextView
+                    android:id="@+id/textView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="Data fi"
+                    app:layout_constraintStart_toEndOf="@+id/editTextInici"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
+
+                <EditText
+                    android:id="@+id/editTextFi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="6"
+                    android:focusableInTouchMode="true"
+                    android:inputType="datetime|date"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView29"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="Telefon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                <EditText
+                    android:id="@+id/editTextTelefon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="6"
+                    android:focusableInTouchMode="true"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView30"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextInici" />
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="e-mail"
+                    app:layout_constraintStart_toEndOf="@+id/editTextTelefon"
+                    app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+                <EditText
+                    android:id="@+id/editTextEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="11"
+                    android:focusableInTouchMode="true"
+                    android:inputType="text|textEmailAddress"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView31"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextFi" />
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:text="Data naixement"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                <EditText
+                    android:id="@+id/editTextDataNaixement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:ems="6"
+                    android:focusableInTouchMode="true"
+                    android:inputType="datetime|date"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView32"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTelefon" />
+
+                <CheckBox
+                    android:id="@+id/cBisactive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:enabled="true"
+                    android:text="Actiu"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/editTextCognom1"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextDNI" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

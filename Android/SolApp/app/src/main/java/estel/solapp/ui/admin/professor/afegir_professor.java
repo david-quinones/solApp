@@ -32,7 +32,7 @@ import estel.solapp.models.User;
  ***********************************************/
 public class afegir_professor extends Fragment {
 
-    private EditText nomUsuari,contrasenya, nom, cognom1, cognom2, dataNaixement, nif, telefon, email, dataInici, dataFi;
+    private EditText nomUsuari,contrasenya, confirmaContrasenya, nom, cognom1, cognom2, dataNaixement, nif, telefon, email, dataInici, dataFi;
     private Button altaBtn, esborrarBtn;
     private Empleat empleat;
     private User usuari;
@@ -51,6 +51,7 @@ public class afegir_professor extends Fragment {
         //Asignació de tots els EditText
         nomUsuari = view.findViewById(R.id.editTextUsuari);
         contrasenya = view.findViewById(R.id.editTextContrasenya);
+        confirmaContrasenya = view.findViewById(R.id.editTextConfirmaContrasenya);
         nom = view.findViewById(R.id.editTextNom);
         cognom1 = view.findViewById(R.id.editTextCognom1);
         cognom2 = view.findViewById(R.id.editTextCognom22);
@@ -107,7 +108,7 @@ public class afegir_professor extends Fragment {
             //Creació de Empleat i usuari per donar d'alta.
             empleat = new Empleat(nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
                     nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),true,dataInici.getText().toString(),dataFi.getText().toString());
-            usuari = new User(nomUsuari.getText().toString(),contrasenya.getText().toString(),false,true,false);
+            usuari = new User(nomUsuari.getText().toString(),contrasenya.getText().toString(),false,true,true);
 
             // Creació d'unaltre fil.
             ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -163,6 +164,9 @@ public class afegir_professor extends Fragment {
 
         String error = "";
 
+        if (nomUsuari.getText().toString().isEmpty()){error = "La casella nom d'usuari és buida.\n"; }
+        if (contrasenya.getText().toString().isEmpty()){error = error + "La casella contrasenya és buida.\n"; }
+        if ((!contrasenya.getText().toString().equals(confirmaContrasenya.getText().toString()))){error = error + "Les contrasenyes no coincideixen."; }
         if (nom.getText().toString().isEmpty()){error = "La casella nom és buida.\n"; }
         if (cognom1.getText().toString().isEmpty()){error = error + "La casella Primer cognom és buida.\n"; }
         if (cognom2.getText().toString().isEmpty()){error = error + "La casella Segón cognom és buida.\n"; }

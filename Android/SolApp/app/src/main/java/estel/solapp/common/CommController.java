@@ -338,7 +338,7 @@ public class CommController {
 
         PeticioClient altaAlumne = new PeticioClient(ALTA_ALUMNE);
         altaAlumne.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
-        altaAlumne.addDataObject(altaAlumne);
+        altaAlumne.addDataObject(alumne);
         altaAlumne.addDataObject(user);
         Gson gson= new Gson();
         Log.d("PETICIO ALTA PROFE", gson.toJson(altaAlumne));
