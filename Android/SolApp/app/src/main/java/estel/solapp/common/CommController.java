@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import estel.solapp.models.Alumne;
 import estel.solapp.models.Empleat;
 import estel.solapp.models.Persona;
 import estel.solapp.models.User;
@@ -34,15 +35,19 @@ public class CommController {
     public static final String LOGIN = "LOGIN";
     public static final String LOGOUT = "LOGOUT";
     public static final String LLISTAR_USUARIS = "LLISTAR_USUARIS";
+    public static final String MODIFICAR_USUARI = "MODIFICAR_USUARIS";
     public static final String AFEGIR_USUARI = "AFEGIR_USUARI";
     public static final String CONSULTA_PERFIL = "CONSULTA_PERFIL";
     public static final String MODIFICAR_PERFIL = "MODIFICAR_PERFIL";
     public static final String BUSCA_USUARI = "BUSCA_USUARI";
     public static final String ALTA_EMPLEAT = "ALTA_EMPLEAT";
-
     public static final String MODIFICAR_EMPLEAT = "MODIFICAR_EMPLEAT";
     public static final String ELIMINAR_EMPLEAT = "ELIMINAR_EMPLEAT";
     public static final String LLISTAR_EMPLEATS = "LLISTAR_EMPLEATS";
+    public static final String ALTA_ALUMNE = "ALTA_ALUMNE";
+    public static final String LLISTAR_ALUMNES = "LLISTAR_ALUMNES";
+    public static final String MODIFICAR_ALUMNE = "MODIFICAR_ALUMNE";
+
 
     /***********************************
     * Conexió amb el servidor per socket
@@ -63,6 +68,10 @@ public class CommController {
         }
 
     }
+
+    /********************************************************************************************************************************************
+     LOGIN LOGOUT
+     ********************************************************************************************************************************************/
 
     /***************************************************
      * Métode retorna true si hi ha sessio i false si no
@@ -107,6 +116,10 @@ public class CommController {
 
     }
 
+    /********************************************************************************************************************************************
+                PERFIL
+     ********************************************************************************************************************************************/
+
     /*****************************************
      * Petició d'informació de perfil servidor
      * @return resposta del sevidor
@@ -150,29 +163,24 @@ public class CommController {
 
     }
 
-    /*******************************************
-     * Petició de llista d'usuaris al servidor
-     * @return result users array; null if error.
-     ********************************************/
-    public static User[] llistarUsuaris(){
+    /********************************************************************************************************************************************
+                        USUARIS
+     ********************************************************************************************************************************************/
 
-        PeticioClient listUsers = new PeticioClient(LLISTAR_USUARIS);
-        listUsers.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
-        ValorsResposta resposta=talkToServer(listUsers);
+    /*************************************
+     * Petició de llista d'usuaris al servidor
+     *
+     * @return resposta del servidor
+     *************************************/
+    public static ValorsResposta llistarUsuaris(){
+
+        PeticioClient listarUsuaris = new PeticioClient(LLISTAR_USUARIS);
+        listarUsuaris.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        ValorsResposta resposta=talkToServer(listarUsuaris);
 
         if(resposta==null) return null;
 
-        int returnCode=resposta.getReturnCode();
-
-        if(returnCode==OK_RETURN_CODE){
-
-            User [] users={};
-            return ( User []) resposta.getData(0, users.getClass());
-
-        }
-        else {
-            return null;
-        }
+        return resposta;
 
     }
 
@@ -188,6 +196,26 @@ public class CommController {
         afegirUsuari.addDataObject(user);
 
         ValorsResposta resposta=talkToServer(afegirUsuari);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició modificar usuari al servidor
+     * @param user
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta modificarUsuari(User user){
+
+        PeticioClient modificausuari = new PeticioClient(MODIFICAR_USUARI);
+        modificausuari.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        modificausuari.addDataObject(user);
+        Gson gson= new Gson();
+        Log.d("PETICIO MODIFICA USER", gson.toJson(modificausuari));
+        ValorsResposta resposta=talkToServer(modificausuari);
 
         if(resposta==null) return null;
 
@@ -214,6 +242,10 @@ public class CommController {
 
     }
 
+    /********************************************************************************************************************************************
+                EMPLEATS (PROFESSORS)
+     ********************************************************************************************************************************************/
+
     /*************************************************
      * Petició de alta de professors al servidor
      * @param empleat
@@ -237,7 +269,7 @@ public class CommController {
     }
 
     /*************************************************
-     * Petició d'eliminar professor al servidor
+     * Petició modificar professor al servidor
      * @param empleat
      * * @return resultat OK/NOK; null si error.
      *************************************************/
@@ -267,7 +299,7 @@ public class CommController {
         eliminaEmpleat.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
         eliminaEmpleat.addDataObject(empleat);
         Gson gson= new Gson();
-        Log.d("PETICIO ALTA PROFE", gson.toJson(eliminaEmpleat));
+        Log.d("PETICIO ELIMINA PROFE", gson.toJson(eliminaEmpleat));
         ValorsResposta resposta=talkToServer(eliminaEmpleat);
 
         if(resposta==null) return null;
@@ -291,6 +323,77 @@ public class CommController {
         return resposta;
 
     }
+
+    /********************************************************************************************************************************************
+                ALUMNES
+     ********************************************************************************************************************************************/
+
+    /*************************************************
+     * Petició de alta de professors al servidor
+     * @param alumne
+     * @param user
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta afegirAlumne(Alumne alumne, User user){
+
+        PeticioClient altaAlumne = new PeticioClient(ALTA_ALUMNE);
+        altaAlumne.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        altaAlumne.addDataObject(altaAlumne);
+        altaAlumne.addDataObject(user);
+        Gson gson= new Gson();
+        Log.d("PETICIO ALTA PROFE", gson.toJson(altaAlumne));
+        ValorsResposta resposta=talkToServer(altaAlumne);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició de llista d'alumnes al servidor
+     * Només enviem el codi de sesseió al servidor
+     * @return resultat alumnes list; null si error.
+     *************************************************/
+    public static ValorsResposta llistarAlumnes(){
+
+        PeticioClient llistarAlumnes = new PeticioClient(LLISTAR_ALUMNES);
+        llistarAlumnes.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        ValorsResposta resposta=talkToServer(llistarAlumnes);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició modificar alumne al servidor
+     * @param alumne
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta modificarAlumne(Alumne alumne){
+
+        PeticioClient modificaAlumne = new PeticioClient(MODIFICAR_ALUMNE);
+        modificaAlumne.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        modificaAlumne.addDataObject(alumne);
+        Gson gson= new Gson();
+        Log.d("PETICIO MODIFICA PROFE", gson.toJson(modificaAlumne));
+        ValorsResposta resposta=talkToServer(modificaAlumne);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /********************************************************************************************************************************************
+                AULES
+     ********************************************************************************************************************************************/
+
+    /********************************************************************************************************************************************
+                        PETICIO / RESPOSTA (TALKTOSERVER)
+     ********************************************************************************************************************************************/
 
     /********************************************************************
     * Envia missatge al servidor i rep la resposta d'aquest.

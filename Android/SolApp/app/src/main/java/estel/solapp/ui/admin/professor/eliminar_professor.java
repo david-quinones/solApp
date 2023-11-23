@@ -64,7 +64,7 @@ public class eliminar_professor extends Fragment {
         nif = view.findViewById(R.id.textViewNif);
         dataInici = view.findViewById(R.id.textViewInici);
         dataFi = view.findViewById(R.id.textViewFi);
-        taulaProfessors = view.findViewById(R.id.taula_modifica_professor);
+        taulaProfessors = view.findViewById(R.id.taula_modifica_usuaris);
         taulaProfessors.removeAllViews();
 
         llistarProfessors();//Mostra la llista de professors per escollir
@@ -131,37 +131,47 @@ public class eliminar_professor extends Fragment {
 
                 for (int i=1;i<=((int)resposta.getData(0,int.class));i++){
 
-
-                    //Condició per alternar colors a les files
-                    if (alternar){ color=(R.drawable.tablas_listas_yellow);alternar=false; }
-                    else {color=(R.drawable.tablas_listas_green);alternar=true;}
-
                     Empleat empleat= (Empleat) resposta.getData(i,Empleat.class);
 
-                    TableRow row = new TableRow(this.getContext());
+                    if (empleat.isActiu()) {
 
-                    TextView nom = new TextView(getContext()); nom.setText(empleat.getNom());
-                    nom.setGravity(Gravity.CENTER);
-                    nom.setBackgroundResource(color);
-                    row.addView(nom);
-                    TextView cognom1 = new TextView(getContext()); cognom1.setText(empleat.getCognom1());
-                    cognom1.setGravity(Gravity.CENTER);
-                    cognom1.setBackgroundResource(color);
-                    row.addView(cognom1);
-                    TextView cognom2 = new TextView(getContext()); cognom2.setText(empleat.getCognom2());
-                    nom.setGravity(Gravity.CENTER);
-                    cognom2.setBackgroundResource(color);
-                    row.addView(cognom2);
-                    //Fem clicable la fila de la taula i cridem al métode de mostrar les dades
-                    //Pasant-li l'empleat de la fila
-                    row.setClickable(true);
-                    row.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            mostrarDades (empleat);
+                        //Condició per alternar colors a les files
+                        if (alternar) {
+                            color = (R.drawable.tablas_listas_yellow);
+                            alternar = false;
+                        } else {
+                            color = (R.drawable.tablas_listas_green);
+                            alternar = true;
                         }
-                    });
-                    taulaProfessors.addView(row);
+
+                        TableRow row = new TableRow(this.getContext());
+
+                        TextView nom = new TextView(getContext());
+                        nom.setText(empleat.getNom());
+                        nom.setGravity(Gravity.CENTER);
+                        nom.setBackgroundResource(color);
+                        row.addView(nom);
+                        TextView cognom1 = new TextView(getContext());
+                        cognom1.setText(empleat.getCognom1());
+                        cognom1.setGravity(Gravity.CENTER);
+                        cognom1.setBackgroundResource(color);
+                        row.addView(cognom1);
+                        TextView cognom2 = new TextView(getContext());
+                        cognom2.setText(empleat.getCognom2());
+                        nom.setGravity(Gravity.CENTER);
+                        cognom2.setBackgroundResource(color);
+                        row.addView(cognom2);
+                        //Fem clicable la fila de la taula i cridem al métode de mostrar les dades
+                        //Pasant-li l'empleat de la fila
+                        row.setClickable(true);
+                        row.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                mostrarDades(empleat);
+                            }
+                        });
+                        taulaProfessors.addView(row);
+                    }
 
                 }
             }
@@ -244,7 +254,7 @@ public class eliminar_professor extends Fragment {
 
         //Creació de Empleat i usuari per donar d'alta.
         Empleat empleat = new Empleat(idPersona,nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement,
-                nif.getText().toString(),telefon,email,idEmpleat,true,dataInici.getText().toString(),dataFi.getText().toString());
+                nif.getText().toString(),telefon,email,idEmpleat,false,dataInici.getText().toString(),dataFi.getText().toString());
 
 
         // Creació d'unaltre fil.

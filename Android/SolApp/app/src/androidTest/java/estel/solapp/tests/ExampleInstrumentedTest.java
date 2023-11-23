@@ -1,4 +1,4 @@
-package estel.solapp;
+package estel.solapp.tests;
 
 import android.content.Context;
 
