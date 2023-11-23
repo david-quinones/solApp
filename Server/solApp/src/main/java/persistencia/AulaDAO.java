@@ -1,11 +1,13 @@
 package persistencia;
 
 import entitats.Aula;
+import entitats.Empleat;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -136,6 +138,66 @@ public class AulaDAO {
                     "ERROR al intentar modifcar l'aula", ex);
         }
         return ERROR;
+    }
+    
+    
+    
+    /**Mètode per llistar les aules de la base de dades amb el professor assignat i
+     * alumnes associats
+     * @return ArrayList amb totes les aules
+     */
+    public ArrayList llistaAula (){
+        //ArrayList amb la que contindrà la llista d'aules
+        ArrayList<Aula> llistaAules = new ArrayList<>();
+        try {
+            String llistaAulesSQL = "SELECT * FROM aula;";
+            psAula = conexio.prepareStatement(llistaAulesSQL);
+            
+            //Executem la consulta
+            ResultSet rs = psAula.executeQuery();
+            //Obtenim totes les aules
+            while(rs.next()){
+                llistaAules.add(obtindreAula(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, 
+                    "ERROR al intentar llistar les aules", ex);
+        }
+        return llistaAules;
+    }
+    
+    
+    /**Mètode per obrtindre una aula a partir d'un ResultSet
+     * 
+     * @param dades resultSet que es rep
+     * @return objecte Aula
+     */
+    public Aula obtindreAula(ResultSet dades){
+        Aula aula = new Aula();
+        try {            
+            aula.setId(dades.getInt("id"));
+            aula.setNomAula(dades.getString("nom"));
+            //Obtindre les dades de l'empleat
+            EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
+            Empleat empleat = new Empleat();
+            Object idEmpleat = dades.getInt("professor_id");
+            //Comprovem que l'aula té un professor associat
+            if(idEmpleat != null){
+                empleat = empleatDAO.consultaEmpleat(dades.getInt("professor_id"));
+            }else{
+                empleat = null;
+            }
+            aula.setEmpleat(empleat);
+            //Obtindre la llista d'alumnes associats a l'aula
+            AlumneDAO alumneDAO = new AlumneDAO(conexio);
+            aula.setAlumnes(alumneDAO.llistaAlumnesAula(aula.getId()));
+            LOGGER.info("S'ha obtingut l'aula amb id: " + aula.getId());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE,
+                    "ERROR al obtindre les dades de una aula", ex);
+        }
+        return aula;
     }
 
 }

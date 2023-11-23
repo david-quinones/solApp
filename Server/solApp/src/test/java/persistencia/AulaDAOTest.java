@@ -4,6 +4,7 @@ import entitats.Aula;
 import entitats.Empleat;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -98,6 +99,30 @@ public class AulaDAOTest {
         aula.setId(254);
         resultat = aulaDAO.modificarAula(aula);
         assertTrue(resultat < 0);
+    }
+    
+    
+    
+    /**Test per comprovar el mètode per llistar les aules
+     * 
+     */
+    @Test
+    public void testLlistarAules(){
+        AulaDAO aulaDAO = new AulaDAO(conexio);
+        ArrayList<Aula> llistaAules = new ArrayList<>();
+        //Obtenim la llista d'aules de la base de dades
+        llistaAules = aulaDAO.llistaAula();
+        //Comprovem si està buida
+        if(!llistaAules.isEmpty()){
+            assertTrue(!llistaAules.isEmpty());
+            for(Aula aula: llistaAules){
+                
+                System.out.println(aula + " Id de l'aula: " + aula.getId());
+            }
+        }else{
+            System.out.println("La llista d'aules està buida");
+            assertTrue(llistaAules.isEmpty());
+        }
     }
     
 }

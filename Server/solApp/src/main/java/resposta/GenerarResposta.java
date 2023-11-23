@@ -508,6 +508,33 @@ public class GenerarResposta {
             }
         return resposta = new RetornDades(CODI_CORRECTE);
         }
+    
+    
+    /**Mètode per restornar la resposta a la crida llista_aules
+     * 
+     * @return resposta
+     */
+    public RetornDades respostaLlistaAules(){
+        AulaDAO aulaDAO = new AulaDAO(conexio);
+        //Array amb la llista d'aules
+        ArrayList<Aula> llistaAules = aulaDAO.llistaAula();
+        if(!llistaAules.isEmpty()){
+            resposta = new RetornDades(CODI_CORRECTE);
+            //Afegim el tamany de l'array d'aules
+            resposta.afegirDades(llistaAules.size());
+            //Afegim les aules a la resposta
+            for(Aula aula: llistaAules){
+                resposta.afegirDades(aula);
+            }
+            LOGGER.info("Resposta amb una llista d'aules");
+            //Retornem resposta
+            return resposta;
+            
+        }else{
+            LOGGER.warning("La llista d'aules està buida");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+    }
     }
         
 

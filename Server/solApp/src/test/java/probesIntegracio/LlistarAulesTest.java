@@ -2,7 +2,7 @@ package probesIntegracio;
 
 import com.google.gson.Gson;
 import entitats.Alumne;
-import entitats.Empleat;
+import entitats.Aula;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
 import java.io.BufferedReader;
@@ -11,23 +11,23 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import persistencia.PersonaDAO;
 import servidor.ServidorSocketListener;
 
-/**Classe per fer les proves d'integració de la crida llistar_alumnes
+/**Classe per fer les proves d'integració de la crida llistar_aules
  *
  * @author Pau Castell Galtes
  */
-public class LlistarAlumnesTest {
+public class LlistarAulesTest {
     private ServidorSocketListener servidor;
     private Socket socket;
-    private static final Logger LOGGER = Logger.getLogger(LlistarAlumnesTest.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(LlistarAulesTest.class.getName());
     
 
     /**Preparem el servidora abans de cada test
@@ -59,20 +59,19 @@ public class LlistarAlumnesTest {
     }
     
     
-    /**Test per comprobar que la crida de llistarAlumnes funciona correctament.
-     * Es verifica que la cantitat d'alumnes sigui la esperada i els alumnes
-     * siguin els mateixos que a la base de dades.
+    /**Test per comprobar que la crida de llistarAules funciona correctament.
+     * 
      * 
      */
     @Test
-    public void testLlistarAlumnes(){
+    public void testLlistarAules(){
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
             
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
-            PeticioClient peticio  = new PeticioClient("LLISTAR_ALUMNES");
+            PeticioClient peticio  = new PeticioClient("LLISTAR_AULES");
             peticio.afegirDades(numSessio);
             
             //Enviem la petició al servidor en format JSON
@@ -88,31 +87,47 @@ public class LlistarAlumnesTest {
             RetornDades retorn = gson.fromJson(llegir, RetornDades.class);          
             //Obtenim de la resposta la llista d'alumnes
             LOGGER.info("Dades rebudes per part del servidor.");
-            
-
-            //Es verifica que el codi del resultat sigui l'esperat
+           
+            //Comprovem el resultat de la resposta
             assertEquals(1, retorn.getCodiResultat());
-            LOGGER.info("Codi del resultat espertat = 1, codi rebut: " + retorn.getCodiResultat());
-            //Número de elements Empleats rebuts
-            int numeroAlumnes = (int) retorn.getDades(0, Integer.class);
-            assertEquals(5, numeroAlumnes);
-            LOGGER.info("Número d'alumnes esperats 4, número d'alumnes rebuts: " + numeroAlumnes);
-            //Comprobem que els alumnes rebuts són els esperats
-            Alumne alumne = (Alumne) retorn.getDades(1, Alumne.class);
-            assertEquals(1, alumne.getIdAlumne());
-            LOGGER.info("Id = 1 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
-            alumne = (Alumne) retorn.getDades(2, Alumne.class);
-            assertEquals(2, alumne.getIdAlumne());
-            LOGGER.info("Id = 2 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
-            alumne = (Alumne) retorn.getDades(3, Alumne.class);
-            assertEquals(3, alumne.getIdAlumne());
-            LOGGER.info("Id = 3 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
-            alumne = (Alumne) retorn.getDades(4, Alumne.class);
-            assertEquals(4, alumne.getIdAlumne());
-            LOGGER.info("Id = 4 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
-            alumne = (Alumne) retorn.getDades(5, Alumne.class);
-            assertEquals(5, alumne.getIdAlumne());
-            LOGGER.info("Id = 5 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
+            LOGGER.info("Resultat esperat 1 resultat obtingut: " + retorn.getCodiResultat());
+            //Comprovem la quantitat d'aules rebudes
+            assertEquals(3, retorn.getDades(0, Integer.class));
+            LOGGER.info("Resultat esperat 3 resultat obtingut: " + retorn.getDades(0, Integer.class));
+            //Obtenim les aules
+            Aula aula1 = (Aula) retorn.getDades(1, Aula.class);
+            ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
+            //Imprimim el resultat
+            System.out.println("\nAula 1: id = " +aula1.getId() + " nom: " + aula1.getNomAula());
+            System.out.println("Empleat = " + aula1.getEmpleat());
+            llistaAlumnes = aula1.getAlumnes();
+            System.out.println("Alumnes:");
+            for(Alumne alumne: llistaAlumnes){
+                System.out.println(alumne);
+            }
+            System.out.println();
+            
+            Aula aula2 = (Aula) retorn.getDades(2, Aula.class);
+            //Imprimim el resultat
+            System.out.println("Aula 2: id = " +aula2.getId() + " nom: " + aula2.getNomAula());
+            System.out.println("Empleat = " + aula2.getEmpleat());
+            llistaAlumnes = aula2.getAlumnes();
+            System.out.println("Alumnes:");
+            for(Alumne alumne: llistaAlumnes){
+                System.out.println(alumne);
+            }
+            System.out.println();
+            
+            Aula aula3 = (Aula) retorn.getDades(3, Aula.class);
+            //Imprimim el resultat
+            System.out.println("Aula 3: id = " +aula3.getId() + " nom: " + aula3.getNomAula());
+            System.out.println("Empleat = " + aula3.getEmpleat());
+            llistaAlumnes = aula3.getAlumnes();
+            System.out.println("Alumnes:");
+            for(Alumne alumne: llistaAlumnes){
+                System.out.println(alumne);
+            }
+            System.out.println();          
 
             socket.close();
             LOGGER.info("Socket del client tancat.");
@@ -121,5 +136,6 @@ public class LlistarAlumnesTest {
             Logger.getLogger(ConsultaPersonaTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     
 }

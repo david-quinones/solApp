@@ -15,6 +15,7 @@ resposta\ControladorRespostaTest.class
 probesIntegracio\EliminarAulaTest.class
 probesIntegracio\ModificacióPerfilTest$1.class
 estructurapr\DadesPRTest.class
+probesIntegracio\LlistarAulesTest.class
 probesIntegracio\EliminarUsuariTest.class
 probesIntegracio\EliminarUsuariTest$1.class
 probesIntegracio\ModificarEmpleatTest.class
@@ -48,3 +49,4 @@ probesIntegracio\AltaEmpleatTest$1.class
 persistencia\AulaDAOTest.class
 probesIntegracio\LlistarAlumnesTest$1.class
 utilitats\UtilsTest.class
+probesIntegracio\LlistarAulesTest$1.class

@@ -323,6 +323,9 @@ public class GenerarRespostaTest {
     }
     
     
+    /**Test per comprovar la resposta a la crida modificar_aula
+     * 
+     */
     @Test
     public void testModificarAula(){
         GenerarResposta generarResposta = new GenerarResposta();
@@ -336,5 +339,19 @@ public class GenerarRespostaTest {
         //Generem la resposta
         RetornDades resposta = generarResposta.respostaModificarAula(aula);
         assertEquals(1, resposta.getCodiResultat());
+    }
+    
+    
+    
+    /**Test per comprovar la resposta a la crida llista_aules
+     * 
+     */
+    @Test
+    public void testLlistaAules(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        RetornDades resposta = generarResposta.respostaLlistaAules();
+        //Comprovem que el resultat es l'esperat en cas de retornar una llista d'aules
+        assertEquals(1, resposta.getCodiResultat());
+        assertTrue((Integer)resposta.getDades(0, Integer.class) > 0);
     }
 }

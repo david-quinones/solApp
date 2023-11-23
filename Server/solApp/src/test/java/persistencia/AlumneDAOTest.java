@@ -92,5 +92,30 @@ public class AlumneDAOTest {
         int filesAfectades = alumneDAO.modificarAlumne(alumneModificat);
         assertEquals(1, filesAfectades);
     }
+    
+    
+    /**Test per comprovar el mètode llistarAlumnesAula
+     * 
+     */
+    @Test
+    public void testLlistarAlumnesAula(){
+        //Id de l'aula on buscarem el alumnes
+        int idAula = 54;
+        AlumneDAO alumneDAO = new AlumneDAO(conexio);
+        //ArrayList on guardarem les dades
+        ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
+        //Afegim els alumnes de l'aula
+        llistaAlumnes = alumneDAO.llistaAlumnesAula(idAula);
+        //Comprovem que la llista no està buida        
+        if(!llistaAlumnes.isEmpty()){
+            for(Alumne alumne: llistaAlumnes){
+                System.out.println(alumne);
+            }
+            assertTrue(!llistaAlumnes.isEmpty());
+        }else{
+            System.out.println("L'aula no té alumnes associats");
+            assertTrue(llistaAlumnes.isEmpty());
+        }
+    }
     }
     

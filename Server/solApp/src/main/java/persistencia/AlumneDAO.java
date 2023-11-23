@@ -260,4 +260,39 @@ public class AlumneDAO {
     }
     
     
+    
+    /**Mètode per llistar el alumnes que hi ha en una aula en concret
+     * 
+     * @param idAula dels alumnes que s'han de llistar
+     * @return ArrayLista amb la llista d'alumnes
+     */
+    public ArrayList llistaAlumnesAula(int idAula){
+        ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
+        try {           
+            String alumnesAula = "SELECT * FROM alumne a INNER JOIN persona p"
+                    + " ON a.persona_id  = p.id WHERE aula_id = ?;";
+            psAlumne = conexio.prepareStatement(alumnesAula);
+            
+            //Establim dades per a la consulta
+            psAlumne.setInt(1, idAula);
+            
+            //Obtenim ResultSet amb el resultat de la consulta
+            ResultSet rs = psAlumne.executeQuery();
+            //Afegim les dades obtingudes a l'array
+            if(rs.isBeforeFirst()){
+                while(rs.next()){
+                    llistaAlumnes.add(obtindreAlumne(rs));
+                }
+            }else{
+                LOGGER.info("No hi ha alumnes associats a l'aula amb id: " + idAula);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumneDAO.class.getName()).log(Level.SEVERE, 
+                    "ERROR al intentar llistar els alumnes per aula", ex);
+        }
+        return llistaAlumnes;
+    }
+    
+    
+    
 }

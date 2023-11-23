@@ -92,4 +92,20 @@ public class EmpleatDAOTest {
     }
     
     
+    
+    /**Test per comprovar el mètode consultaEmpleat a partir del id de l'empleat
+     * 
+     */
+    @Test
+    public void testConsultaEmpleat(){
+        Empleat empleat = null;
+        EmpleatDAO empleatDAO = new EmpleatDAO(conexio);
+        //Obtenim l'empleat a partir del seu id
+        empleat = empleatDAO.consultaEmpleat(1);
+        assertEquals(1, empleat.getIdEmpleat());
+        //Fem una prova amb un empleat inexistent
+        empleat = empleatDAO.consultaEmpleat(0);
+        assertNull(empleat);
+    }
+    
 }

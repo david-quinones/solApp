@@ -209,4 +209,37 @@ public class EmpleatDAO {
     }
     
     
+    
+    /**Mètode per obtindre un emplat a partir del seu id
+     * 
+     * @param idEmpleat que s'ha d'obtindre
+     * @return objecte empleat
+     */
+    public Empleat consultaEmpleat(int idEmpleat){
+        Empleat empleat  = null;
+        try {
+            //Consulta a la base de dades
+            String consultaEmpleat = "SELECT * FROM empleat e INNER JOIN persona p "
+                    + "ON e.persona_id = p.id WHERE e.id = ? ;";
+            psEmpleat = conexio.prepareStatement(consultaEmpleat);
+            
+            //Establim les dades per a la consulta
+            psEmpleat.setInt(1, idEmpleat);
+            //Obtenim el resultat
+            ResultSet rs = psEmpleat.executeQuery();
+            //Si s'ha retornat alguna dada es recupera l'objecte Empleat
+            if(rs.next()){
+                empleat = obtindreEmpleat(rs);
+            }else{
+                LOGGER.info("No s'ha trobat cap empleat amb el id: " + idEmpleat);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleatDAO.class.getName()).log(Level.SEVERE,
+                    "ERROR al obtindre un empleat a partir del seu id", ex);
+        }
+        
+        return empleat;
+    }
+    
+    
 }

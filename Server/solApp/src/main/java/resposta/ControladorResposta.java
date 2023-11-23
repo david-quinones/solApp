@@ -109,6 +109,10 @@ public class ControladorResposta {
                 //Generem resposta a la crida modificar_aula
                 resposta = dadesResposta.respostaModificarAula((Aula)peticio.getDades(1, Aula.class));
                 return resposta;
+            case "LLISTAR_AULES":
+                //Genrem la resposta a la crida llistar_aules
+                resposta = dadesResposta.respostaLlistaAules();
+                return resposta;
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }
