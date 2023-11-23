@@ -105,6 +105,10 @@ public class ControladorResposta {
                 //Generem resposta a la crida eliminar_aula
                 resposta = dadesResposta.respostaEliminarAula((Aula) peticio.getDades(1, Aula.class));
                 return resposta;
+            case "MODIFICAR_AULA":
+                //Generem resposta a la crida modificar_aula
+                resposta = dadesResposta.respostaModificarAula((Aula)peticio.getDades(1, Aula.class));
+                return resposta;
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }

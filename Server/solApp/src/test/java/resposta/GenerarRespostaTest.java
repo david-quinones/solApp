@@ -321,4 +321,20 @@ public class GenerarRespostaTest {
         resposta = generarResposta.respostaEliminarAula(aula);
         assertEquals(1, resposta.getCodiResultat());
     }
+    
+    
+    @Test
+    public void testModificarAula(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        //Dades de la nova Aula
+        Aula aula = new Aula();
+        aula.setNomAula("ProvaModificar");
+        aula.setId(2);
+        Empleat empleat = new Empleat();
+        empleat.setIdEmpleat(1);
+        aula.setEmpleat(empleat);
+        //Generem la resposta
+        RetornDades resposta = generarResposta.respostaModificarAula(aula);
+        assertEquals(1, resposta.getCodiResultat());
+    }
 }
