@@ -35,7 +35,7 @@ public class CommController {
     public static final String LOGIN = "LOGIN";
     public static final String LOGOUT = "LOGOUT";
     public static final String LLISTAR_USUARIS = "LLISTAR_USUARIS";
-    public static final String MODIFICAR_USUARI = "MODIFICAR_USUARIS";
+    public static final String MODIFICAR_USUARI = "MODIFICAR_USUARI";
     public static final String AFEGIR_USUARI = "AFEGIR_USUARI";
     public static final String CONSULTA_PERFIL = "CONSULTA_PERFIL";
     public static final String MODIFICAR_PERFIL = "MODIFICAR_PERFIL";

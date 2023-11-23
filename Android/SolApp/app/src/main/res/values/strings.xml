@@ -36,4 +36,5 @@
     <string name="modifica_professor">Modificar professor</string>
     <string name="busca_professor">Buscar professor</string>
     <string name="llista_professors">Llistar professors</string>
+    <string name="title_activity_nav_gestio_alumnes">NavGestioAlumnesActivity</string>
 </resources>

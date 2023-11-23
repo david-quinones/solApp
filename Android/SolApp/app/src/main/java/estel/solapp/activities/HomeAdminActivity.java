@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import estel.solapp.ui.admin.NavGestioAlumnesActivity;
 import estel.solapp.ui.admin.NavGestioUsuarisActivity;
 import estel.solapp.R;
 import estel.solapp.common.CommController;
@@ -91,7 +92,7 @@ public class HomeAdminActivity extends AppCompatActivity {
      *****************************************/
     public void goGestioAlumnes(View view){
 
-        Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+        Utility.gotoActivityChild(this, NavGestioAlumnesActivity.class);
 
     }
 

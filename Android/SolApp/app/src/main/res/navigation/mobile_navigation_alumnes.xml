@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/home_gestio_alumnes">
+
+    <fragment
+        android:id="@+id/home_gestio_alumnes"
+        android:name="estel.solapp.ui.admin.Alumnes.HomeGestioAlumnes"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home_gestio_alumnes" />
+    <fragment
+        android:id="@+id/afegirAlumne"
+        android:name="estel.solapp.ui.admin.Alumnes.AfegirAlumne"
+        android:label="fragment_afegir_alumne"
+        tools:layout="@layout/fragment_afegir_alumne" />
+    <fragment
+        android:id="@+id/modificarAlumne"
+        android:name="estel.solapp.ui.admin.Alumnes.modificarAlumne"
+        android:label="fragment_modificar_alumne"
+        tools:layout="@layout/fragment_modificar_alumne" />
+    <fragment
+        android:id="@+id/eliminarAlumne"
+        android:name="estel.solapp.ui.admin.Alumnes.eliminarAlumne"
+        android:label="fragment_eliminar_alumne"
+        tools:layout="@layout/fragment_eliminar_alumne" />
+    <fragment
+        android:id="@+id/llistarAlumnes"
+        android:name="estel.solapp.ui.admin.Alumnes.llistarAlumnes"
+        android:label="fragment_llistar_alumnes"
+        tools:layout="@layout/fragment_llistar_alumnes" />
+    <fragment
+        android:id="@+id/buscarAlumne"
+        android:name="estel.solapp.buscarAlumne"
+        android:label="fragment_buscar_alumne"
+        tools:layout="@layout/fragment_buscar_alumne" />
+
+</navigation>

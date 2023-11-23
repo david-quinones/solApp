@@ -15,6 +15,11 @@
         android:theme="@style/Theme.Solapp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.admin.NavGestioAlumnesActivity"
+            android:exported="false"
+            android:label="@string/title_activity_nav_gestio_alumnes"
+            android:theme="@style/Theme.Solapp.NoActionBar" />
+        <activity
             android:name=".activities.PerfilActivity"
             android:exported="false" />
         <activity
