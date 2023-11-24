@@ -68,7 +68,7 @@ public class modifica_usuari extends Fragment {
         isAdmin = view.findViewById(R.id.cBisAdmin);
         isTeacher = view.findViewById(R.id.cBisProfessor);
         isactive = view.findViewById(R.id.cBisactive);
-        taulaUsuaris = view.findViewById(R.id.taula_modifica_usuaris);
+        taulaUsuaris = view.findViewById(R.id.taula_modifica_professor);
         taulaUsuaris.removeAllViews();
 
         llistarUsuaris();//Mostra la llista d'usuaris per escollir

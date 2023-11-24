@@ -65,7 +65,7 @@ public class EliminaUsuari extends Fragment {
         nif = view.findViewById(R.id.textViewNif);
         dataInici = view.findViewById(R.id.textViewInici);
         dataFi = view.findViewById(R.id.textViewFi);
-        taulaProfessors = view.findViewById(R.id.taula_modifica_usuaris);
+        taulaProfessors = view.findViewById(R.id.taula_modifica_professor);
         taulaProfessors.removeAllViews();
 
         llistarProfessors();//Mostra la llista de professors per escollir

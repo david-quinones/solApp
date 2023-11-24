@@ -41,11 +41,9 @@ public class modificar_professor extends Fragment {
 
     private TextView nom, cognom1, cognom2, nif, dataInici, dataFi, telefon, dataNaixement, email;
     private Button modificar, confirmar;
-
     private CheckBox isactive;
     private TableLayout taulaProfessors;
     private boolean alternar=true;
-
     private boolean set;
     private int color, idPersona, idEmpleat;
 
@@ -72,7 +70,7 @@ public class modificar_professor extends Fragment {
         email = view.findViewById(R.id.editTextEmail);
         dataNaixement = view.findViewById(R.id.editTextDataNaixement);
         isactive = view.findViewById(R.id.cBisactive);
-        taulaProfessors = view.findViewById(R.id.taula_modifica_usuaris);
+        taulaProfessors = view.findViewById(R.id.taula_modifica_professor);
         taulaProfessors.removeAllViews();
 
         llistarProfessors();//Mostra la llista de professors per escollir

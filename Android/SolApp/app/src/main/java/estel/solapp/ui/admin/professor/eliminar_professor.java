@@ -36,8 +36,7 @@ import estel.solapp.models.Empleat;
  *************************************/
 public class eliminar_professor extends Fragment {
 
-    private TextView nom, cognom1, cognom2, nif, dataInici, dataFi;
-
+    private TextView nom, cognom1, cognom2, nif, dataInici,dataFi;
     private String telefon, dataNaixement, email;
     private Button eliminar;
     private TableLayout taulaProfessors;
@@ -64,7 +63,7 @@ public class eliminar_professor extends Fragment {
         nif = view.findViewById(R.id.textViewNif);
         dataInici = view.findViewById(R.id.textViewInici);
         dataFi = view.findViewById(R.id.textViewFi);
-        taulaProfessors = view.findViewById(R.id.taula_modifica_usuaris);
+        taulaProfessors = view.findViewById(R.id.taula_modifica_professor);
         taulaProfessors.removeAllViews();
 
         llistarProfessors();//Mostra la llista de professors per escollir
@@ -158,7 +157,7 @@ public class eliminar_professor extends Fragment {
                         row.addView(cognom1);
                         TextView cognom2 = new TextView(getContext());
                         cognom2.setText(empleat.getCognom2());
-                        nom.setGravity(Gravity.CENTER);
+                        cognom2.setGravity(Gravity.CENTER);
                         cognom2.setBackgroundResource(color);
                         row.addView(cognom2);
                         //Fem clicable la fila de la taula i cridem al métode de mostrar les dades

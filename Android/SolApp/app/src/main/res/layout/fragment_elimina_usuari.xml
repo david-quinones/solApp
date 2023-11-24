@@ -205,7 +205,7 @@
             app:layout_constraintTop_toBottomOf="@+id/eliminarBtn">
 
             <TableLayout
-                android:id="@+id/taula_modifica_usuaris"
+                android:id="@+id/taula_modifica_professor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -213,14 +213,6 @@
 
             </TableLayout>
         </ScrollView>
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="45dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
