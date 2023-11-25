@@ -1,10 +1,12 @@
-package sol.app.quinones.solappquinones.Controllers;
+package sol.app.quinones.solappquinones.Controllers.Aula;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import sol.app.quinones.solappquinones.Controllers.ITopMenuDelegation;
+import sol.app.quinones.solappquinones.Controllers.TopMenuController;
 import sol.app.quinones.solappquinones.Models.Model;
 import sol.app.quinones.solappquinones.Models.VistaController;
 

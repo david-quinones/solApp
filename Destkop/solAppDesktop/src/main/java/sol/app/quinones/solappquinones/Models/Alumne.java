@@ -111,10 +111,10 @@ public class Alumne extends Persona {
      * @param mail
      * @param idAlumne
      */
-    public Alumne(int idPersona, String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail, int idAlumne) {
+    public Alumne(int idPersona, String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail, int idAlumne, boolean actiu) {
         super(idPersona, nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.idAlumne = idAlumne;
-        this.actiu = true;
+        this.actiu = actiu;
     }
 
     /**

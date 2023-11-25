@@ -31,6 +31,8 @@ import java.util.ResourceBundle;
 public class WindowsFormAlumneController implements Initializable {
 
     @FXML
+    private CheckBox idChekActiu;
+    @FXML
     private Label idLbl11, idLbl12;
     @FXML
     private AnchorPane mainWindowForm;
@@ -146,7 +148,8 @@ public class WindowsFormAlumneController implements Initializable {
                 idTxtFld5.getText(),
                 idTxtFld6.getText(),
                 idTxtFld7.getText(),
-                idAlumne
+                idAlumne,
+                idChekActiu.isSelected()
                 //idBtnAcceptar.getText().equalsIgnoreCase("Crear") ? 0 : alumneCarregat.getIdAlumne()
         );
 
@@ -244,6 +247,7 @@ public class WindowsFormAlumneController implements Initializable {
         idTxtFld5.setText(alum.getDni());
         idTxtFld6.setText(alum.getTelefon());
         idTxtFld7.setText(alum.getMail());
+        idChekActiu.setSelected(alum.getIsActiu());
 
         //ocultar botons de usuari
         idTxtFld11.setManaged(false);
