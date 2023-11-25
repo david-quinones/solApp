@@ -1,4 +1,4 @@
-package estel.solapp.ui.admin.professor;
+package estel.solapp.ui.admin.Alumnes;
 
 import static estel.solapp.common.Utility.showToast;
 
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -24,17 +25,22 @@ import estel.solapp.R;
 import estel.solapp.common.CommController;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
+import estel.solapp.models.Alumne;
 import estel.solapp.models.Empleat;
 import estel.solapp.models.User;
 
-/***********************************************
- * Fragment per donar d'alta empleats-professors
- ***********************************************/
-public class afegir_professor extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link AfegirAlumne#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class AfegirAlumne extends Fragment {
 
-    private EditText nomUsuari,contrasenya, confirmaContrasenya, nom, cognom1, cognom2, dataNaixement, nif, telefon, email, dataInici, dataFi;
+    private EditText nomUsuari,contrasenya, confirmaContrasenya, nom, cognom1, cognom2, dataNaixement, nif, telefon, email;
     private Button altaBtn, esborrarBtn;
-    private Empleat empleat;
+
+    private CheckBox menjador, acollida;
+    private Alumne alumne;
     private User usuari;
 
 
@@ -46,7 +52,7 @@ public class afegir_professor extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_afegir_professor, container, false);
+        View view = inflater.inflate(R.layout.fragment_afegir_alumne, container, false);
 
         //Asignació de tots els EditText
         nomUsuari = view.findViewById(R.id.editTextUsuari);
@@ -59,8 +65,8 @@ public class afegir_professor extends Fragment {
         nif = view.findViewById(R.id.editTextDNI);
         telefon = view.findViewById(R.id.editTextTelefon);
         email = view.findViewById(R.id.editTextEmail);
-        dataInici= view.findViewById(R.id.editTextInici);
-        dataFi = view.findViewById(R.id.editTextFi);
+        menjador= view.findViewById(R.id.cBmenjador);
+        acollida = view.findViewById(R.id.cBacollida);
 
         //Botó de alta de professor.
         altaBtn = view.findViewById(R.id.altaBtn);
@@ -106,20 +112,20 @@ public class afegir_professor extends Fragment {
         }else {//Dades correctes
 
             //Creació de Empleat i usuari per donar d'alta.
-            empleat = new Empleat(nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
-                    nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),true,dataInici.getText().toString(),dataFi.getText().toString());
-            usuari = new User(nomUsuari.getText().toString(),contrasenya.getText().toString(),false,true,true);
+            alumne = new Alumne(nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
+                    nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),true,menjador.isChecked(),acollida.isChecked());
+            usuari = new User(nomUsuari.getText().toString(),contrasenya.getText().toString(),false,false,true);
 
             // Creació d'unaltre fil.
             ExecutorService executor = Executors.newSingleThreadExecutor();
             // La petició es fa en unaltre fil
-            Future<ValorsResposta> future = executor.submit(()->{return CommController.afegirEmpleat(empleat, usuari);});
+            Future<ValorsResposta> future = executor.submit(()->{return CommController.afegirAlumne(alumne, usuari);});
             // Procesar resposta del servidor
             try {
 
                 ValorsResposta resposta = future.get();
                 Gson gson= new Gson();
-                Log.d("RESPOSTA ALTA PROFE", gson.toJson(resposta));
+                Log.d("RESPOSTA ALTA ALUMNE", gson.toJson(resposta));
                 if (resposta==null){
 
                     showToast(this.getActivity(),this.getContext(), "Error de conexió amb el servidor. ");
@@ -128,12 +134,12 @@ public class afegir_professor extends Fragment {
 
                     if (resposta.getReturnCode()==CommController.OK_RETURN_CODE){//Codi correcte
 
-                        showToast(this.getActivity(),this.getContext(), "Empleat donat d'alta amb èxit");
+                        showToast(this.getActivity(),this.getContext(), "Alumne donat d'alta amb èxit");
 
 
                     }else {
 
-                        showToast(this.getActivity(),this.getContext(), "No s'ha pogut donar d'alta l'empleat");
+                        showToast(this.getActivity(),this.getContext(), "No s'ha pogut donar d'alta l'alumne");
 
                     }
                 }
@@ -152,8 +158,8 @@ public class afegir_professor extends Fragment {
      ****************************************************/
     public void esborrarDades(){
 
-        nomUsuari.setText("");contrasenya.setText("");nom.setText("");cognom1.setText("");cognom2.setText("");dataNaixement.setText("");
-        nif.setText("");telefon.setText("");email.setText("");dataInici.setText("");dataFi.setText("");
+        nomUsuari.setText("");contrasenya.setText("");confirmaContrasenya.setText("");nom.setText("");cognom1.setText("");cognom2.setText("");dataNaixement.setText("");
+        nif.setText("");telefon.setText("");email.setText("");menjador.setChecked(false);acollida.setChecked(false);
 
     }
 
@@ -177,13 +183,8 @@ public class afegir_professor extends Fragment {
         if (telefon.getText().toString().isEmpty()){error = error + "La casella Telèfon es buida.\n"; }
         if (email.getText().toString().isEmpty()){error = error + "La casella Email es buida.\n"; }
         if (!Utility.validarEmail(email.getText().toString())) {error = error + "El emailintroduït no és correcte";}
-        if (dataInici.getText().toString().isEmpty()){error = error + "La casella Data d'inici és buida.\n"; }
-        if (!Utility.validarData(dataInici.getText().toString())) {error= error + "El format de la data ha de ser aaaa-mm-dd";}
-        if (dataFi.getText().toString().isEmpty()){error = error + "La casella Data d'inici és buida.\n"; }
-        if (!Utility.validarData(dataFi.getText().toString())) {error= error + "El format de la data ha de ser aaaa-mm-dd";}
 
         return (error);
 
     }
-
 }

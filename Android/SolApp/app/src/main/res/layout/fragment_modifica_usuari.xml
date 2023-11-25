@@ -161,7 +161,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextConfirmContrasenya" />
 
         <Button
-            android:id="@+id/modificarBtn"
+            android:id="@+id/altaBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -180,7 +180,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cBisAdmin" />
 
         <Button
-            android:id="@+id/confirmarBtn"
+            android:id="@+id/esborrarBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -200,7 +200,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cBisactive" />
 
         <ScrollView
-            android:id="@+id/VSmodificar_Usuaris"
+            android:id="@+id/VSmodificar_Alumne"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -210,10 +210,10 @@
             app:layout_constraintBottom_toTopOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/confirmarBtn">
+            app:layout_constraintTop_toBottomOf="@+id/esborrarBtn">
 
             <TableLayout
-                android:id="@+id/taula_modifica_usuaris"
+                android:id="@+id/taula_modifica_professor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"

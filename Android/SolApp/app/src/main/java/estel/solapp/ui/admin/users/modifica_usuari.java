@@ -30,7 +30,6 @@ import estel.solapp.R;
 import estel.solapp.common.CommController;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
-import estel.solapp.models.Empleat;
 import estel.solapp.models.User;
 
 /**
@@ -69,12 +68,12 @@ public class modifica_usuari extends Fragment {
         isAdmin = view.findViewById(R.id.cBisAdmin);
         isTeacher = view.findViewById(R.id.cBisProfessor);
         isactive = view.findViewById(R.id.cBisactive);
-        taulaUsuaris = view.findViewById(R.id.taula_modifica_usuaris);
+        taulaUsuaris = view.findViewById(R.id.taula_modifica_professor);
         taulaUsuaris.removeAllViews();
 
         llistarUsuaris();//Mostra la llista d'usuaris per escollir
 
-        modificar = view.findViewById(R.id.modificarBtn);
+        modificar = view.findViewById(R.id.altaBtn);
         modificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +83,7 @@ public class modifica_usuari extends Fragment {
             }
         });
 
-        confirmar = view.findViewById(R.id.confirmarBtn);
+        confirmar = view.findViewById(R.id.esborrarBtn);
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

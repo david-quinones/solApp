@@ -35,18 +35,19 @@ public class CommController {
     public static final String LOGIN = "LOGIN";
     public static final String LOGOUT = "LOGOUT";
     public static final String LLISTAR_USUARIS = "LLISTAR_USUARIS";
-    public static final String MODIFICAR_USUARI = "MODIFICAR_USUARIS";
+    public static final String MODIFICAR_USUARI = "MODIFICAR_USUARI";
     public static final String AFEGIR_USUARI = "AFEGIR_USUARI";
     public static final String CONSULTA_PERFIL = "CONSULTA_PERFIL";
     public static final String MODIFICAR_PERFIL = "MODIFICAR_PERFIL";
     public static final String BUSCA_USUARI = "BUSCA_USUARI";
     public static final String ALTA_EMPLEAT = "ALTA_EMPLEAT";
     public static final String MODIFICAR_EMPLEAT = "MODIFICAR_EMPLEAT";
-    public static final String ELIMINAR_EMPLEAT = "ELIMINAR_EMPLEAT";
+    public static final String ELIMINAR_EMPLEAT = "ELIMINAR_USUARI";
     public static final String LLISTAR_EMPLEATS = "LLISTAR_EMPLEATS";
     public static final String ALTA_ALUMNE = "ALTA_ALUMNE";
     public static final String LLISTAR_ALUMNES = "LLISTAR_ALUMNES";
     public static final String MODIFICAR_ALUMNE = "MODIFICAR_ALUMNE";
+    public static final String ELIMINAR_ALUMNE = "ELIMINAR_USUARI";
 
 
     /***********************************
@@ -329,7 +330,7 @@ public class CommController {
      ********************************************************************************************************************************************/
 
     /*************************************************
-     * Petició de alta de professors al servidor
+     * Petició de alta d'alumnes al servidor
      * @param alumne
      * @param user
      * * @return resultat OK/NOK; null si error.
@@ -338,7 +339,7 @@ public class CommController {
 
         PeticioClient altaAlumne = new PeticioClient(ALTA_ALUMNE);
         altaAlumne.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
-        altaAlumne.addDataObject(altaAlumne);
+        altaAlumne.addDataObject(alumne);
         altaAlumne.addDataObject(user);
         Gson gson= new Gson();
         Log.d("PETICIO ALTA PROFE", gson.toJson(altaAlumne));
@@ -380,6 +381,25 @@ public class CommController {
         Gson gson= new Gson();
         Log.d("PETICIO MODIFICA PROFE", gson.toJson(modificaAlumne));
         ValorsResposta resposta=talkToServer(modificaAlumne);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+    /*************************************************
+     * Petició d'eliminar alumne al servidor
+     * @param alumne
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta eliminarAlumne(Alumne alumne){
+
+        PeticioClient eliminaAlumne = new PeticioClient(ELIMINAR_ALUMNE);
+        eliminaAlumne.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        eliminaAlumne.addDataObject(alumne);
+        Gson gson= new Gson();
+        Log.d("PETICIO ELIMINA ALUMNE", gson.toJson(eliminaAlumne));
+        ValorsResposta resposta=talkToServer(eliminaAlumne);
 
         if(resposta==null) return null;
 

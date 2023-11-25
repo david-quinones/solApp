@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.admin.professor.afegir_professor">
+    tools:context=".ui.admin.Alumnes.AfegirAlumne">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,11 +17,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="#090909"
             android:clickable="true"
             android:enabled="true"
-            android:text="Alta professor"
+            android:text="Alta alumne"
             android:textAlignment="center"
             android:textSize="16sp"
             android:visibility="visible"
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="#090909"
             android:clickable="true"
             android:enabled="true"
@@ -80,7 +80,7 @@
             android:id="@+id/imageView4"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toTopOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,41 +90,42 @@
             android:id="@+id/scrollView2"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/altaBtn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView20"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@+id/textView20">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/editTextUsuari"
+                <CheckBox
+                    android:id="@+id/cBacollida"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
                     android:background="#FFFFFF"
-                    android:ems="11"
-                    android:focusableInTouchMode="true"
-                    android:singleLine="true"
+                    android:enabled="true"
+                    android:text="Acollida"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextDataNaixement" />
 
-                <TextView
-                    android:id="@+id/textView9"
+                <CheckBox
+                    android:id="@+id/cBmenjador"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="24dp"
                     android:background="#FFFFFF"
-                    android:text="Usuari"
+                    android:enabled="true"
+                    android:text="Menjador"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTextDataNaixement" />
 
                 <EditText
                     android:id="@+id/editTextConfirmaContrasenya"
@@ -152,7 +153,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
-
                 <EditText
                     android:id="@+id/editTextContrasenya"
                     android:layout_width="wrap_content"
@@ -178,6 +178,31 @@
                     android:text="Contrasenya"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                <EditText
+                    android:id="@+id/editTextUsuari"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="32dp"
+                    android:background="#FFFFFF"
+                    android:ems="11"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:background="#FFFFFF"
+                    android:text="Usuari"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView21"
@@ -265,7 +290,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
-
                 <EditText
                     android:id="@+id/editTextCognom22"
                     android:layout_width="wrap_content"
@@ -281,58 +305,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/editTextCognom1" />
 
                 <TextView
-                    android:id="@+id/textView28"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:text="Data inici"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-                <EditText
-                    android:id="@+id/editTextInici"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="6"
-                    android:focusableInTouchMode="true"
-                    android:inputType="datetime|date"
-                    android:singleLine="true"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toEndOf="@+id/textView28"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
-
-                <TextView
-                    android:id="@+id/textView29"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:text="Data fi"
-                    app:layout_constraintStart_toEndOf="@+id/editTextInici"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
-
-                <EditText
-                    android:id="@+id/editTextFi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:ems="6"
-                    android:focusableInTouchMode="true"
-                    android:inputType="datetime|date"
-                    android:singleLine="true"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toEndOf="@+id/textView29"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
-
-                <TextView
                     android:id="@+id/textView30"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -341,7 +313,7 @@
                     android:background="#FFFFFF"
                     android:text="Telefon"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView28" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
                 <EditText
                     android:id="@+id/editTextTelefon"
@@ -356,7 +328,7 @@
                     android:singleLine="true"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/textView30"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextInici" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
                 <TextView
                     android:id="@+id/textView31"
@@ -367,7 +339,7 @@
                     android:background="#FFFFFF"
                     android:text="e-mail"
                     app:layout_constraintStart_toEndOf="@+id/editTextTelefon"
-                    app:layout_constraintTop_toBottomOf="@+id/textView29" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
 
                 <EditText
                     android:id="@+id/editTextEmail"
@@ -375,14 +347,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
                     android:background="#FFFFFF"
                     android:ems="11"
                     android:focusableInTouchMode="true"
                     android:inputType="text|textEmailAddress"
                     android:singleLine="true"
                     android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView31"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextFi" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCognom22" />
 
                 <TextView
                     android:id="@+id/textView32"
@@ -408,20 +382,7 @@
                     android:singleLine="true"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/textView32"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTelefon" />
-
-                <CheckBox
-                    android:id="@+id/cBisactive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
-                    android:enabled="true"
-                    android:text="Actiu"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toEndOf="@+id/editTextCognom1"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextDNI" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

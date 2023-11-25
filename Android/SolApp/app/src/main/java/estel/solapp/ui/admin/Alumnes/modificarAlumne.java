@@ -1,4 +1,4 @@
-package estel.solapp.ui.admin.professor;
+package estel.solapp.ui.admin.Alumnes;
 
 import static estel.solapp.common.Utility.showToast;
 
@@ -30,22 +30,22 @@ import estel.solapp.R;
 import estel.solapp.common.CommController;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
-import estel.solapp.models.Empleat;
+import estel.solapp.models.Alumne;
 
 /**
  * A simple {@link Fragment} subclass.
- *
+ * Use
  * create an instance of this fragment.
  */
-public class modificar_professor extends Fragment {
+public class modificarAlumne extends Fragment {
 
-    private TextView nom, cognom1, cognom2, nif, dataInici, dataFi, telefon, dataNaixement, email;
+    private TextView nom, cognom1, cognom2, nif, telefon, dataNaixement, email;
     private Button modificar, confirmar;
-    private CheckBox isactive;
-    private TableLayout taulaProfessors;
+    private CheckBox isactive, menjador, acollida;
+    private TableLayout taulaAlumnes;
     private boolean alternar=true;
     private boolean set;
-    private int color, idPersona, idEmpleat;
+    private int color, idPersona, idAlumne;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,23 +57,23 @@ public class modificar_professor extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_modificar_professor, container, false);
+        View view = inflater.inflate(R.layout.fragment_modificar_alumne, container, false);
 
         //Asignació de tots els TextView
         nom = view.findViewById(R.id.editTextNom);
         cognom1 = view.findViewById(R.id.editTextCognom1);
         cognom2 = view.findViewById(R.id.editTextCognom22);
         nif = view.findViewById(R.id.editTextDNI);
-        dataInici = view.findViewById(R.id.editTextInici);
-        dataFi = view.findViewById(R.id.editTextFi);
+        menjador = view.findViewById(R.id.cBMenjador);
+        acollida = view.findViewById(R.id.cBAcollida);
         telefon = view.findViewById(R.id.editTextTelefon);
         email = view.findViewById(R.id.editTextEmail);
         dataNaixement = view.findViewById(R.id.editTextDataNaixement);
         isactive = view.findViewById(R.id.cBisactive);
-        taulaProfessors = view.findViewById(R.id.taula_modifica_professor);
-        taulaProfessors.removeAllViews();
+        taulaAlumnes = view.findViewById(R.id.taula_modifica_alumne);
+        taulaAlumnes.removeAllViews();
 
-        llistarProfessors();//Mostra la llista de professors per escollir
+        llistarAlumnes();//Mostra la llista d'alumnes per escollir
 
         modificar = view.findViewById(R.id.altaBtn);
         modificar.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +90,7 @@ public class modificar_professor extends Fragment {
             @Override
             public void onClick(View view) {
 
-                alertmodificarProfessor();
+                alertmodificarAlumne();
 
             }
         });
@@ -101,15 +101,15 @@ public class modificar_professor extends Fragment {
 
     /*********************************************
      * Metode per enviar petició i mostrar resposta
-     * Per llistar professors
+     * Per llistar alumnes
      **********************************************/
-    public void llistarProfessors(){
+    public void llistarAlumnes(){
 
-        //Fem petició per agafar les dades de tots els professors
+        //Fem petició per agafar les dades de tots els alumnes
         // Creació d'unaltre fil.
         ExecutorService executor = Executors.newSingleThreadExecutor();
         // La petició es fa en unaltre fil
-        Future<ValorsResposta> future = executor.submit(()->{return CommController.llistarEmpleats();});
+        Future<ValorsResposta> future = executor.submit(()->{return CommController.llistarAlumnes();});
         // Procesar resposta del servidor
         try {
 
@@ -121,7 +121,7 @@ public class modificar_professor extends Fragment {
 
             }else{
 
-                taulaProfessors.removeAllViews();
+                taulaAlumnes.removeAllViews();
                 //Capçelera de la taula
                 //*********************
 
@@ -139,9 +139,20 @@ public class modificar_professor extends Fragment {
                 cognom2Header.setGravity(Gravity.CENTER);
                 cognom2Header.setBackgroundResource(R.drawable.tablas_listas_heather);
                 capcelera.addView(cognom2Header);
+                TextView menjadorHeather = new TextView(getContext()); menjadorHeather.setText("MENJADOR");
+                menjadorHeather.setGravity(Gravity.CENTER);
+                menjadorHeather.setBackgroundResource(R.drawable.tablas_listas_heather);
+                capcelera.addView(menjadorHeather);
+                TextView acollidaHeather = new TextView(getContext()); acollidaHeather.setText("ACOLLIDA");
+                acollidaHeather.setGravity(Gravity.CENTER);
+                acollidaHeather.setBackgroundResource(R.drawable.tablas_listas_heather);
+                capcelera.addView(acollidaHeather);
+                TextView actiuHeather = new TextView(getContext()); actiuHeather.setText("ACTIU");
+                actiuHeather.setGravity(Gravity.CENTER);
+                actiuHeather.setBackgroundResource(R.drawable.tablas_listas_heather);
+                capcelera.addView(actiuHeather);
 
-
-                taulaProfessors.addView(capcelera);
+                taulaAlumnes.addView(capcelera);
 
                 //Creació de Taula amb llista d'empleats
                 //**************************************
@@ -153,32 +164,49 @@ public class modificar_professor extends Fragment {
                     if (alternar){ color=(R.drawable.tablas_listas_yellow);alternar=false; }
                     else {color=(R.drawable.tablas_listas_green);alternar=true;}
 
-                    Empleat empleat= (Empleat) resposta.getData(i,Empleat.class);
+                    Alumne alumne = (Alumne) resposta.getData(i,Alumne.class);
 
                     TableRow row = new TableRow(this.getContext());
 
-                    TextView nom = new TextView(getContext()); nom.setText(empleat.getNom());
+                    TextView nom = new TextView(getContext());
+                    nom.setText(alumne.getNom());
                     nom.setGravity(Gravity.CENTER);
                     nom.setBackgroundResource(color);
                     row.addView(nom);
-                    TextView cognom1 = new TextView(getContext()); cognom1.setText(empleat.getCognom1());
+                    TextView cognom1 = new TextView(getContext());
+                    cognom1.setText(alumne.getCognom1());
                     cognom1.setGravity(Gravity.CENTER);
                     cognom1.setBackgroundResource(color);
                     row.addView(cognom1);
-                    TextView cognom2 = new TextView(getContext()); cognom2.setText(empleat.getCognom2());
-                    nom.setGravity(Gravity.CENTER);
+                    TextView cognom2 = new TextView(getContext());
+                    cognom2.setText(alumne.getCognom2());
+                    cognom2.setGravity(Gravity.CENTER);
                     cognom2.setBackgroundResource(color);
                     row.addView(cognom2);
+                    CheckBox menjador = new CheckBox(getContext());
+                    menjador.setChecked(alumne.isMenjador());
+                    menjador.setGravity(Gravity.CENTER);
+                    menjador.setBackgroundResource(color);
+                    row.addView(menjador);
+                    CheckBox acollida = new CheckBox(getContext());
+                    acollida.setChecked(alumne.isAcollida());
+                    acollida.setGravity(Gravity.CENTER);
+                    acollida.setBackgroundResource(color);
+                    row.addView(acollida);
+                    CheckBox actiu = new CheckBox(getContext());
+                    actiu.setChecked(alumne.isActiu());
+                    actiu.setGravity(Gravity.CENTER);
+                    actiu.setBackgroundResource(color);
+                    row.addView(actiu);
+
                     //Fem clicable la fila de la taula i cridem al métode de mostrar les dades
                     //Pasant-li l'empleat de la fila
                     row.setClickable(true);
                     row.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View view) {
-                            mostrarDades (empleat);
-                        }
+                        public void onClick(View view) {mostrarDades(alumne);}
                     });
-                    taulaProfessors.addView(row);
+                    taulaAlumnes.addView(row);
 
                 }
             }
@@ -194,34 +222,34 @@ public class modificar_professor extends Fragment {
 
     /***************************************************************
      * Metode per mostrar les dades de l'empleat escollit a la taula
-     * @param empleat
+     * @param alumne
      **********************************************/
-    public void mostrarDades (Empleat empleat){
+    public void mostrarDades (Alumne alumne){
 
-        nom.setText(empleat.getNom().toString());
-        cognom1.setText(empleat.getCognom1().toString());
-        cognom2.setText(empleat.getCognom2().toString());
-        nif.setText(empleat.getDni().toString());
-        dataInici.setText(empleat.getIniciContracte());
-        dataFi.setText(empleat.getFinalContracte());
-        telefon.setText(empleat.getTelefon());
-        email.setText(empleat.getMail().toString()); ;
-        dataNaixement.setText(empleat.getData_naixement());
-        idEmpleat= empleat.getIdEmpleat();
-        idPersona = empleat.getIdPersona();
-        isactive.setChecked(empleat.isActiu());
+        nom.setText(alumne.getNom().toString());
+        cognom1.setText(alumne.getCognom1().toString());
+        cognom2.setText(alumne.getCognom2().toString());
+        nif.setText(alumne.getDni().toString());
+        menjador.setChecked(alumne.isMenjador());
+        acollida.setChecked(alumne.isAcollida());
+        telefon.setText(alumne.getTelefon());
+        email.setText(alumne.getMail());
+        dataNaixement.setText(alumne.getData_naixement());
+        idAlumne = alumne.getIdAlumne();
+        idPersona = alumne.getIdPersona();
+        isactive.setChecked(alumne.isActiu());
 
     }
 
     /*********************************************
      * Metode per mostrar confirmació d'eliminar
      *********************************************/
-    public void alertmodificarProfessor(){
+    public void alertmodificarAlumne(){
 
-        // Dialeg per preguntar a l'usuari si vol modificar el professor
+        // Dialeg per preguntar a l'usuari si vol modificar l'alumne
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.getContext());
-        alertDialog.setMessage("Estàs segur que vols modificar el professor?");
+        alertDialog.setMessage("Estàs segur que vols modificar l'alumne?");
         alertDialog.setTitle("Atenció!");
         alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
         alertDialog.setCancelable(false);
@@ -229,9 +257,9 @@ public class modificar_professor extends Fragment {
         {
             public void onClick(DialogInterface dialog, int which)
             {
-                // Resposta si crida a modifcar professor
+                // Resposta si crida a modifcar alumne
 
-                modificarProfessor();
+                modificarAlumne();
 
             }
         });
@@ -252,7 +280,7 @@ public class modificar_professor extends Fragment {
     /************************************************
      * Metode per enviar petició de modificar professor
      ************************************************/
-    public void modificarProfessor(){
+    public void modificarAlumne(){
 
         //Control de dades.
 
@@ -264,21 +292,21 @@ public class modificar_professor extends Fragment {
 
         }else {//Dades correctes
 
-            //Creació de Empleat i usuari per donar d'alta.
-            Empleat empleat = new Empleat(idPersona,nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
-                    nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),idEmpleat,isactive.isChecked(),dataInici.getText().toString(),dataFi.getText().toString());
+            //Creació d'alumne i usuari per donar d'alta.
+            Alumne alumne = new Alumne(idPersona,nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
+                    nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),idAlumne,isactive.isChecked(),menjador.isChecked(),acollida.isChecked());
 
 
             // Creació d'unaltre fil.
             ExecutorService executor = Executors.newSingleThreadExecutor();
             // La petició es fa en unaltre fil
-            Future<ValorsResposta> future = executor.submit(()->{return CommController.modificarEmpleat(empleat);});
+            Future<ValorsResposta> future = executor.submit(()->{return CommController.modificarAlumne(alumne);});
             // Procesar resposta del servidor
             try {
 
                 ValorsResposta resposta = future.get();
                 Gson gson= new Gson();
-                Log.d("RESPOSTA MODIFICA PROFE", gson.toJson(resposta));
+                Log.d("RESPOSTA MODIFICA ALUMNE", gson.toJson(resposta));
                 if (resposta==null){
 
                     showToast(this.getActivity(),this.getContext(), "Error de conexió amb el servidor. ");
@@ -291,7 +319,7 @@ public class modificar_professor extends Fragment {
 
                         set=false;
                         setFocusable(set);
-                        llistarProfessors();
+                        llistarAlumnes();
 
 
                     }else {
@@ -317,7 +345,7 @@ public class modificar_professor extends Fragment {
 
         if (nom.getText().length()==0) {
 
-            showToast(this.getActivity(), this.getContext(), "Seleccioni un professor de la llista. ");
+            showToast(this.getActivity(), this.getContext(), "Seleccioni un alumne de la llista. ");
 
         }else {
             // Fem tots els editText editables
@@ -325,8 +353,8 @@ public class modificar_professor extends Fragment {
             cognom1.setFocusableInTouchMode(set);
             cognom2.setFocusableInTouchMode(set);
             nif.setFocusableInTouchMode(set);
-            dataInici.setFocusableInTouchMode(set);
-            dataFi.setFocusableInTouchMode(set);
+            acollida.setEnabled(set);
+            menjador.setEnabled(set);
             telefon.setFocusableInTouchMode(set);
             email.setFocusableInTouchMode(set);
             dataNaixement.setFocusableInTouchMode(set);
@@ -352,10 +380,9 @@ public class modificar_professor extends Fragment {
         if (!Utility.validarData(dataNaixement.getText().toString())) {error= error + "El format de la data ha de ser aaaa-mm-dd";}
         if (telefon.getText().toString().isEmpty()){error = error + "La casella Telèfon es buida.\n"; }
         if (email.getText().toString().isEmpty()){error = error + "La casella Email es buida.\n"; }
-        if (!Utility.validarEmail(email.getText().toString())) {error = error + "El emailintroduït no és correcte";}
+        if (!Utility.validarEmail(email.getText().toString())) {error = error + "El email introduït no és correcte";}
 
         return (error);
 
     }
-
 }
