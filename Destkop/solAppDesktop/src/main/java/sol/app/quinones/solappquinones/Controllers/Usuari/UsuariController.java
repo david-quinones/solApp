@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -82,6 +83,9 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
             return row;
         });
 
+        //ajustar columnes
+        tableUsers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
     }
 
     /**
@@ -114,6 +118,7 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
                 } else {
                     setGraphic(checkBox);
                     checkBox.setSelected(item);
+                    setAlignment(Pos.CENTER);
                 }
                 checkBox.setDisable(true);
             }
@@ -129,6 +134,7 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
                 } else {
                     setGraphic(checkBox);
                     checkBox.setSelected(item);
+                    setAlignment(Pos.CENTER);
                 }
                 checkBox.setDisable(true);
             }
@@ -144,6 +150,7 @@ public class UsuariController implements Initializable, ITopMenuDelegation {
                 } else {
                     setGraphic(checkBox);
                     checkBox.setSelected(item);
+                    setAlignment(Pos.CENTER);
                 }
                 checkBox.setDisable(true);
             }

@@ -103,6 +103,9 @@ public class ProfessorController implements Initializable, ITopMenuDelegation {
             });
             return row;
         });
+
+        //Ajustar columnes
+        tableProfe.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     /**
