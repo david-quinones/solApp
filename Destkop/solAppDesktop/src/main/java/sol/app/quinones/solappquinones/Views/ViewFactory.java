@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import sol.app.quinones.solappquinones.Controllers.*;
 import sol.app.quinones.solappquinones.Controllers.Alumne.AlumneController;
 import sol.app.quinones.solappquinones.Controllers.Alumne.WindowsFormAlumneController;
+import sol.app.quinones.solappquinones.Controllers.Aula.AulaController;
+import sol.app.quinones.solappquinones.Controllers.Aula.WindowsFormAulaController;
 import sol.app.quinones.solappquinones.Controllers.MainWindow.MainWindowController;
 import sol.app.quinones.solappquinones.Controllers.Professor.ProfessorController;
 import sol.app.quinones.solappquinones.Controllers.Professor.WindowFormProfessorController;
@@ -174,7 +176,7 @@ public class ViewFactory {
      */
     public void showWindowFormProfessor(String title, Professor professor, ProfessorController professorController){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormProfessor.fxml"));
-        createStage(loader, true, title, true, professor, null);
+        createStage(loader, true, title, true, professor, null, null);
         //una vez cargada la stage
         WindowFormProfessorController windowFormProfessorController = loader.getController();
         windowFormProfessorController.setProfessorController(professorController);
@@ -192,10 +194,26 @@ public class ViewFactory {
      */
     public void showWindowFormAlumne(String title, Alumne a, AlumneController alumneController){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormAlumne.fxml"));
-        createStage(loader, true, title, true, null, a);
+        createStage(loader, true, title, true, null, a, null);
         //una vez cargada la stage
         WindowsFormAlumneController windowsFormAlumneController = loader.getController();
         windowsFormAlumneController.setUsuariController(alumneController);
+
+    }
+
+    /**
+     * Mostra la finestra del formulari de l'aula
+     * Crea i mostra una finestra per l'edidicó o creació
+     * @param title titul de la finestra
+     * @param a Objecte Aula per accaregar a la finestra
+     * @param aulaController Controlador associat a lka finestra de l'aula
+     */
+    public void showWindowFormAula(String title, Aula a, AulaController aulaController){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormAula.fxml"));
+        createStage(loader, true, title, true, null, null,a);
+        //una vez cargada la stage
+        WindowsFormAulaController windowsFormAulaController = loader.getController();
+        windowsFormAulaController.setAulaController(aulaController);
 
     }
 
@@ -208,7 +226,7 @@ public class ViewFactory {
      */
     public void showWindowFormUser(String title, Usuari u, UsuariController usuariController){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/WindowFormUser.fxml"));
-        createStage(loader, true, title, true, null, null);
+        createStage(loader, true, title, true, null, null, null);
         //una vez cargada la stage
 
         WindowsFormUsuariController windowsFormUsuariController = loader.getController();
@@ -241,7 +259,7 @@ public class ViewFactory {
      */
     public void showLoginWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
-        createStage(loader, true, "", false, null, null);
+        createStage(loader, true, "", false, null, null, null);
     }
 
 
@@ -254,7 +272,7 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MainWindow/MainWindow.fxml"));
         MainWindowController mainWindowController = new MainWindowController(rol);
         loader.setController(mainWindowController);
-        createStage(loader, false, "", false, null, null);
+        createStage(loader, false, "", false, null, null, null);
 
     }
 
@@ -266,7 +284,7 @@ public class ViewFactory {
      * @param loader FXMLLoader per carregar la vista
      * @param login identifica si es la finestra de login o no per realitzar n accio
      */
-    private void createStage(FXMLLoader loader, boolean login, String title, boolean block, Professor professor, Alumne alumne) {
+    private void createStage(FXMLLoader loader, boolean login, String title, boolean block, Professor professor, Alumne alumne, Aula aula) {
         Scene scene = null;
         try{
             scene = new Scene(loader.load());
@@ -283,6 +301,10 @@ public class ViewFactory {
         if(alumne != null) {
             WindowsFormAlumneController windowsFormAlumneController = loader.getController();
             windowsFormAlumneController.loadAlumne(alumne);
+        }
+        if(aula != null){
+            WindowsFormAulaController windowsFormAulaController = loader.getController();
+            windowsFormAulaController.loadAula(aula);
         }
 
 

@@ -1,5 +1,7 @@
 package sol.app.quinones.solappquinones.Models;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,12 @@ public class Aula {
         this.nomAula = nomAula;
         this.empleat = professor;
         this.alumnes = new ArrayList<>(alumnes);
+    }
+
+    public Aula(int id, String nomAula, Professor professor) {
+        this.id = id;
+        this.nomAula = nomAula;
+        this.empleat = professor;
     }
 
     public Aula(String nomAula){
@@ -54,4 +62,16 @@ public class Aula {
     public void setAlumnes(List<Alumne> alumnes) {
         this.alumnes = new ArrayList<>(alumnes);
     }
+
+    /**
+     * Converteix una cadena "JSON" a un objecte Aula
+     * Static per no tindre que instanciar objectes, i cridar-lo directament
+     * @param json cadena "JSON"
+     * @return objecte Aula
+     */
+    public static Aula fromJson (String json){
+        Gson gson = new Gson();
+        return gson.fromJson(json, Aula.class);
+    }
+
 }
