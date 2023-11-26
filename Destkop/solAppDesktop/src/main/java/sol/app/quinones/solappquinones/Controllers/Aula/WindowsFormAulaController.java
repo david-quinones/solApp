@@ -1,5 +1,7 @@
 package sol.app.quinones.solappquinones.Controllers.Aula;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -10,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sol.app.quinones.solappquinones.Controllers.ErrorController;
+import sol.app.quinones.solappquinones.Models.Alumne;
 import sol.app.quinones.solappquinones.Models.Aula;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Models.Professor;
@@ -27,6 +30,8 @@ import java.util.ResourceBundle;
 public class WindowsFormAulaController implements Initializable {
 
     @FXML
+    private ListView<Alumne> listUsers;
+    @FXML
     private Button idBtnAcceptar;
     @FXML
     private TextField idTxtFld1;
@@ -37,6 +42,7 @@ public class WindowsFormAulaController implements Initializable {
     private Aula aula;
     private Aula aulaCarregada;
     private Professor professorSeleccionat;
+    private ObservableList<Alumne> observableList = callAlumnes();
 
     private List<Professor> professorsList = new ArrayList<>();
 
@@ -84,7 +90,7 @@ public class WindowsFormAulaController implements Initializable {
 
         //add to comboBox
         idTxtFld2.getItems().addAll(professorsList);
-        
+
         //ListenerCanvisProfessor
         idTxtFld2.valueProperty().addListener((obs, oldValue, newValue) -> {
             professorSeleccionat = (Professor) newValue;
@@ -97,6 +103,18 @@ public class WindowsFormAulaController implements Initializable {
             if(seleccionat != null) {
                 idTxtFld2.getSelectionModel().clearSelection();
                 e.consume();
+            }
+        });
+
+        /*CONFGURE ALUMNES TO LIST*/
+        listUsers.setItems(observableList);
+        listUsers.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //definit cell factory per veure objectes
+        listUsers.setCellFactory(e -> new ListCell<Alumne>() {
+            @Override
+            protected void updateItem(Alumne alumne, boolean empty){
+                super.updateItem(alumne, empty);
+                setText(empty ? "" : alumne.getNom().toUpperCase() + " " + alumne.getCognom1().toUpperCase());
             }
         });
 
@@ -115,7 +133,38 @@ public class WindowsFormAulaController implements Initializable {
             throw new RuntimeException(e);
         }
 
+    }
 
+    //Metode obtenir usser seleccionstas
+    @FXML
+    private void handleAddStudentToAula(){
+        ObservableList<Alumne> selectedStudent = listUsers.getSelectionModel().getSelectedItems();
+        aula.setAlumnes(selectedStudent);
+    }
+
+    /**
+     *
+     * @return
+     */
+
+    private ObservableList<Alumne> callAlumnes() {
+
+        ObservableList<Alumne> alumnes = FXCollections.observableArrayList();
+
+        try{
+        JSONObject obj = new JSONObject(ConsultesSocket.serverPeticioConsulta("LLISTAR_ALUMNES"));
+        JSONArray listArray = obj.getJSONArray("dades");
+        for (int i = 1 ; i<listArray.length(); i++){
+            //Alumne alumne = Alumne.fromJson(listArray.get(i).toString());
+            //if (alumne.get)
+            alumnes.add(Alumne.fromJson(listArray.get(i).toString()));
+        }
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        return alumnes;
     }
 
     /**
@@ -135,6 +184,9 @@ public class WindowsFormAulaController implements Initializable {
 
           // List alumnes
         );
+
+        //call to add user aula
+        handleAddStudentToAula();
 
         if(!idBtnAcceptar.getText().equalsIgnoreCase("modificar")){
             tipusPeticio = "ALTA_AULA";
@@ -185,7 +237,8 @@ public class WindowsFormAulaController implements Initializable {
             
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
-            //System.out.println(JsonUtil.toJson(peticio));
+            //TODO
+            System.out.println(JsonUtil.toJson(peticio));
 
             JSONObject jO = new JSONObject(resposta);
             if(jO.getInt("codiResultat") != 0 ){
@@ -203,8 +256,14 @@ public class WindowsFormAulaController implements Initializable {
     }
 
     public void loadAula(Aula aula) {
+
         idTxtFld1.setText(aula.getNomAula());
         idTxtFld2.setValue(aula.getEmpleat());
+
+
+        for(Alumne alumne : aula.getAlumnes()){
+            listUsers.getSelectionModel().select(alumne);
+        }
 
         this.aulaCarregada = aula;
         idBtnAcceptar.setText("Modificar");
