@@ -27,6 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador del formulari de l'aula
+ * Gestiona la logica i UI per crear i editar aules
+ *
+ * @author david
+ */
 public class WindowsFormAulaController implements Initializable {
 
     @FXML
@@ -120,13 +126,19 @@ public class WindowsFormAulaController implements Initializable {
 
     }
 
+    /**
+     * Metode per carregar al comboBox els professors
+     * Només carregaran els professors que son actius, els inactius no
+     */
     private void loadTeacher() {
         try{
             JSONObject obj = new JSONObject(ConsultesSocket.serverPeticioConsulta("LLISTAR_EMPLEATS"));
             JSONArray listArray = obj.getJSONArray("dades");
             for(int i = 1; i< listArray.length(); i++){
-                //System.out.println(Professor.fromJson(listArray.get(i).toString()));
-                professorsList.add(Professor.fromJson(listArray.get(i).toString()));
+                // revisem si es actiu, sino es actiu no l'inserim a la llista
+                Professor professor = Professor.fromJson(listArray.get(i).toString());
+                if(professor.isActiu()) professorsList.add(professor);
+                //professorsList.add(Professor.fromJson(listArray.get(i).toString()));
             }
 
         } catch (JSONException e) {
@@ -135,7 +147,9 @@ public class WindowsFormAulaController implements Initializable {
 
     }
 
-    //Metode obtenir usser seleccionstas
+    /**
+     * Metode per obtenir els usuaris seleccionas al list
+     */
     @FXML
     private void handleAddStudentToAula(){
         ObservableList<Alumne> selectedStudent = listUsers.getSelectionModel().getSelectedItems();
@@ -143,8 +157,11 @@ public class WindowsFormAulaController implements Initializable {
     }
 
     /**
+     *Metode per obtenir els alumnes de la base de dades,
+     * només inserirem i retornem els alumnes que son actius, els inactius els ignorarem
+     * per tal de nose mostrats a la llista
      *
-     * @return
+     * @return List alumnes actius
      */
 
     private ObservableList<Alumne> callAlumnes() {
@@ -155,9 +172,10 @@ public class WindowsFormAulaController implements Initializable {
         JSONObject obj = new JSONObject(ConsultesSocket.serverPeticioConsulta("LLISTAR_ALUMNES"));
         JSONArray listArray = obj.getJSONArray("dades");
         for (int i = 1 ; i<listArray.length(); i++){
-            //Alumne alumne = Alumne.fromJson(listArray.get(i).toString());
-            //if (alumne.get)
-            alumnes.add(Alumne.fromJson(listArray.get(i).toString()));
+            // revisem si es actiu, sino es actiu no l'inserim a la llista
+            Alumne alumne = Alumne.fromJson(listArray.get(i).toString());
+            if (alumne.getIsActiu()) alumnes.add(alumne);
+            //alumnes.add(Alumne.fromJson(listArray.get(i).toString()));
         }
 
         } catch (JSONException e) {
@@ -255,6 +273,11 @@ public class WindowsFormAulaController implements Initializable {
 
     }
 
+    /**
+     * Metode per carrgar a la finesta l'aulta seleccionada per editar
+     * també recorre la llista per tal de seleccionar.los
+     * @param aula aula seleccionada
+     */
     public void loadAula(Aula aula) {
 
         idTxtFld1.setText(aula.getNomAula());
