@@ -112,7 +112,10 @@ public class WindowsFormAulaController implements Initializable {
             }
         });
 
+
+
         /*CONFGURE ALUMNES TO LIST*/
+
         listUsers.setItems(observableList);
         listUsers.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         //definit cell factory per veure objectes
@@ -163,7 +166,6 @@ public class WindowsFormAulaController implements Initializable {
      *
      * @return List alumnes actius
      */
-
     private ObservableList<Alumne> callAlumnes() {
 
         ObservableList<Alumne> alumnes = FXCollections.observableArrayList();
@@ -203,7 +205,7 @@ public class WindowsFormAulaController implements Initializable {
           // List alumnes
         );
 
-        //call to add user aula
+        //call to add selected user at aula
         handleAddStudentToAula();
 
         if(!idBtnAcceptar.getText().equalsIgnoreCase("modificar")){
@@ -255,9 +257,6 @@ public class WindowsFormAulaController implements Initializable {
             
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
-            //TODO
-            System.out.println(JsonUtil.toJson(peticio));
-
             JSONObject jO = new JSONObject(resposta);
             if(jO.getInt("codiResultat") != 0 ){
                 return true;
@@ -283,7 +282,7 @@ public class WindowsFormAulaController implements Initializable {
         idTxtFld1.setText(aula.getNomAula());
         idTxtFld2.setValue(aula.getEmpleat());
 
-
+        //seleccionem cada alumne de la llista que te l'aula assignats
         for(Alumne alumne : aula.getAlumnes()){
             listUsers.getSelectionModel().select(alumne);
         }
