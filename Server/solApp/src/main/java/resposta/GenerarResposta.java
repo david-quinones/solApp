@@ -488,25 +488,36 @@ public class GenerarResposta {
      * @return resposta amb el resultat
      */
     public RetornDades respostaModificarAula(Aula aula){
-        ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
-        AulaDAO aulaDAO = new AulaDAO(conexio);
-        //Executem la modificació
-        int modificarAula = aulaDAO.modificarAula(aula);
-        if(modificarAula > 0){
-            llistaAlumnes = aula.getAlumnes();
-            if(!llistaAlumnes.isEmpty()){
-                AlumneDAO alumneDAO = new AlumneDAO(conexio);
-                for(Alumne alumne: llistaAlumnes){
-                    alumneDAO.afegirAlumneAula(alumne, aula.getId());
+        try {
+            conexio.setAutoCommit(false);
+            ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
+            AulaDAO aulaDAO = new AulaDAO(conexio);
+            //Executem la modificació
+            int modificarAula = aulaDAO.modificarAula(aula);
+            if(modificarAula > 0){
+                llistaAlumnes = aula.getAlumnes();
+                if(!llistaAlumnes.isEmpty()){
+                    AlumneDAO alumneDAO = new AlumneDAO(conexio);
+                    alumneDAO.eliminarAlumneAula(aula.getId());
+                    for(Alumne alumne: llistaAlumnes){
+                        alumneDAO.afegirAlumneAula(alumne, aula.getId());               
+                    }
+                }else{
+                    LOGGER.info("La llista d'alumnes està buida");
                 }
             }else{
-                LOGGER.info("La llista d'alumnes està buida");
-            }            
-        }else{
-            LOGGER.warning("La modificació no s'ha pogut realitzar");
-            return resposta = new RetornDades(CODI_ERROR);
+                LOGGER.warning("La modificació no s'ha pogut realitzar");
+                //Desfem posibles canvis
+                conexio.rollback();
+                return resposta = new RetornDades(CODI_ERROR);
             }
-        return resposta = new RetornDades(CODI_CORRECTE);
+            //Acceptem els canvis
+            conexio.commit();
+            return resposta = new RetornDades(CODI_CORRECTE);
+        } catch (SQLException ex) {
+            Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resposta = new RetornDades(CODI_ERROR);
         }
     
     

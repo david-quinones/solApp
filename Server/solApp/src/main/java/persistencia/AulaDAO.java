@@ -112,6 +112,7 @@ public class AulaDAO {
      */
     public int modificarAula(Aula aula){
         try {
+            //Sentència SQL
             String modificarAula = "UPDATE aula SET nom = ?, professor_id = ? "
                     + "WHERE id = ?;";
             psAula = conexio.prepareStatement(modificarAula);
@@ -199,5 +200,6 @@ public class AulaDAO {
         }
         return aula;
     }
+    
 
 }

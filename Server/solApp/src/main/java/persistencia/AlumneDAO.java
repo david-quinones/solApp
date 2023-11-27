@@ -294,5 +294,34 @@ public class AlumneDAO {
     }
     
     
-    
+    /**Mètode per eliminar les aules associades a un alumne
+     * 
+     * @param idAula que cal elimnar
+     * @return codi resultat
+     */
+    public int eliminarAlumneAula(int idAula){
+        try {
+            String eliminarAlumneAula = "UPDATE alumne SET aula_id = NULL "
+                    + "WHERE aula_id = ?;";
+            psAlumne = conexio.prepareStatement(eliminarAlumneAula);
+            
+            //Establim dades per a la consulta
+            psAlumne.setInt(1, idAula);
+            
+            int filesAfectades = psAlumne.executeUpdate();
+            //Comprovem el resultat
+            if(filesAfectades > 0){
+                LOGGER.info("Aula eliminada.");
+                return CORRECTE;
+            }else{
+                LOGGER.warning("No s'ha pogut eliminar l'aula: " + idAula + " dels alumne");
+                return ERROR;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumneDAO.class.getName()).log(Level.SEVERE, 
+                    "ERROR al intentar eliminar la aula del alumne", ex);
+        }
+        
+        return ERROR;
+    }
 }
