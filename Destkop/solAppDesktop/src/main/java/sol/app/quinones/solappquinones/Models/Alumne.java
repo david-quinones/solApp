@@ -2,6 +2,8 @@ package sol.app.quinones.solappquinones.Models;
 
 import com.google.gson.Gson;
 
+import java.util.Objects;
+
 /**
  * Classe model que representa un alumne
  * Extend de la classe persona i inclou atribuits propis
@@ -111,10 +113,10 @@ public class Alumne extends Persona {
      * @param mail
      * @param idAlumne
      */
-    public Alumne(int idPersona, String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail, int idAlumne) {
+    public Alumne(int idPersona, String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail, int idAlumne, boolean actiu) {
         super(idPersona, nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.idAlumne = idAlumne;
-        this.actiu = true;
+        this.actiu = actiu;
     }
 
     /**
@@ -192,4 +194,18 @@ public class Alumne extends Persona {
         Gson gson = new Gson();
         return gson.fromJson(json, Alumne.class);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Alumne alumne = (Alumne) o;
+        return Objects.equals(idAlumne, alumne.idAlumne);
+    }
+
+    @Override
+    public int hasCode(){
+        return Objects.hash(idAlumne);
+    }
+
 }

@@ -60,7 +60,12 @@ public class PerfilController implements Initializable {
     private int idPersona;
 
     private Persona persona;
-    private Persona mPersona =  new Persona();
+    private Persona mPersona = new Persona() {
+        @Override
+        public int hasCode() {
+            return 0;
+        }
+    };
 
     private Peticio peticio = new Peticio();
     private ServerComunication socket = new ServerComunication();

@@ -9,7 +9,7 @@ import com.google.gson.Gson;
  *
  * @author david
  */
-public class Persona {
+public abstract class Persona {
 
     private int idPersona;
     private String nom;
@@ -235,4 +235,6 @@ public class Persona {
                 ", mail='" + mail + '\'' +
                 '}';
     }
+
+    public abstract int hasCode();
 }

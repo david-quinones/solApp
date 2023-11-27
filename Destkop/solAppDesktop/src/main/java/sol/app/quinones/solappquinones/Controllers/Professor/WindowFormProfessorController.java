@@ -26,6 +26,8 @@ import java.util.ResourceBundle;
  */
 public class WindowFormProfessorController implements Initializable {
     public AnchorPane mainWindowForm;
+    @FXML
+    private CheckBox idChekActiu;
 
     @FXML
     private Label idLbl1,idLbl2,idLbl3,idLbl4,idLbl5,idLbl6,idLbl7,idLbl8,idLbl9,idLbl10,idLbl11,idLbl12;
@@ -135,7 +137,7 @@ public class WindowFormProfessorController implements Initializable {
                 idEmpleat,
                 idTxtFld8.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
                 idTxtFld9.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
-                true
+                idChekActiu.isSelected()
         );
         if(!idBtnAcceptar.getText().equals("Modificar")){
             //controlar si estan vacios, no hacer nada?? mandar un objeto vacio? siempre obligatorio?
@@ -236,6 +238,7 @@ public class WindowFormProfessorController implements Initializable {
                 idTxtFld9.setValue((obj.getFinalContracte() != null && !obj.getFinalContracte().isEmpty()) ? LocalDate.parse(obj.getFinalContracte()) : LocalDate.now());
                 idTxtFld10.setText(String.valueOf(obj.getIdPersona()));
                 idEmpleat = obj.getIdEmpleat();
+                idChekActiu.setSelected(obj.isActiu());
 
                 //idTxtFld8.setValue(LocalDate.parse(obj.getIniciContracte()));
                 //idTxtFld9.setValue(LocalDate.parse(obj.getFinalContracte()));

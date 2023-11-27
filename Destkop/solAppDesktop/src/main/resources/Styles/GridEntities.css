@@ -36,18 +36,30 @@
     -fx-font-size: 1.2em;
 }
 
+.grid_view .column-header{
+    -fx-border-color: #132A13;
+    -fx-border-style: none solid solid none;
+    -fx-border-width: 0 1 1 0;
+
+}
+
 .grid_view .column-header .label{
     -fx-pref-width: 150px;
 }
-
 
 .grid_view VBox {
     -fx-alignment: top_center;
     -fx-spacing: 10;
 }
 
-
 .grid_view .table-view:focused .table-row-cell:focused:selected {
     -fx-background-color: #132A13;
     -fx-text-fill: white;
 }
+
+/**/
+.table-view .cell .check-box {
+    -fx-alignment: center;
+}
+
+

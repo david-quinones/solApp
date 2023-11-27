@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="mainWindowForm" prefHeight="453.0" prefWidth="350.0" styleClass="main_view" stylesheets="@../Styles/WindowsForm.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.Aula.WindowsFormAulaController">
+    <VBox prefHeight="200.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <Label fx:id="idLbl1" text="Nom Aula" />
+            <TextField fx:id="idTxtFld1" />
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <Label fx:id="idLbl2" text="Professor" />
+                <ComboBox fx:id="idTxtFld2" />
+            </children>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="19.0" prefWidth="62.0" text="Alumnes" />
+               <ListView fx:id="listUsers" prefHeight="40.0" prefWidth="247.0">
+
+            </ListView>
+         </children>
+        </HBox>
+        <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <Button fx:id="idBtnAcceptar" mnemonicParsing="false" text="Crear">
+                    <opaqueInsets>
+                        <Insets right="50.0" />
+                    </opaqueInsets>
+                </Button>
+            </children>
+            <opaqueInsets>
+                <Insets right="15.0" />
+            </opaqueInsets>
+        </HBox>
+    </VBox>
+</AnchorPane>

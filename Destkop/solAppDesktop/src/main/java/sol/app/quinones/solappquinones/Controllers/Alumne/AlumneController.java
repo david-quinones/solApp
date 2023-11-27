@@ -88,6 +88,9 @@ public class AlumneController implements Initializable, ITopMenuDelegation {
             return row;
         });
 
+        //ajustar columnes i redimensionar
+        tableAlumne.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
 
 
     }

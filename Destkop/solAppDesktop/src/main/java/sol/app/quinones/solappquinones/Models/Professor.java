@@ -2,6 +2,8 @@ package sol.app.quinones.solappquinones.Models;
 
 import com.google.gson.Gson;
 
+import java.util.Objects;
+
 /**
  * Classe model que representa un professor
  * Extend de Persona incloent els atribut especifics
@@ -208,5 +210,10 @@ public class Professor extends Persona {
     public static Professor fromJson (String json){
         Gson gson = new Gson();
         return gson.fromJson(json, Professor.class);
+    }
+
+    @Override
+    public int hasCode() {
+        return Objects.hash(idEmpleat);
     }
 }
