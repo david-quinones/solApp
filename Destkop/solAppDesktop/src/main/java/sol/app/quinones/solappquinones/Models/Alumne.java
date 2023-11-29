@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Alumne extends Persona {
 
-    private int idAlumne;
+    private int idAlumne, idAula;
     private boolean menjador, actiu, acollida;
 
     /**
@@ -35,12 +35,13 @@ public class Alumne extends Persona {
      * @param actiu
      * @param acollida
      */
-    public Alumne(String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail, int idAlumne, boolean menjador, boolean actiu, boolean acollida) {
+    public Alumne(String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail, int idAlumne, boolean menjador, boolean actiu, boolean acollida, int idAula) {
         super(nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.idAlumne = idAlumne;
         this.menjador = menjador;
         this.actiu = actiu;
         this.acollida = acollida;
+        this.idAula = idAula;
     }
 
     /**
@@ -58,12 +59,13 @@ public class Alumne extends Persona {
      * @param actiu
      * @param acollida
      */
-    public Alumne(int idPersona, String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail, int idAlumne, boolean menjador, boolean actiu, boolean acollida) {
+    public Alumne(int idPersona, String nom, String cognom1, String cognom2, String data_naixement, String dni, String telefon, String mail, int idAlumne, boolean menjador, boolean actiu, boolean acollida, int idAula) {
         super(idPersona, nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.idAlumne = idAlumne;
         this.menjador = menjador;
         this.actiu = actiu;
         this.acollida = acollida;
+        this.idAula = idAula;
     }
 
     /**
@@ -118,6 +120,8 @@ public class Alumne extends Persona {
         this.idAlumne = idAlumne;
         this.actiu = actiu;
     }
+
+
 
     /**
      * Obte Identificador Alumne
@@ -195,6 +199,14 @@ public class Alumne extends Persona {
         return gson.fromJson(json, Alumne.class);
     }
 
+    public int getIdAula() {
+        return idAula;
+    }
+
+    public void setIdAula(int idAula) {
+        this.idAula = idAula;
+    }
+
     @Override
     public boolean equals(Object o) {
         if(this == o) return true;
@@ -207,5 +219,7 @@ public class Alumne extends Persona {
     public int hasCode(){
         return Objects.hash(idAlumne);
     }
+
+
 
 }

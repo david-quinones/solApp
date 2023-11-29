@@ -176,6 +176,7 @@ public class WindowsFormAulaController implements Initializable {
         for (int i = 1 ; i<listArray.length(); i++){
             // revisem si es actiu, sino es actiu no l'inserim a la llista
             Alumne alumne = Alumne.fromJson(listArray.get(i).toString());
+            //TODO System.out.println(alumne.getIdAula());
             if (alumne.getIsActiu()) alumnes.add(alumne);
             //alumnes.add(Alumne.fromJson(listArray.get(i).toString()));
         }
@@ -254,7 +255,8 @@ public class WindowsFormAulaController implements Initializable {
             peticio.setPeticio(tipusPeticio);
             peticio.addDades(SingletonConnection.getInstance().getKey());
             peticio.addDades(JsonUtil.toJson(aula));
-            
+            //TODO
+            //System.out.println(JsonUtil.toJson(aula));
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
 
             JSONObject jO = new JSONObject(resposta);
