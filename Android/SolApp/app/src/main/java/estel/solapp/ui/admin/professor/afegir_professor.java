@@ -49,7 +49,7 @@ public class afegir_professor extends Fragment {
         View view = inflater.inflate(R.layout.fragment_afegir_professor, container, false);
 
         //Asignació de tots els EditText
-        nomUsuari = view.findViewById(R.id.editTextUsuari);
+        nomUsuari = view.findViewById(R.id.editTextNomUsuari);
         contrasenya = view.findViewById(R.id.editTextContrasenya);
         confirmaContrasenya = view.findViewById(R.id.editTextConfirmaContrasenya);
         nom = view.findViewById(R.id.editTextNom);

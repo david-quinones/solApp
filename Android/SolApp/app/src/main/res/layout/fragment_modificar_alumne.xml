@@ -315,7 +315,8 @@
                 <TableLayout
                     android:id="@+id/taula_modifica_alumne"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:gravity="bottom|center_horizontal">
 
                 </TableLayout>
             </HorizontalScrollView>

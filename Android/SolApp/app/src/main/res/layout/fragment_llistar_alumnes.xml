@@ -55,6 +55,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="top"
                     android:layout_marginTop="16dp"
+                    android:gravity="center"
                     android:scrollbarStyle="outsideOverlay"
                     android:scrollbarThumbHorizontal="@color/solapp_background"
                     android:scrollbarThumbVertical="@color/solapp_background"

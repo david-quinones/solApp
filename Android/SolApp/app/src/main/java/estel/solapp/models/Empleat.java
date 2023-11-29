@@ -7,6 +7,13 @@ public class Empleat extends Persona{
     private String iniciContracte;
     private String finalContracte;
 
+    private String professor;
+
+    @Override
+    public String toString() {
+        this.professor = this.professor = super.getNom()+" "+ super.getCognom1()+" "+ super.getCognom2();
+        return professor;
+    }
 
     /**************
      * Constructors
@@ -38,6 +45,14 @@ public class Empleat extends Persona{
         this.finalContracte = finalContracte;
 
     }
+    public Empleat(String nom, String cognom1, String cognom2, String data_naixement,
+                   String dni, String telefon, String mail) {
+
+        super(nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
+
+
+    }
+
     public Empleat(){
 
     }
