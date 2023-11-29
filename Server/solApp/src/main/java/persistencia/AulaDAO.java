@@ -33,6 +33,11 @@ public class AulaDAO {
     }
     
     
+    /**Mètode per afegir una aula nova a la base de dades
+     * 
+     * @param aula que s'ha d'afegir
+     * @return codi del resultat
+     */
     public int altaAula(Aula aula){
         int id = 0;
         try {

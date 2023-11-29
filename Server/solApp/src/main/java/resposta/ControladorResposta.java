@@ -113,6 +113,11 @@ public class ControladorResposta {
                 //Genrem la resposta a la crida llistar_aules
                 resposta = dadesResposta.respostaLlistaAules();
                 return resposta;
+            case "ENVIAR_MISSATGE":
+                //Generem la resposta a la crida enviar_missatge
+                resposta = dadesResposta.respostaEnviarMissatge((Missatge)peticio.getDades(1, Missatge.class),
+                        (String) peticio.getDades(0, String.class));
+                return resposta;
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }

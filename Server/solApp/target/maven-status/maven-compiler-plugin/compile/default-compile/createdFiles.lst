@@ -1,3 +1,4 @@
+persistencia\MissatgeDAO.class
 servidor\ServidorSocketListener$GestorClients.class
 persistencia\AulaDAO.class
 entitats\Empleat.class
@@ -24,3 +25,4 @@ resposta\ControladorResposta.class
 persistencia\PersonaDAO.class
 seguretat\Encriptar.class
 entitats\Aula.class
+entitats\Missatge.class

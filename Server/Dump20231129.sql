@@ -43,26 +43,9 @@ CREATE TABLE `alumne` (
 
 LOCK TABLES `alumne` WRITE;
 /*!40000 ALTER TABLE `alumne` DISABLE KEYS */;
-INSERT INTO `alumne` VALUES (1,1,0,0,31,NULL),(2,1,0,1,32,NULL),(3,1,1,1,33,4),(4,1,0,0,34,4),(5,1,1,1,5,4),(8,0,0,0,52,NULL),(21,1,0,1,67,NULL);
+INSERT INTO `alumne` VALUES (1,1,0,0,31,NULL),(2,1,0,1,32,NULL),(3,1,1,1,33,NULL),(4,1,0,0,34,4),(5,1,1,1,5,NULL),(8,0,0,0,52,2),(21,1,0,1,67,2);
 /*!40000 ALTER TABLE `alumne` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `alumne_AFTER_UPDATE` AFTER UPDATE ON `alumne` FOR EACH ROW BEGIN
-
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `aula`
@@ -87,7 +70,7 @@ CREATE TABLE `aula` (
 
 LOCK TABLES `aula` WRITE;
 /*!40000 ALTER TABLE `aula` DISABLE KEYS */;
-INSERT INTO `aula` VALUES (2,'Prova',NULL),(4,'TestIntegracio',NULL),(5,'ProvaEliminarCorrecte',NULL);
+INSERT INTO `aula` VALUES (2,'TestIntegracio',1),(4,'TestIntegracio',1),(5,'ProvaEliminarCorrecte',NULL);
 /*!40000 ALTER TABLE `aula` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,6 +101,39 @@ LOCK TABLES `empleat` WRITE;
 /*!40000 ALTER TABLE `empleat` DISABLE KEYS */;
 INSERT INTO `empleat` VALUES (1,1,'2022-01-01','9999-12-31',1),(2,1,'2021-06-15','2024-06-14',2),(3,1,'2020-12-01',NULL,3),(4,1,'2023-01-01',NULL,4),(31,1,'2000-01-01','9999-12-31',53);
 /*!40000 ALTER TABLE `empleat` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `missatge`
+--
+
+DROP TABLE IF EXISTS `missatge`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `missatge` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `remitent_id` int NOT NULL,
+  `destinatari_id` int NOT NULL,
+  `contingut` text NOT NULL,
+  `data_enviament` datetime NOT NULL,
+  `remitent_esborrat` tinyint(1) DEFAULT '0',
+  `destinatari_esborrat` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `remitent_id` (`remitent_id`),
+  KEY `destinatari_id` (`destinatari_id`),
+  CONSTRAINT `missatge_ibfk_1` FOREIGN KEY (`remitent_id`) REFERENCES `persona` (`id`),
+  CONSTRAINT `missatge_ibfk_2` FOREIGN KEY (`destinatari_id`) REFERENCES `persona` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `missatge`
+--
+
+LOCK TABLES `missatge` WRITE;
+/*!40000 ALTER TABLE `missatge` DISABLE KEYS */;
+INSERT INTO `missatge` VALUES (3,2,1,'Estic fent una prova d\'un missatge.','2023-11-27 17:37:10',0,0);
+/*!40000 ALTER TABLE `missatge` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -182,33 +198,6 @@ LOCK TABLES `usuari` WRITE;
 INSERT INTO `usuari` VALUES (1,'nom_usuariProva','Ylil4Ot3KRHU+SvltdsOFFEe2+AdHQ3dHVosuduaVro=',1,0,NULL,1),(2,'PAU','siHZ27CDp/M0KNfCo8MZiuklYU1wIQ4ocWzKp81N23k=',1,0,1,1),(18,'testResposta2','u//vhnk6QOPfMuE7eVnaxcprcGCNr3blor2hfdexoIY=',1,0,31,1),(22,'testConsulta','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,38,1),(23,'NouUsuariModificat','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',0,1,2,1),(37,'testAlumne','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,52,0),(38,'testResposta10','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,53,1),(52,'testAlumneIntegracio','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,67,1);
 /*!40000 ALTER TABLE `usuari` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `usuari_AFTER_UPDATE` AFTER UPDATE ON `usuari` FOR EACH ROW BEGIN
-IF NEW.actiu <> OLD.actiu THEN
-        -- Actualizar empleado
-        UPDATE empleat
-        SET actiu = NEW.actiu
-        WHERE persona_id = NEW.persona_id;
-
-        -- Actualizar alumno
-        UPDATE alumne
-        SET actiu = NEW.actiu
-        WHERE persona_id = NEW.persona_id;
-    END IF;
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -219,4 +208,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-25 20:30:31
+-- Dump completed on 2023-11-29 17:39:42

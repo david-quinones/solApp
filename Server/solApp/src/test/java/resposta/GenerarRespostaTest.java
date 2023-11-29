@@ -3,9 +3,11 @@ package resposta;
 import entitats.Alumne;
 import entitats.Aula;
 import entitats.Empleat;
+import entitats.Missatge;
 import entitats.Persona;
 import entitats.Usuari;
 import estructurapr.RetornDades;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -353,5 +355,32 @@ public class GenerarRespostaTest {
         //Comprovem que el resultat es l'esperat en cas de retornar una llista d'aules
         assertEquals(1, resposta.getCodiResultat());
         assertTrue((Integer)resposta.getDades(0, Integer.class) > 0);
+    }
+    
+    
+    /**Test per comprovar la resposta a la crida enviar_missatge
+     * 
+     */
+    @Test
+    public void testEnviarMissatge(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        //Dades per la prova
+        //Destinataris:
+        Persona persona = new Persona();
+        persona.setIdPersona(1);
+        Persona persona2 = new Persona();
+        persona2.setIdPersona(2);
+        //Array amb destinataris
+        ArrayList<Persona> destinataris = new ArrayList<>();
+        destinataris.add(persona);
+        destinataris.add(persona2);
+        //Missatge
+        Missatge missatge = new Missatge(destinataris, 
+                "Prova enviar missatge diferents destinataris");
+        //Generem resposta
+        RetornDades resposta = generarResposta.respostaEnviarMissatge(missatge,"sessioProves");
+        //Comprovem el resultat
+        assertEquals(1, resposta.getCodiResultat());
+        
     }
 }

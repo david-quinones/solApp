@@ -1,11 +1,14 @@
 package probesIntegracio;
 
 import com.google.gson.Gson;
-import entitats.*;
+import com.google.gson.GsonBuilder;
+import entitats.Missatge;
+import entitats.Persona;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,16 +18,17 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import servidor.ServidorSocketListener;
 
-/**Classe per fer el test d'integritat de la crida modificar_aula
+/**Classe per comprovar el funcionament de la crida enviar_missatge
  *
  * @author Pau Castell Galtes
  */
-public class ModificarAulaTest {
+public class EnviarMissatgeTest {
     private ServidorSocketListener servidor;
     private Socket socket;
-    private static final Logger LOGGER = Logger.getLogger(AltaAulaTest.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ConsultaPersonaTest.class.getName());
     
-    /**Preparem el servidora abans de cada test
+     /**Iniciem el servidor en un fil diferent al del client
+     * per poder fer el test
      * 
      */
     @Before
@@ -44,7 +48,9 @@ public class ModificarAulaTest {
         } catch (InterruptedException ex) {
             Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
+    
     
     @After
     public void tearDown(){
@@ -52,41 +58,36 @@ public class ModificarAulaTest {
         LOGGER.info("Servidor tancat.");
     }
     
-    
-    /**Test d'integració per comprovar el funcionament correcte de la crida a modificar_aula
+    /**Test d'integració de la crida enviar_missatge
      * 
      */
     @Test
-    public void testModificarAula(){
+    public void testEnviarMissatge(){
+        
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
             
-            //Preparem dades que s'han de donar d'alta
-            //Empleat assignat a l'aula
-            Empleat empleat = new Empleat(1,"Pau", "Castell", "Galtes", "1983-08-07",
-                "46797529G", "93703532", "pau@gmail.com", 1,true, "2022-01-01", "2023-12-31");
-            //Aula que es donarà d'alta
-            Aula aula = new Aula();
-            aula.setId(4);
-            aula.setNomAula("TestIntegracio");
-            aula.setEmpleat(empleat);
-            //ArrayList d'alumnes
-            ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
-            //Alumne alumne1 = new Alumne(33, "Pedro", "Martinez", "Gutierrez", "2023-04-20", "98765432B", 
-               // "654321987", "pedro@gmail.com", 3, true, true, true);
-            Alumne alumne2 = new Alumne(34, "Laura", "Garcia", "Fernandez", "2022-08-22", null, 
-                "789456123", "laura@gmail.com", 4, true, false, false);
-            //llistaAlumnes.add(alumne1);
-            llistaAlumnes.add(alumne2);
-            aula.setAlumnes(llistaAlumnes);
-            
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
-            PeticioClient peticio  = new PeticioClient("MODIFICAR_AULA");
+            PeticioClient peticio  = new PeticioClient("ENVIAR_MISSATGE");
             peticio.afegirDades(numSessio);
-            peticio.afegirDades(aula);
-
+            //Dades per la prova
+            //Destinataris:
+            Persona persona = new Persona();
+            persona.setIdPersona(1);
+            Persona persona2 = new Persona();
+            persona2.setIdPersona(2);
+            //Array amb destinataris
+            ArrayList<Persona> destinataris = new ArrayList<>();
+            destinataris.add(persona);
+            destinataris.add(persona2);
+            //Missatge
+            Missatge missatge = new Missatge(destinataris,
+                "Missatge prova integració.");
+            //Afegim les dades a la petició
+            peticio.afegirDades(missatge);
+            
             //Enviem la petició al servidor en format JSON
             Gson gson = new Gson();
             PrintWriter output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()),true);
@@ -94,20 +95,13 @@ public class ModificarAulaTest {
             LOGGER.info("Petició enviada al servidor.");
             
             //RESPOSTA DEL SERVIDOR QUE REP EL CLIENT
-            //Legim les dades rebudes del servidor
+            //Llegim les dades rebudes del servidor
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String llegir = input.readLine();
-            RetornDades retorn = gson.fromJson(llegir, RetornDades.class);          
-            //Obtenim la resposta del servidor
-            LOGGER.info("Dades rebudes per part del servidor.");
-            
-            //Si la modificació es correcte el resultat es 1
+            RetornDades retorn = gson.fromJson(llegir, RetornDades.class);
+           
+            //Comprovem el resultat de la resposta
             assertEquals(1, retorn.getCodiResultat());
-            LOGGER.info("Resultat esperat 1, resultat obtingut : " + retorn.getCodiResultat());
-            
-            socket.close();
-            LOGGER.info("Socket del client tancat.");
-
         } catch (IOException ex) {
             Logger.getLogger(ConsultaPersonaTest.class.getName()).log(Level.SEVERE, null, ex);
         }
