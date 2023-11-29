@@ -16,6 +16,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import estel.solapp.models.Alumne;
+import estel.solapp.models.Aula;
 import estel.solapp.models.Empleat;
 import estel.solapp.models.Persona;
 import estel.solapp.models.User;
@@ -48,7 +49,10 @@ public class CommController {
     public static final String LLISTAR_ALUMNES = "LLISTAR_ALUMNES";
     public static final String MODIFICAR_ALUMNE = "MODIFICAR_ALUMNE";
     public static final String ELIMINAR_ALUMNE = "ELIMINAR_USUARI";
-
+    public static final String ELIMINAR_AULA = "ELIMINAR_AULA";
+    public static final String LLISTAR_AULES = "LLISTAR_AULES";
+    public static final String MODIFICAR_AULA = "MODIFICAR_AULA";
+    public static final String ALTA_AULA = "ALTA_AULA";
 
     /***********************************
     * Conexió amb el servidor per socket
@@ -410,6 +414,70 @@ public class CommController {
     /********************************************************************************************************************************************
                 AULES
      ********************************************************************************************************************************************/
+
+    /*************************************************
+     * Petició de llista d'aules al servidor
+     * Només enviem el codi de sesseió al servidor
+     * @return resultat alumnes list; null si error.
+     *************************************************/
+    public static ValorsResposta llistarAules(){
+
+        PeticioClient llistarAules = new PeticioClient(LLISTAR_AULES);
+        llistarAules.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        Gson gson= new Gson();
+        Log.d("PETICIO LLISTAR AULES", gson.toJson(llistarAules));
+        ValorsResposta resposta=talkToServer(llistarAules);
+
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************
+     * Petició d'afegir aula al servidor
+     * @param aula que afegirem
+     * @return resposta del servidor
+     *************************************/
+    public static ValorsResposta afegirAula(Aula aula){
+
+        PeticioClient afegirAula = new PeticioClient(ALTA_AULA);
+        afegirAula.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        afegirAula.addDataObject(aula);
+
+        ValorsResposta resposta=talkToServer(afegirAula);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+    /*************************************************
+     * Petició modificar alumne al servidor
+     * @param aula
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta modificarAula(Aula aula){
+
+        PeticioClient modificaAula = new PeticioClient(MODIFICAR_AULA);
+        modificaAula.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        modificaAula.addDataObject(aula);
+        Gson gson= new Gson();
+        Log.d("PETICIO MODIFICA PROFE", gson.toJson(modificaAula));
+        ValorsResposta resposta=talkToServer(modificaAula);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+
+
+
+
+
 
     /********************************************************************************************************************************************
                         PETICIO / RESPOSTA (TALKTOSERVER)

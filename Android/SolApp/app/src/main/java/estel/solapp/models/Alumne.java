@@ -1,12 +1,18 @@
 package estel.solapp.models;
 
+/*****************************
+ * Classe model entitat Alumne
+ *****************************/
 public class Alumne extends Persona{
     private int idAlumne;
     private boolean actiu;
     private boolean menjador;
     private boolean acollida;
+    private int idAula;
 
-    /**Constructors
+    /**************
+     * Constructors
+     **************
      *
      * @param idAlumne
      * @param actiu
@@ -22,6 +28,16 @@ public class Alumne extends Persona{
      * @param mail
      */
     public Alumne(int id, String nom, String cognom1, String cognom2, String data_naixement,
+                  String dni, String telefon, String mail,int idAlumne, boolean actiu, boolean menjador, boolean acollida, int idAula) {
+        super(id, nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
+        this.idAlumne = idAlumne;
+        this.actiu = actiu;
+        this.menjador = menjador;
+        this.acollida = acollida;
+        this.idAula = idAula;
+    }
+
+    public Alumne(int id, String nom, String cognom1, String cognom2, String data_naixement,
                   String dni, String telefon, String mail,int idAlumne, boolean actiu, boolean menjador, boolean acollida) {
         super(id, nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.idAlumne = idAlumne;
@@ -30,6 +46,15 @@ public class Alumne extends Persona{
         this.acollida = acollida;
     }
 
+
+    public Alumne(String nom, String cognom1, String cognom2, String data_naixement,
+                  String dni, String telefon, String mail,boolean actiu, boolean menjador, boolean acollida) {
+        super(nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
+        this.actiu = actiu;
+        this.menjador = menjador;
+        this.acollida = acollida;
+
+    }
     /**Constructors
      *
      * @param actiu
@@ -42,13 +67,16 @@ public class Alumne extends Persona{
      * @param dni
      * @param telefon
      * @param mail
+     * @param idAula
      */
     public Alumne(String nom, String cognom1, String cognom2, String data_naixement,
-                  String dni, String telefon, String mail,boolean actiu, boolean menjador, boolean acollida) {
+                  String dni, String telefon, String mail,boolean actiu, boolean menjador, boolean acollida, int idAula) {
         super(nom, cognom1, cognom2, data_naixement, dni, telefon, mail);
         this.actiu = actiu;
         this.menjador = menjador;
         this.acollida = acollida;
+        this.idAula = idAula;
+
     }
 
 
@@ -58,17 +86,17 @@ public class Alumne extends Persona{
      * @param menjador
      * @param acollida
      */
-    public Alumne(boolean actiu, boolean menjador, boolean acollida) {
+    public Alumne(boolean actiu, boolean menjador, boolean acollida, int idAula) {
         this.actiu = actiu;
         this.menjador = menjador;
         this.acollida = acollida;
+        this.idAula = idAula;
     }
 
 
 
     public Alumne() {
     }
-
 
     /**Getter i Setters:
      *
@@ -106,5 +134,12 @@ public class Alumne extends Persona{
         this.acollida = acollida;
     }
 
+    public int getIdAula() {
+        return idAula;
+    }
+
+    public void setIdAula(int idAula) {
+        this.idAula = idAula;
+    }
 
 }

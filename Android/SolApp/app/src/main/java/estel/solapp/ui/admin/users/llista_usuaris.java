@@ -112,7 +112,6 @@ public class llista_usuaris extends Fragment {
                             alternar = true;
                         }
 
-
                         TableRow row = new TableRow(this.getContext());
 
                         TextView nom = new TextView(getContext());
@@ -144,7 +143,6 @@ public class llista_usuaris extends Fragment {
                         isActive.setGravity(Gravity.CENTER);
                         isActive.setBackgroundResource(color);
                         row.addView(isActive);
-
 
                         taulaUsuaris.addView(row);
 
