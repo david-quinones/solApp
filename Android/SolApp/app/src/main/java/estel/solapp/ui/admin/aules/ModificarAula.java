@@ -14,8 +14,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -42,16 +45,20 @@ import estel.solapp.models.User;
 public class ModificarAula extends Fragment {
 
     private TextView nomAula;
-    private Button modificar, confirmar, afegirAlumne, treureAlumne;
+    private Button modificar, confirmar;
     private TableLayout taulaAules;
     private Spinner spinnerProfessors;
     private ArrayList<Empleat> professors = new ArrayList<Empleat>();
+    private ArrayAdapter<Empleat> adaptadorProfessors;
     private ArrayList<Alumne> alumnes = new ArrayList<Alumne>();
     private ArrayList<Alumne>alumnesClase = new ArrayList<Alumne>();
-    private RecyclerView llistaAlumnes, llistaAlumnesClase;
+    private ArrayAdapter<Alumne> adaptadorAlumnes, adaptadorAlumnesClasse;
+    private ListView llistaAlumnes, llistaAlumnesClase;
     private boolean alternar = true;
     private boolean set;
     private int color;
+
+    private Aula aula;
 
 
     @Override
@@ -68,11 +75,52 @@ public class ModificarAula extends Fragment {
 
         //Asignació de tots els TextView
         nomAula = view.findViewById(R.id.editTextNomAula);
+
+        //Taula per mostrar aules a escollir
         taulaAules = view.findViewById(R.id.taula_modifica_aula);
         taulaAules.removeAllViews();
-
         llistarAules();//Mostra la llista d'aules per escollir
 
+        //Spinner de professors
+        spinnerProfessors= view.findViewById(R.id.spinnerProfessors);
+        omplirProfessors();//Omplim l'aaraylist de professors per escollir un
+        adaptadorProfessors = new ArrayAdapter(this.getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,professors);
+        spinnerProfessors.setAdapter(adaptadorProfessors);
+        professors.add(0,new Empleat("","","","","","",""));
+        spinnerProfessors.setSelection(0);
+
+        omplirAlumnes();//Omplim l'arraylist d'alumnes del centre sense classe
+
+        //ListViews
+        //ListView llista d'alumnes a classe
+        llistaAlumnesClase = view.findViewById(R.id.lvllistaAlumnesClasse);
+
+        //ListView Llista d'alumnes total
+        llistaAlumnes = view.findViewById(R.id.lVllistaAlumnes);
+
+        //Afegir alumne a l'aula
+        llistaAlumnes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                alumnesClase.add(alumnes.get(i));
+                alumnes.remove(i);
+                mostrarDades(aula);
+            }
+        });
+
+        //Treure alumne de l'aula
+        llistaAlumnesClase.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                alumnes.add(alumnes.get(i));
+                alumnesClase.remove(i);
+                mostrarDades(aula);
+            }
+        });
+
+        //Botó de modificar
         modificar = view.findViewById(R.id.modificaBtn);
         modificar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +131,7 @@ public class ModificarAula extends Fragment {
             }
         });
 
+        //Botó de desar
         confirmar = view.findViewById(R.id.desaBtn);
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +148,7 @@ public class ModificarAula extends Fragment {
 
     /*********************************************
      * Metode per enviar petició i mostrar resposta
-     * Per llistar professors
+     * Per llistar aules
      **********************************************/
     public void llistarAules() {
 
@@ -120,7 +169,6 @@ public class ModificarAula extends Fragment {
                 showToast(this.getActivity(),this.getContext(), "Error de conexió amb el servidor. ");
 
             }else{
-
 
                 //Capçelera de la taula
                 //*********************
@@ -148,9 +196,9 @@ public class ModificarAula extends Fragment {
 
                 for (int i=1;i<=((int)resposta.getData(0,int.class));i++){
 
-                    Aula aula = (Aula) resposta.getData(i,Aula.class);
+                    Aula aulaTaula = (Aula) resposta.getData(i,Aula.class);
                     Gson gson1= new Gson();
-                    Log.d("AULA "+i, gson1.toJson(aula));
+                    Log.d("AULA "+i, gson1.toJson(aulaTaula));
                     //Condició per alternar colors a les files
 
                     if (alternar) {
@@ -164,19 +212,19 @@ public class ModificarAula extends Fragment {
                     TableRow row = new TableRow(this.getContext());
 
                     TextView nomAula = new TextView(getContext());
-                    nomAula.setText(aula.getNomAula().toString());
+                    nomAula.setText(aulaTaula.getNomAula().toString());
                     nomAula.setGravity(Gravity.CENTER);
                     nomAula.setBackgroundResource(color);
                     row.addView(nomAula);
 
                     TextView professor = new TextView(getContext());
-                    professor.setText(aula.getEmpleat().getNom().toString()+" "+aula.getEmpleat().getCognom1().toString()+" "+aula.getEmpleat().getCognom2().toString());
+                    professor.setText(aulaTaula.getEmpleat().getNom().toString()+" "+aulaTaula.getEmpleat().getCognom1().toString()+" "+aulaTaula.getEmpleat().getCognom2().toString());
                     professor.setGravity(Gravity.CENTER);
                     professor.setBackgroundResource(color);
                     row.addView(professor);
 
                     TextView nAlumnes = new TextView(getContext());
-                    nAlumnes.setText(String.valueOf(aula.getAlumnes().size()));
+                    nAlumnes.setText(String.valueOf(aulaTaula.getAlumnes().size()));
                     nAlumnes.setGravity(Gravity.CENTER);
                     nAlumnes.setBackgroundResource(color);
                     //Fem clicable la fila de la taula i cridem al métode de mostrar les dades
@@ -185,7 +233,7 @@ public class ModificarAula extends Fragment {
                     row.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            mostrarDades (aula);
+                            mostrarDades (aulaTaula);
                         }
                     });
 
@@ -208,16 +256,28 @@ public class ModificarAula extends Fragment {
 
     /***************************************************************
      * Metode per mostrar les dades de l'aula escollida a la taula
-     * @param aula
+     * @param aulaTaula
      ***************************************************************/
-    public void mostrarDades(Aula aula) {
+    public void mostrarDades(Aula aulaTaula) {
 
-        nomAula.setText(aula.getNomAula().toString());
+        aula = aulaTaula;
+        nomAula.setText(aulaTaula.getNomAula());
+        alumnesClase= aulaTaula.getAlumnes();//Omplim l'arraylist d'alumnes de la clase
+        adaptadorAlumnesClasse = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_1,alumnesClase);
+        llistaAlumnesClase.setAdapter(adaptadorAlumnesClasse);
+
+
+        adaptadorAlumnes = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_1,alumnes);
+        llistaAlumnes.setAdapter(adaptadorAlumnes);
+
+        int posicio = trobarProfessor(aulaTaula);//Metode per trobar el professor que te asignat l'aula
+
+        spinnerProfessors.setSelection(posicio);
 
     }
 
     /*********************************************
-     * Metode per mostrar confirmació d'eliminar
+     * Metode per mostrar confirmació de modificar
      *********************************************/
     public void alertmodificarAula() {
 
@@ -249,7 +309,7 @@ public class ModificarAula extends Fragment {
     }
 
     /************************************************
-     * Metode per enviar petició de modificar professor
+     * Metode per enviar petició de modificar aula
      ************************************************/
     public void modificarAula() {
 
@@ -263,9 +323,9 @@ public class ModificarAula extends Fragment {
 
         } else {//Dades correctes
 
-            //Creació de Empleat i usuari per donar d'alta.
-            Aula aula = new Aula();
-
+            //Creació d'aula modificada.
+            Empleat empleatEscollit = (Empleat) spinnerProfessors.getSelectedItem();
+            aula = new Aula(nomAula.getText().toString(),empleatEscollit,alumnesClase);
 
             // Creació d'unaltre fil.
             ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -292,7 +352,6 @@ public class ModificarAula extends Fragment {
                         setFocusable(set);
                         llistarAules();
 
-
                     } else {
 
                         showToast(this.getActivity(), this.getContext(), "No s'han pogut modificar les dades");
@@ -309,6 +368,101 @@ public class ModificarAula extends Fragment {
 
     }
 
+    /*************************************************
+     * Mètode per fer omplir l'arrayList de professors
+     *************************************************/
+    private void omplirProfessors() {
+
+        //Fem petició per agafar les dades de tots els professors
+        // Creació d'unaltre fil.
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        // La petició es fa en unaltre fil
+        Future<ValorsResposta> future = executor.submit(()->{return CommController.llistarEmpleats();});
+        // Procesar resposta del servidor
+        try {
+
+            ValorsResposta resposta = future.get();
+
+            if (resposta==null){
+
+                showToast(this.getActivity(),this.getContext(), "Error de conexió amb el servidor. ");
+
+            }else{
+                for (int i=1;i<=((int)resposta.getData(0,int.class));i++){
+
+                    Empleat empleat= (Empleat) resposta.getData(i,Empleat.class);
+
+                    if (empleat.isActiu()) {//Només llistem els actius
+
+                        professors.add(empleat);
+
+                    }
+
+                }
+            }
+
+        } catch (Exception e) {
+
+            showToast(this.getActivity(),this.getContext(), "Error ("+e.getMessage()+")");
+            Log.d("ERROR" , "Error ("+e.getMessage()+")");
+
+        }
+    }
+    /***************************************************************
+     * Mètode per trobar la posicio a l'array del professor assignat
+     ***************************************************************/
+    public int trobarProfessor (Aula aula){
+        int posicio=-1;
+        for (int i=1;i<professors.size();i++){
+
+            if (professors.get(i).getIdEmpleat()==aula.getEmpleat().getIdEmpleat()){posicio=i;}
+
+        }
+
+        return posicio;
+    }
+
+    /*********************************************************
+     * Mètode per fer omplir l'arrayList d'alumnes sense clase
+     *********************************************************/
+
+    public void omplirAlumnes(){
+
+        //Fem petició per agafar les dades de tots els alumnes
+        // Creació d'unaltre fil.
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        // La petició es fa en unaltre fil
+        Future<ValorsResposta> future = executor.submit(()->{return CommController.llistarAlumnes();});
+        // Procesar resposta del servidor
+        try {
+
+            ValorsResposta resposta = future.get();
+
+            if (resposta==null){
+
+                showToast(this.getActivity(),this.getContext(), "Error de conexió amb el servidor. ");
+
+            }else{
+                for (int i=1;i<=((int)resposta.getData(0,int.class));i++) {
+
+                    Alumne alumne = (Alumne) resposta.getData(i, Alumne.class);
+
+                    if (alumne.getIdAula()==0) {//Només afegim a l'array els que no tenen classe
+
+                        alumnes.add(alumne);
+                    }
+                }
+            }
+        }catch (Exception e) {
+
+            showToast(this.getActivity(),this.getContext(), "Error ("+e.getMessage()+")");
+            Log.d("ERROR" , "Error ("+e.getMessage()+")");
+
+        }
+
+    }
+
+
     /*********************************************
      * Mètode per fer editables tots els editText
      *********************************************/
@@ -321,6 +475,7 @@ public class ModificarAula extends Fragment {
         } else {
             // Fem tots els editText editables
             nomAula.setFocusableInTouchMode(set);
+            spinnerProfessors.setEnabled(set);
             confirmar.setEnabled(set);
         }
 

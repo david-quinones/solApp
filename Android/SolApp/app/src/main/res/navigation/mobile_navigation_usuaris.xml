@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
+    android:label="Llista d'usuaris"
     app:startDestination="@+id/home_gestio_alumnes">
 
     <fragment
         android:id="@+id/home_gestio_alumnes"
         android:name="estel.solapp.ui.admin.users.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Menú gestió d'usuaris"
         tools:layout="@layout/fragment_home_gestio_usuaris" />
 
     <fragment
@@ -19,7 +20,7 @@
     <fragment
         android:id="@+id/busca_usuari"
         android:name="estel.solapp.ui.admin.users.busca_usuari"
-        android:label="Buscar usuari"
+        android:label="Cercar usuari"
         tools:layout="@layout/fragment_busca_usuari" />
     <fragment
         android:id="@+id/llista_usuaris"
