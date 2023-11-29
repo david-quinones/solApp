@@ -2,6 +2,8 @@ package utilitats;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**Classe que contindrá diferents utilitats per a la apalcació
  *
@@ -16,6 +18,17 @@ public class Utils {
      */
     public static String formatData(Date data){
         SimpleDateFormat formatData = new SimpleDateFormat("yyyy-MM-dd");
+        String dataString = formatData.format(data);
+        return dataString;
+    }
+    
+    /**Mètode per formatejar la data en format LocalDateTime
+     * 
+     * @param data
+     * @return 
+     */
+    public static String formatDataHoraMinuts(LocalDateTime data){
+        DateTimeFormatter formatData = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dataString = formatData.format(data);
         return dataString;
     }

@@ -1,5 +1,6 @@
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\resposta\GenerarResposta.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\entitats\Aula.java
+C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\entitats\Missatge.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\persistencia\AulaDAO.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\estructurapr\PeticioClient.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\persistencia\UsuariDAO.java
@@ -15,6 +16,7 @@ C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\resposta\Enviar
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\Probaclient.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\seguretat\Encriptar.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\utilitats\Utils.java
+C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\persistencia\MissatgeDAO.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\persistencia\PersonaDAO.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\persistencia\ConexioBBDD.java
 C:\Users\pau\Documents\GitHub\solApp\Server\solApp\src\main\java\HashProbes.java

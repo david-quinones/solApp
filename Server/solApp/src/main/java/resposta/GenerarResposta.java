@@ -5,6 +5,7 @@ import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -12,6 +13,7 @@ import java.util.logging.Logger;
 import persistencia.ConexioBBDD;
 import persistencia.*;
 import seguretat.GestorSessions;
+import utilitats.Utils;
 
 /**
  *Classe que genera i construeix les respostes que s'enviaran al client
@@ -545,6 +547,47 @@ public class GenerarResposta {
             LOGGER.warning("La llista d'aules està buida");
             return resposta = new RetornDades(CODI_ERROR);
         }
+    }
+    
+    
+    /**Mètode per gestionar la resposta a la crida enviar_missatge
+     * 
+     * @param missatge que s'ha d'enviar
+     * @return resposta 
+     */
+    public RetornDades respostaEnviarMissatge(Missatge missatge, String numSessio){
+        try {
+            //Obtenim l'id del remitent a partir del número de sessió
+            UsuariDAO usuariDAO = new UsuariDAO(conexio);
+            Usuari usuari = usuariDAO.consultaUsuari(sessions.idUsuariConectat(numSessio));
+            missatge.setIdRemitentPersona(usuari.getIdPersona());
+            
+            int filesAfectades = 0;
+            //Si no s'envien tots els missatges no s'envia cap
+            conexio.setAutoCommit(false);
+            MissatgeDAO missatgeDAO = new MissatgeDAO(conexio);
+            //Array amb els destinataris
+            ArrayList<Persona> destinataris = missatge.getDestinataris();
+            //Guardem un missatge per cada destinatari
+            for(Persona persona: destinataris){
+                String data = Utils.formatDataHoraMinuts(LocalDateTime.now());
+                missatge.setDataEnviament(data);
+                filesAfectades += missatgeDAO.altaMissatge(missatge, persona.getIdPersona());
+            }
+            //Comprovem que s'hane enviat tots els missatges
+            if(filesAfectades == destinataris.size()){
+                LOGGER.info("Tots els missatges s'han enviat correctament");
+                conexio.commit();
+                return resposta = new RetornDades(CODI_CORRECTE);
+            }else{
+                LOGGER.warning("ERROR al enviar els missatges");      
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GenerarResposta.class.getName()).log(Level.SEVERE,
+                    "ERROR al intentar generar la resposta, missatges no enviats", ex);
+        }
+        
+        return resposta = new RetornDades(CODI_ERROR);
     }
     }
         
