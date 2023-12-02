@@ -48,19 +48,39 @@ public class MissatgeDAOTest {
     @Test
     public void testAltaMissatge() {
         //Establim les dades per fer la prova
+        Persona remitent = new Persona();
+        remitent.setIdPersona(2);
         Persona persona = new Persona();
         persona.setIdPersona(1);
         ArrayList<Persona> destinataris = new ArrayList<>(); 
         destinataris.add(persona);
         String contingut = "Estic fent una prova d'un missatge.";
         String data = Utils.formatDataHoraMinuts(LocalDateTime.now());
-        Missatge missatge = new Missatge(2, destinataris, data, contingut);
+        Missatge missatge = new Missatge(remitent, destinataris, data, contingut);
         
         //Donem d'alta el nou missatge
         MissatgeDAO missatgeDAO = new MissatgeDAO(conexio);
         int resultat = missatgeDAO.altaMissatge(missatge,destinataris.get(0).getIdPersona());
         assertTrue(resultat > 0);
 
+    }
+    
+    
+    /**Test per comprovar si s'han llistat els missatges rebuts d'una persona
+     * 
+     */
+    @Test
+    public void testLlistarMissatgesRebuts(){
+        //IdPersona del qual volem llitar els missatges
+        int idPersona = 1;
+        MissatgeDAO missatgeDAO = new MissatgeDAO(conexio);
+        //Obtenim la llista dels missatges
+        ArrayList<Missatge> llista = missatgeDAO.llistarMissatgesRebuts(idPersona);
+        //Comprovem que la llista no està buida
+        assertTrue(!llista.isEmpty());
+        for(Missatge missatge: llista){
+            System.out.println(missatge.getIdMissatge());
+        }
     }
     
 }

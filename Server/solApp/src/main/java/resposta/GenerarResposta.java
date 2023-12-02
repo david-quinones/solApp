@@ -560,7 +560,8 @@ public class GenerarResposta {
             //Obtenim l'id del remitent a partir del número de sessió
             UsuariDAO usuariDAO = new UsuariDAO(conexio);
             Usuari usuari = usuariDAO.consultaUsuari(sessions.idUsuariConectat(numSessio));
-            missatge.setIdRemitentPersona(usuari.getIdPersona());
+            PersonaDAO personaDAO = new PersonaDAO(conexio);
+            missatge.setRemitentPersona(personaDAO.consultaPersona(usuari.getId()));
             
             int filesAfectades = 0;
             //Si no s'envien tots els missatges no s'envia cap
@@ -588,6 +589,34 @@ public class GenerarResposta {
         }
         
         return resposta = new RetornDades(CODI_ERROR);
+    }
+    
+    
+    public RetornDades respostaLlistarMissatgesRebuts(String numSessio){
+        //Obtenim les dades de l'usuari conectat
+        UsuariDAO usuariDAO = new UsuariDAO(conexio);
+        Usuari usuari = usuariDAO.consultaUsuari(sessions.idUsuariConectat(numSessio));
+        //Obtenim les dades de Persona de l'usuari connectat
+        PersonaDAO personaDAO = new PersonaDAO(conexio);
+        Persona persona = personaDAO.consultaPersona(usuari.getId());
+        //Obtenim llista dels missatges rebuts de la Persona
+        MissatgeDAO missatgeDAO = new MissatgeDAO(conexio);
+        ArrayList<Missatge> llistaMissatges = missatgeDAO.llistarMissatgesRebuts(persona.getIdPersona());
+        //Afegim el número de resultat obtinguts a la resposta
+        if(!llistaMissatges.isEmpty()){
+            resposta = new RetornDades(CODI_CORRECTE);
+            //Afegim tamany de la llista
+            resposta.afegirDades(llistaMissatges.size());
+            //Afegim tots els missatges
+            for(Missatge missatge: llistaMissatges){
+                resposta.afegirDades(missatge);
+            }
+            LOGGER.info("Resposta amb la llista de missatges");
+            return resposta;
+        }else{
+            LOGGER.warning("La llista de missatges està buida.");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
     }
     }
         

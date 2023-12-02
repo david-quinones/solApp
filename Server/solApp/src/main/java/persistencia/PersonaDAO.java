@@ -173,4 +173,32 @@ public class PersonaDAO {
         return 0;     
     }
     
+    
+    /**Mètode per obrtindre les dades d'una persona a partir del se id
+     * 
+     * @param idPersona que cal obtenir
+     * @return Persona
+     */
+    public Persona consultaPersonaIdPersona(int idPersona){
+        Persona persona = new Persona();
+        try {
+            String consultaPersona = "SELECT * FROM persona WHERE id = ?;";
+            ps = conexio.prepareStatement(consultaPersona);
+            
+            //Establim les dades per a la consulta
+            ps.setInt(1, idPersona);
+            //Executem la consulta
+            ResultSet rs = ps.executeQuery();
+            //Obtenim les dades a partir del resultSet
+            persona = obtindrePersona(rs);
+            //Retornem el resultat
+            return persona;
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, 
+                    "ERROR al intentar consultar una persona a partir del se id", ex);
+        }
+        
+        return persona;
+    } 
+    
 }

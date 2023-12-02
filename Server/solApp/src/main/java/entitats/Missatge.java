@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class Missatge {
     private int idMissatge;
-    private int idRemitentPersona;
-    private ArrayList<Persona> destinataris;
+    private Persona RemitentPersona;
+    private ArrayList<Persona> destinataris = new ArrayList<>();
     private String dataEnviament;
     private String contingut;
     private boolean remitentEsborrat;
@@ -21,9 +21,9 @@ public class Missatge {
     
     //Constructor de la classe
 
-    public Missatge(int idMissatge, int idRemitent, ArrayList<Persona> destinataris, String dataEnviament, String contingut) {
+    public Missatge(int idMissatge, Persona Remitent, ArrayList<Persona> destinataris, String dataEnviament, String contingut) {
         this.idMissatge = idMissatge;
-        this.idRemitentPersona = idRemitent;
+        this.RemitentPersona = Remitent;
         this.destinataris = destinataris;
         this.dataEnviament = dataEnviament;
         this.contingut = contingut;
@@ -39,8 +39,8 @@ public class Missatge {
     
     //Constructor sense idMissatge per a nove altes
 
-    public Missatge(int idRemitent, ArrayList<Persona> destinataris, String dataEnviament, String contingut) {
-        this.idRemitentPersona = idRemitent;
+    public Missatge(Persona Remitent, ArrayList<Persona> destinataris, String dataEnviament, String contingut) {
+        this.RemitentPersona = Remitent;
         this.destinataris = destinataris;
         this.dataEnviament = dataEnviament;
         this.contingut = contingut;
@@ -85,12 +85,12 @@ public class Missatge {
         this.contingut = contingut;
     }
 
-    public int getIdRemitentPersona() {
-        return idRemitentPersona;
+    public Persona getRemitentPersona() {
+        return RemitentPersona;
     }
 
-    public void setIdRemitentPersona(int idRemitentPersona) {
-        this.idRemitentPersona = idRemitentPersona;
+    public void setRemitentPersona(Persona RemitentPersona) {
+        this.RemitentPersona = RemitentPersona;
     }
 
     public boolean isRemitentEsborrat() {
@@ -117,7 +117,7 @@ public class Missatge {
             destinatarisText = persona.getIdPersona() +"\n";
         }
         return "Missatge: \n"
-                + "Id del remitent: " + idRemitentPersona + "\n"+
+                + "Id del remitent: " + RemitentPersona + "\n"+
                 "Id del destinatari: " + destinatarisText +
                 "Data enviament: " + getDataEnviament() + "\n"+
                 "Contingut: " + contingut;

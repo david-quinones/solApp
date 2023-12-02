@@ -2,9 +2,12 @@ package persistencia;
 
 import entitats.Alumne;
 import entitats.Missatge;
+import entitats.Persona;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,7 +45,7 @@ public class MissatgeDAO {
             psMissatge = conexio.prepareStatement(altaMissatge);
             
             //Establim les dades per executar l'ordre
-            psMissatge.setInt(1, missatge.getIdRemitentPersona());
+            psMissatge.setInt(1, missatge.getRemitentPersona().getIdPersona());
             psMissatge.setInt(2, destinatari);
             psMissatge.setString(3, missatge.getContingut());
             psMissatge.setString(4, missatge.getDataEnviament());
@@ -62,5 +65,65 @@ public class MissatgeDAO {
         }
         
         return ERROR;
+    }
+    
+    /**Mètode per llistar els missatges que ha rebut un usuari
+     * 
+     * @param idPersona que ha rebut els missatges
+     * @return Array amb la llista de missatges
+     */
+    public ArrayList llistarMissatgesRebuts(int idPersona){
+        ArrayList<Missatge> llistaMissatges = new ArrayList<>();
+        try {
+            String llistarMissatgesRebuts = "SELECT * FROM missatge WHERE destinatari_id = ? "
+                    + "AND destinatari_esborrat = false;";
+            psMissatge = conexio.prepareStatement(llistarMissatgesRebuts);
+            
+            //Establim les dades per a la consulta
+            psMissatge.setInt(1, idPersona);
+            //Obtenim les dades de la bd
+            ResultSet rs = psMissatge.executeQuery();
+            while(rs.next()){
+                llistaMissatges.add(obtindreMissatge(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MissatgeDAO.class.getName()).log(Level.SEVERE, 
+                    "ERROR al intentar llistar els missatges rebuts", ex);
+        }
+        
+        return llistaMissatges;
+    }
+    
+    
+    /**Mètode per obtindre un Missatge a partir del resultSet d'una consulta
+     * 
+     * @param rs de la consulta
+     * @return objecte Missatge
+     */
+    public Missatge obtindreMissatge(ResultSet rs){
+        Missatge missatge = new Missatge();
+        try {           
+            missatge.setIdMissatge(rs.getInt("id"));
+            //Obtenim el remitent a partir del id de la persona
+            int idPersona = rs.getInt("remitent_id");
+            PersonaDAO personaDAO = new PersonaDAO(conexio);
+            Persona persona = personaDAO.consultaPersonaIdPersona(idPersona);
+            missatge.setRemitentPersona(persona);
+            //Obtenim el destinatari a partir del id
+            idPersona = rs.getInt("destinatari_id");
+            persona = personaDAO.consultaPersonaIdPersona(idPersona);
+            missatge.getDestinataris().add(persona);
+            //Obtenim el contingut
+            missatge.setContingut(rs.getString("contingut"));
+            //Obtenim data del missatge
+            missatge.setDataEnviament("data_enviament");
+            
+            LOGGER.info("S'ha obtingut el missatge amb id: " + missatge.getIdMissatge());           
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MissatgeDAO.class.getName()).log(Level.SEVERE, 
+                    "ERROR al obtindre el missatge", ex);
+        }
+        return missatge;
     }
 }

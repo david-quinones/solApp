@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: persistencia.PersonaDAOTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.589 s -- in persistencia.PersonaDAOTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.658 s -- in persistencia.PersonaDAOTest

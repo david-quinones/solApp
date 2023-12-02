@@ -81,4 +81,19 @@ public class PersonaDAOTest {
         assertTrue(filesAfectades > 0);  
     }
     
+    
+    /**Test per comprovar el mètode consultaPersonaIdPersona
+     * 
+     */
+    @Test
+    public void testConsultaPersonaIdPersona(){
+        //Establim les dades per a la prova
+        Persona persona = new Persona();
+        persona.setIdPersona(1);
+        PersonaDAO personaDAO = new PersonaDAO(conexio);
+        //Executem la consulta
+        persona = personaDAO.consultaPersonaIdPersona(persona.getIdPersona());
+        assertEquals("Pau", persona.getNom());
+    }
+    
 }
