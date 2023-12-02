@@ -83,4 +83,23 @@ public class MissatgeDAOTest {
         }
     }
     
+    
+    
+    /**Test per comprovar que s'han llistat els missatges enviats
+     * 
+     */
+    @Test
+    public void testLlistarMissatgesEnviats(){
+        //IdPersona del qual volem llitar els missatges
+        int idPersona = 1;
+        MissatgeDAO missatgeDAO = new MissatgeDAO(conexio);
+        //Obtenim la llista dels missatges
+        ArrayList<Missatge> llista = missatgeDAO.llistarMissatgesEnviats(idPersona);
+        //Comprovem que la llista no està buida
+        assertTrue(!llista.isEmpty());
+        for(Missatge missatge: llista){
+            System.out.println(missatge.getIdMissatge());
+        }
+    }
+    
 }

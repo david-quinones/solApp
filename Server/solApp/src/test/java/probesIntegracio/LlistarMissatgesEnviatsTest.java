@@ -1,7 +1,6 @@
 package probesIntegracio;
 
 import com.google.gson.Gson;
-import entitats.Empleat;
 import entitats.Missatge;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
@@ -17,17 +16,16 @@ import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import persistencia.PersonaDAO;
 import servidor.ServidorSocketListener;
 
-/**Classe per fer les proves d'integració de la crida llistarMissatgesRebuts
+/**Classe per fer la prova d'integració a la crida llistar missatges enviats
  *
  * @author Pau Castell Galtes
  */
-public class LlistarMissatgesRebutsTest {
+public class LlistarMissatgesEnviatsTest {
     private ServidorSocketListener servidor;
     private Socket socket;
-    private static final Logger LOGGER = Logger.getLogger(LlistarMissatgesRebutsTest.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(LlistarMissatgesEnviatsTest.class.getName());
     
 
     /**Preparem el servidora abans de cada test
@@ -64,14 +62,14 @@ public class LlistarMissatgesRebutsTest {
      * la crida
      */
     @Test
-    public void testLlistarMissatgesRebuts(){
+    public void testLlistarMissatgesEnviats(){
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
             
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
-            PeticioClient peticio  = new PeticioClient("MISSATGES_REBUTS");
+            PeticioClient peticio  = new PeticioClient("MISSATGES_ENVIATS");
             peticio.afegirDades(numSessio);
             
             //Enviem la petició al servidor en format JSON
@@ -93,11 +91,11 @@ public class LlistarMissatgesRebutsTest {
             assertEquals(1, retorn.getCodiResultat());
             LOGGER.info("Resultat esperat 1 resultat obtingut: " + retorn.getCodiResultat());
             //Comprovem que la llista de missatges sigui més gran de zero
-            int missatgesRebuts = (Integer)retorn.getDades(0, Integer.class);
-            assertTrue(missatgesRebuts > 0);
-            LOGGER.info("S'han llistat " + missatgesRebuts + " missatges");
+            int missatgesEnviats = (Integer)retorn.getDades(0, Integer.class);
+            assertTrue(missatgesEnviats > 0);
+            LOGGER.info("S'han llistat " + missatgesEnviats + " missatges");
             //Comprovem missatges rebuts
-            for(int i=1; i<=missatgesRebuts; i++){
+            for(int i=1; i<=missatgesEnviats; i++){
                 Missatge missatge = (Missatge) retorn.getDades(i, Missatge.class);
                 System.out.println("Missatge amb id: " + missatge.getIdMissatge());
             }                
@@ -108,5 +106,6 @@ public class LlistarMissatgesRebutsTest {
             Logger.getLogger(ConsultaPersonaTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    }
-
+    
+    
+}

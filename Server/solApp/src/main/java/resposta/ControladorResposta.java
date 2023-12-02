@@ -122,6 +122,10 @@ public class ControladorResposta {
                 //Generem la resposta a la crida missatges_rebuts
                 resposta = dadesResposta.respostaLlistarMissatgesRebuts((String)peticio.getDades(0, String.class));
                 return resposta;
+            case "MISSATGES_ENVIATS":
+                //Generem la resposta a la crida missatges_enviats
+                resposta = dadesResposta.respostaLlistarMissatgesEnviats((String)peticio.getDades(0, String.class));
+                return resposta;
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }

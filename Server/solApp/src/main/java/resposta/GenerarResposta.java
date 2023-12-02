@@ -592,6 +592,12 @@ public class GenerarResposta {
     }
     
     
+    
+    /**Mètode per generar la resposta a la crida llistarMissatgesRebuts
+     * 
+     * @param numSessio
+     * @return 
+     */
     public RetornDades respostaLlistarMissatgesRebuts(String numSessio){
         //Obtenim les dades de l'usuari conectat
         UsuariDAO usuariDAO = new UsuariDAO(conexio);
@@ -602,6 +608,40 @@ public class GenerarResposta {
         //Obtenim llista dels missatges rebuts de la Persona
         MissatgeDAO missatgeDAO = new MissatgeDAO(conexio);
         ArrayList<Missatge> llistaMissatges = missatgeDAO.llistarMissatgesRebuts(persona.getIdPersona());
+        //Afegim el número de resultat obtinguts a la resposta
+        if(!llistaMissatges.isEmpty()){
+            resposta = new RetornDades(CODI_CORRECTE);
+            //Afegim tamany de la llista
+            resposta.afegirDades(llistaMissatges.size());
+            //Afegim tots els missatges
+            for(Missatge missatge: llistaMissatges){
+                resposta.afegirDades(missatge);
+            }
+            LOGGER.info("Resposta amb la llista de missatges");
+            return resposta;
+        }else{
+            LOGGER.warning("La llista de missatges està buida.");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+    }
+    
+    
+    
+    /**Mètode per generar la resposta a la crida llistarMissatgesEnviats
+     * 
+     * @param numSessio
+     * @return 
+     */
+    public RetornDades respostaLlistarMissatgesEnviats(String numSessio){
+        //Obtenim les dades de l'usuari conectat
+        UsuariDAO usuariDAO = new UsuariDAO(conexio);
+        Usuari usuari = usuariDAO.consultaUsuari(sessions.idUsuariConectat(numSessio));
+        //Obtenim les dades de Persona de l'usuari connectat
+        PersonaDAO personaDAO = new PersonaDAO(conexio);
+        Persona persona = personaDAO.consultaPersona(usuari.getId());
+        //Obtenim llista dels missatges enviats de la Persona
+        MissatgeDAO missatgeDAO = new MissatgeDAO(conexio);
+        ArrayList<Missatge> llistaMissatges = missatgeDAO.llistarMissatgesEnviats(persona.getIdPersona());
         //Afegim el número de resultat obtinguts a la resposta
         if(!llistaMissatges.isEmpty()){
             resposta = new RetornDades(CODI_CORRECTE);

@@ -126,4 +126,34 @@ public class MissatgeDAO {
         }
         return missatge;
     }
+    
+    
+    
+    
+    /**Mètode per llistar els missatges enviats per un usuari
+     * 
+     * @param idPersona associada al usuari
+     * @return ArrayList amb la llista de missatges
+     */
+    public ArrayList llistarMissatgesEnviats(int idPersona){
+        ArrayList<Missatge> llistaMissatges = new ArrayList<>();
+        try {
+            String llistarMissatgesRebuts = "SELECT * FROM missatge WHERE remitent_id = ? "
+                    + "AND remitent_esborrat = false;";
+            psMissatge = conexio.prepareStatement(llistarMissatgesRebuts);
+            
+            //Establim les dades per a la consulta
+            psMissatge.setInt(1, idPersona);
+            //Obtenim les dades de la bd
+            ResultSet rs = psMissatge.executeQuery();
+            while(rs.next()){
+                llistaMissatges.add(obtindreMissatge(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MissatgeDAO.class.getName()).log(Level.SEVERE, 
+                    "ERROR al intentar llistar els missatges rebuts", ex);
+        }
+        
+        return llistaMissatges;
+    }
 }

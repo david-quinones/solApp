@@ -397,4 +397,18 @@ public class GenerarRespostaTest {
         assertEquals(1,resposta.getCodiResultat());
         assertTrue((Integer)resposta.getDades(0, Integer.class) > 0);
     }
+    
+    
+     /**Test per comprovar la resposta generada a la crida llistarMissatgesEnviats
+     * 
+     */
+    @Test
+    public void testLlistarMissatgesEnviats(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        //Obtenim resposta
+        RetornDades resposta = generarResposta.respostaLlistarMissatgesEnviats("sessioProves");
+        //Comprovem el resultat
+        assertEquals(1,resposta.getCodiResultat());
+        assertTrue((Integer)resposta.getDades(0, Integer.class) > 0);
+    }
 }
