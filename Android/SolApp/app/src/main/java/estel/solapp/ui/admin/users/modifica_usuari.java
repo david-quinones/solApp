@@ -213,7 +213,7 @@ public class modifica_usuari extends Fragment {
     }
 
     /*********************************************
-     * Metode per mostrar confirmació d'eliminar
+     * Metode per mostrar confirmació de modificar
      *********************************************/
     public void alertmodificarUsuari(){
 

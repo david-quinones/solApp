@@ -221,9 +221,9 @@ public class modificarAlumne extends Fragment {
     }
 
     /***************************************************************
-     * Metode per mostrar les dades de l'empleat escollit a la taula
+     * Metode per mostrar les dades de l'alumne escollit a la taula
      * @param alumne
-     **********************************************/
+     ***************************************************************/
     public void mostrarDades (Alumne alumne){
 
         nom.setText(alumne.getNom().toString());
@@ -278,7 +278,7 @@ public class modificarAlumne extends Fragment {
     }
 
     /************************************************
-     * Metode per enviar petició de modificar professor
+     * Metode per enviar petició de modificar alumne
      ************************************************/
     public void modificarAlumne(){
 

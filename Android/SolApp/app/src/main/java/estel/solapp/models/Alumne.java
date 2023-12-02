@@ -10,6 +10,13 @@ public class Alumne extends Persona{
     private boolean acollida;
     private int idAula;
 
+    private String alumne;
+
+    public String toString() {
+        this.alumne = this.alumne = super.getNom()+" "+ super.getCognom1()+" "+ super.getCognom2();
+        return alumne;
+    }
+
     /**************
      * Constructors
      **************

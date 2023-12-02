@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home_gestio_alumnes"
-            android:icon="@drawable/baseline_home_24"
+            android:icon="@drawable/baseline_face_24"
             android:title="Menú gestió d'alumnes" />
         <item
             android:id="@+id/afegirAlumne"

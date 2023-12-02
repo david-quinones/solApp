@@ -214,7 +214,7 @@ public class modificar_professor extends Fragment {
     }
 
     /*********************************************
-     * Metode per mostrar confirmació d'eliminar
+     * Metode per mostrar confirmació de modificar
      *********************************************/
     public void alertmodificarProfessor(){
 

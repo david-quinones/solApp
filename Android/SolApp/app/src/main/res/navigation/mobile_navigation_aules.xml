@@ -8,32 +8,32 @@
     <fragment
         android:id="@+id/home_gestio_aules"
         android:name="estel.solapp.ui.admin.aules.HomeGestioAules"
-        android:label="@string/menu_home"
+        android:label="Menu gestió d'aules"
         tools:layout="@layout/fragment_home_gestio_aules" />
     <fragment
         android:id="@+id/afegirAula"
         android:name="estel.solapp.ui.admin.aules.AfegirAula"
-        android:label="fragment_afegir_aula"
+        android:label="Afegir aula"
         tools:layout="@layout/fragment_afegir_aula" />
     <fragment
         android:id="@+id/eliminarAula"
         android:name="estel.solapp.ui.admin.aules.EliminarAula"
-        android:label="fragment_eliminar_aula"
+        android:label="Eliminar aula"
         tools:layout="@layout/fragment_eliminar_aula" />
     <fragment
         android:id="@+id/modificarAula"
         android:name="estel.solapp.ui.admin.aules.ModificarAula"
-        android:label="fragment_modificar_aula"
+        android:label="Modificar aula"
         tools:layout="@layout/fragment_modificar_aula" />
     <fragment
         android:id="@+id/llistarAules"
         android:name="estel.solapp.ui.admin.aules.LlistarAules"
-        android:label="fragment_llistar_aules"
+        android:label="Llista d'aules"
         tools:layout="@layout/fragment_llistar_aules" />
     <fragment
         android:id="@+id/buscarAula2"
         android:name="estel.solapp.ui.admin.aules.BuscarAula"
-        android:label="fragment_buscar_aula"
+        android:label="Cerca d'aules"
         tools:layout="@layout/fragment_buscar_aula" />
 
 </navigation>

@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/home_gestio_professors"
         android:name="estel.solapp.ui.admin.professor.home_gestio_professors"
-        android:label="@string/gestio_professors_menu"
+        android:label="Menú gestió de professors"
         tools:layout="@layout/fragment_home_gestio_professors" />
     <fragment
         android:id="@+id/afegir_professor"
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/busca_professor"
         android:name="estel.solapp.ui.admin.professor.busca_professor"
-        android:label="Busca professor"
+        android:label="Cercar professor"
         tools:layout="@layout/fragment_busca_professor" />
     <fragment
         android:id="@+id/llistar_professor"

@@ -473,7 +473,25 @@ public class CommController {
 
     }
 
+    /*************************************************
+     * Petició d'eliminar alumne al servidor
+     * @param aula
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta eliminarAula(Aula aula){
 
+        PeticioClient eliminaAula = new PeticioClient(ELIMINAR_AULA);
+        eliminaAula.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        eliminaAula.addDataObject(aula);
+        Gson gson= new Gson();
+        Log.d("PETICIO ELIMINA AULA", gson.toJson(eliminaAula));
+        ValorsResposta resposta=talkToServer(eliminaAula);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
 
 
 
