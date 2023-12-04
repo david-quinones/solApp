@@ -2,6 +2,7 @@ package sol.app.quinones.solappquinones.Service;
 
 import org.junit.jupiter.api.Test;
 
+import javax.net.ssl.SSLSocket;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class ServerComunicationTest  {
     @Test
     public void testSendMessage() throws IOException {
         //Configurem els mocks (simular connexió)
-        Socket socketMock = mock(Socket.class);
+        SSLSocket socketMock = mock(SSLSocket.class);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("resposta".getBytes());
 

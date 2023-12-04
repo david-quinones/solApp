@@ -22,5 +22,6 @@ public class App extends Application {
         //Obtenim una instancia del model
         //obtenim atraves de l'instacnia de model una instancia de ViewFactory i moestrem la finestra
         Model.getInstance().getViewFactory().showLoginWindow();
+
     }
 }
