@@ -93,6 +93,7 @@ public class LoginController implements Initializable {
             //send message (convert petition to JSON)
             String respota = socket.sendMessage(JsonUtil.toJson(peticio));
 
+
             //TODO si es null controlar
             /*RESPOSTA*/
             //convert to "JSON"

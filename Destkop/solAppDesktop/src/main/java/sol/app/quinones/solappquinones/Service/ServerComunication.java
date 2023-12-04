@@ -35,7 +35,7 @@ public class ServerComunication {
     public ServerComunication() {
         this.serverAddress = "localhost";
         this.port = 9999;
-        //llegim propietats
+        //configurem propietats
         loadTrustStr();
     }
 
@@ -45,8 +45,11 @@ public class ServerComunication {
      *      -> password del mateix
      */
     private void loadTrustStr() {
-        System.setProperty("javax.net.ssl.trustStore", "C:\\Users\\david\\Documents\\GitHub\\solApp\\Destkop\\solAppDesktop\\mykeystore.jks");
-        System.setProperty("javax.net.ssl.trustStorePassword", "ioc2023");
+        //establim propietat del sistema
+        //definim ubicació del fitxer truststore(gestor de certificats) que java utilitza per guardar certificats
+        System.setProperty("javax.net.ssl.trustStore", System.getProperty("user.dir") + File.separator + "mykeystore.jks"); //fitxer
+        //defineix la contrasenya per el trusttore anterior, per garantir la comunicació correcta al servidor (valdiesa)
+        System.setProperty("javax.net.ssl.trustStorePassword", "ioc2023"); //estblim password
     }
 
     /**
@@ -64,7 +67,9 @@ public class ServerComunication {
      * @throws IOException En cas d'error durant la connexió li pasaem al pare que l'ha cridat
      */
     public void connect() throws IOException {
+        //Obtenim la fabrica SSL per defecte, per crear instancies del SSLSocket
         ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        //Crreem un Socket SSL utilitzant la fabrica anterior, comunciació cifrada per protocol SSL/TLS
         socket = (SSLSocket)ssf.createSocket(serverAddress, port);
     }
 
