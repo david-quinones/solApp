@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import sol.app.quinones.solappquinones.Models.Model;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Models.Usuari;
+import sol.app.quinones.solappquinones.Service.CesarAlgoritme;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
@@ -64,7 +65,7 @@ public class LoginController implements Initializable {
 
         //Obtenim les dades dels camps
         String name = fld_usuari.getText();
-        String password = fld_password.getText();
+        String password = CesarAlgoritme.codificar(fld_password.getText());
 
         //Mirem que usuari and password no estigui buit (sempre han de tindre dades)
         if(fld_usuari.getText().isEmpty() || fld_password.getText().isEmpty()){
@@ -91,6 +92,7 @@ public class LoginController implements Initializable {
             peticio.addDades(JsonUtil.toJson(user));
             //send message (convert petition to JSON)
             String respota = socket.sendMessage(JsonUtil.toJson(peticio));
+
 
             //TODO si es null controlar
             /*RESPOSTA*/

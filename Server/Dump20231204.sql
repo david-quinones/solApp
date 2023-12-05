@@ -123,7 +123,7 @@ CREATE TABLE `missatge` (
   KEY `destinatari_id` (`destinatari_id`),
   CONSTRAINT `missatge_ibfk_1` FOREIGN KEY (`remitent_id`) REFERENCES `persona` (`id`),
   CONSTRAINT `missatge_ibfk_2` FOREIGN KEY (`destinatari_id`) REFERENCES `persona` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +132,7 @@ CREATE TABLE `missatge` (
 
 LOCK TABLES `missatge` WRITE;
 /*!40000 ALTER TABLE `missatge` DISABLE KEYS */;
-INSERT INTO `missatge` VALUES (3,2,1,'Estic fent una prova d\'un missatge.','2023-11-27 17:37:10',0,0);
+INSERT INTO `missatge` VALUES (3,2,1,'Estic fent una prova d\'un missatge.','2023-11-27 17:37:10',0,0),(6,1,1,'Missatge prova integració.','2023-11-29 17:50:30',0,0),(7,1,2,'Missatge prova integració.','2023-11-29 17:50:30',0,0),(8,2,1,'Estic fent una prova d\'un missatge.','2023-11-30 17:45:17',0,1);
 /*!40000 ALTER TABLE `missatge` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-29 17:39:42
+-- Dump completed on 2023-12-04 18:06:47

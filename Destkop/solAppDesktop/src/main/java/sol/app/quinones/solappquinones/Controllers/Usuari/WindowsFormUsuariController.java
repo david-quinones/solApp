@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import org.json.JSONObject;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Models.Usuari;
+import sol.app.quinones.solappquinones.Service.CesarAlgoritme;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
 import sol.app.quinones.solappquinones.Service.SingletonConnection;
@@ -66,7 +67,7 @@ public class WindowsFormUsuariController implements Initializable {
         Usuari u = new Usuari(
                 userLoad.getId(),
                 idTxtFld1.getText(),
-                idTxtFld2.getText(),
+                CesarAlgoritme.codificar(idTxtFld2.getText()),
                 //TODO
                 //idTxtFld2.getText().equals(userLoad.getPassword()) ? null : idTxtFld2.getText(),
                 idBoxProfessor.isSelected(),
