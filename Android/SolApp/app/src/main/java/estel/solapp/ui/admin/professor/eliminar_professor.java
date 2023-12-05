@@ -49,7 +49,6 @@ public class eliminar_professor extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -122,7 +121,6 @@ public class eliminar_professor extends Fragment {
                 cognom2Header.setBackgroundResource(R.drawable.tablas_listas_heather);
                 capcelera.addView(cognom2Header);
 
-
                 taulaProfessors.addView(capcelera);
 
                 //Creació de Taula amb llista d'empleats
@@ -170,6 +168,7 @@ public class eliminar_professor extends Fragment {
                             }
                         });
                         taulaProfessors.addView(row);
+
                     }
 
                 }

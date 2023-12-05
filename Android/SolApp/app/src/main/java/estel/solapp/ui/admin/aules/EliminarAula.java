@@ -148,7 +148,7 @@ public class EliminarAula extends Fragment {
                         professor.setBackgroundResource(color);
                         row.addView(professor);
                         TextView nAlumnes = new TextView(getContext());
-                        nAlumnes.setText(aulaTaula.getEmpleat().toString());
+                        nAlumnes.setText(String.valueOf(aulaTaula.getAlumnes().size()));
                         nAlumnes.setGravity(Gravity.CENTER);
                         nAlumnes.setBackgroundResource(color);
                         row.addView(nAlumnes);
@@ -186,7 +186,7 @@ public class EliminarAula extends Fragment {
         aula =aulaTaula;
         nomAula.setText(aula.getNomAula());
         professor.setText(aula.getEmpleat().toString());
-        nAlumnes.setText(aula.getAlumnes().toString());
+        nAlumnes.setText(String.valueOf(aula.getAlumnes().size()));
 
     }
 
@@ -260,7 +260,7 @@ public class EliminarAula extends Fragment {
 
                 }else {
 
-                    showToast(this.getActivity(),this.getContext(), "No s'ha pogut eliminar l'aula");
+                    showToast(this.getActivity(),this.getContext(), "No s'ha pogut eliminar l'aula\n L'aula ha de ser buida d'alumnes.");
 
                 }
             }

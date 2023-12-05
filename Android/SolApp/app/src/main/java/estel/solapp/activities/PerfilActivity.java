@@ -25,10 +25,11 @@ import estel.solapp.common.SingletonSessio;
 import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
 import estel.solapp.models.Persona;
+import estel.solapp.models.User;
 
 public class PerfilActivity extends AppCompatActivity {
 
-    private EditText nomUsuari, nom, cognom1, cognom2, dataNaixement, nif, telefon, email;
+    private EditText nomUsuari, nom, contrasenya, confirmarContrasenya, cognom1, cognom2, dataNaixement, nif, telefon, email;
     private  Button modificarPerfilBtn, mofificarBtn, enrereBtn;
     private int userId;
 
@@ -49,11 +50,15 @@ public class PerfilActivity extends AppCompatActivity {
         //Asignació de tots els EditText
         nomUsuari = (EditText) findViewById(R.id.editTextUserName);
         nomUsuari.setText(SingletonSessio.getInstance().getUserConnectat().getNomUsuari());
+        contrasenya = (EditText) findViewById(R.id.editTextContrasenya);
+        contrasenya.setText(SingletonSessio.getInstance().getUserConnectat().getPassword());
+        confirmarContrasenya = (EditText) findViewById(R.id.editTextConfirmaContrasenya);
+        confirmarContrasenya.setText(SingletonSessio.getInstance().getUserConnectat().getPassword());
         nom = (EditText) findViewById(R.id.editTextNom);
         cognom1 = (EditText) findViewById(R.id.editTextCognom1);
         cognom2 = (EditText) findViewById(R.id.editTextCognom22);
         dataNaixement = (EditText) findViewById(R.id.editTextDataNaixement);
-        nif = (EditText) findViewById(R.id.editTextNIF);
+        nif = (EditText) findViewById(R.id.editTextDNI);
         telefon = (EditText) findViewById(R.id.editTextTelefon);
         email = (EditText) findViewById(R.id.editTextEmail);
 
@@ -69,19 +74,13 @@ public class PerfilActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 mofificarBtn.setVisibility(View.VISIBLE);
-                nom.setFocusableInTouchMode(true);
-                cognom1.setFocusableInTouchMode(true);
-                cognom2.setFocusableInTouchMode(true);
-                dataNaixement.setFocusableInTouchMode(true);
-                nif.setFocusableInTouchMode(true);
-                telefon.setFocusableInTouchMode(true);
-                email.setFocusableInTouchMode(true);
+                ferClicable(true);
 
             }
         });
 
         //Botó de confirmar canvis fa la modificació del perfil.
-        mofificarBtn = (Button)findViewById(R.id.modificarlBtn);
+        mofificarBtn = (Button)findViewById(R.id.desarPerfilBtn);
         mofificarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,17 +182,51 @@ public class PerfilActivity extends AppCompatActivity {
 
                     if (resposta.getReturnCode()==CommController.OK_RETURN_CODE){//Codi correcte
 
+
+                        //Tornem a deixar com NO editables els EditText
+
+                        ferClicable(false);
+
+                    }else {
+
+                        showToast(this,this, "No s'han pogut modificar les dades");
+
+                    }
+                }
+            } catch (ExecutionException e) {
+                showToast(this,this, "Error ("+e.getMessage()+")");
+            } catch (InterruptedException e) {
+                showToast(this,this, "Error ("+e.getMessage()+")");
+            }
+
+            //Creació d'usuari per modificar
+
+            User user = new User(SingletonSessio.getInstance().getUserConnectat().getId(),nomUsuari.getText().toString(),contrasenya.getText().toString(),
+                    SingletonSessio.getInstance().getUserConnectat().isAdmin(),SingletonSessio.getInstance().getUserConnectat().isTeacher(),
+                    true);
+            // Creació d'unaltre fil.
+            ExecutorService executor2 = Executors.newSingleThreadExecutor();
+            // La petició es fa en unaltre fil
+            Future<ValorsResposta> future2 = executor2.submit(()->{return CommController.modificarUsuari(user);});
+            // Procesar resposta del servidor
+
+            try {
+
+                ValorsResposta resposta = future2.get();
+                Gson gson= new Gson();
+                Log.d("RESPOSTA MODIFICAR USUARI", gson.toJson(resposta));
+                if (resposta==null){
+
+                    showToast(this,this, "Error de conexió amb el servidor. ");
+
+                }else{
+
+                    if (resposta.getReturnCode()==CommController.OK_RETURN_CODE){//Codi correcte
+
                         showToast(this,this, "Dades modificades");
                         //Tornem a deixar com NO editables els EditText
-                        mofificarBtn.setClickable(false);
-                        nom.setFocusableInTouchMode(false);
-                        cognom1.setFocusableInTouchMode(false);
-                        cognom2.setFocusableInTouchMode(false);
-                        dataNaixement.setFocusableInTouchMode(false);
-                        nif.setFocusableInTouchMode(false);
-                        telefon.setFocusableInTouchMode(false);
-                        email.setFocusableInTouchMode(false);
-                        onBackPressed();
+
+                        ferClicable(false);
 
                     }else {
 
@@ -217,7 +250,9 @@ public class PerfilActivity extends AppCompatActivity {
     public String controlDades(){
 
         String error = "";
-
+        if (nomUsuari.getText().toString().isEmpty()){error = "La casella usuari és buida.\n"; }
+        if (contrasenya.getText().toString().isEmpty()){error = error + "La casella contrasenya és buida.\n"; }
+        if ((!contrasenya.getText().toString().equals(confirmarContrasenya.getText().toString()))){error = error + "Les contrasenyes no coincideixen."; }
         if (nom.getText().toString().isEmpty()){error = "La casella nom és buida.\n"; }
         if (cognom1.getText().toString().isEmpty()){error = error + "La casella Primer cognom és buida.\n"; }
         if (cognom2.getText().toString().isEmpty()){error = error + "La casella Segón cognom és buida.\n"; }
@@ -230,6 +265,23 @@ public class PerfilActivity extends AppCompatActivity {
         if (!Utility.validarEmail(email.getText().toString())) {error = error + "El emailintroduït no és correcte";}
 
         return (error);
+
+    }
+
+    public void ferClicable (boolean set){
+
+        mofificarBtn.setEnabled(set);
+        nomUsuari.setFocusableInTouchMode(set);
+        contrasenya.setFocusableInTouchMode(set);
+        confirmarContrasenya.setFocusableInTouchMode(set);
+        nom.setFocusableInTouchMode(set);
+        cognom1.setFocusableInTouchMode(set);
+        cognom2.setFocusableInTouchMode(set);
+        dataNaixement.setFocusableInTouchMode(set);
+        nif.setFocusableInTouchMode(set);
+        telefon.setFocusableInTouchMode(set);
+        email.setFocusableInTouchMode(set);
+
 
     }
 

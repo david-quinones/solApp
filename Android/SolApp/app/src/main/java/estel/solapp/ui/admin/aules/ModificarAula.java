@@ -60,6 +60,8 @@ public class ModificarAula extends Fragment {
 
     private Aula aula;
 
+    private Empleat empleat;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class ModificarAula extends Fragment {
         omplirProfessors();//Omplim l'aaraylist de professors per escollir un
         adaptadorProfessors = new ArrayAdapter(this.getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,professors);
         spinnerProfessors.setAdapter(adaptadorProfessors);
-        professors.add(0,new Empleat("","","","","","",""));
+        professors.add(0,new Empleat(" ","","","","","",""));
         spinnerProfessors.setSelection(0);
 
         omplirAlumnes();//Omplim l'arraylist d'alumnes del centre sense classe
@@ -114,7 +116,7 @@ public class ModificarAula extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                alumnes.add(alumnes.get(i));
+                alumnes.add(alumnesClase.get(i));
                 alumnesClase.remove(i);
                 mostrarDades(aula);
             }
@@ -127,7 +129,7 @@ public class ModificarAula extends Fragment {
             public void onClick(View view) {
 
                 set = true;
-                setFocusable(set);
+                setFocusable(set);//activem click als camps per poder modificar-los
             }
         });
 
@@ -170,6 +172,7 @@ public class ModificarAula extends Fragment {
 
             }else{
 
+                taulaAules.removeAllViews();
                 //Capçelera de la taula
                 //*********************
 
@@ -210,7 +213,7 @@ public class ModificarAula extends Fragment {
                     }
 
                     TableRow row = new TableRow(this.getContext());
-
+                    row.setGravity(Gravity.CENTER);
                     TextView nomAula = new TextView(getContext());
                     nomAula.setText(aulaTaula.getNomAula().toString());
                     nomAula.setGravity(Gravity.CENTER);
@@ -218,7 +221,7 @@ public class ModificarAula extends Fragment {
                     row.addView(nomAula);
 
                     TextView professor = new TextView(getContext());
-                    professor.setText(aulaTaula.getEmpleat().getNom().toString()+" "+aulaTaula.getEmpleat().getCognom1().toString()+" "+aulaTaula.getEmpleat().getCognom2().toString());
+                    professor.setText(aulaTaula.getEmpleat().toString());
                     professor.setGravity(Gravity.CENTER);
                     professor.setBackgroundResource(color);
                     row.addView(professor);
@@ -233,12 +236,14 @@ public class ModificarAula extends Fragment {
                     row.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+
+                            aula = (aulaTaula);
                             mostrarDades (aulaTaula);
+
                         }
                     });
 
                     row.addView(nAlumnes);
-
                     taulaAules.addView(row);
 
                 }
@@ -325,12 +330,12 @@ public class ModificarAula extends Fragment {
 
             //Creació d'aula modificada.
             Empleat empleatEscollit = (Empleat) spinnerProfessors.getSelectedItem();
-            aula = new Aula(nomAula.getText().toString(),empleatEscollit,alumnesClase);
+            Aula novaAula = new Aula(aula.getId(),nomAula.getText().toString(),empleatEscollit,alumnesClase);
 
             // Creació d'unaltre fil.
             ExecutorService executor = Executors.newSingleThreadExecutor();
             // La petició es fa en unaltre fil
-            Future<ValorsResposta> future = executor.submit(() -> {return CommController.modificarAula(aula);
+            Future<ValorsResposta> future = executor.submit(() -> {return CommController.modificarAula(novaAula);
             });
             // Procesar resposta del servidor
             try {
@@ -462,7 +467,6 @@ public class ModificarAula extends Fragment {
 
     }
 
-
     /*********************************************
      * Mètode per fer editables tots els editText
      *********************************************/
@@ -475,7 +479,7 @@ public class ModificarAula extends Fragment {
         } else {
             // Fem tots els editText editables
             nomAula.setFocusableInTouchMode(set);
-            spinnerProfessors.setEnabled(set);
+            spinnerProfessors.setClickable(set);
             confirmar.setEnabled(set);
         }
 
