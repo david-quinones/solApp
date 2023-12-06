@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sol.app.quinones.solappquinones.Controllers.Messages.MessageController;
 import sol.app.quinones.solappquinones.Models.Model;
 import sol.app.quinones.solappquinones.Models.Persona;
 import sol.app.quinones.solappquinones.Models.Peticio;
@@ -114,7 +115,7 @@ public class PerfilController implements Initializable {
 
             //respota
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
-            
+
             JSONObject jsonObject = new JSONObject(resposta);
 
             if(jsonObject.getInt("codiResultat") == 0){
