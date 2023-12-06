@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home_comunicacions">
+
+    <fragment
+        android:id="@+id/nav_home_comunicacions"
+        android:name="estel.solapp.ui.admin.comunicacions.home.HomeGestioComunicacions"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home_gestio_comunicacions" />
+    <fragment
+        android:id="@+id/enviarMissatges"
+        android:name="estel.solapp.ui.admin.comunicacions.home.EnviarMissatges"
+        android:label="fragment_enviar_missatges"
+        tools:layout="@layout/fragment_enviar_missatges" />
+    <fragment
+        android:id="@+id/safataEntrada"
+        android:name="estel.solapp.ui.admin.comunicacions.home.SafataEntrada"
+        android:label="fragment_safata_entrada"
+        tools:layout="@layout/fragment_safata_entrada" />
+
+</navigation>

@@ -9,8 +9,8 @@
     tools:openDrawer="start">
 
     <include
-        android:id="@+id/app_bar_nav_gestio_alumnes"
-        layout="@layout/app_bar_nav_gestio_alumnes"
+        android:id="@+id/app_bar_nav_gestio_comunicacions"
+        layout="@layout/app_bar_nav_gestio_comunicacions"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -20,6 +20,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_nav_gestio_alumnes"
-        app:menu="@menu/activity_nav_gestio_alumnes_drawer" />
+        app:headerLayout="@layout/nav_header_nav_gestio_comunicacions"
+        app:menu="@menu/activity_nav_gestio_comunicacions_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>

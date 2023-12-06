@@ -22,7 +22,7 @@ import java.util.concurrent.Future;
 
 import estel.solapp.ui.admin.NavGestioAlumnesActivity;
 import estel.solapp.ui.admin.NavGestioAulesActivity;
-import estel.solapp.ui.admin.NavGestioMissatgesActivity;
+import estel.solapp.ui.admin.NavGestioComunicacionsActivity;
 import estel.solapp.ui.admin.NavGestioUsuarisActivity;
 import estel.solapp.R;
 import estel.solapp.common.CommController;
@@ -118,7 +118,7 @@ public class HomeAdminActivity extends AppCompatActivity {
      ***********************************************/
     public void goGestioComunicacions(View view){
 
-        Utility.gotoActivityChild(this, NavGestioMissatgesActivity.class);
+        Utility.gotoActivityChild(this, NavGestioComunicacionsActivity.class);
 
     }
 

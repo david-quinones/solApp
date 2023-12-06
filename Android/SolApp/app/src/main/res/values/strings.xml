@@ -40,4 +40,5 @@
     <string name="title_activity_nav_gestio_aules">NavGestioAulesActivity</string>
     <string name="spinnerProfessors">Professors</string>
     <string name="title_activity_nav_gestio_missatges">NavGestioMissatgesActivity</string>
+    <string name="title_activity_nav_gestio_comunicacions">NavGestioComunicacionsActivity</string>
 </resources>
