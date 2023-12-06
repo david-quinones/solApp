@@ -60,12 +60,7 @@ public class PerfilController implements Initializable {
     private int idPersona;
 
     private Persona persona;
-    private Persona mPersona = new Persona() {
-        @Override
-        public int hasCode() {
-            return 0;
-        }
-    };
+    private Persona mPersona = new Persona();
 
     private Peticio peticio = new Peticio();
     private ServerComunication socket = new ServerComunication();
@@ -119,7 +114,7 @@ public class PerfilController implements Initializable {
 
             //respota
             String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
-
+            
             JSONObject jsonObject = new JSONObject(resposta);
 
             if(jsonObject.getInt("codiResultat") == 0){
