@@ -658,6 +658,44 @@ public class GenerarResposta {
             return resposta = new RetornDades(CODI_ERROR);
         }
     }
+    
+    
+    
+    /**Mètode per generar la resposta corresponent a la crida eliminarMissatge
+     * 
+     */
+    public RetornDades respostaEliminarMissatge(Missatge missatge, String numSessio){
+        MissatgeDAO missatgeDAO = new MissatgeDAO(conexio);
+        int resultat = 0;
+        //Obtenim les dades de l'usuari conectat
+        UsuariDAO usuariDAO = new UsuariDAO(conexio);
+        Usuari usuari = usuariDAO.consultaUsuari(sessions.idUsuariConectat(numSessio));
+        //Obtenim les dades de Persona de l'usuari connectat
+        PersonaDAO personaDAO = new PersonaDAO(conexio);
+        Persona persona = personaDAO.consultaPersona(usuari.getId());
+        //Comprovem si l'usuari es el remitent o destinatari del missatge
+        if(missatge.getRemitentPersona().getIdPersona() == persona.getIdPersona()){
+            //L'usuari es el remitent del missatge
+            missatge.setRemitentEsborrat(true);
+            missatge.setDestinatariEsborrat(false);
+            //Executem l'esborrat
+            resultat = missatgeDAO.eliminarMissatge(missatge);
+        }else{
+            //L'usuari es el remitent del missatge
+            missatge.setRemitentEsborrat(false);
+            missatge.setDestinatariEsborrat(true);
+            //Executem l'esborrat
+            resultat = missatgeDAO.eliminarMissatge(missatge);
+        }
+        //Comprovem el resultat de l'esborrat i generem resposta
+        if(resultat > 0){
+            LOGGER.info("Generem resposta missatge eliminat");
+            return resposta = new RetornDades(CODI_CORRECTE);
+        }else{
+            LOGGER.warning("Generem resposta no s'ha eliminat el missatge");
+            return resposta = new RetornDades(CODI_ERROR);
+        }
+    }
     }
         
 
