@@ -47,6 +47,8 @@ public class modificarAlumne extends Fragment {
     private boolean set;
     private int color, idPersona, idAlumne;
 
+    private Alumne alumne;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -226,10 +228,10 @@ public class modificarAlumne extends Fragment {
      ***************************************************************/
     public void mostrarDades (Alumne alumne){
 
-        nom.setText(alumne.getNom().toString());
-        cognom1.setText(alumne.getCognom1().toString());
-        cognom2.setText(alumne.getCognom2().toString());
-        nif.setText(alumne.getDni().toString());
+        nom.setText(alumne.getNom());
+        cognom1.setText(alumne.getCognom1());
+        cognom2.setText(alumne.getCognom2());
+        nif.setText(alumne.getDni());
         menjador.setChecked(alumne.isMenjador());
         acollida.setChecked(alumne.isAcollida());
         telefon.setText(alumne.getTelefon());

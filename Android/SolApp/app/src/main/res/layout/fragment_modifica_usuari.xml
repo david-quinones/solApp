@@ -81,7 +81,7 @@
             android:singleLine="true"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/textView24"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNomUsuari" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextUserName" />
 
         <TextView
             android:id="@+id/textView24"
@@ -95,7 +95,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
         <EditText
-            android:id="@+id/editTextNomUsuari"
+            android:id="@+id/editTextUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

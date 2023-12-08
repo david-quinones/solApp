@@ -97,9 +97,8 @@
         <Button
             android:id="@+id/modificaBtn"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:backgroundTint="#090909"
             android:clickable="true"
             android:enabled="true"
@@ -111,15 +110,16 @@
             app:icon="@drawable/baseline_create_24"
             app:iconGravity="top"
             app:iconTint="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/textView10"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/desaBtn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lVllistaAlumnes" />
 
         <Button
             android:id="@+id/desaBtn"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:backgroundTint="#090909"
             android:clickable="false"
             android:enabled="false"
@@ -131,8 +131,10 @@
             app:icon="@drawable/baseline_save_24"
             app:iconGravity="top"
             app:iconTint="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/textView10"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/modificaBtn"
+            app:layout_constraintTop_toBottomOf="@+id/lvllistaAlumnesClasse" />
 
         <Spinner
             android:id="@+id/spinnerProfessors"
@@ -151,13 +153,15 @@
         <ScrollView
             android:id="@+id/VSmodificar_Aula"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/modificaBtn"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modificaBtn">
 
             <TableLayout
                 android:id="@+id/taula_modifica_aula"
@@ -172,13 +176,11 @@
         <ListView
             android:id="@+id/lVllistaAlumnes"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="150dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:background="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/VSmodificar_Aula"
             app:layout_constraintEnd_toStartOf="@+id/lvllistaAlumnesClasse"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -187,15 +189,12 @@
         <ListView
             android:id="@+id/lvllistaAlumnesClasse"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="150dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
             android:background="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/VSmodificar_Aula"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/lVllistaAlumnes"
             app:layout_constraintTop_toBottomOf="@+id/textView35" />
 

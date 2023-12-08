@@ -3,12 +3,19 @@ package sol.app.quinones.solappquinones.Service;
 import sol.app.quinones.solappquinones.Models.Peticio;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 
+import javax.net.ssl.*;
 import java.io.*;
 import java.net.Socket;
+import java.security.KeyStore;
 
 /**
- * Classe que proporciona una interficia per establir una connexió amb el servidor usant SOCKET
+ * Classe que proporciona una interficia per establir una connexió amb el servidor usant SSLSOCKET
  * Permet connectar al servidor, enviar missatges i rebre respostes
+ * **********************************************************
+ * ioc2023
+ * Generando par de claves RSA de 2.048 bits para certificado autofirmado (SHA256withRSA) con una validez de 365 días
+ *         para: CN=Estel IOC, OU=estelApp, O=estelApp, L=Barcelona, ST=Spain, C=ES
+ * ***********************************************************
  *
  * @author david
  */
@@ -16,7 +23,11 @@ public class ServerComunication {
 
     private String serverAddress;
     private int port;
-    private Socket socket;
+    private SSLSocket socket;
+
+    /*SSL*/
+    SSLSocketFactory ssf;
+
 
     /**
      * Constructor que inicializa la comunicació amb el servidor a la direcció i port establers
@@ -24,6 +35,21 @@ public class ServerComunication {
     public ServerComunication() {
         this.serverAddress = "localhost";
         this.port = 9999;
+        //configurem propietats
+        loadTrustStr();
+    }
+
+    /**
+     * Inicializtem les variables
+     *      -> On esta certificat
+     *      -> password del mateix
+     */
+    private void loadTrustStr() {
+        //establim propietat del sistema
+        //definim ubicació del fitxer truststore(gestor de certificats) que java utilitza per guardar certificats
+        System.setProperty("javax.net.ssl.trustStore", System.getProperty("user.dir") + File.separator + "mykeystore.jks"); //fitxer
+        //defineix la contrasenya per el trusttore anterior, per garantir la comunicació correcta al servidor (valdiesa)
+        System.setProperty("javax.net.ssl.trustStorePassword", "ioc2023"); //estblim password
     }
 
     /**
@@ -37,11 +63,14 @@ public class ServerComunication {
     }
 
     /**
-     * Metode que estableix la connexió amb el servidor utilitzant l'adreça i port
+     * Metode que estableix la connexió amb el servidor utilitzant l'adreça i port i SSL (segura)
      * @throws IOException En cas d'error durant la connexió li pasaem al pare que l'ha cridat
      */
     public void connect() throws IOException {
-        socket = new Socket(serverAddress, port);
+        //Obtenim la fabrica SSL per defecte, per crear instancies del SSLSocket
+        ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        //Crreem un Socket SSL utilitzant la fabrica anterior, comunciació cifrada per protocol SSL/TLS
+        socket = (SSLSocket)ssf.createSocket(serverAddress, port);
     }
 
     /**
@@ -77,7 +106,7 @@ public class ServerComunication {
      *
      * @param socket
      */
-    protected void setSocket(Socket socket){
+    protected void setSocket(SSLSocket socket){
         this.socket = socket;
     }
 

@@ -86,7 +86,6 @@ public class Alumne extends Persona{
 
     }
 
-
     /**Constructor que servirà per fer proves
      *
      * @param actiu
@@ -99,8 +98,6 @@ public class Alumne extends Persona{
         this.acollida = acollida;
         this.idAula = idAula;
     }
-
-
 
     public Alumne() {
     }
@@ -120,7 +117,6 @@ public class Alumne extends Persona{
     public boolean isActiu() {
         return actiu;
     }
-
     public void setActiu(boolean actiu) {
         this.actiu = actiu;
     }

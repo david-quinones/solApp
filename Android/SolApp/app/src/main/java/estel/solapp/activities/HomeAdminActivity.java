@@ -4,7 +4,9 @@ import static estel.solapp.common.Utility.showToast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +22,7 @@ import java.util.concurrent.Future;
 
 import estel.solapp.ui.admin.NavGestioAlumnesActivity;
 import estel.solapp.ui.admin.NavGestioAulesActivity;
+import estel.solapp.ui.admin.NavGestioComunicacionsActivity;
 import estel.solapp.ui.admin.NavGestioUsuarisActivity;
 import estel.solapp.R;
 import estel.solapp.common.CommController;
@@ -115,7 +118,7 @@ public class HomeAdminActivity extends AppCompatActivity {
      ***********************************************/
     public void goGestioComunicacions(View view){
 
-        Utility.gotoActivityChild(this, NavGestioUsuarisActivity.class);
+        Utility.gotoActivityChild(this, NavGestioComunicacionsActivity.class);
 
     }
 
@@ -170,7 +173,32 @@ public class HomeAdminActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        showToast(this, getApplicationContext(), "S'ha de sortir per tancar sessió");
+            // Dialeg per preguntar a l'usuari si vol tancar l'aplicació
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomeAdminActivity.this);
+            alertDialog.setMessage("Estas segur que vols tancar la sessió?");
+            alertDialog.setTitle("Tancar");
+            alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+            alertDialog.setCancelable(false);
+            alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    // Tancar aplicació
+
+                    doLogout(findViewById(R.id.logoutBtn));
+                }
+            });
+            alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    // Resposta "no" no fa res
+                }
+            });
+
+            // Obrir dialeg
+            alertDialog.show();
 
     }
 

@@ -99,11 +99,11 @@ public class llistar_professor extends Fragment {
                 emailHeader.setGravity(Gravity.CENTER);
                 emailHeader.setBackgroundResource(R.drawable.tablas_listas_heather);
                 capcelera.addView(emailHeader);
-                TextView dataIniciHeader= new TextView(getContext()); dataIniciHeader.setText("INICI DE CONTRACTE");
+                TextView dataIniciHeader= new TextView(getContext()); dataIniciHeader.setText("INICI");
                 dataIniciHeader.setGravity(Gravity.CENTER);
                 dataIniciHeader.setBackgroundResource(R.drawable.tablas_listas_heather);
                 capcelera.addView(dataIniciHeader);
-                TextView dataFiHeader= new TextView(getContext()); dataFiHeader.setText("FI DE CONTRACTE");
+                TextView dataFiHeader= new TextView(getContext()); dataFiHeader.setText("FI");
                 dataFiHeader.setGravity(Gravity.CENTER);
                 dataFiHeader.setBackgroundResource(R.drawable.tablas_listas_heather);
                 capcelera.addView(dataFiHeader);
