@@ -76,7 +76,7 @@ public class MissatgeDAO {
         ArrayList<Missatge> llistaMissatges = new ArrayList<>();
         try {
             String llistarMissatgesRebuts = "SELECT * FROM missatge WHERE destinatari_id = ? "
-                    + "AND destinatari_esborrat = false;";
+                    + "AND destinatari_esborrat = false ORDER BY data_enviament DESC;";
             psMissatge = conexio.prepareStatement(llistarMissatgesRebuts);
             
             //Establim les dades per a la consulta
@@ -116,7 +116,7 @@ public class MissatgeDAO {
             //Obtenim el contingut
             missatge.setContingut(rs.getString("contingut"));
             //Obtenim data del missatge
-            missatge.setDataEnviament("data_enviament");
+            missatge.setDataEnviament(rs.getString("data_enviament"));
             
             LOGGER.info("S'ha obtingut el missatge amb id: " + missatge.getIdMissatge());           
             
@@ -139,7 +139,7 @@ public class MissatgeDAO {
         ArrayList<Missatge> llistaMissatges = new ArrayList<>();
         try {
             String llistarMissatgesRebuts = "SELECT * FROM missatge WHERE remitent_id = ? "
-                    + "AND remitent_esborrat = false;";
+                    + "AND remitent_esborrat = false ORDER BY data_enviament DESC;";
             psMissatge = conexio.prepareStatement(llistarMissatgesRebuts);
             
             //Establim les dades per a la consulta
