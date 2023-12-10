@@ -18,6 +18,7 @@ import java.net.Socket;
 import estel.solapp.models.Alumne;
 import estel.solapp.models.Aula;
 import estel.solapp.models.Empleat;
+import estel.solapp.models.Missatge;
 import estel.solapp.models.Persona;
 import estel.solapp.models.User;
 /****************************************
@@ -53,6 +54,9 @@ public class CommController {
     public static final String LLISTAR_AULES = "LLISTAR_AULES";
     public static final String MODIFICAR_AULA = "MODIFICAR_AULA";
     public static final String ALTA_AULA = "ALTA_AULA";
+    public static final String ENVIAR_MISSATGE = "ENVIAR_MISSATGE";
+    public static final String SAFATA_ENTRADA = "MISSATGES_REBUTS";
+    public static final String SAFATA_SORTIDA = "MISSATGES_ENVIATS";
 
     /***********************************
     * Conexió amb el servidor per socket
@@ -493,8 +497,69 @@ public class CommController {
 
     }
 
+    /********************************************************************************************************************************************
+     COMUNICACIONS
+     ********************************************************************************************************************************************/
 
+    /*************************************************
+     * Petició d'enviar missatge al servidor
+     * @param missatge
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta enviarMissatge(Missatge missatge){
 
+        PeticioClient enviarMissatge = new PeticioClient(ENVIAR_MISSATGE);
+        enviarMissatge.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        enviarMissatge.addDataObject(missatge);
+        Gson gson= new Gson();
+        Log.d("PETICIO ENVIA MISSATGE", gson.toJson(enviarMissatge));
+        ValorsResposta resposta=talkToServer(enviarMissatge);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició per mostrar safata d'entrada al servidor
+     * @param persona
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta safataEntrada(Persona persona){
+
+        PeticioClient safataEntrada = new PeticioClient(SAFATA_ENTRADA);
+        safataEntrada.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        safataEntrada.addDataObject(persona);
+        Gson gson= new Gson();
+        Log.d("PETICIO SAFATA ENTRADA", gson.toJson(safataEntrada));
+        ValorsResposta resposta=talkToServer(safataEntrada);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició per mostrar safata de sortida al servidor
+     * @param persona
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta safataSortida(Persona persona){
+
+        PeticioClient safataSortida = new PeticioClient(SAFATA_SORTIDA);
+        safataSortida.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        safataSortida.addDataObject(persona);
+        Gson gson= new Gson();
+        Log.d("PETICIO SAFATA ENTRADA", gson.toJson(safataSortida));
+        ValorsResposta resposta=talkToServer(safataSortida);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
 
 
     /********************************************************************************************************************************************

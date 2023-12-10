@@ -102,7 +102,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine2"
+            android:id="@+id/editTextMissatge"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"

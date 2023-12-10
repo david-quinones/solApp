@@ -126,4 +126,31 @@ public class Utility {
 
     }
 
+    /****************************************
+     * Metode per codificar les contrasenyes
+     * @param password
+     * Return String contrasenya codificada
+     **************************************/
+
+    public static String codificar(String password) {
+        int desplacament = 4; //moviments que realitzarem al carcater dins de ASCII
+        //construir la cadena codificada
+        StringBuilder passwordCodificat = new StringBuilder();
+        //recorrem cada caracter del password
+        for (char c : password.toCharArray()) {
+            //convertim el caracter actual a ASCII
+            int caracterAscii = (int) c;
+            //movem el caracter segons la variable "desplacament", asegurant que sigui un ASCII imprimible
+            caracterAscii = (caracterAscii + desplacament) % 128;
+            //agregem el caracter desplaçat a la cadna
+            passwordCodificat.append((char) caracterAscii);
+        }
+        //retornem el StringBuild pero a String
+        return passwordCodificat.toString();
+    }
+
+
+
+
+
 }

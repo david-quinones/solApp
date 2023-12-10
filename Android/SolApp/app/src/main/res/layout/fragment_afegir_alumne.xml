@@ -126,7 +126,7 @@
                     android:background="#FFFFFF"
                     android:ems="11"
                     android:focusableInTouchMode="true"
-                    android:inputType="text"
+                    android:inputType="text|textPassword"
                     android:singleLine="true"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/textView33"

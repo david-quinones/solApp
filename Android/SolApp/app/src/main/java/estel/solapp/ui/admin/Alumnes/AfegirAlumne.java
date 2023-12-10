@@ -67,19 +67,19 @@ public class AfegirAlumne extends Fragment {
         menjador= view.findViewById(R.id.cBmenjador);
         acollida = view.findViewById(R.id.cBacollida);
 
-        //Botó de alta de professor.
+        //Botó de alta de alumne.
         altaBtn = view.findViewById(R.id.altaBtn);
         altaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //Crida al metode per donar d'alta un professor
-                afegirProfessor();
+                afegirAlumne();
 
             }
         });
 
-        //Botó per tornar enrere
+        //Botó per esborrar dades
         esborrarBtn = view.findViewById(R.id.esborrarBtn);
         esborrarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,9 +96,9 @@ public class AfegirAlumne extends Fragment {
     }
 
     /*********************************************************
-     * Mètode per fer fer peticio de donar d'alta un professor
+     * Mètode per fer fer peticio de donar d'alta un alumne
      *********************************************************/
-    public void afegirProfessor(){
+    public void afegirAlumne(){
 
         //Control de dades.
 
@@ -110,10 +110,13 @@ public class AfegirAlumne extends Fragment {
 
         }else {//Dades correctes
 
+            //Codificació de contrasenya
+            String password = Utility.codificar(contrasenya.getText().toString());
+
             //Creació de Empleat i usuari per donar d'alta.
             alumne = new Alumne(nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
                     nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),true,menjador.isChecked(),acollida.isChecked());
-            usuari = new User(nomUsuari.getText().toString(),contrasenya.getText().toString(),false,false,true);
+            usuari = new User(nomUsuari.getText().toString(),password,false,false,true);
 
             // Creació d'unaltre fil.
             ExecutorService executor = Executors.newSingleThreadExecutor();

@@ -42,7 +42,7 @@ public class SafataEntrada extends Fragment {
         taulaMissatges = view.findViewById(R.id.taula_Llista_Missatge);
         taulamisatgeSeleccionat = view.findViewById(R.id.taula_Missatge_Sel);
 
-        omplirTaula();
+        //omplirTaula();
 
         // Inflate the layout for this fragment
         return view;

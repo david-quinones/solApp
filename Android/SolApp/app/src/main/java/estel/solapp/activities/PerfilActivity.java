@@ -201,7 +201,10 @@ public class PerfilActivity extends AppCompatActivity {
 
             //Creació d'usuari per modificar
 
-            User user = new User(SingletonSessio.getInstance().getUserConnectat().getId(),nomUsuari.getText().toString(),contrasenya.getText().toString(),
+            //Codificació de contrasenya
+            String password = Utility.codificar(contrasenya.getText().toString());
+
+            User user = new User(SingletonSessio.getInstance().getUserConnectat().getId(),nomUsuari.getText().toString(),password,
                     SingletonSessio.getInstance().getUserConnectat().isAdmin(),SingletonSessio.getInstance().getUserConnectat().isTeacher(),
                     true);
             // Creació d'unaltre fil.

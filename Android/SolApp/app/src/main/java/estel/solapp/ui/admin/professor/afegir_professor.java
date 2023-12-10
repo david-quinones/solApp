@@ -63,7 +63,7 @@ public class afegir_professor extends Fragment {
         dataFi = view.findViewById(R.id.editTextFi);
 
         //Botó de alta de professor.
-        altaBtn = view.findViewById(R.id.altaBtn);
+        altaBtn = view.findViewById(R.id.altaProfessorBtn);
         altaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +75,7 @@ public class afegir_professor extends Fragment {
         });
 
         //Botó per tornar enrere
-        esborrarBtn = view.findViewById(R.id.esborrarBtn);
+        esborrarBtn = view.findViewById(R.id.esborrarBtn2);
         esborrarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,10 +105,13 @@ public class afegir_professor extends Fragment {
 
         }else {//Dades correctes
 
+            //Codificació de contrasenya
+            String password = Utility.codificar(contrasenya.getText().toString());
+
             //Creació de Empleat i usuari per donar d'alta.
             empleat = new Empleat(nom.getText().toString(),cognom1.getText().toString(),cognom2.getText().toString(),dataNaixement.getText().toString(),
                     nif.getText().toString(),telefon.getText().toString(),email.getText().toString(),true,dataInici.getText().toString(),dataFi.getText().toString());
-            usuari = new User(nomUsuari.getText().toString(),contrasenya.getText().toString(),false,true,true);
+            usuari = new User(nomUsuari.getText().toString(),password,false,true,true);
 
             // Creació d'unaltre fil.
             ExecutorService executor = Executors.newSingleThreadExecutor();
