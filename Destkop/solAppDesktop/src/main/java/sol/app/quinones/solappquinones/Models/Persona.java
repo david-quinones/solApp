@@ -9,7 +9,7 @@ import com.google.gson.Gson;
  *
  * @author david
  */
-public abstract class Persona {
+public class Persona {
 
     private int idPersona;
     private String nom;
@@ -210,6 +210,8 @@ public abstract class Persona {
         this.mail = mail;
     }
 
+
+
     /**
      * Converteix una cadena "JSON" a un objecte Persona
      * Static per no tindre que instanciar objectes, i cridar-lo directament
@@ -222,19 +224,8 @@ public abstract class Persona {
         return gson.fromJson(json, Persona.class);
     }
 
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "idPersona=" + idPersona +
-                ", nom='" + nom + '\'' +
-                ", cognom1='" + cognom1 + '\'' +
-                ", cognom2='" + cognom2 + '\'' +
-                ", data_naixement='" + data_naixement + '\'' +
-                ", dni='" + dni + '\'' +
-                ", telefon='" + telefon + '\'' +
-                ", mail='" + mail + '\'' +
-                '}';
-    }
 
-    public abstract int hasCode();
+    public int hasCode() {
+        return 0;
+    }
 }

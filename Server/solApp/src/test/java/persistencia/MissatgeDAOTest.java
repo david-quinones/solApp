@@ -102,4 +102,22 @@ public class MissatgeDAOTest {
         }
     }
     
+    
+    /**Test per comprovar el resultat de la crida eliminar_missatge
+     * 
+     */
+    @Test
+    public void testEliminarMissatge(){
+        //Dades del missatge a eliminar
+        Missatge missatge = new Missatge();
+        missatge.setRemitentEsborrat(false);
+        missatge.setDestinatariEsborrat(true);
+        missatge.setIdMissatge(8);
+        //Executem la modificació
+        MissatgeDAO missatgeDAO = new MissatgeDAO(conexio);
+        int resultat = missatgeDAO.eliminarMissatge(missatge);
+        //Comprovem el resultat
+        assertTrue(resultat > 0);
+    }
+    
 }

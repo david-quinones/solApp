@@ -1,6 +1,7 @@
 seguretat\GestorSessionsTest.class
 estructurapr\PeticioClientTest.class
 probesIntegracio\LogoutTest.class
+probesIntegracio\EliminarMissatgeTest.class
 estructurapr\RetornDadesTest.class
 probesIntegracio\LlistarMissatgesRebutsTest.class
 probesIntegracio\LlistarEmpleatsTest.class
@@ -23,6 +24,7 @@ probesIntegracio\EliminarUsuariTest$1.class
 probesIntegracio\ModificarEmpleatTest.class
 probesIntegracio\AltaAlumneTest.class
 persistencia\EmpleatDAOTest.class
+probesIntegracio\EliminarMissatgeTest$1.class
 probesIntegracio\ModificarUsuariTest.class
 probesIntegracio\AltaEmpleatTest.class
 probesIntegracio\ModificarUsuariTest$1.class

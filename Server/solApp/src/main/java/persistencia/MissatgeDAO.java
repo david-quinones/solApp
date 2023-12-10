@@ -76,7 +76,7 @@ public class MissatgeDAO {
         ArrayList<Missatge> llistaMissatges = new ArrayList<>();
         try {
             String llistarMissatgesRebuts = "SELECT * FROM missatge WHERE destinatari_id = ? "
-                    + "AND destinatari_esborrat = false;";
+                    + "AND destinatari_esborrat = false ORDER BY data_enviament DESC;";
             psMissatge = conexio.prepareStatement(llistarMissatgesRebuts);
             
             //Establim les dades per a la consulta
@@ -116,7 +116,7 @@ public class MissatgeDAO {
             //Obtenim el contingut
             missatge.setContingut(rs.getString("contingut"));
             //Obtenim data del missatge
-            missatge.setDataEnviament("data_enviament");
+            missatge.setDataEnviament(rs.getString("data_enviament"));
             
             LOGGER.info("S'ha obtingut el missatge amb id: " + missatge.getIdMissatge());           
             
@@ -139,7 +139,7 @@ public class MissatgeDAO {
         ArrayList<Missatge> llistaMissatges = new ArrayList<>();
         try {
             String llistarMissatgesRebuts = "SELECT * FROM missatge WHERE remitent_id = ? "
-                    + "AND remitent_esborrat = false;";
+                    + "AND remitent_esborrat = false ORDER BY data_enviament DESC;";
             psMissatge = conexio.prepareStatement(llistarMissatgesRebuts);
             
             //Establim les dades per a la consulta
@@ -155,5 +155,37 @@ public class MissatgeDAO {
         }
         
         return llistaMissatges;
+    }
+    
+    
+    
+    /**Mètode per eliminar els missatges d'un usuari
+     * 
+     * @param missatge que s'ha d'esborrar
+     * @return codi del resultat
+     */
+    public int eliminarMissatge (Missatge missatge){
+        try {
+            String eliminarMissatge = "UPDATE missatge SET remitent_esborrat = ?, destinatari_esborrat = ? "
+                    + "WHERE id = ?;";
+            psMissatge = conexio.prepareStatement(eliminarMissatge);
+            
+            //Establim les dade per a la modificació
+            psMissatge.setBoolean(1, missatge.isRemitentEsborrat());
+            psMissatge.setBoolean(2, missatge.isDestinatariEsborrat());
+            psMissatge.setInt(3, missatge.getIdMissatge());
+            //Comprovem si s'ha esborrat alguna fila
+            int filesAfectades = psMissatge.executeUpdate();
+            if(filesAfectades > 0){
+                LOGGER.info("Missatge esborrat correctament amb id: " + missatge.getIdMissatge());
+                return CORRECTE;
+            }else{
+                LOGGER.info("No s'ha pogut eliminar el missatge amb id: " + missatge.getIdMissatge());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MissatgeDAO.class.getName()).log(Level.SEVERE,
+                    "ERROR al intentar esborrar el missatge", ex);
+        }
+        return ERROR;
     }
 }

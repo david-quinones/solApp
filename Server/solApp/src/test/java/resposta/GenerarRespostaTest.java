@@ -411,4 +411,26 @@ public class GenerarRespostaTest {
         assertEquals(1,resposta.getCodiResultat());
         assertTrue((Integer)resposta.getDades(0, Integer.class) > 0);
     }
+    
+    
+    
+    /**Test per comprovar el resultat de la resposta a la crida esborrar_missatge
+     * 
+     */
+    @Test
+    public void testEliminarMissatge(){
+        GenerarResposta generarResposta = new GenerarResposta();
+        //Dades per a la prova
+        Missatge missatge = new Missatge();
+        missatge.setIdMissatge(7);
+        Persona personaRemitent = new Persona();
+        personaRemitent.setIdPersona(1);
+        Persona personaDestinatari = new Persona();
+        personaDestinatari.setIdPersona(2);
+        missatge.setRemitentPersona(personaRemitent);
+        String numSessio = "sessioProves";
+        //Generem resposta
+        RetornDades resposta = generarResposta.respostaEliminarMissatge(missatge, numSessio);
+        assertEquals(1, resposta.getCodiResultat());
+    }
 }

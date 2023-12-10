@@ -126,6 +126,11 @@ public class ControladorResposta {
                 //Generem la resposta a la crida missatges_enviats
                 resposta = dadesResposta.respostaLlistarMissatgesEnviats((String)peticio.getDades(0, String.class));
                 return resposta;
+            case "ELIMINAR_MISSATGE":
+            //Generem resposta a la crida eliminar_missatge
+                resposta = dadesResposta.respostaEliminarMissatge((Missatge)peticio.getDades(1, Missatge.class),
+                        (String)peticio.getDades(0, String.class));
+                return resposta;
             default:               
                 return resposta = new RetornDades(CODI_ERROR);
         }
