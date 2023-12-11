@@ -34,7 +34,7 @@ CREATE TABLE `alumne` (
   KEY `fk_aula` (`aula_id`),
   CONSTRAINT `fk_aula` FOREIGN KEY (`aula_id`) REFERENCES `aula` (`id`),
   CONSTRAINT `fk_persona` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,9 +43,26 @@ CREATE TABLE `alumne` (
 
 LOCK TABLES `alumne` WRITE;
 /*!40000 ALTER TABLE `alumne` DISABLE KEYS */;
-INSERT INTO `alumne` VALUES (1,1,0,0,31,NULL),(2,1,0,1,32,NULL),(3,1,1,1,33,NULL),(4,1,0,0,34,4),(5,1,1,1,5,NULL),(8,0,0,0,52,2),(21,1,0,1,67,2);
+INSERT INTO `alumne` VALUES (1,1,0,0,31,NULL),(2,1,0,1,32,NULL),(3,1,1,1,33,NULL),(4,1,0,0,34,4),(5,1,1,1,5,NULL),(8,0,0,0,52,2),(26,1,0,0,73,NULL);
 /*!40000 ALTER TABLE `alumne` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `alumne_AFTER_UPDATE` AFTER UPDATE ON `alumne` FOR EACH ROW BEGIN
+
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `aula`
@@ -90,7 +107,7 @@ CREATE TABLE `empleat` (
   PRIMARY KEY (`id`),
   KEY `persona_id` (`persona_id`),
   CONSTRAINT `empleat_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +116,7 @@ CREATE TABLE `empleat` (
 
 LOCK TABLES `empleat` WRITE;
 /*!40000 ALTER TABLE `empleat` DISABLE KEYS */;
-INSERT INTO `empleat` VALUES (1,1,'2022-01-01','9999-12-31',1),(2,1,'2021-06-15','2024-06-14',2),(3,1,'2020-12-01',NULL,3),(4,1,'2023-01-01',NULL,4),(31,1,'2000-01-01','9999-12-31',53);
+INSERT INTO `empleat` VALUES (1,1,'2022-01-01','9999-12-31',1),(2,1,'2021-06-15','2024-06-14',2),(3,1,'2020-12-01',NULL,3),(4,1,'2023-01-01',NULL,4),(31,1,'2000-01-01','9999-12-31',53),(33,0,'2000-01-01','2024-01-01',74);
 /*!40000 ALTER TABLE `empleat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +171,7 @@ CREATE TABLE `persona` (
   `mail` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `dni` (`dni`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +180,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'Pau','Castell','Galtes','1983-08-07','46797529G','645878955','pau@gmail.com'),(2,'NomPersona','CognomPersona1','CognomPersona2','2000-01-01','1111111H','999999999','provapersona@gmail.com'),(3,'Carlos','González','Rodríguez','1988-12-10','54321678C','654987321','carlos@example.com'),(4,'Ana','Martínez','Sánchez','1992-03-08','87651234D','789654321','ana@example.com'),(5,'Pablo','Jiménez','Pérez','1995-07-12','43218765E','159753468','pablo@example.com'),(6,'Juan','Pérez','García','1990-05-15','12345678A','123456789','juan@example.com'),(7,'María','López','Fernández','1985-09-23','87654321B','987654321','maria@example.com'),(30,'prova2','prova2',NULL,'2000-01-01',NULL,NULL,NULL),(31,'Juan','Gomez','Lopez','2022-02-15',NULL,'999999999','juan@gmail.com'),(32,'Maria','Perez','Rodriguez','2021-09-10','12756678A','987654321','maria@gmail.com'),(33,'Pedro','Martinez','Gutierrez','2023-04-20','98765432B','654321987','pedro@gmail.com'),(34,'Laura','Garcia','Fernandez','2022-08-22',NULL,'789456123','laura@gmail.com'),(38,'TestModificat','UnitariModificat','PauCastellModificat','1983-08-07','00000000K','Modificat','Modificat'),(52,'testAlumne','cognomAlumne','cognomAlumne2','2021-08-06','8748555H','111111111','alumne@gmail.com'),(53,'testResposta','cognomResposta1','cognomResposta2','1983-02-06','1111111T','587458746','resposta@gmail.com'),(67,'AlumneIntegracio','cognomIntegracio','cognomIntegracio2','2022-08-23','45645645P','111111111','alumneInt@gmail.com');
+INSERT INTO `persona` VALUES (1,'Pau','Castell','Galtes','1983-08-07','46797529G','645878955','pau@gmail.com'),(2,'PauCastellGaltes','CognomPersona1','CognomPersona2','2000-01-01','1245874L','999999999','provapersona@gmail.com'),(3,'Carlos','González','Rodríguez','1988-12-10','54321678C','654987321','carlos@example.com'),(4,'Ana','Martínez','Sánchez','1992-03-08','87651234D','789654321','ana@example.com'),(5,'Pablo','Jiménez','Pérez','1995-07-12','43218765E','159753468','pablo@example.com'),(6,'Juan','Pérez','García','1990-05-15','12345678A','123456789','juan@example.com'),(7,'María','López','Fernández','1985-09-23','87654321B','987654321','maria@example.com'),(30,'prova2','prova2',NULL,'2000-01-01',NULL,NULL,NULL),(31,'Juan','Gomez','Lopez','2022-02-15',NULL,'999999999','juan@gmail.com'),(32,'Maria','Perez','Rodriguez','2021-09-10','12756678A','987654321','maria@gmail.com'),(33,'Pedro','Martinez','Gutierrez','2023-04-20','98765432B','654321987','pedro@gmail.com'),(34,'Laura','Garcia','Fernandez','2022-08-22',NULL,'789456123','laura@gmail.com'),(38,'TestModificat','UnitariModificat','PauCastellModificat','1983-08-07','00000000K','Modificat','Modificat'),(52,'testAlumne','cognomAlumne','cognomAlumne2','2021-08-06','8748555H','111111111','alumne@gmail.com'),(53,'testResposta','cognomResposta1','cognomResposta2','1983-02-06','1111111T','587458746','resposta@gmail.com'),(73,'AlumneIntegracioModificat','cognomIntegracio','cognomIntegracio2','2022-08-23','45645645P','111111111','alumneInt@gmail.com'),(74,'TestEmpleatIntegracioModificat','TestEMpleatIntegracio','TestIntegracio','1983-02-06','1111111G','587458745','TestIntegracio@gmail.com');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +203,7 @@ CREATE TABLE `usuari` (
   UNIQUE KEY `nom_usuari_UNIQUE` (`nom_usuari`),
   KEY `persona_id` (`persona_id`),
   CONSTRAINT `usuari_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,9 +212,36 @@ CREATE TABLE `usuari` (
 
 LOCK TABLES `usuari` WRITE;
 /*!40000 ALTER TABLE `usuari` DISABLE KEYS */;
-INSERT INTO `usuari` VALUES (1,'nom_usuariProva','Ylil4Ot3KRHU+SvltdsOFFEe2+AdHQ3dHVosuduaVro=',1,0,NULL,1),(2,'PAU','siHZ27CDp/M0KNfCo8MZiuklYU1wIQ4ocWzKp81N23k=',1,0,1,1),(18,'testResposta2','u//vhnk6QOPfMuE7eVnaxcprcGCNr3blor2hfdexoIY=',1,0,31,1),(22,'testConsulta','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,38,1),(23,'NouUsuariModificat','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',0,1,2,1),(37,'testAlumne','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,52,0),(38,'testResposta10','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,53,1),(52,'testAlumneIntegracio','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,67,1);
+INSERT INTO `usuari` VALUES (1,'nom_usuariProva','Ylil4Ot3KRHU+SvltdsOFFEe2+AdHQ3dHVosuduaVro=',1,0,NULL,1),(2,'PAU','siHZ27CDp/M0KNfCo8MZiuklYU1wIQ4ocWzKp81N23k=',1,0,1,1),(18,'testRespostaModificat','V1RsmLBkCI+iGQCu1arc7tFHCS3aSWe8VclqIJ9UeJs=',0,1,31,1),(22,'testConsulta','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,38,1),(23,'NouUsuariModificat','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',0,1,2,1),(37,'testAlumne','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,52,0),(38,'testResposta10','XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=',1,0,53,1),(58,'testAlumneIntegracio','dwqEp6HvGgmzLwiMPJzM2GvfzvWygxhMkV1B39JRLRI=',1,0,73,1),(59,'TestEmpleatIntegracio','L+AC4nQwHOIpWVRfFJpag7vVItd2kjkW72R+zrjbdFk=',1,0,74,0);
 /*!40000 ALTER TABLE `usuari` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `usuari_AFTER_UPDATE` AFTER UPDATE ON `usuari` FOR EACH ROW BEGIN
+IF NEW.actiu <> OLD.actiu THEN
+        -- Actualizar empleado
+        UPDATE empleat
+        SET actiu = NEW.actiu
+        WHERE persona_id = NEW.persona_id;
+
+        -- Actualizar alumno
+        UPDATE alumne
+        SET actiu = NEW.actiu
+        WHERE persona_id = NEW.persona_id;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -208,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-04 18:06:47
+-- Dump completed on 2023-12-11 19:54:31
