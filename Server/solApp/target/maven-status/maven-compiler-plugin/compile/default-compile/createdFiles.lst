@@ -26,3 +26,4 @@ persistencia\PersonaDAO.class
 seguretat\Encriptar.class
 entitats\Aula.class
 entitats\Missatge.class
+seguretat\CesarAlgoritme.class

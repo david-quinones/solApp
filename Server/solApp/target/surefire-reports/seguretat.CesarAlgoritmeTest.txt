@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: probesIntegracio.LoginTest
+Test set: seguretat.CesarAlgoritmeTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.629 s -- in probesIntegracio.LoginTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.069 s -- in seguretat.CesarAlgoritmeTest

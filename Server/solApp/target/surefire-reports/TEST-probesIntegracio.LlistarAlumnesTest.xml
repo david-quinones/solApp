@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="probesIntegracio.LlistarAlumnesTest" time="1.74" tests="1" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="probesIntegracio.LlistarAlumnesTest" time="1.357" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\openjdk-17.0.1_windows-x64_bin\jdk-17.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\pau\AppData\Local\Temp\surefire3522276700833546292\surefirebooter-20231122132958984_3.jar C:\Users\pau\AppData\Local\Temp\surefire3522276700833546292 2023-11-22T13-29-58_827-jvmRun1 surefire-20231122132958984_1tmp surefire_0-20231122132958984_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\pau\AppData\Local\Temp\surefire11803224815221758825\surefirebooter-20231211200544210_3.jar C:\Users\pau\AppData\Local\Temp\surefire11803224815221758825 2023-12-11T20-05-44_056-jvmRun1 surefire-20231211200544210_1tmp surefire_0-20231211200544210_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="probesIntegracio.LlistarAlumnesTest#testLlistarAlumnes"/>
     <property name="surefire.test.class.path" value="C:\Users\pau\Documents\GitHub\solApp\Server\solApp\target\test-classes;C:\Users\pau\Documents\GitHub\solApp\Server\solApp\target\classes;C:\Users\pau\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\pau\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\pau\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\pau\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\pau\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\pau\.m2\repository\org\mockito\mockito-all\1.9.5\mockito-all-1.9.5.jar;C:\Users\pau\.m2\repository\org\dbunit\dbunit\2.7.3\dbunit-2.7.3.jar;C:\Users\pau\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\pau\.m2\repository\org\postgresql\postgresql\42.3.1\postgresql-42.3.1.jar;C:\Users\pau\.m2\repository\org\checkerframework\checker-qual\3.5.0\checker-qual-3.5.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\jdbc\ojdbc8\19.3.0.0\ojdbc8-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\jdbc\ucp\19.3.0.0\ucp-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\security\oraclepki\19.3.0.0\oraclepki-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\security\osdt_cert\19.3.0.0\osdt_cert-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\security\osdt_core\19.3.0.0\osdt_core-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\ha\simplefan\19.3.0.0\simplefan-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\ha\ons\19.3.0.0\ons-19.3.0.0.jar;"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\pau\AppData\Local\Temp\surefire3522276700833546292\surefirebooter-20231122132958984_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\pau\AppData\Local\Temp\surefire11803224815221758825\surefirebooter-20231211200544210_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.1+12-39"/>
@@ -58,13 +58,18 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testLlistarAlumnes" classname="probesIntegracio.LlistarAlumnesTest" time="1.647">
-    <failure message="expected:&lt;5&gt; but was:&lt;7&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: expected:<5> but was:<7>
-	at org.junit.Assert.fail(Assert.java:89)
-	at org.junit.Assert.failNotEquals(Assert.java:835)
-	at org.junit.Assert.assertEquals(Assert.java:647)
-	at org.junit.Assert.assertEquals(Assert.java:633)
-	at probesIntegracio.LlistarAlumnesTest.testLlistarAlumnes(LlistarAlumnesTest.java:98)
+  <testcase name="testLlistarAlumnes" classname="probesIntegracio.LlistarAlumnesTest" time="1.298">
+    <system-out><![CDATA[localhost/127.0.0.1
+]]></system-out>
+    <system-err><![CDATA[dic 11, 2023 8:05:45 P. M. probesIntegracio.LlistarAlumnesTest testLlistarAlumnes
+INFO: Client connectat al servidor
+dic 11, 2023 8:05:45 P. M. probesIntegracio.LlistarAlumnesTest testLlistarAlumnes
+INFO: Petició enviada al servidor.
+dic 11, 2023 8:05:45 P. M. probesIntegracio.LlistarAlumnesTest testLlistarAlumnes
+SEVERE: null
+java.net.SocketException: Socket is closed
+	at java.base/sun.security.ssl.SSLSocketImpl.getInputStream(SSLSocketImpl.java:883)
+	at probesIntegracio.LlistarAlumnesTest.testLlistarAlumnes(LlistarAlumnesTest.java:100)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -95,40 +100,50 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-]]></failure>
-    <system-err><![CDATA[nov 22, 2023 1:30:00 P. M. probesIntegracio.LlistarAlumnesTest testLlistarAlumnes
-INFO: Client connectat al servidor
-nov 22, 2023 1:30:00 P. M. probesIntegracio.LlistarAlumnesTest testLlistarAlumnes
-INFO: Petició enviada al servidor.
-nov 22, 2023 1:30:01 P. M. persistencia.ConexioBBDD conectar
-INFO: Connexió a la base de dades.
-nov 22, 2023 1:30:01 P. M. persistencia.AlumneDAO obtindreAlumne
-INFO: Obtingut alumne amb id: 1
-nov 22, 2023 1:30:01 P. M. persistencia.AlumneDAO obtindreAlumne
-INFO: Obtingut alumne amb id: 2
-nov 22, 2023 1:30:01 P. M. persistencia.AlumneDAO obtindreAlumne
-INFO: Obtingut alumne amb id: 3
-nov 22, 2023 1:30:01 P. M. persistencia.AlumneDAO obtindreAlumne
-INFO: Obtingut alumne amb id: 4
-nov 22, 2023 1:30:01 P. M. persistencia.AlumneDAO obtindreAlumne
-INFO: Obtingut alumne amb id: 5
-nov 22, 2023 1:30:01 P. M. persistencia.AlumneDAO obtindreAlumne
-INFO: Obtingut alumne amb id: 8
-nov 22, 2023 1:30:01 P. M. persistencia.AlumneDAO obtindreAlumne
-INFO: Obtingut alumne amb id: 21
-nov 22, 2023 1:30:01 P. M. resposta.GenerarResposta respostaLlistarAlumnes
-INFO: Resposta amb la llista d'alumnes
-nov 22, 2023 1:30:01 P. M. persistencia.ConexioBBDD tancarConexio
-INFO: Conexió a la base de dades tancada.
-nov 22, 2023 1:30:01 P. M. probesIntegracio.LlistarAlumnesTest testLlistarAlumnes
-INFO: Dades rebudes per part del servidor.
-nov 22, 2023 1:30:01 P. M. probesIntegracio.LlistarAlumnesTest testLlistarAlumnes
-INFO: Codi del resultat espertat = 1, codi rebut: 1
-nov 22, 2023 1:30:01 P. M. probesIntegracio.LlistarAlumnesTest tearDown
+
+dic 11, 2023 8:05:45 P. M. servidor.ServidorSocketListener$GestorClients run
+SEVERE: Error al conectar amb el client en el métode run de GestorClients
+java.net.SocketException: Se ha anulado una conexión establecida por el software en su equipo host.
+	at java.base/sun.nio.ch.NioSocketImpl.implWrite(NioSocketImpl.java:420)
+	at java.base/sun.nio.ch.NioSocketImpl.write(NioSocketImpl.java:440)
+	at java.base/sun.nio.ch.NioSocketImpl$2.write(NioSocketImpl.java:826)
+	at java.base/java.net.Socket$SocketOutputStream.write(Socket.java:1035)
+	at java.base/sun.security.ssl.SSLSocketOutputRecord.flush(SSLSocketOutputRecord.java:266)
+	at java.base/sun.security.ssl.HandshakeOutStream.flush(HandshakeOutStream.java:89)
+	at java.base/sun.security.ssl.Finished$T13FinishedProducer.onProduceFinished(Finished.java:787)
+	at java.base/sun.security.ssl.Finished$T13FinishedProducer.produce(Finished.java:675)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:440)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1246)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1182)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:840)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:801)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:396)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:480)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:458)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:200)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1500)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1415)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:915)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:1006)
+	at java.base/sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:270)
+	at java.base/sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:313)
+	at java.base/sun.nio.cs.StreamDecoder.read(StreamDecoder.java:188)
+	at java.base/java.io.InputStreamReader.read(InputStreamReader.java:177)
+	at java.base/java.io.BufferedReader.fill(BufferedReader.java:162)
+	at java.base/java.io.BufferedReader.readLine(BufferedReader.java:329)
+	at java.base/java.io.BufferedReader.readLine(BufferedReader.java:396)
+	at servidor.ServidorSocketListener$GestorClients.run(ServidorSocketListener.java:137)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+dic 11, 2023 8:05:45 P. M. probesIntegracio.LlistarAlumnesTest tearDown
 INFO: Servidor tancat.
-nov 22, 2023 1:30:01 P. M. servidor.ServidorSocketListener escoltarClients
+dic 11, 2023 8:05:45 P. M. servidor.ServidorSocketListener escoltarClients
 SEVERE: Servidor tancat, no es poden escoltar clients
-nov 22, 2023 1:30:01 P. M. probesIntegracio.LlistarAlumnesTest$1 run
+dic 11, 2023 8:05:45 P. M. probesIntegracio.LlistarAlumnesTest$1 run
 INFO: Servidor escoltant clients.
 ]]></system-err>
   </testcase>

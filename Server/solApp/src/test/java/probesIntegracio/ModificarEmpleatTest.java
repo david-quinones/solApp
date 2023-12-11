@@ -64,11 +64,11 @@ public class ModificarEmpleatTest {
     @Test
     public void testModificarEmpleatCorrecte(){
         //Empleat original a la base de dades
-        Empleat empleatOriginal = new Empleat(1,"Pau", "Castell", "Galtes", "1983-08-07",
-                "46797529G", "93703532", "pau@gmail.com", 1,true, "2022-01-01", "2023-12-31");
+        Empleat empleat = new Empleat("TestEmpleatIntegracio", "TestEMpleatIntegracio", "TestIntegracio",
+                "1983-02-06", "1111111G", "587458745", "TestIntegracio@gmail.com", true, "2000-01-01", "9999-12-31");
         //Es modifica telefon i final contracte
-        Empleat empleatNovesDades = new Empleat(1,"Pau", "Castell", "Galtes", "1983-08-07",
-                "46797529G", "645878955", "pau@gmail.com", 1,true, "2022-01-01", "9999-12-31");
+        Empleat empleatNovesDades = new Empleat(74,"TestEmpleatIntegracioModificat", "TestEMpleatIntegracio", "TestIntegracio",
+                "1983-02-06", "1111111G", "587458745", "TestIntegracio@gmail.com",33, true, "2000-01-01", "2024-01-01");
 
         try {
             socket = new Socket("localhost",9999);

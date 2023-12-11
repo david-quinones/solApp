@@ -17,6 +17,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
+import seguretat.CesarAlgoritme;
 import servidor.ServidorSocketListener;
 
 /**Test per comprobar la crida a la petició LOGIN al servidor
@@ -75,7 +76,9 @@ public class LoginTest {
             socket = new Socket("localhost",9999);
             //PETICIO DEL CLIENT AL SERVIDOR
             //Usuari que intentarem validar
-            Usuari usuari = new Usuari("nom_usuari","password");
+            //Codifiquem password
+            String password = CesarAlgoritme.codificar("password");
+            Usuari usuari = new Usuari("testConsulta",password);
             //Generem la petició que farem al servidor
             PeticioClient peticio = new PeticioClient("LOGIN");
             peticio.afegirDades(usuari);
@@ -96,7 +99,7 @@ public class LoginTest {
             //Comprobem que les dades rebudes coincideixen amb un login correcte
             //Comprobem primer el codi del resultat, 1 en cas de verificació correcte
             assertEquals("Codi de resultat correcte", 1, retorn.getCodiResultat());
-            assertEquals("Id de l'usuari retornat",1, usuariRetorn.getId());
+            assertEquals("Id de l'usuari retornat",22, usuariRetorn.getId());
             assertNotNull("Número de sessió no null",numSessio);
 
         } catch (IOException ex) {
@@ -116,7 +119,8 @@ public class LoginTest {
             socket = new Socket("localhost",9999);           
             //PETICIO DEL CLIENT AL SERVIDOR
             //Usuari que intentarem validar amb un password incorrecte
-            Usuari usuari = new Usuari("nom_usuari","password_incorrecte");
+            String password = CesarAlgoritme.codificar("passwordIncorrecte");
+            Usuari usuari = new Usuari("testConsulta",password);
             //Generem la petició que farem al servidor
             PeticioClient peticio = new PeticioClient("LOGIN");
             peticio.afegirDades(usuari);

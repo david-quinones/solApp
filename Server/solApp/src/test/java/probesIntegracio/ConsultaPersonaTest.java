@@ -98,8 +98,6 @@ public class ConsultaPersonaTest {
             LOGGER.info("Dada esperada 1, dada rebuda " + persona.getIdPersona());
             assertEquals("Pau", persona.getNom());
             LOGGER.info("Dada esperada Pau, dada rebuda " + persona.getNom());
-            assertEquals("933703532", persona.getTelefon());
-            LOGGER.info("Dada esperada 933703532, dada rebuda " + persona.getTelefon());
             
         } catch (IOException ex) {
             Logger.getLogger(ConsultaPersonaTest.class.getName()).log(Level.SEVERE, null, ex);

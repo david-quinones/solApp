@@ -97,7 +97,7 @@ public class LlistarMissatgesEnviatsTest {
             //Comprovem missatges rebuts
             for(int i=1; i<=missatgesEnviats; i++){
                 Missatge missatge = (Missatge) retorn.getDades(i, Missatge.class);
-                System.out.println("Missatge amb id: " + missatge.getIdMissatge());
+                System.out.println("Missatge amb id: " + missatge.getIdMissatge() + " " + missatge.getDataEnviament());
             }                
             socket.close();
             LOGGER.info("Socket del client tancat.");

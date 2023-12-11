@@ -24,7 +24,7 @@ public class ConexioBBDD {
      * @throws SQLException si hi ha algun error al intentar conectar amb la base de dades.
      */
     public Connection conectar() throws SQLException{
-        
+
         conexio = DriverManager.getConnection(JDBD_URL,USUARI,PASSWORD);
         
         LOGGER.info("Connexió a la base de dades.");
