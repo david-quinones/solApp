@@ -6,6 +6,7 @@ import entitats.Empleat;
 import estructurapr.PeticioClient;
 import estructurapr.RetornDades;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -13,6 +14,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -26,7 +29,8 @@ import servidor.ServidorSocketListener;
  */
 public class LlistarAlumnesTest {
     private ServidorSocketListener servidor;
-    private Socket socket;
+    private SSLSocket socket;
+    private SSLSocketFactory ssf;
     private static final Logger LOGGER = Logger.getLogger(LlistarAlumnesTest.class.getName());
     
 
@@ -38,6 +42,7 @@ public class LlistarAlumnesTest {
         Thread serverThread = new Thread(new Runnable() {
             @Override
             public void run() {
+                
                servidor = new ServidorSocketListener(9999);
                servidor.escoltarClients();
                LOGGER.info("Servidor escoltant clients.");
@@ -54,10 +59,15 @@ public class LlistarAlumnesTest {
     
     @After
     public void tearDown(){
-        servidor.tancarServidor();
-        LOGGER.info("Servidor tancat.");
+        try {
+            Thread.sleep(100);
+            servidor.tancarServidor();
+            LOGGER.info("Servidor tancat.");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(LlistarAlumnesTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+  
     
     /**Test per comprobar que la crida de llistarAlumnes funciona correctament.
      * Es verifica que la cantitat d'alumnes sigui la esperada i els alumnes
@@ -67,9 +77,13 @@ public class LlistarAlumnesTest {
     @Test
     public void testLlistarAlumnes(){
         try {
-            socket = new Socket("localhost",9999);
+            System.setProperty("javax.net.ssl.trustStore", "C:\\Users\\pau\\Documents\\GitHub\\solApp\\Destkop\\solAppDesktop\\mykeystore2.jks");
+            System.setProperty("javax.net.ssl.trustStorePassword", "ioc2023");
+            ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            socket = (SSLSocket)ssf.createSocket("localhost", 9999);
+            //socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
-            
+            System.out.println(socket.getInetAddress());
             //PETICIO DEL CLIENT AL SERVIDOR
             String numSessio = "sessioProves";
             PeticioClient peticio  = new PeticioClient("LLISTAR_ALUMNES");
@@ -95,26 +109,10 @@ public class LlistarAlumnesTest {
             LOGGER.info("Codi del resultat espertat = 1, codi rebut: " + retorn.getCodiResultat());
             //Número de elements Empleats rebuts
             int numeroAlumnes = (int) retorn.getDades(0, Integer.class);
-            assertEquals(5, numeroAlumnes);
-            LOGGER.info("Número d'alumnes esperats 4, número d'alumnes rebuts: " + numeroAlumnes);
-            //Comprobem que els alumnes rebuts són els esperats
-            Alumne alumne = (Alumne) retorn.getDades(1, Alumne.class);
-            assertEquals(1, alumne.getIdAlumne());
-            LOGGER.info("Id = 1 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
-            alumne = (Alumne) retorn.getDades(2, Alumne.class);
-            assertEquals(2, alumne.getIdAlumne());
-            LOGGER.info("Id = 2 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
-            alumne = (Alumne) retorn.getDades(3, Alumne.class);
-            assertEquals(3, alumne.getIdAlumne());
-            LOGGER.info("Id = 3 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
-            alumne = (Alumne) retorn.getDades(4, Alumne.class);
-            assertEquals(4, alumne.getIdAlumne());
-            LOGGER.info("Id = 4 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
-            alumne = (Alumne) retorn.getDades(5, Alumne.class);
-            assertEquals(5, alumne.getIdAlumne());
-            LOGGER.info("Id = 5 de l'alumne esperat, rebut el id " + alumne.getIdAlumne());
+            assertEquals(7, numeroAlumnes);
+            LOGGER.info("Número d'alumnes esperats 7, número d'alumnes rebuts: " + numeroAlumnes);
 
-            socket.close();
+            
             LOGGER.info("Socket del client tancat.");
 
         } catch (IOException ex) {

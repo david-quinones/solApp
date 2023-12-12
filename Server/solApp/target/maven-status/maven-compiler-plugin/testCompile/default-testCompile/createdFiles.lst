@@ -25,6 +25,7 @@ probesIntegracio\ModificarEmpleatTest.class
 probesIntegracio\AltaAlumneTest.class
 persistencia\EmpleatDAOTest.class
 probesIntegracio\EliminarMissatgeTest$1.class
+seguretat\CesarAlgoritmeTest.class
 probesIntegracio\ModificarUsuariTest.class
 probesIntegracio\AltaEmpleatTest.class
 probesIntegracio\ModificarUsuariTest$1.class

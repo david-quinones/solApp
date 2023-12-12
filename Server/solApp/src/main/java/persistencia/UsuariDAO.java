@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import seguretat.CesarAlgoritme;
 import seguretat.Encriptar;
 
 /**
@@ -59,8 +60,10 @@ public class UsuariDAO {
                 //Recuperació del password de la consulta
                 String passwordBBDD = rs.getString("password");
                 
+                //Descodifiquem el password rebut
+                String passwordDescodificat = CesarAlgoritme.descodificar(usuari.getPassword());
                 //Obtenim el hash del password rebut de la petició
-                String hashPasswordRebut = seguretat.hashPassword(usuari.getPassword());
+                String hashPasswordRebut = seguretat.hashPassword(passwordDescodificat);
                 
                 //Si el password es correcte generem l'usuari amb totes les dades
                 if(MessageDigest.isEqual(hashPasswordRebut.getBytes(),passwordBBDD.getBytes())){
@@ -97,9 +100,10 @@ public class UsuariDAO {
             
             //Establim dades per a la instrucció
             ps.setString(1, usuari.getNomUsuari());
-            //Abans d'insertar el password l'encriptem
+            //Abans d'insertar el password el descodifiquem i l'encriptem
+            String passwordDescodificat = CesarAlgoritme.descodificar(usuari.getPassword());
             Encriptar encriptar= new Encriptar();
-            String password = encriptar.hashPassword(usuari.getPassword());
+            String password = encriptar.hashPassword(passwordDescodificat);
             ps.setString(2, password);
             ps.setBoolean(3, usuari.isIsAdmin());
             ps.setBoolean(4, usuari.isIsTeacher());
@@ -202,15 +206,18 @@ public class UsuariDAO {
             //Si la contraseña es la mateixa no fem un hash
                 String password = "";
                 Usuari usuariOriginal = consultaUsuari(usuari.getId());
+
+                
+            if(usuariOriginal != null){
                 if(!usuariOriginal.getPassword().equals(usuari.getPassword())){
+                    //Descodifiquem el password
+                    String passwordDescodificat = CesarAlgoritme.descodificar(usuari.getPassword());
                     //Obtenim el hash del password rebut
                     Encriptar encriptar= new Encriptar();
-                    password = encriptar.hashPassword(usuari.getPassword());
+                    password = encriptar.hashPassword(passwordDescodificat);
                 } else{
                     password = usuariOriginal.getPassword();
                 }
-            
-            if(usuari != null){
                 //Establim les dades per a la modificació
                 ps.setString(1, usuari.getNomUsuari());               
                 ps.setString(2, password);

@@ -66,9 +66,8 @@ public class EliminarUsuariTest {
      */
     @Test
     public void testEliminarUsuari(){
-        Empleat empleat = new Empleat(1, "testResposta", "cognomResposta1", "cognomResposta2",
-                "1983-02-06", "1111111G", "587458745", "resposta@gmail.com",
-                1, true, "2000-01-01", "9999-12-31");
+        Empleat empleat = new Empleat(74,"TestEmpleatIntegracioModificat", "TestEMpleatIntegracio", "TestIntegracio",
+                "1983-02-06", "1111111G", "587458745", "TestIntegracio@gmail.com",33, true, "2000-01-01", "9999-12-31");
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");

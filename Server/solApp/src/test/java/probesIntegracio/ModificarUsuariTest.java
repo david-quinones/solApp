@@ -65,9 +65,9 @@ public class ModificarUsuariTest {
     @Test
     public void testModificarUsuariCorrecte(){
         //Dades que utilitzarem per la prova
-        Usuari usuariOriginal = new Usuari(18, "testResposta", "password", true, false, true);
+        Usuari usuariOriginal = new Usuari(18, "testResposta", "password", true, false, false);
         //Modifiquem nom usuari i password
-        Usuari usuariModificat = new Usuari(18, "testResposta2", "holaPau", true, false, false);
+        Usuari usuariModificat = new Usuari(18, "testRespostaModificat", "Prova", false, true, true);
         //Executem la modificació
 
         try {

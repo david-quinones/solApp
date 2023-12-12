@@ -6,20 +6,21 @@ import java.io.*;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.SSLSocket;
 
 /**Classe que enviará la resposta al client a través d'un socket
  *
  * @author Pau Castell Galtes
  */
 public class EnviarResposta {
-    Socket socket;
+    SSLSocket socket;
 
     
     /**Constructor que rep el socket per poder fer l'enviament de les dades
      * 
      * @param socket per on es retornara les dades de la resposta
      */
-    public EnviarResposta(Socket socket) {
+    public EnviarResposta(SSLSocket socket) {
         this.socket = socket;
     }
     

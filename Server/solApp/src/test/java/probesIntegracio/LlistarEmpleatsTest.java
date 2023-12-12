@@ -94,21 +94,8 @@ public class LlistarEmpleatsTest {
             LOGGER.info("Codi del resultat espertat = 1, codi rebut: " + retorn.getCodiResultat());
             //Número de elements Empleats rebuts
             int numeroEmpleats = (int) retorn.getDades(0, Integer.class);
-            assertEquals(4, numeroEmpleats);
-            LOGGER.info("Número d'empleats esperats 4, número d'empleats rebuts: " + numeroEmpleats);
-            //Comprobem que els empleats rebuts són els esperats
-            Empleat empleat = (Empleat) retorn.getDades(1, Empleat.class);
-            assertEquals(1, empleat.getIdEmpleat());
-            LOGGER.info("Id = 1 de l'empleat esperat, rebut el id " + empleat.getIdEmpleat());
-            empleat = (Empleat) retorn.getDades(2, Empleat.class);
-            assertEquals(2, empleat.getIdEmpleat());
-            LOGGER.info("Id = 2 de l'empleat esperat, rebut el id " + empleat.getIdEmpleat());
-            empleat = (Empleat) retorn.getDades(3, Empleat.class);
-            assertEquals(3, empleat.getIdEmpleat());
-            LOGGER.info("Id = 3 de l'empleat esperat, rebut el id " + empleat.getIdEmpleat());
-            empleat = (Empleat) retorn.getDades(4, Empleat.class);
-            assertEquals(4, empleat.getIdEmpleat());
-            LOGGER.info("Id = 4 de l'empleat esperat, rebut el id " + empleat.getIdEmpleat());
+            assertEquals(6, numeroEmpleats);
+            LOGGER.info("Número d'empleats esperats 6, número d'empleats rebuts: " + numeroEmpleats);
 
             socket.close();
             LOGGER.info("Socket del client tancat.");

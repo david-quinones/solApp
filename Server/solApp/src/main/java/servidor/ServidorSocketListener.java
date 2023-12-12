@@ -11,6 +11,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
+import javax.net.ssl.SSLSocket;
 import persistencia.ConexioBBDD;
 import resposta.ControladorResposta;
 import resposta.EnviarResposta;
@@ -22,12 +25,13 @@ import resposta.EnviarResposta;
 public class ServidorSocketListener {
     
     private ServerSocket servidor_socket;
-    private Socket conexio_socket;
+    private SSLSocket conexio_socket;
     private ConexioBBDD base_dades;
     private int port;
     private boolean activat = false;
     public static final int MAX_CLIENTS = 50;
-    
+    private SSLServerSocketFactory ssf ;
+    private SSLServerSocket serverSocketSll;
     
     /**Constructor que inicialitza el socket del servidor amb el port especificat
      * i inicialitzem la class per la base de dades.
@@ -37,8 +41,12 @@ public class ServidorSocketListener {
     public ServidorSocketListener(int port){       
         try {
             this.port = port;
-            
-            servidor_socket = new ServerSocket(port);
+            System.setProperty("javax.net.ssl.keyStore", "C:\\Users\\pau\\Documents\\GitHub\\solApp\\Destkop\\solAppDesktop\\mykeystore.jks");
+            System.setProperty("javax.net.ssl.keyStorePassword", "ioc2023");
+           
+            ssf = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+            serverSocketSll = (SSLServerSocket) ssf.createServerSocket(this.port);
+            //servidor_socket = new ServerSocket(port);
             
             base_dades = new ConexioBBDD();
             
@@ -62,12 +70,12 @@ public class ServidorSocketListener {
         while(activat){
             try {
                 //Acceptem conexions amb el servidor
-                conexio_socket = servidor_socket.accept();
+                conexio_socket = (SSLSocket)serverSocketSll.accept();
+                //conexio_socket = servidor_socket.accept();
                 
                 /*Inicialitzem el GestorClients per realitzar les comunicacions 
                 amb diferents clients*/
                 GestorClients gestorClients = new GestorClients(conexio_socket);
-                
                 //Executem la piscina de fils
                 executor.execute(gestorClients);
                 
@@ -85,9 +93,9 @@ public class ServidorSocketListener {
      * 
      */
     public void tancarServidor(){
-        if(servidor_socket != null && !servidor_socket.isClosed()){
+        if(serverSocketSll != null && !serverSocketSll.isClosed()){
             try{
-                servidor_socket.close();
+                serverSocketSll.close();
                 
             }catch(IOException ex){
                 
@@ -105,12 +113,12 @@ public class ServidorSocketListener {
      * 
      */
     private class GestorClients implements Runnable{
-        private Socket client;
-        ControladorResposta controlador;
-        RetornDades dadesResposta;
-        EnviarResposta output;
+        private SSLSocket client;
+        private ControladorResposta controlador;
+        private RetornDades dadesResposta;
+        private EnviarResposta output;
         
-        public GestorClients(Socket socket){
+        public GestorClients(SSLSocket socket){
             client = socket;
             
         }
@@ -130,8 +138,7 @@ public class ServidorSocketListener {
                 
                 //Deserialització de les dades en un objecte PeticioClient
                 Gson gson = new Gson();
-                PeticioClient peticio = gson.fromJson(dades, PeticioClient.class);
-                
+                PeticioClient peticio = gson.fromJson(dades, PeticioClient.class);               
                 //Instanciem ControladorRespostes amb la petició del client
                 controlador = new ControladorResposta(peticio);
                 

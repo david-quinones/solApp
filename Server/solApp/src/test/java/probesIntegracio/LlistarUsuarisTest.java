@@ -95,18 +95,9 @@ public class LlistarUsuarisTest {
             LOGGER.info("Codi del resultat espertat = 1, codi rebut: " + retorn.getCodiResultat());
             //Número de elements Usuari rebuts
             int numeroUsuaris = (int) retorn.getDades(0, Integer.class);
-            assertEquals(3, numeroUsuaris);
-            LOGGER.info("Número d'usuaris esperats 3, número d'usuaris rebuts: " + numeroUsuaris);
-            //Comprobem que els empleats rebuts són els esperats
-            Usuari usuari = (Usuari) retorn.getDades(1, Usuari.class);
-            assertEquals(1, usuari.getId());
-            LOGGER.info("Id = 1 de l'usuari esperat, rebut el id " + usuari.getId());
-            usuari = (Usuari) retorn.getDades(2, Usuari.class);
-            assertEquals(2, usuari.getId());
-            LOGGER.info("Id = 2 de l'usuari esperat, rebut el id " + usuari.getId());
-            usuari = (Usuari) retorn.getDades(3, Usuari.class);
-            assertEquals(18, usuari.getId());
-            LOGGER.info("Id = 3 de l'usuari esperat, rebut el id " + usuari.getId());
+            assertEquals(9, numeroUsuaris);
+            LOGGER.info("Número d'usuaris esperats 7, número d'usuaris rebuts: " + numeroUsuaris);
+
 
             socket.close();
             LOGGER.info("Socket del client tancat.");

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.Messages.MessageController">
+   <children>
+      <Text fx:id="txt_user_name" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="user_name" text="Hola, David" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0" />
+      <Label fx:id="lbl_login_date" styleClass="date_label" text="Today, 2023-10-07" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="27.0" />
+      <Text layoutX="811.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section_title" text="Account Summary" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="90.0" />
+      <Text layoutX="32.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section_title" text="Account" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="90.0" />
+      <HBox layoutX="20.0" layoutY="107.0" prefHeight="180.0" prefWidth="620.0" styleClass="account_view" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="120.0">
+         <children>
+            <AnchorPane prefHeight="150.0" prefWidth="295.0">
+               <children>
+                  <Label styleClass="account_balance" text="€ 3 500.56" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="25.0" />
+                  <Label styleClass="account_number" text="**** **** ****" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="14.0" />
+                  <Label layoutX="108.0" layoutY="118.0" styleClass="account_number" text="4458" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="138.0" />
+                  <VBox layoutX="181.0" prefHeight="100.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="14.0" />
+                  <FontAwesomeIconView glyphName="BANK" layoutX="264.0" layoutY="18.0" size="30" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="7.0" />
+                  <Text layoutX="19.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cheking Accounting" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" />
+               </children>
+               <styleClass>
+                  <String fx:value="account" />
+                  <String fx:value="account_gradient" />
+               </styleClass>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="295.0">
+               <children>
+                  <Label styleClass="account_balance" text="€ 3 500.56" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="25.0" />
+                  <Label styleClass="account_number" text="**** **** ****" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="14.0" />
+                  <Label layoutX="108.0" layoutY="118.0" styleClass="account_number" text="4458" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="138.0" />
+                  <VBox layoutX="181.0" prefHeight="100.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="14.0" />
+                  <FontAwesomeIconView glyphName="BANK" layoutX="264.0" layoutY="18.0" size="30" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="7.0" />
+                  <Text layoutX="19.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savings Account" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" />
+               </children>
+               <styleClass>
+                  <String fx:value="account" />
+                  <String fx:value="account_gradient" />
+               </styleClass>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <VBox layoutX="612.0" layoutY="120.0" prefHeight="180.0" prefWidth="210.0" styleClass="summary_view" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="acc_summary_container">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Income" />
+                  <Label styleClass="income_ammount" text="+ €400.00" />
+                  <Line endX="160.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Expenses" />
+                  <Label styleClass="expense_ammount" text="- €150.00" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Text layoutX="20.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section_title" text="Ultimes Conversacions" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="340.0" />
+      <Text layoutX="755.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section_title" text="Envia Missatge" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="340.0" />
+      <ListView fx:id="listview_conversations" layoutX="28.0" layoutY="356.0" prefHeight="365.0" prefWidth="570.0" styleClass="conversation_listview" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" />
+      <VBox layoutX="590.0" layoutY="383.0" prefHeight="366.0" prefWidth="240.0" styleClass="new_conversation_container" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <Label text="Alumne Code" />
+            <TextField fx:id="txt_alumncode" />
+            <Label text="Missatge" />
+            <TextArea fx:id="txtf_message" prefHeight="100.0" prefWidth="240.0" />
+            <Button fx:id="btn_sendMessage" mnemonicParsing="false" text="Envia Missatge" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

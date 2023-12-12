@@ -63,11 +63,11 @@ public class ModificarAlumneTest {
     @Test
     public void testModificarAlumneCorrecte(){
         //Dades que utilitzarem per la proba
-        Alumne alumneOriginal = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "123456789", "juan@gmail.com",1 , true, true, false);
+        Alumne alumneOriginal = new Alumne(73,"AlumneIntegracio", "cognomIntegracio", "cognomIntegracio2",
+                "2022-08-23", "45645645P", "111111111", "alumneInt@gmail.com",26, true, false, true);
         //Modifiquem el teléfon i menjador ara serà false
-        Alumne alumneModificat = new Alumne(31, "Juan", "Gomez", "Lopez", "2022-02-15",
-                null, "999999999", "juan@gmail.com",1 , true, false, false);
+        Alumne alumneModificat = new Alumne(73,"AlumneIntegracioModificat", "cognomIntegracio", "cognomIntegracio2",
+                "2022-08-23", "45645645P", "111111111", "alumneInt@gmail.com",26, true, false, false);
         try {
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
