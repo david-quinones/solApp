@@ -45,6 +45,7 @@ public class ViewFactory {
     private AnchorPane alumneView;
     private AnchorPane professorView;
     private AnchorPane userView;
+    private AnchorPane messageView;
 
     //controlar que clico al menu
     private final StringProperty seleccioClientItemMenu;
@@ -166,6 +167,22 @@ public class ViewFactory {
         //}
         return alumneView;
     }
+
+    /**
+     *  Obte i crea la vista de missatges
+     *  @return Instancia corresponent a la vista de missatges
+     */
+    public AnchorPane getMessageView() {
+        //if(aulaView == null){
+        try {
+            messageView = new FXMLLoader(getClass().getResource("/Fxml/DashboardMessage.fxml")).load();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        //}
+        return messageView;
+    }
+
 
     /**
      *  Mostra la finestra del formulari del professor

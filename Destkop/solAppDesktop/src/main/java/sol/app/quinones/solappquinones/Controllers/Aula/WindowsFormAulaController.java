@@ -4,7 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -126,7 +129,6 @@ public class WindowsFormAulaController implements Initializable {
                 setText(empty ? "" : alumne.getNom().toUpperCase() + " " + alumne.getCognom1().toUpperCase());
             }
         });
-
     }
 
     /**

@@ -26,7 +26,7 @@ public class ServerComunication {
     private SSLSocket socket;
 
     /*SSL*/
-    SSLSocketFactory ssf;
+    private SSLSocketFactory ssf;
 
 
     /**
