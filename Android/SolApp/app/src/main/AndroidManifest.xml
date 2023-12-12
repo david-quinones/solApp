@@ -17,29 +17,29 @@
         <activity
             android:name=".ui.admin.NavGestioComunicacionsActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_nav_gestio_comunicacions"
-            android:theme="@style/Theme.Solapp.NoActionBar" />
-        <activity
-            android:name=".ui.admin.NavGestioMissatgesActivity"
-            android:exported="false"
-            android:label="@string/title_activity_nav_gestio_missatges"
             android:theme="@style/Theme.Solapp.NoActionBar" />
         <activity
             android:name=".ui.admin.NavGestioAulesActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_nav_gestio_aules"
             android:theme="@style/Theme.Solapp.NoActionBar" />
         <activity
             android:name=".ui.admin.NavGestioAlumnesActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_nav_gestio_alumnes"
             android:theme="@style/Theme.Solapp.NoActionBar" />
         <activity
             android:name=".activities.PerfilActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".ui.admin.NavGestioProfessorsActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_nav_gestio_professors"
             android:theme="@style/Theme.Solapp.NoActionBar" />
         <activity
@@ -54,11 +54,13 @@
         <activity
             android:name=".ui.admin.NavGestioUsuarisActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_nav_gestio_usuaris"
             android:parentActivityName=".activities.HomeAdminActivity"
             android:theme="@style/Theme.Solapp.NoActionBar" />
         <activity
             android:name=".activities.LoginActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"

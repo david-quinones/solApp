@@ -12,21 +12,6 @@
 
         android:background="@color/solapp_background">
 
-        <TableLayout
-            android:id="@+id/taula_Missatge_Sel"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_gravity="top"
-            android:gravity="center"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbarThumbHorizontal="@color/cardview_dark_background"
-            android:scrollbarThumbVertical="@color/cardview_dark_background"
-            android:scrollbars="horizontal|vertical"
-            app:layout_constraintBottom_toTopOf="@+id/MultiLineContingut"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/VSVListMissatges" />
-
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
@@ -88,7 +73,40 @@
             android:inputType="textMultiLine"
             app:layout_constraintBottom_toTopOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Remitent:"
+            app:layout_constraintBottom_toTopOf="@+id/MultiLineContingut"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewRemitent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="11"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/MultiLineContingut"
+            app:layout_constraintStart_toEndOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/textViewData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewRemitent"
+            tools:layout_editor_absoluteY="378dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

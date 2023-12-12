@@ -40,7 +40,6 @@ public class SafataEntrada extends Fragment {
 
         contingut = view.findViewById(R.id.MultiLineContingut);
         taulaMissatges = view.findViewById(R.id.taula_Llista_Missatge);
-        taulamisatgeSeleccionat = view.findViewById(R.id.taula_Missatge_Sel);
 
         //omplirTaula();
 
