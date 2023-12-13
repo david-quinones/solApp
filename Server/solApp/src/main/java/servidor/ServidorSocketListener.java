@@ -25,6 +25,7 @@ import resposta.EnviarResposta;
 public class ServidorSocketListener {
     
     private ServerSocket servidor_socket;
+    //private SSLSocket conexio_socket;
     private SSLSocket conexio_socket;
     private ConexioBBDD base_dades;
     private int port;
@@ -113,6 +114,7 @@ public class ServidorSocketListener {
      * 
      */
     private class GestorClients implements Runnable{
+        //private SSLSocket client;
         private SSLSocket client;
         private ControladorResposta controlador;
         private RetornDades dadesResposta;

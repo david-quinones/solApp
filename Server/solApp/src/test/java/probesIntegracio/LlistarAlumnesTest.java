@@ -37,7 +37,7 @@ public class LlistarAlumnesTest {
     /**Preparem el servidora abans de cada test
      * 
      */
-    @Before
+    /*@Before
     public void setUp(){
         Thread serverThread = new Thread(new Runnable() {
             @Override
@@ -66,7 +66,7 @@ public class LlistarAlumnesTest {
         } catch (InterruptedException ex) {
             Logger.getLogger(LlistarAlumnesTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
   
     
     /**Test per comprobar que la crida de llistarAlumnes funciona correctament.

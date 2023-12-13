@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * @author Pau Castell Galtes
  */
 public class ConexioBBDD {
-    private static final String JDBD_URL = "jdbc:mysql://localhost:3306/escola_bressol";
+    private static final String JDBD_URL = "jdbc:mysql://localhost:3306/escola_bressol?useSSL=false";
     private static final String USUARI =  "root";
     private static final String PASSWORD = "1234";
     private static final Logger LOGGER = Logger.getLogger(ConexioBBDD.class.getName());
@@ -25,6 +25,8 @@ public class ConexioBBDD {
      */
     public Connection conectar() throws SQLException{
 
+        System.setProperty("https.protocols", "TLSv1.3");
+        
         conexio = DriverManager.getConnection(JDBD_URL,USUARI,PASSWORD);
         
         LOGGER.info("Connexió a la base de dades.");

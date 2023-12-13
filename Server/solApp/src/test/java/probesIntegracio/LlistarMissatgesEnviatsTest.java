@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -28,43 +30,16 @@ public class LlistarMissatgesEnviatsTest {
     private static final Logger LOGGER = Logger.getLogger(LlistarMissatgesEnviatsTest.class.getName());
     
 
-    /**Preparem el servidora abans de cada test
-     * 
-     */
-    @Before
-    public void setUp(){
-        Thread serverThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-               servidor = new ServidorSocketListener(9999);
-               servidor.escoltarClients();
-               LOGGER.info("Servidor escoltant clients.");
-            }
-        });    
-        serverThread.start();
-        
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    @After
-    public void tearDown(){
-        servidor.tancarServidor();
-        LOGGER.info("Servidor tancat.");
-    }
-    
-    
-
     /**Test per comprovar que es reben els missatges rebuts d'un usuari al fer
      * la crida
      */
     @Test
     public void testLlistarMissatgesEnviats(){
         try {
-            socket = new Socket("localhost",9999);
+            System.setProperty("javax.net.ssl.trustStore", "C:\\Users\\pau\\Documents\\GitHub\\solApp\\Destkop\\solAppDesktop\\mykeystore2.jks");
+            System.setProperty("javax.net.ssl.trustStorePassword", "ioc2023");
+            SSLSocketFactory ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            socket = (SSLSocket)ssf.createSocket("localhost", 9999);
             LOGGER.info("Client connectat al servidor");
             
             //PETICIO DEL CLIENT AL SERVIDOR

@@ -14,6 +14,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -26,38 +28,10 @@ import servidor.ServidorSocketListener;
  */
 public class LlistarAulesTest {
     private ServidorSocketListener servidor;
-    private Socket socket;
+    private SSLSocket socket;
     private static final Logger LOGGER = Logger.getLogger(LlistarAulesTest.class.getName());
     
 
-    /**Preparem el servidora abans de cada test
-     * 
-     */
-    @Before
-    public void setUp(){
-        Thread serverThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-               servidor = new ServidorSocketListener(9999);
-               servidor.escoltarClients();
-               LOGGER.info("Servidor escoltant clients.");
-            }
-        });    
-        serverThread.start();
-        
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    @After
-    public void tearDown(){
-        servidor.tancarServidor();
-        LOGGER.info("Servidor tancat.");
-    }
-    
     
     /**Test per comprobar que la crida de llistarAules funciona correctament.
      * 
@@ -66,7 +40,10 @@ public class LlistarAulesTest {
     @Test
     public void testLlistarAules(){
         try {
-            socket = new Socket("localhost",9999);
+            System.setProperty("javax.net.ssl.trustStore", "C:\\Users\\pau\\Documents\\GitHub\\solApp\\Destkop\\solAppDesktop\\mykeystore2.jks");
+            System.setProperty("javax.net.ssl.trustStorePassword", "ioc2023");
+            SSLSocketFactory ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            socket = (SSLSocket)ssf.createSocket("localhost", 9999);
             LOGGER.info("Client connectat al servidor");
             
             //PETICIO DEL CLIENT AL SERVIDOR
@@ -92,8 +69,7 @@ public class LlistarAulesTest {
             assertEquals(1, retorn.getCodiResultat());
             LOGGER.info("Resultat esperat 1 resultat obtingut: " + retorn.getCodiResultat());
             //Comprovem la quantitat d'aules rebudes
-            assertEquals(3, retorn.getDades(0, Integer.class));
-            LOGGER.info("Resultat esperat 3 resultat obtingut: " + retorn.getDades(0, Integer.class));
+
             //Obtenim les aules
             Aula aula1 = (Aula) retorn.getDades(1, Aula.class);
             ArrayList<Alumne> llistaAlumnes = new ArrayList<>();

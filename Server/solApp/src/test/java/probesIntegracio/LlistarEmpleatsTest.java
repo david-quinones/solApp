@@ -18,6 +18,8 @@ import persistencia.PersonaDAO;
 import servidor.ServidorSocketListener;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 
  /**Classe per realitzar el test d'integració de la consulta, llistar Empleats 
  *
@@ -66,6 +68,7 @@ public class LlistarEmpleatsTest {
     @Test
     public void testLlistarEmpleats(){
         try {
+            
             socket = new Socket("localhost",9999);
             LOGGER.info("Client connectat al servidor");
             

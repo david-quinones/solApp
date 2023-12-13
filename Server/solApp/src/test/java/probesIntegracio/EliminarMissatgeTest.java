@@ -14,6 +14,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -29,45 +31,19 @@ public class EliminarMissatgeTest {
     private Socket socket;
     private static final Logger LOGGER = Logger.getLogger(ConsultaPersonaTest.class.getName());
     
-     /**Iniciem el servidor en un fil diferent al del client
-     * per poder fer el test
-     * 
-     */
-    @Before
-    public void setUp(){
-        Thread serverThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-               servidor = new ServidorSocketListener(9999);
-               servidor.escoltarClients();
-               LOGGER.info("Servidor escoltant clients.");
-            }
-        });    
-        serverThread.start();
-        
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-    }
     
-    
-    @After
-    public void tearDown(){
-        servidor.tancarServidor();
-        LOGGER.info("Servidor tancat.");
-    }
-    
-    /**Test d'integració de la crida enviar_missatge
+    /**Test d'integració de la crida eliminar_missatge
      * 
      */
     @Test
     public void testEliminarMissatge(){
         
         try {
-            socket = new Socket("localhost",9999);
+            System.setProperty("javax.net.ssl.trustStore", "C:\\Users\\pau\\Documents\\GitHub\\solApp\\Destkop\\solAppDesktop\\mykeystore2.jks");
+            System.setProperty("javax.net.ssl.trustStorePassword", "ioc2023");
+            SSLSocketFactory ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            socket = (SSLSocket)ssf.createSocket("localhost", 9999);
             LOGGER.info("Client connectat al servidor");
             
             //PETICIO DEL CLIENT AL SERVIDOR
@@ -77,17 +53,17 @@ public class EliminarMissatgeTest {
             //Dades per la prova
             //Remitent
             Persona remitent = new Persona();
-            remitent.setIdPersona(1);
+            remitent.setIdPersona(2);
             //Destinatari:
             Persona persona = new Persona();
-            persona.setIdPersona(2);
+            persona.setIdPersona(1);
             //Array amb destinataris
             ArrayList<Persona> destinataris = new ArrayList<>();
             destinataris.add(persona);
             //Missatge
             Missatge missatge = new Missatge(destinataris,
                 "Missatge prova integració.");
-            missatge.setIdMissatge(7);
+            missatge.setIdMissatge(8);
             missatge.setRemitentPersona(remitent);
             //Afegim les dades a la petició
             peticio.afegirDades(missatge);

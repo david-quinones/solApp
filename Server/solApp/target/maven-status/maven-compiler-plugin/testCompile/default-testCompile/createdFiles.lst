@@ -6,12 +6,10 @@ estructurapr\RetornDadesTest.class
 probesIntegracio\LlistarMissatgesRebutsTest.class
 probesIntegracio\LlistarEmpleatsTest.class
 resposta\GenerarRespostaTest.class
-probesIntegracio\LlistarMissatgesEnviatsTest$1.class
 probesIntegracio\LoginTest.class
 persistencia\UsuariDAOTest.class
 entitats\PersonaTest.class
 probesIntegracio\ConsultaPersonaTest$1.class
-probesIntegracio\ModificarAulaTest$1.class
 entitats\UsuariTest.class
 entitats\AlumneTest.class
 resposta\ControladorRespostaTest.class
@@ -24,7 +22,6 @@ probesIntegracio\EliminarUsuariTest$1.class
 probesIntegracio\ModificarEmpleatTest.class
 probesIntegracio\AltaAlumneTest.class
 persistencia\EmpleatDAOTest.class
-probesIntegracio\EliminarMissatgeTest$1.class
 seguretat\CesarAlgoritmeTest.class
 probesIntegracio\ModificarUsuariTest.class
 probesIntegracio\AltaEmpleatTest.class
@@ -33,11 +30,7 @@ probesIntegracio\LlistarUsuarisTest.class
 persistencia\ConexioBBDDTest.class
 probesIntegracio\LogoutTest$1.class
 entitats\EmpleatTest.class
-probesIntegracio\EliminarAulaTest$1.class
 persistencia\MissatgeDAOTest.class
-probesIntegracio\LlistarMissatgesRebutsTest$1.class
-probesIntegracio\AltaAulaTest$1.class
-probesIntegracio\EnviarMissatgeTest$1.class
 probesIntegracio\LlistarMissatgesEnviatsTest.class
 probesIntegracio\EnviarMissatgeTest.class
 persistencia\AlumneDAOTest.class
@@ -57,6 +50,4 @@ probesIntegracio\ModificacióPerfilTest.class
 probesIntegracio\ConsultaPersonaTest.class
 probesIntegracio\AltaEmpleatTest$1.class
 persistencia\AulaDAOTest.class
-probesIntegracio\LlistarAlumnesTest$1.class
 utilitats\UtilsTest.class
-probesIntegracio\LlistarAulesTest$1.class

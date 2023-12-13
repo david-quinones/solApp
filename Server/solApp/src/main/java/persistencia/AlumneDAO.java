@@ -57,6 +57,7 @@ public class AlumneDAO {
         } catch (SQLException ex) {
             Logger.getLogger(AlumneDAO.class.getName()).log(Level.SEVERE, 
                     "ERROR al obtindre un llistat d'alumnes", ex);
+            
         }
         return llistaAlumnes;
     }
