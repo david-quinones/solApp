@@ -63,7 +63,16 @@ public class MenuController implements Initializable {
         btn_professor.setOnAction(event -> openProfessor());
         btn_user.setOnAction(event -> openUserList());
         image.setOnMouseClicked(event -> loadDashboard());
+        btn_comunicacio.setOnAction(e -> openMessages());
 
+    }
+
+    /**
+     * Obre la vista de missatges
+     * Estableix la propietat de seleccio del item del menu de l'apliació, canvia el valor de seleccioClient a la fabrica de vistes
+     */
+    private void openMessages() {
+        Model.getInstance().getViewFactory().getSeleccioClientItemMenu().set("Message");
     }
 
     /**

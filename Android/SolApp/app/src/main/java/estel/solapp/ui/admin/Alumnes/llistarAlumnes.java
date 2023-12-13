@@ -102,7 +102,7 @@ public class llistarAlumnes extends Fragment {
                 emailHeader.setGravity(Gravity.CENTER);
                 emailHeader.setBackgroundResource(R.drawable.tablas_listas_heather);
                 capcelera.addView(emailHeader);
-                TextView menjadorHeather= new TextView(getContext()); menjadorHeather.setText("ACOLLIDA");
+                TextView menjadorHeather= new TextView(getContext()); menjadorHeather.setText("MENJADOR");
                 menjadorHeather.setGravity(Gravity.CENTER);
                 menjadorHeather.setBackgroundResource(R.drawable.tablas_listas_heather);
                 capcelera.addView(menjadorHeather);

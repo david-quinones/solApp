@@ -11,6 +11,15 @@ public class Persona {
     private String telefon;
     private String mail;
 
+    private String persona;
+
+    public String toString(){
+
+        this.persona = this.getNom()+" "+this.getCognom1()+" "+this.getCognom2();
+
+        return persona;
+    }
+
 
     /********************
      * Constructors

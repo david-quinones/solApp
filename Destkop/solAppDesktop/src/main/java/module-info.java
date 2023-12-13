@@ -22,5 +22,7 @@ module sol.app.quinones.solappquinones {
     opens sol.app.quinones.solappquinones.Controllers.Usuari to javafx.fxml;
     exports sol.app.quinones.solappquinones.Controllers.Aula;
     opens sol.app.quinones.solappquinones.Controllers.Aula to javafx.fxml;
+    exports sol.app.quinones.solappquinones.Controllers.Messages;
+    opens sol.app.quinones.solappquinones.Controllers.Messages to javafx.fxml;
 
 }
