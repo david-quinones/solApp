@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="probesIntegracio.LlistarAulesTest" time="0.5" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="probesIntegracio.LlistarAulesTest" time="0.612" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,9 +15,9 @@
     <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\openjdk-17.0.1_windows-x64_bin\jdk-17.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\pau\AppData\Local\Temp\surefire685412095165713849\surefirebooter-20231212112603115_3.jar C:\Users\pau\AppData\Local\Temp\surefire685412095165713849 2023-12-12T11-26-02_984-jvmRun1 surefire-20231212112603115_1tmp surefire_0-20231212112603115_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\pau\AppData\Local\Temp\surefire9941456322984168690\surefirebooter-20231214112357383_3.jar C:\Users\pau\AppData\Local\Temp\surefire9941456322984168690 2023-12-14T11-23-57_228-jvmRun1 surefire-20231214112357383_1tmp surefire_0-20231214112357383_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="probesIntegracio.LlistarAulesTest#testLlistarAules"/>
+    <property name="test" value="probesIntegracio.LlistarAulesTest"/>
     <property name="surefire.test.class.path" value="C:\Users\pau\Documents\GitHub\solApp\Server\solApp\target\test-classes;C:\Users\pau\Documents\GitHub\solApp\Server\solApp\target\classes;C:\Users\pau\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\pau\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\pau\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\pau\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\pau\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\pau\.m2\repository\org\mockito\mockito-all\1.9.5\mockito-all-1.9.5.jar;C:\Users\pau\.m2\repository\org\dbunit\dbunit\2.7.3\dbunit-2.7.3.jar;C:\Users\pau\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\pau\.m2\repository\org\postgresql\postgresql\42.3.1\postgresql-42.3.1.jar;C:\Users\pau\.m2\repository\org\checkerframework\checker-qual\3.5.0\checker-qual-3.5.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\jdbc\ojdbc8\19.3.0.0\ojdbc8-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\jdbc\ucp\19.3.0.0\ucp-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\security\oraclepki\19.3.0.0\oraclepki-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\security\osdt_cert\19.3.0.0\osdt_cert-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\security\osdt_core\19.3.0.0\osdt_core-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\ha\simplefan\19.3.0.0\simplefan-19.3.0.0.jar;C:\Users\pau\.m2\repository\com\oracle\database\ha\ons\19.3.0.0\ons-19.3.0.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\pau"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\pau\AppData\Local\Temp\surefire685412095165713849\surefirebooter-20231212112603115_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\pau\AppData\Local\Temp\surefire9941456322984168690\surefirebooter-20231214112357383_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.1+12-39"/>
@@ -58,33 +58,34 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testLlistarAules" classname="probesIntegracio.LlistarAulesTest" time="0.428">
+  <testcase name="testLlistarAules" classname="probesIntegracio.LlistarAulesTest" time="0.562">
     <system-out><![CDATA[
-Aula 1: id = 2 nom: TestIntegracio
-Empleat = entitats.Empleat@52af26ee
-Alumnes:
-entitats.Alumne@6fd83fc1
-
-Aula 2: id = 4 nom: TestIntegracio
-Empleat = entitats.Empleat@4f2b503c
-Alumnes:
-
-Aula 3: id = 7 nom: Test_Eliminar
+Aula 1: id = 2 nom: TestModificacio
 Empleat = null
 Alumnes:
+entitats.Alumne@1e04fa0a
+
+Aula 2: id = 4 nom: TestIntegracio
+Empleat = entitats.Empleat@1af2d44a
+Alumnes:
+
+Aula 3: id = 8 nom: Aula_Integració_Modificat
+Empleat = entitats.Empleat@18d87d80
+Alumnes:
+entitats.Alumne@618425b5
+entitats.Alumne@58695725
+entitats.Alumne@543588e6
 
 ]]></system-out>
-    <system-err><![CDATA[dic 12, 2023 11:26:03 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
+    <system-err><![CDATA[dic 14, 2023 11:23:58 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
 INFO: Client connectat al servidor
-dic 12, 2023 11:26:03 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
+dic 14, 2023 11:23:58 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
 INFO: Petició enviada al servidor.
-dic 12, 2023 11:26:03 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
+dic 14, 2023 11:23:58 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
 INFO: Dades rebudes per part del servidor.
-dic 12, 2023 11:26:03 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
+dic 14, 2023 11:23:58 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
 INFO: Resultat esperat 1 resultat obtingut: 1
-dic 12, 2023 11:26:03 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
-INFO: Resultat esperat 3 resultat obtingut: 3
-dic 12, 2023 11:26:03 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
+dic 14, 2023 11:23:58 A. M. probesIntegracio.LlistarAulesTest testLlistarAules
 INFO: Socket del client tancat.
 ]]></system-err>
   </testcase>

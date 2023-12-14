@@ -46,7 +46,7 @@ public class ModificarAulaTest {
                 "46797529G", "93703532", "pau@gmail.com", 1,true, "2022-01-01", "2023-12-31");
             //Aula que es donarà d'alta
             Aula aula = new Aula();
-            aula.setId(4);
+            aula.setId(8);
             aula.setNomAula("Aula_Integració_Modificat");
             aula.setEmpleat(empleat);
             //ArrayList d'alumnes

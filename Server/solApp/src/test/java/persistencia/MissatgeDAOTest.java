@@ -45,6 +45,9 @@ public class MissatgeDAOTest {
         baseDades.tancarConexio();
     }
 
+    /**Test per comprovar l'alta d'un missatge
+     * 
+     */
     @Test
     public void testAltaMissatge() {
         //Establim les dades per fer la prova
@@ -112,7 +115,7 @@ public class MissatgeDAOTest {
         Missatge missatge = new Missatge();
         missatge.setRemitentEsborrat(false);
         missatge.setDestinatariEsborrat(true);
-        missatge.setIdMissatge(8);
+        missatge.setIdMissatge(3);
         //Executem la modificació
         MissatgeDAO missatgeDAO = new MissatgeDAO(conexio);
         int resultat = missatgeDAO.eliminarMissatge(missatge);

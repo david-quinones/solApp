@@ -286,20 +286,11 @@ public class GenerarRespostaTest {
         GenerarResposta generarResposta = new GenerarResposta();
         //Es crea una aula
         Aula aula = new Aula();
-        aula.setNomAula("TestResposta");
+        aula.setNomAula("GenerarResposta");
         Empleat empleat = new Empleat(1,"Pau", "Castell", "Galtes", "1983-08-07",
                 "46797529G", "93703532", "pau@gmail.com", 1,true, "2022-01-01", "2023-12-31");
         aula.setEmpleat(empleat);
-        //ArrayList d'alumnes
-        ArrayList<Alumne> llistaAlumnes = new ArrayList<>();
-        Alumne alumne1 = new Alumne(33, "Pedro", "Martinez", "Gutierrez", "2023-04-20", "98765432B", 
-                "654321987", "pedro@gmail.com", 3, true, true, true);
-        Alumne alumne2 = new Alumne(34, "Laura", "Garcia", "Fernandez", "2022-08-22", null, 
-                "789456123", "laura@gmail.com", 4, true, false, false);
-        llistaAlumnes.add(alumne1);
-        llistaAlumnes.add(alumne2);
-        aula.setAlumnes(llistaAlumnes);
-        
+
         RetornDades resposta = generarResposta.respostaAltaAula(aula);
         assertEquals(1, resposta.getCodiResultat());
         
@@ -314,12 +305,12 @@ public class GenerarRespostaTest {
     public void testEliminarAula(){
         GenerarResposta generarResposta = new GenerarResposta();
         Aula aula = new Aula();
-        aula.setId(4);
+        aula.setId(8);
         //No es pot esborrar l'aula
         RetornDades resposta = generarResposta.respostaEliminarAula(aula);
         assertEquals(0, resposta.getCodiResultat());
         //L'aula es pot esborrar
-        aula.setId(5);
+        aula.setId(18);
         resposta = generarResposta.respostaEliminarAula(aula);
         assertEquals(1, resposta.getCodiResultat());
     }
@@ -422,7 +413,7 @@ public class GenerarRespostaTest {
         GenerarResposta generarResposta = new GenerarResposta();
         //Dades per a la prova
         Missatge missatge = new Missatge();
-        missatge.setIdMissatge(7);
+        missatge.setIdMissatge(20);
         Persona personaRemitent = new Persona();
         personaRemitent.setIdPersona(1);
         Persona personaDestinatari = new Persona();
