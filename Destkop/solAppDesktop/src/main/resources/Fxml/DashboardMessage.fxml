@@ -2,80 +2,143 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
-<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.Messages.MessageController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" stylesheets="@../Styles/MessageGrid.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.Messages.MessageController">
    <children>
-      <Text fx:id="txt_user_name" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="user_name" text="Hola, David" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0" />
-      <Label fx:id="lbl_login_date" styleClass="date_label" text="Today, 2023-10-07" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="27.0" />
-      <Text layoutX="811.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section_title" text="Account Summary" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="90.0" />
-      <Text layoutX="32.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section_title" text="Account" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="90.0" />
-      <HBox layoutX="20.0" layoutY="107.0" prefHeight="180.0" prefWidth="620.0" styleClass="account_view" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="120.0">
+      <HBox layoutX="-6.0" prefHeight="750.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="150.0" prefWidth="295.0">
+            <VBox prefHeight="200.0" prefWidth="200.0" styleClass="primaey-color">
                <children>
-                  <Label styleClass="account_balance" text="€ 3 500.56" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="25.0" />
-                  <Label styleClass="account_number" text="**** **** ****" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="14.0" />
-                  <Label layoutX="108.0" layoutY="118.0" styleClass="account_number" text="4458" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="138.0" />
-                  <VBox layoutX="181.0" prefHeight="100.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="14.0" />
-                  <FontAwesomeIconView glyphName="BANK" layoutX="264.0" layoutY="18.0" size="30" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="7.0" />
-                  <Text layoutX="19.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cheking Accounting" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" />
-               </children>
-               <styleClass>
-                  <String fx:value="account" />
-                  <String fx:value="account_gradient" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="295.0">
-               <children>
-                  <Label styleClass="account_balance" text="€ 3 500.56" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="25.0" />
-                  <Label styleClass="account_number" text="**** **** ****" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="14.0" />
-                  <Label layoutX="108.0" layoutY="118.0" styleClass="account_number" text="4458" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="138.0" />
-                  <VBox layoutX="181.0" prefHeight="100.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="14.0" />
-                  <FontAwesomeIconView glyphName="BANK" layoutX="264.0" layoutY="18.0" size="30" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="7.0" />
-                  <Text layoutX="19.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savings Account" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" />
-               </children>
-               <styleClass>
-                  <String fx:value="account" />
-                  <String fx:value="account_gradient" />
-               </styleClass>
-            </AnchorPane>
-         </children>
-      </HBox>
-      <VBox layoutX="612.0" layoutY="120.0" prefHeight="180.0" prefWidth="210.0" styleClass="summary_view" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
-         <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="acc_summary_container">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Income" />
-                  <Label styleClass="income_ammount" text="+ €400.00" />
-                  <Line endX="160.0" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Expenses" />
-                  <Label styleClass="expense_ammount" text="- €150.00" />
+                  <Label prefHeight="22.0" prefWidth="190.0" text="Comunicació" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <FontAwesomeIconView fx:id="btnMenuLateral" fill="#fffbfb" glyphName="BARS" size="20" styleClass="selected" wrappingWidth="43.2857141494751">
+                     <VBox.margin>
+                        <Insets left="15.0" top="25.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <VBox fx:id="menuLateral" prefHeight="500.0" prefWidth="180.0" spacing="10.0">
+                     <children>
+                        <HBox fx:id="newConversation" alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="175.0" styleClass="selected">
+                           <children>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="20" />
+                              <Label text="Nova Conversació" textFill="#f8f8f8">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="Compte" alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="198.0" styleClass="selected">
+                           <children>
+                              <FontAwesomeIconView fill="WHITE" glyphName="USER" size="20" />
+                              <Label fx:id="CompteButton" text="Compte" textFill="#f8f8f8">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="mailBox" alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="175.0" styleClass="selected">
+                           <children>
+                              <Label fx:id="emailLabel" alignment="CENTER" prefHeight="17.0" prefWidth="169.0" text="david@gmail.com" textFill="#f8f8f8">
+                                 <HBox.margin>
+                                    <Insets top="-20.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="25.0" top="15.0" />
+                     </VBox.margin>
+                  </VBox>
                </children>
             </VBox>
+            <VBox fx:id="VBoxMail" prefHeight="750.0" prefWidth="243.0" styleClass="withe-background">
+               <opaqueInsets>
+                  <Insets left="200.0" />
+               </opaqueInsets>
+               <children>
+                  <HBox prefHeight="36.0" prefWidth="243.0">
+                     <children>
+                        <HBox prefHeight="39.0" prefWidth="243.0">
+                           <children>
+                              <FontAwesomeIconView glyphName="SEARCH" size="20" styleClass="handToMessageMenu">
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="7.0" />
+                                 </HBox.margin>
+                              </FontAwesomeIconView>
+                              <TextField>
+                                 <HBox.margin>
+                                    <Insets left="12.0" top="5.0" />
+                                 </HBox.margin>
+                                 <styleClass>
+                                    <String fx:value="withe-background" />
+                                    <String fx:value="linia" />
+                                 </styleClass>
+                              </TextField>
+                              <FontAwesomeIconView glyphName="REFRESH" size="20" styleClass="handToMessageMenu">
+                                 <HBox.margin>
+                                    <Insets left="8.0" top="6.0" />
+                                 </HBox.margin>
+                              </FontAwesomeIconView>
+                           </children>
+                           <styleClass>
+                              <String fx:value="withe-background" />
+                              <String fx:value="transparent" />
+                           </styleClass>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="21.0" prefWidth="243.0" spacing="5.0">
+                     <children>
+                        <Label text="Entrada">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="21.0" prefWidth="139.0">
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </Pane>
+                        <Label text="Tots">
+                           <font>
+                              <Font name="System Italic" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="750.0" prefWidth="409.0" />
          </children>
-      </VBox>
-      <Text layoutX="20.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section_title" text="Ultimes Conversacions" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="340.0" />
-      <Text layoutX="755.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section_title" text="Envia Missatge" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="340.0" />
-      <ListView fx:id="listview_conversations" layoutX="28.0" layoutY="356.0" prefHeight="365.0" prefWidth="570.0" styleClass="conversation_listview" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" />
-      <VBox layoutX="590.0" layoutY="383.0" prefHeight="366.0" prefWidth="240.0" styleClass="new_conversation_container" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
-         <children>
-            <Label text="Alumne Code" />
-            <TextField fx:id="txt_alumncode" />
-            <Label text="Missatge" />
-            <TextArea fx:id="txtf_message" prefHeight="100.0" prefWidth="240.0" />
-            <Button fx:id="btn_sendMessage" mnemonicParsing="false" text="Envia Missatge" />
-         </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>

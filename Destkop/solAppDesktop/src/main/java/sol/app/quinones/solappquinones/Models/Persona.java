@@ -2,6 +2,8 @@ package sol.app.quinones.solappquinones.Models;
 
 import com.google.gson.Gson;
 
+import java.util.Objects;
+
 /**
  * Classe model que reprenta una persona
  *
@@ -225,7 +227,30 @@ public class Persona {
     }
 
 
-    public int hasCode() {
-        return 0;
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Persona persona = (Persona) o;
+        return Objects.equals(idPersona, persona.idPersona);
+    }
+
+
+    public int hasCode(){
+        return Objects.hash(idPersona);
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "idPersona=" + idPersona +
+                ", nom='" + nom + '\'' +
+                ", cognom1='" + cognom1 + '\'' +
+                ", cognom2='" + cognom2 + '\'' +
+                ", data_naixement='" + data_naixement + '\'' +
+                ", dni='" + dni + '\'' +
+                ", telefon='" + telefon + '\'' +
+                ", mail='" + mail + '\'' +
+                '}';
     }
 }

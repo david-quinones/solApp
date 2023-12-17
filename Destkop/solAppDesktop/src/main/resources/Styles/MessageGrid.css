@@ -1,0 +1,26 @@
+.primaey-color {
+    -fx-background-color: #132A13;
+}
+
+.selected:hover {
+    -fx-cursor: hand;
+}
+
+.transparent {
+    -fx-background-color: rgba(0,0,0,0);
+}
+.withe-background {
+    -fx-background-color: white;
+}
+
+.linia {
+    -fx-border-color: black;
+}
+
+.handToMessageMenu:hover {
+    -fx-cursor: hand;
+}
+
+.selected_vbox {
+    -fx-background-color: #a6a6a6;
+}

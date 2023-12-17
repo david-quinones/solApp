@@ -11,12 +11,16 @@ import java.util.*;
 public class Message {
 
     private int idMissatge;
-    private Persona remitentPersona;
+    private Persona RemitentPersona;
     private List<Persona> destinataris = new ArrayList<>();
     private String dataEnviament;
     private String contingut;
     private boolean destinetariEsborrat;
     private boolean remitentEsborrat;
+
+    //controlar estat
+    private boolean enviat;
+    private boolean rebut;
 
     /**
      * Contructors
@@ -35,7 +39,7 @@ public class Message {
      * @param remitentEsborrat    the remitent esborrat
      */
     public Message(Persona remitentPersona, List<Persona> destinataris, String dataEnviament, String contingut, boolean destinetariEsborrat, boolean remitentEsborrat) {
-        this.remitentPersona = remitentPersona;
+        this.RemitentPersona = remitentPersona;
         this.destinataris = destinataris;
         this.dataEnviament = dataEnviament;
         this.contingut = contingut;
@@ -56,7 +60,7 @@ public class Message {
      */
     public Message(int idMissatge, Persona remitentPersona, List<Persona> destinataris, String dataEnviament, String contingut, boolean destinetariEsborrat, boolean remitentEsborrat) {
         this.idMissatge = idMissatge;
-        this.remitentPersona = remitentPersona;
+        this.RemitentPersona = remitentPersona;
         this.destinataris = destinataris;
         this.dataEnviament = dataEnviament;
         this.contingut = contingut;
@@ -88,7 +92,7 @@ public class Message {
      * @return the remitent persona
      */
     public Persona getRemitentPersona() {
-        return remitentPersona;
+        return RemitentPersona;
     }
 
     /**
@@ -97,7 +101,7 @@ public class Message {
      * @param remitentPersona the remitent persona
      */
     public void setRemitentPersona(Persona remitentPersona) {
-        this.remitentPersona = remitentPersona;
+        this.RemitentPersona = remitentPersona;
     }
 
     /**
@@ -190,6 +194,22 @@ public class Message {
         this.remitentEsborrat = remitentEsborrat;
     }
 
+    public boolean isEnviat() {
+        return enviat;
+    }
+
+    public void setEnviat(boolean enviat) {
+        this.enviat = enviat;
+    }
+
+    public boolean isRebut() {
+        return rebut;
+    }
+
+    public void setRebut(boolean rebut) {
+        this.rebut = rebut;
+    }
+
     /**
      * Converteix una cadena "JSON" a un objecte Message
      * Static per no tindre que instanciar objectes, i cridar-lo directament
@@ -202,4 +222,18 @@ public class Message {
         return gson.fromJson(json, Message.class);
     }
 
+    @Override
+    public String toString() {
+        return "Message{" +
+                "idMissatge=" + idMissatge +
+                ", RemitentPersona=" + RemitentPersona +
+                ", destinataris=" + destinataris +
+                ", dataEnviament='" + dataEnviament + '\'' +
+                ", contingut='" + contingut + '\'' +
+                ", destinetariEsborrat=" + destinetariEsborrat +
+                ", remitentEsborrat=" + remitentEsborrat +
+                ", enviat=" + enviat +
+                ", rebut=" + rebut +
+                '}';
+    }
 }
