@@ -230,6 +230,8 @@ public class ModificarAula extends Fragment {
                     nAlumnes.setText(String.valueOf(aulaTaula.getAlumnes().size()));
                     nAlumnes.setGravity(Gravity.CENTER);
                     nAlumnes.setBackgroundResource(color);
+                    row.addView(nAlumnes);
+
                     //Fem clicable la fila de la taula i cridem al métode de mostrar les dades
                     //Pasant-li l'aula de la fila
                     row.setClickable(true);
@@ -242,8 +244,6 @@ public class ModificarAula extends Fragment {
 
                         }
                     });
-
-                    row.addView(nAlumnes);
                     taulaAules.addView(row);
 
                 }

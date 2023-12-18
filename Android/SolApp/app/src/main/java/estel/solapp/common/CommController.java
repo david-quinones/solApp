@@ -30,7 +30,7 @@ public class CommController {
 
     //Dades de conexió
     private static int port = 9999;
-    private static String serverName = "192.168.1.131";
+    private static String serverName = "192.168.1.132";
     public static final int OK_RETURN_CODE = 1;
 
     // Noms de les peticions
@@ -55,6 +55,7 @@ public class CommController {
     public static final String MODIFICAR_AULA = "MODIFICAR_AULA";
     public static final String ALTA_AULA = "ALTA_AULA";
     public static final String ENVIAR_MISSATGE = "ENVIAR_MISSATGE";
+    public static final String ELIMINAR_MISSATGE = "ELIMINAR_MISSATGE";
     public static final String SAFATA_ENTRADA = "MISSATGES_REBUTS";
     public static final String SAFATA_SORTIDA = "MISSATGES_ENVIATS";
 
@@ -99,6 +100,8 @@ public class CommController {
         User usuari = new User(user,password);
         PeticioClient login = new PeticioClient(LOGIN);
         login.addDataObject(usuari);
+        Gson gson= new Gson();
+        Log.d("PETICIO LOGIN", gson.toJson(login));
         ValorsResposta resposta=talkToServer(login);
 
         if(resposta==null) {return null;}
@@ -478,7 +481,7 @@ public class CommController {
     }
 
     /*************************************************
-     * Petició d'eliminar alumne al servidor
+     * Petició d'eliminar aula al servidor
      * @param aula
      * * @return resultat OK/NOK; null si error.
      *************************************************/
@@ -523,14 +526,13 @@ public class CommController {
 
     /*************************************************
      * Petició per mostrar safata d'entrada al servidor
-     * @param persona
+     * Enviem el codi de sessió
      * * @return resultat OK/NOK; null si error.
      *************************************************/
-    public static ValorsResposta safataEntrada(Persona persona){
+    public static ValorsResposta safataEntrada(){
 
         PeticioClient safataEntrada = new PeticioClient(SAFATA_ENTRADA);
         safataEntrada.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
-        safataEntrada.addDataObject(persona);
         Gson gson= new Gson();
         Log.d("PETICIO SAFATA ENTRADA", gson.toJson(safataEntrada));
         ValorsResposta resposta=talkToServer(safataEntrada);
@@ -543,17 +545,36 @@ public class CommController {
 
     /*************************************************
      * Petició per mostrar safata de sortida al servidor
-     * @param persona
+     * Enviem usuari conectat
      * * @return resultat OK/NOK; null si error.
      *************************************************/
-    public static ValorsResposta safataSortida(Persona persona){
+    public static ValorsResposta safataSortida(){
 
         PeticioClient safataSortida = new PeticioClient(SAFATA_SORTIDA);
         safataSortida.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
-        safataSortida.addDataObject(persona);
         Gson gson= new Gson();
-        Log.d("PETICIO SAFATA ENTRADA", gson.toJson(safataSortida));
+        Log.d("PETICIO SAFATA SORTIDA", gson.toJson(safataSortida));
         ValorsResposta resposta=talkToServer(safataSortida);
+
+        if(resposta==null) return null;
+
+        return resposta;
+
+    }
+
+    /*************************************************
+     * Petició d'eliminar missatge al servidor
+     * @param missatge
+     * * @return resultat OK/NOK; null si error.
+     *************************************************/
+    public static ValorsResposta eliminarMissatge(Missatge missatge){
+
+        PeticioClient eliminarMissatge = new PeticioClient(ELIMINAR_MISSATGE);
+        eliminarMissatge.addPrimitiveData(SingletonSessio.getInstance().getKey().replace("\"",""));
+        eliminarMissatge.addDataObject(missatge);
+        Gson gson= new Gson();
+        Log.d("PETICIO ENVIA MISSATGE", gson.toJson(eliminarMissatge));
+        ValorsResposta resposta=talkToServer(eliminarMissatge);
 
         if(resposta==null) return null;
 

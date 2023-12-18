@@ -13,14 +13,17 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,13 +33,22 @@ import estel.solapp.R;
 import estel.solapp.common.CommController;
 import estel.solapp.common.ValorsResposta;
 import estel.solapp.models.Missatge;
+import estel.solapp.models.Persona;
 
-
-public class SafataEntrada extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link safataSortida#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class safataSortida extends Fragment {
 
     EditText contingut;
-    TextView remitent, datEnviament;
-    TableLayout  taulaMissatges;
+    TextView  datEnviament;
+
+    ArrayList<Persona> destinataris;
+    Spinner spinnerDestinataris;
+    ArrayAdapter<Persona> adaptadorDestinataris;
+    TableLayout taulaMissatgesEnv;
     Button eliminarBtn;
     private boolean alternar = true;
     private boolean set;
@@ -51,16 +63,16 @@ public class SafataEntrada extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_safata_entrada, container, false);
+        View view = inflater.inflate(R.layout.fragment_safata_sortida, container, false);
 
-        contingut = view.findViewById(R.id.MultiLineContingut);
-        taulaMissatges = view.findViewById(R.id.taula_Llista_Missatge);
-        remitent = view.findViewById(R.id.textViewRemitent);
-        datEnviament = view.findViewById(R.id.textViewData);
+        contingut = view.findViewById(R.id.MultiLineContingutEnv);
+        taulaMissatgesEnv = view.findViewById(R.id.taula_Llista_Missatge_env);
+        spinnerDestinataris = view.findViewById(R.id.spinnerDestinataris);
+        datEnviament = view.findViewById(R.id.textViewDataEnv);
 
         omplirTaula(); //fem petició de rebre tots el missatges de l'usuari
 
-        eliminarBtn = view.findViewById(R.id.eliminarBtn);
+        eliminarBtn = view.findViewById(R.id.eliminarBtn2);
         eliminarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +98,7 @@ public class SafataEntrada extends Fragment {
         // Creació d'unaltre fil.
         ExecutorService executor = Executors.newSingleThreadExecutor();
         // La petició es fa en unaltre fil
-        Future<ValorsResposta> future = executor.submit(()->{return CommController.safataEntrada();});
+        Future<ValorsResposta> future = executor.submit(()->{return CommController.safataSortida();});
         // Procesar resposta del servidor
         try {
 
@@ -100,22 +112,22 @@ public class SafataEntrada extends Fragment {
 
             }else{
 
-                taulaMissatges.removeAllViews();
+                taulaMissatgesEnv.removeAllViews();
                 //Capçelera de la taula
                 //*********************
 
                 TableRow capcelera = new TableRow(getContext());
                 capcelera.setGravity(Gravity.CENTER);
 
-                TextView nomHeader= new TextView(getContext()); nomHeader.setText("REMITENT");
-                nomHeader.setGravity(Gravity.CENTER);
-                nomHeader.setBackgroundResource(R.drawable.tablas_listas_heather);
-                capcelera.addView(nomHeader);
+                TextView destinatarisHeader= new TextView(getContext()); destinatarisHeader.setText("DESTINATARIS");
+                destinatarisHeader.setGravity(Gravity.CENTER);
+                destinatarisHeader.setBackgroundResource(R.drawable.tablas_listas_heather);
+                capcelera.addView(destinatarisHeader);
                 TextView dataEnviamentHeader= new TextView(getContext()); dataEnviamentHeader.setText("DATA ENVIAMENT");
                 dataEnviamentHeader.setGravity(Gravity.CENTER);
                 dataEnviamentHeader.setBackgroundResource(R.drawable.tablas_listas_heather);
                 capcelera.addView(dataEnviamentHeader);
-                taulaMissatges.addView(capcelera);
+                taulaMissatgesEnv.addView(capcelera);
 
                 //Creació de Taula amb llista d'aules
                 //**************************************
@@ -124,9 +136,8 @@ public class SafataEntrada extends Fragment {
 
                     Missatge missatgeTaula = (Missatge) resposta.getData(i,Missatge.class);
                     Gson gson1= new Gson();
-                    Log.d("AULA "+i, gson1.toJson(missatgeTaula));
+                    Log.d("MISSATGE "+i, gson1.toJson(missatgeTaula));
                     //Condició per alternar colors a les files
-
                     if (alternar) {
                         color = (R.drawable.tablas_listas_yellow);
                         alternar = false;
@@ -137,11 +148,13 @@ public class SafataEntrada extends Fragment {
 
                     TableRow row = new TableRow(this.getContext());
                     row.setGravity(Gravity.CENTER);
-                    TextView remitent = new TextView(getContext());
-                    remitent.setText(missatgeTaula.getRemitentPersona().toString());
-                    remitent.setGravity(Gravity.CENTER);
-                    remitent.setBackgroundResource(color);
-                    row.addView(remitent);
+
+                    Spinner spinnerDestinatarisTaula = new Spinner(getContext());
+                    ArrayList<Persona> destinatarisTaula = new ArrayList<>(missatgeTaula.getDestinataris());
+                    ArrayAdapter<Persona> adaptadorDestinatarisTaula = new ArrayAdapter(this.getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,destinatarisTaula);
+                    spinnerDestinatarisTaula.setAdapter(adaptadorDestinatarisTaula);
+                    spinnerDestinatarisTaula.setBackgroundResource(color);
+                    row.addView(spinnerDestinatarisTaula);
 
                     TextView dataEnviament = new TextView(getContext());
                     dataEnviament.setText(missatgeTaula.getDataEnviament().toString());
@@ -157,12 +170,12 @@ public class SafataEntrada extends Fragment {
                         public void onClick(View view) {
 
                             missatge = (missatgeTaula);
-                            mostrarDades (missatge);
+                            mostrarDades (missatgeTaula);
 
                         }
                     });
 
-                    taulaMissatges.addView(row);
+                    taulaMissatgesEnv.addView(row);
 
                 }
 
@@ -182,7 +195,10 @@ public class SafataEntrada extends Fragment {
      ***************************************************************/
     public void mostrarDades(Missatge missatgeTaula) {
 
-        remitent.setText(missatge.getRemitentPersona().toString());
+        missatge = missatgeTaula;
+        destinataris = missatge.getDestinataris();
+        adaptadorDestinataris = new ArrayAdapter(this.getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,destinataris);
+        spinnerDestinataris.setAdapter(adaptadorDestinataris);
         datEnviament.setText(missatge.getDataEnviament().toString());
         contingut.setText(missatge.getContingut());
 
@@ -193,7 +209,7 @@ public class SafataEntrada extends Fragment {
      *********************************************/
     public void alertEliminarMissatge(){
 
-        if (remitent.getText().length()==0) {
+        if (contingut.getText().length()==0) {
 
             showToast(this.getActivity(), this.getContext(), "Cap missatge seleccionat per eliminar");
 
@@ -235,7 +251,7 @@ public class SafataEntrada extends Fragment {
      ***********************************************/
     public void eliminarMissatge(){
 
-        if (remitent.getText().length()==0){//Control de missatge seleccionat
+        if (contingut.getText().length()==0){//Control de missatge seleccionat
 
             showToast(this.getActivity(),this.getContext(), "Seleccioni un missatge per eliminar");
 
@@ -262,7 +278,7 @@ public class SafataEntrada extends Fragment {
                     if (resposta.getReturnCode() == CommController.OK_RETURN_CODE) {//Codi correcte
 
                         showToast(this.getActivity(), this.getContext(), "Missatge eliminat");
-                        remitent.setText("");
+                        destinataris.clear();
                         datEnviament.setText("");
                         contingut.setText("");
                         omplirTaula();
@@ -281,5 +297,4 @@ public class SafataEntrada extends Fragment {
         }
 
     }
-
 }

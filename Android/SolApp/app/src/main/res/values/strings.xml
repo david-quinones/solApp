@@ -41,4 +41,5 @@
     <string name="spinnerProfessors">Professors</string>
     <string name="title_activity_nav_gestio_missatges">NavGestioMissatgesActivity</string>
     <string name="title_activity_nav_gestio_comunicacions">NavGestioComunicacionsActivity</string>
+    <string name="destinataris">Destinataris</string>
 </resources>
