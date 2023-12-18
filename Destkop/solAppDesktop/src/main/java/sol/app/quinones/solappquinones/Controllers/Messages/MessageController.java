@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -39,26 +41,34 @@ import java.util.ResourceBundle;
 public class MessageController implements Initializable {
 
 
+    /**
+     * Missatge Sencer
+     */
+    @FXML
+    private HBox btnBasura, btnrespon;
+    @FXML
+    private Label IdInicialsMiss, IdNomCorreuMiss, IdDestinetariMiss, idContingutMiss;
+    @FXML
+    private Circle idCircle;
+    @FXML
+    private VBox IdCosMissatge;
+
+    /**
+     *
+      */
     @FXML
     private VBox VBoxMail;
     @FXML
-    private HBox newConversation;
+    private HBox newConversation, btnRebuts, btnEnviats;
     @FXML
-    private FontAwesomeIconView btnMenuLateral;
+    private FontAwesomeIconView btnMenuLateral, btnRefresh;
     @FXML
     private VBox menuLateral;
     @FXML
-    private Label emailLabel;
-    /**
-     * En carregar la finestra, busca els usuaris els converteix en persona a la dreta i els posa a la tula
-     */
+    private Label emailLabel, idTipusMissatge;
 
     private HBox selectedHBox;
-
-    /*Organitzar menu lateral
-    * Agrupar per missatge, idPersona
-    * */
-    private Map<Integer, ArrayList<Message>> messagePerson = new HashMap<>();
+    private CardMessageController cardMessageControllerSelected;
 
 
     private ArrayList<Message> messageRecived = new ArrayList<>();
@@ -101,31 +111,70 @@ public class MessageController implements Initializable {
         carregarEmailView(messageRecived, false);
         //carregarEmailView(messageSended, true);
 
-
+        btnRebuts.setOnMouseClicked(e -> carregarEmailView(messageRecived, false));
+        btnEnviats.setOnMouseClicked(e -> carregarEmailView(messageSended, true));
 
         /**
-         * Posar a la vista esquerra les persones
+         * En arrancar missatge ocult
          */
+        IdCosMissatge.setVisible(false);
+        IdCosMissatge.setManaged(false);
+
+        /**
+         * Eliminar
+         */
+        btnBasura.setOnMouseClicked(e -> deleteMail());
+
+        /**
+         * refresh
+         */
+        btnRefresh.setOnMouseClicked(e -> {
+            loadPersonsMessages();
+            carregarEmailView(messageRecived, false);
+        });
+
+        /**
+         * New Message
+         */
+        newConversation.setOnMouseClicked(e -> {
+            //obrir nova finestra missatge:
+
+        });
 
 
+    }
 
+    private void deleteMail() {
+        //llamada servidor
+        try {
+            peticio.dropDades();
+            socket.connect();
+            peticio.setPeticio("ELIMINAR_MISSATGE");
+            peticio.addDades(SingletonConnection.getInstance().getKey());
+            peticio.addDades(JsonUtil.toJson(cardMessageControllerSelected.getMissatgeCard()));
 
-        //TODO temporal
-        //btn_sendMessage.setOnAction(event -> sendMessage());
+            JSONObject jsonObject = new JSONObject(socket.sendMessage(JsonUtil.toJson(peticio)));
 
-        //menu lateral esquerra, Persones
-        //en clicar una persona --> mostrat missatges al mig
-        // enviar missatge en conversa
-        //boto per fer un missatge nou oi llavors actualitzar tot
+            if(jsonObject.getInt("codiResultat") == 1){
+               //actualitzo la vista de missastges i poso en blanc la vista dreta
+                loadPersonsMessages();
+                carregarEmailView(messageRecived, false);
+                IdCosMissatge.setVisible(false);
+                IdCosMissatge.setManaged(false);
 
-        for(Map.Entry<Integer, ArrayList<Message>> message : messagePerson.entrySet()) {
-            System.out.println("Id: " + message.getKey() + " , Message: " + message.getValue());
-            for(Persona p : llistatPersones) {
-                if(p.getIdPersona() == message.getKey()) {
-                    System.out.println(p.getNom());
-                }
+            } else {
+                //no faig res, perque no l'ha pogut eliminar
             }
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         }
+
+        //refrescar vista
     }
 
     /***
@@ -136,6 +185,13 @@ public class MessageController implements Initializable {
     private void carregarEmailView(ArrayList<Message> messages, Boolean isSended) {
         //VBoxMail.getChildren().clear();
         VBoxMail.getChildren().removeIf(node -> VBoxMail.getChildren().indexOf(node) > 1);
+
+        if(isSended == true) {
+            idTipusMissatge.setText("Sortida");
+        }else{
+            idTipusMissatge.setText("Entrada");
+        }
+
         try {
 
 
@@ -143,9 +199,11 @@ public class MessageController implements Initializable {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/Fxml/CardMessage.fxml"));
                 HBox messageCard = loader.load();
-                CardMessageController cardMessageController = loader.getController();
+                CardMessageController cardMessageController= loader.getController();
                 cardMessageController.setMessage(message, isSended);
 
+                //comportament al clicar una targeta
+                //mirar si es ocult o no, per mostrar-ho
                 messageCard.setOnMouseClicked(e -> {
                     if(selectedHBox != null) {
                         selectedHBox.getStyleClass().clear();
@@ -153,7 +211,31 @@ public class MessageController implements Initializable {
                     messageCard.getStyleClass().add("selected_vbox");
                     selectedHBox = messageCard;
 
-                    System.out.println("print");
+                    //carregar info a la vista lateral dreta:
+                    if (!IdCosMissatge.isVisible()) {
+                        IdCosMissatge.setVisible(true);
+                        IdCosMissatge.setManaged(true);
+                    }
+                    //Inicial remitent i color
+                    IdInicialsMiss.setText(cardMessageController.getMissatgeCard().getRemitentPersona().getNom().toUpperCase().charAt(0) +
+                            Character.toString(cardMessageController.getMissatgeCard().getRemitentPersona().getCognom1().toUpperCase().charAt(0)));
+                    idCircle.setFill(cardMessageController.assignarColorSegonsNom(cardMessageController.getMissatgeCard().getRemitentPersona().getNom().charAt(0)));
+
+                    //Nom  i correu
+                    IdNomCorreuMiss.setText(cardMessageController.getMissatgeCard().getRemitentPersona().getNom() +
+                            " " + cardMessageController.getMissatgeCard().getRemitentPersona().getCognom1() +
+                            "<" + cardMessageController.getMissatgeCard().getRemitentPersona().getMail() + ">");
+                    //Destinataris
+                    IdDestinetariMiss.setText(cardMessageController.getMissatgeCard()
+                                    .getDestinataris()
+                                    .stream()
+                                    .map(destinatari -> destinatari.getMail())
+                                            .collect(Collectors.joining("; ")));
+                    //Cos
+                    idContingutMiss.setText(cardMessageController.getMissatgeCard().getContingut());
+
+                    cardMessageControllerSelected = cardMessageController;
+
                 });
 
 
@@ -240,8 +322,6 @@ public class MessageController implements Initializable {
     public void callRecivedMessages(){
         //MISSATGES_REBUTS
         String response = ConsultesSocket.serverPeticioConsulta("MISSATGES_REBUTS");
-        System.out.println(response);
-
         callMessageServer(messageRecived, response);
 
 
@@ -253,7 +333,6 @@ public class MessageController implements Initializable {
     public void callSendedMessages(){
         //MISSATGES_REBUTS
         String response = ConsultesSocket.serverPeticioConsulta("MISSATGES_ENVIATS");
-        System.out.println(response);
         //deserialitzar aquests misatges
 
         callMessageServer(messageSended, response);
@@ -267,30 +346,11 @@ public class MessageController implements Initializable {
             if(jsonObject.getInt("codiResultat") == 1){
                 JSONArray jsonArray = jsonObject.getJSONArray("dades");
 
-                //clean Map -->
-                messagePerson.clear();
+                //netejem la llista
+                typeMessage.clear();
 
                 for(int i = 1; i < jsonArray.length();i++){
-                    Message message = Message.fromJson(jsonArray.get(i).toString());
-                    typeMessage.add(message);
-
-                    //add to Map
-                    message.setRebut(false);
-                    message.setEnviat(true);
-
-                    //mirem si existeix la idPersona al Map, sino existeix l'Id executem la funcio per generar-la, si existeix, retorna la clau
-                    //per acabar insereix el missatge a la llista existent (perque la clau ja hi es) o la nova creada
-                    messagePerson.computeIfAbsent(message.getRemitentPersona().getIdPersona(), e -> new ArrayList<>()).add(message);
-
-
-                    for(Persona persona : message.getDestinataris()) {
-                        message.setRebut(true);
-                        message.setEnviat(false);
-                        messagePerson.computeIfAbsent(persona.getIdPersona(), e -> new ArrayList<>()).add(message);
-                    }
-
-
-
+                    typeMessage.add(Message.fromJson(jsonArray.get(i).toString()));
                 }
 
             } else{

@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" prefHeight="60.0" prefWidth="243.0" stylesheets="@../Styles/MessageGrid.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.Messages.CardMessageController">
+<HBox alignment="CENTER" prefHeight="60.0" prefWidth="243.0" spacing="5.0" stylesheets="@../Styles/MessageGrid.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sol.app.quinones.solappquinones.Controllers.Messages.CardMessageController">
    <children>
       <Pane prefHeight="60.0" prefWidth="65.0">
          <children>
-            <Circle fill="DODGERBLUE" layoutX="33.0" layoutY="30.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Label fx:id="IdInicials" layoutX="18.0" layoutY="15.0" text="DQ" textFill="WHITE">
+            <Circle fx:id="idCircle" fill="DODGERBLUE" layoutX="28.0" layoutY="25.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Label fx:id="IdInicials" layoutX="13.0" layoutY="10.0" text="DQ" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <VBox prefHeight="60.0" prefWidth="184.0">
+      <VBox prefHeight="50.0" prefWidth="172.0">
          <children>
             <Label fx:id="IdNomComplet" prefHeight="17.0" prefWidth="193.0" text="David Quiñones">
                <font>
@@ -28,6 +30,7 @@
                </font>
             </Label>
             <Label fx:id="IdCosMiss" prefHeight="42.0" prefWidth="181.0" text="Cos del missatge es molt mes gran qu eno pas toit aix" />
+            <Separator prefWidth="200.0" />
          </children>
       </VBox>
    </children>
@@ -35,4 +38,7 @@
       <String fx:value="handToMessageMenu" />
       <String fx:value="HBox" />
    </styleClass>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 </HBox>
