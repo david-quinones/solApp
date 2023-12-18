@@ -6,7 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import estel.solapp.models.Alumne;
+import estel.solapp.models.Aula;
 import estel.solapp.models.Empleat;
+import estel.solapp.models.Missatge;
 import estel.solapp.models.Persona;
 import estel.solapp.models.User;
 
@@ -21,11 +23,19 @@ public class CommControllerTest {
 
     SingletonSessio singletonSessio;
 
+    Aula aula;
+
+    Missatge missatge;
+
     @Before
     public void setUp(){
 
         user=new User("juan","hola");
-
+        empleat = new Empleat();
+        alumne =new Alumne();
+        persona = new Persona();
+        aula = new Aula();
+        missatge = new Missatge();
 
     }
 
@@ -128,6 +138,69 @@ public class CommControllerTest {
     public void modificarAlumne() {
 
         assertEquals(1,CommController.modificarAlumne(alumne).getReturnCode());
+
+    }
+
+    @Test
+    public void eliminarAlumne() {
+
+        assertEquals(1,CommController.eliminarAlumne(alumne).getReturnCode());
+
+    }
+
+    @Test
+    public void afegirAula() {
+
+        assertEquals(1,CommController.afegirAula(aula).getReturnCode());
+
+    }
+
+    @Test
+    public void llistarAules() {
+
+        assertEquals(1,CommController.llistarAules().getReturnCode());
+
+    }
+
+    @Test
+    public void modificarAula() {
+
+        assertEquals(1,CommController.modificarAula(aula).getReturnCode());
+
+    }
+
+    @Test
+    public void eliminarAula() {
+
+        assertEquals(1,CommController.eliminarAula(aula).getReturnCode());
+
+    }
+
+    @Test
+    public void safataEntrada() {
+
+        assertEquals(1,CommController.safataEntrada().getReturnCode());
+
+    }
+
+    @Test
+    public void safataSortida() {
+
+        assertEquals(1,CommController.safataSortida().getReturnCode());
+
+    }
+
+    @Test
+    public void eliminarMissatge() {
+
+        assertEquals(1,CommController.eliminarMissatge(missatge).getReturnCode());
+
+    }
+
+    @Test
+    public void enviarMissatge() {
+
+        assertEquals(1,CommController.enviarMissatge(missatge).getReturnCode());
 
     }
 }

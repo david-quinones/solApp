@@ -27,6 +27,7 @@ import java.util.concurrent.Future;
 
 import estel.solapp.R;
 import estel.solapp.common.CommController;
+import estel.solapp.common.Utility;
 import estel.solapp.common.ValorsResposta;
 import estel.solapp.models.Alumne;
 import estel.solapp.models.Aula;
@@ -200,69 +201,98 @@ public class EnviarMissatges extends Fragment {
 
     public void enviarMissage() {
 
-        //Recuperem persona del usuari conectat per tenir el remitent
+        //Control de dades.
 
-        //Fem petició per agafar les dades de l'usuari
-        // Creació d'unaltre fil.
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        // La petició es fa en unaltre fil
-        Future<ValorsResposta> future = executor.submit(() -> {
-            return CommController.consultaPerfil();
-        });
-        // Procesar resposta del servidor
-        try {
-            ValorsResposta resposta = future.get();
-            Gson gson = new Gson();
-            Log.d("RESPOSTA CONSULTAR PERFIL", gson.toJson(resposta));
-            Persona remitent = null;
-            java.util.Date data = new Date();
-            String dataEnviament= data.toString();
-            if (resposta == null) {
+        String error = controlDades();
 
-                showToast(this.getActivity(), this.getContext(), "Error de conexió amb el servidor. ");
+        if (!error.equals("")) {
 
-            } else {
+            Utility.showToast(this.getActivity(), this.getContext(), error);
 
-                remitent = (Persona) resposta.getData(0, Persona.class);
-            }
+        } else {//Dades correctes
 
-            //Instanciem el missatge que volem enviar
+            //Recuperem persona del usuari conectat per tenir el remitent
 
-            Missatge missatge = new Missatge(remitent,destinataris,dataEnviament,contingut.getText().toString());
-
-            //Fem petició per enviar missatge
+            //Fem petició per agafar les dades de l'usuari
             // Creació d'unaltre fil.
-            ExecutorService executor2 = Executors.newSingleThreadExecutor();
+            ExecutorService executor = Executors.newSingleThreadExecutor();
             // La petició es fa en unaltre fil
-            Future<ValorsResposta> future2 = executor2.submit(() -> {
-                return CommController.enviarMissatge(missatge);
+            Future<ValorsResposta> future = executor.submit(() -> {
+                return CommController.consultaPerfil();
             });
             // Procesar resposta del servidor
             try {
-
-                ValorsResposta resposta2 = future.get();
-
+                ValorsResposta resposta = future.get();
+                Gson gson = new Gson();
+                Log.d("RESPOSTA CONSULTAR PERFIL", gson.toJson(resposta));
+                Persona remitent = null;
+                java.util.Date data = new Date();
+                String dataEnviament = data.toString();
                 if (resposta == null) {
 
                     showToast(this.getActivity(), this.getContext(), "Error de conexió amb el servidor. ");
 
                 } else {
 
-                    showToast(this.getActivity(), this.getContext(), "Missatge enviat");
+                    remitent = (Persona) resposta.getData(0, Persona.class);
+                }
+
+                //Instanciem el missatge que volem enviar
+
+                Missatge missatge = new Missatge(remitent, destinataris, dataEnviament, contingut.getText().toString());
+
+                //Fem petició per enviar missatge
+                // Creació d'unaltre fil.
+                ExecutorService executor2 = Executors.newSingleThreadExecutor();
+                // La petició es fa en unaltre fil
+                Future<ValorsResposta> future2 = executor2.submit(() -> {
+                    return CommController.enviarMissatge(missatge);
+                });
+                // Procesar resposta del servidor
+                try {
+
+                    ValorsResposta resposta2 = future.get();
+
+                    if (resposta == null) {
+
+                        showToast(this.getActivity(), this.getContext(), "Error de conexió amb el servidor. ");
+
+                    } else {
+
+                        showToast(this.getActivity(), this.getContext(), "Missatge enviat");
+                        contingut.setText("");
+                        destinataris.clear();
+                        usuaris.clear();
+                        omplirUsuaris();
+                        mostrarDades(destinataris,usuaris);
+
+                    }
+                } catch (Exception e) {
+
+                    showToast(this.getActivity(), this.getContext(), "Error (" + e.getMessage() + ")");
+                    Log.d("ERROR", "Error (" + e.getMessage() + ")");
 
                 }
-            } catch (Exception e) {
 
-                showToast(this.getActivity(), this.getContext(), "Error (" + e.getMessage() + ")");
-                Log.d("ERROR", "Error (" + e.getMessage() + ")");
-
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
 
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
+    }
 
+    /***************************************************
+     * Mètode per controlar camps buits i format de dades
+     ****************************************************/
+    public String controlDades(){
+
+        String error = "";
+        if (contingut.getText().toString().isEmpty()){error = "El contingut és buit.\n";}
+        if (destinataris.size()==0){error= error+ " No s'han introduït destinataris";}
+
+
+    return error;
     }
 }

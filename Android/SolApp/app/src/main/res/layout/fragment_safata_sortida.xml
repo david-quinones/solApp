@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.admin.comunicacions.home.SafataEntrada">
+    tools:context=".ui.admin.comunicacions.home.safataSortida">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:background="@color/solapp_background">
 
         <Button
-            android:id="@+id/eliminarBtn"
+            android:id="@+id/eliminarBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ScrollView
-            android:id="@+id/VSVListMissatges"
+            android:id="@+id/VSVListMissatgesEnv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -58,15 +58,15 @@
             android:scrollbarStyle="outsideInset"
             android:scrollbarThumbVertical="@color/cardview_dark_background"
             android:soundEffectsEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/textViewRemitent"
+            app:layout_constraintBottom_toTopOf="@+id/spinnerDestinataris"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/textView16">
 
 
             <TableLayout
-                android:id="@+id/taula_Llista_Missatge"
+                android:id="@+id/taula_Llista_Missatge_env"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
@@ -81,7 +81,7 @@
         </ScrollView>
 
         <EditText
-            android:id="@+id/MultiLineContingut"
+            android:id="@+id/MultiLineContingutEnv"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_marginStart="8dp"
@@ -91,7 +91,7 @@
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
-            app:layout_constraintBottom_toTopOf="@+id/eliminarBtn"
+            app:layout_constraintBottom_toTopOf="@+id/eliminarBtn2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent" />
@@ -103,33 +103,46 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:background="#FFFFFF"
-            android:text="Remitent:"
-            app:layout_constraintBottom_toTopOf="@+id/MultiLineContingut"
+            android:text="Destinataris"
+            app:layout_constraintBottom_toTopOf="@+id/MultiLineContingutEnv"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textViewRemitent"
+            android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Missatges enviats"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinnerDestinataris"
+            android:layout_width="178dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:background="#FFFFFF"
-            android:ems="11"
-            app:layout_constraintBottom_toTopOf="@+id/MultiLineContingut"
+            android:prompt="@string/destinataris"
+            android:spinnerMode="dialog"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/MultiLineContingutEnv"
             app:layout_constraintStart_toEndOf="@+id/textView15" />
 
         <TextView
-            android:id="@+id/textViewData"
-            android:layout_width="0dp"
+            android:id="@+id/textViewDataEnv"
+            android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="#FFFFFF"
             android:text=""
-            app:layout_constraintBottom_toTopOf="@+id/MultiLineContingut"
+            app:layout_constraintBottom_toTopOf="@+id/MultiLineContingutEnv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textViewRemitent" />
+            app:layout_constraintStart_toEndOf="@+id/spinnerDestinataris" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

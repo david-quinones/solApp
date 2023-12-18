@@ -20,5 +20,11 @@
             android:layout_height="wrap_content"
             android:icon="@drawable/baseline_mark_as_unread_24"
             android:title="Safata d'entrada" />
+        <item
+            android:id="@+id/safataSortida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/baseline_mark_email_read_24"
+            android:title="Missatges enviats" />
     </group>
 </menu>

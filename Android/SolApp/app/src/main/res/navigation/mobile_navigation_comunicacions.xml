@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
+    android:label="Enviar missatge"
     app:startDestination="@+id/nav_home_comunicacions">
 
     <fragment
@@ -13,12 +14,17 @@
     <fragment
         android:id="@+id/enviarMissatges"
         android:name="estel.solapp.ui.admin.comunicacions.home.EnviarMissatges"
-        android:label="fragment_enviar_missatges"
+        android:label="Missatge nou"
         tools:layout="@layout/fragment_enviar_missatges" />
     <fragment
         android:id="@+id/safataEntrada"
         android:name="estel.solapp.ui.admin.comunicacions.home.SafataEntrada"
-        android:label="fragment_safata_entrada"
+        android:label="Safata d'entrada"
         tools:layout="@layout/fragment_safata_entrada" />
+    <fragment
+        android:id="@+id/safataSortida"
+        android:name="estel.solapp.ui.admin.comunicacions.home.safataSortida"
+        android:label="Safata de sortida"
+        tools:layout="@layout/fragment_safata_sortida" />
 
 </navigation>
