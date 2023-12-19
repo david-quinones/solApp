@@ -7,6 +7,8 @@ import javafx.scene.shape.Circle;
 import sol.app.quinones.solappquinones.Models.Message;
 
 /***
+ * Metode controlador de la targeta que identifica un missatge (la petita lateral esquerra)
+ *
  * @author david
  */
 public class CardMessageController {
@@ -67,6 +69,10 @@ public class CardMessageController {
         return Color.rgb(vermell, verd, blau);
     }
 
+    /**
+     * Metode per retornar el missatge complert (objecte)
+     * @return Objecte misssatge que tenim clicat
+     */
     public Message getMissatgeCard() {
         return missatgeCard;
     }

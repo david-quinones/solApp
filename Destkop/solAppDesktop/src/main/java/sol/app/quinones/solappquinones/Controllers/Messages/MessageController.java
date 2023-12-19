@@ -30,6 +30,10 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 /**
+ *Controlador de la vista de missatge
+ *
+ * S'encarrega de gestionar les interaccions de l'usuari amb la vista
+ * Gestiona les comunicacions
  *
  * @author david
  */
@@ -49,8 +53,8 @@ public class MessageController implements Initializable {
     private VBox IdCosMissatge;
 
     /**
-     *
-      */
+     * Menu esquerra i finestra centreal
+     */
     @FXML
     private VBox VBoxMail;
     @FXML
@@ -66,25 +70,21 @@ public class MessageController implements Initializable {
     private CardMessageController cardMessageControllerSelected;
 
 
+    /**
+     * Variables per els missatges (tots) i les persones (totes)
+     */
     private ArrayList<Message> messageRecived = new ArrayList<>();
     private ArrayList<Message> messageSended = new ArrayList<>();
     private ArrayList<Persona> llistatPersones = new ArrayList<>();
     
     private Persona personaRemitent;
 
+    /**
+     * Comunicació
+     */
     ServerComunication socket = new ServerComunication();
     Peticio peticio = new Peticio();
 
-    //variables per els arrays
-    //Agrupats per usuari?
-    //fer consulta i llavors ordenar per cada?
-    /*
-    arrancada, com estableixo?
-
-    poner en la lista
-    recorrer todos los mensajes haciendo un hasmap id la persona remitente o envio dependiendo
-    poner los mensajes al clicar, buscar todos los menjsaes ordenar y pintar dependiendo de si es enviado o recibido
-     */
 
 
     @Override
@@ -96,18 +96,25 @@ public class MessageController implements Initializable {
         loadPersonsMessages(); //carregar els missatges i destinetaris
         callRemitentPerson(); //load person logging
 
+        //assignar el correu de l'usuari al menu esquerra
         emailLabel.setText(personaRemitent.getMail());
 
 
+        //Carregar els missatges rebuts en l'entrada de l'apliació, passant la llista de missatges i el tipus
+        carregarEmailView(messageRecived, false);
+
+
+        /**
+         * Acció de ocultar el menu lateral
+         */
         btnMenuLateral.setOnMouseClicked(e -> changeStateMenu());
 
-
-        //load conversations (recived)
-        carregarEmailView(messageRecived, false);
-        //carregarEmailView(messageSended, true);
-
+        /**
+         * Accio dels submenus de rebuts i enviats
+         */
         btnRebuts.setOnMouseClicked(e -> carregarEmailView(messageRecived, false));
         btnEnviats.setOnMouseClicked(e -> carregarEmailView(messageSended, true));
+
 
         /**
          * En arrancar missatge ocult
@@ -134,12 +141,15 @@ public class MessageController implements Initializable {
         newConversation.setOnMouseClicked(e -> {
             //obrir nova finestra missatge:
             newMessageView();
-
         });
 
 
     }
 
+    /**
+     * Metode per eliminar un missatge
+     * En eliminar, recarrega la vista retornan a esafata d'entrada en ambdos casos
+     */
     private void deleteMail() {
         //llamada servidor
         try {
@@ -162,26 +172,27 @@ public class MessageController implements Initializable {
                 //no faig res, perque no l'ha pogut eliminar
             }
 
-
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
 
-        //refrescar vista
     }
 
+
     /***
+     * Metode per carregar les targetees de missatges a la vista principal
+     * Recorre cada missatge, crea una targeta amb la info, i linserta
      *
-     * @param messages
-     * @param isSended
+     * @param messages Llitsa de missatges
+     * @param isSended Identificados si es enviat o rebut
      */
     private void carregarEmailView(ArrayList<Message> messages, Boolean isSended) {
-        //VBoxMail.getChildren().clear();
-        VBoxMail.getChildren().removeIf(node -> VBoxMail.getChildren().indexOf(node) > 1);
 
+        // eliminem els VBox apartir del 3 (deixant la part de la capçalera)
+        VBoxMail.getChildren().removeIf(node -> VBoxMail.getChildren().indexOf(node) > 1);
+        //assignem nom a la capçalera depenen de quin tipus es
         if(isSended == true) {
             idTipusMissatge.setText("Sortida");
         }else{
@@ -190,7 +201,7 @@ public class MessageController implements Initializable {
 
         try {
 
-
+            //recorrem tots els missatges i anem creant la vista de les targetes
             for(Message message : messages ) {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/Fxml/CardMessage.fxml"));
@@ -198,7 +209,7 @@ public class MessageController implements Initializable {
                 CardMessageController cardMessageController= loader.getController();
                 cardMessageController.setMessage(message, isSended);
 
-                //comportament al clicar una targeta
+                //comportament al clicar una targeta (part dreta)
                 //mirar si es ocult o no, per mostrar-ho
                 messageCard.setOnMouseClicked(e -> {
                     if(selectedHBox != null) {
@@ -236,11 +247,8 @@ public class MessageController implements Initializable {
                     cardMessageControllerSelected = cardMessageController;
 
                 });
-
-
+                //afegim missatge
                 VBoxMail.getChildren().add(messageCard);
-
-
             }
 
         } catch (IOException e) {
@@ -251,6 +259,7 @@ public class MessageController implements Initializable {
 
     /**
      * Metode per crear un nou missatge a la vista
+     * Obre la finestra del missatge i precarrega informació
      */
     private void newMessageView() {
         //load FXML (no utilitzo la fabrica perque no m'interesa)
@@ -259,6 +268,7 @@ public class MessageController implements Initializable {
             Parent parent = loader.load();
             //instanciem i obtenim el controlador de la finestra nova
             ShowerMessageController showerMessageController = loader.getController();
+            //passema a la finestra, persona qui envia (sempre sera connectat) i llistat de persones
             showerMessageController.setPersonaEnviaMiss(personaRemitent);
             showerMessageController.assignarDadesFinestra(llistatPersones);
 
@@ -266,13 +276,12 @@ public class MessageController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
             stage.setTitle("Enviar Missatge");
-            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initModality(Modality.APPLICATION_MODAL); //bloquejm pantalla prinicpal
             stage.show();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     /**
@@ -288,19 +297,31 @@ public class MessageController implements Initializable {
         }
     }
 
+    /**
+     * Metode inicial que crida els submetodes per emplenar les llistes de:
+     * * Persones
+     * * Enviats
+     * * Rebuts
+     */
     private void loadPersonsMessages() {
         callAllPersons(); //add to array all persons on system
         callRecivedMessages(); //add to array messages to distenatary its user loggin
         callSendedMessages(); //add to array messages to remitent its user logging
-
     }
 
 
-    //Afegir totes les persones a un array
+    /**
+     * Metode per afegir totes les persones a un array - NO TENIM CRIDA, ENS ADAPTEM
+     */
     private void callAllPersons() {
         processarPersones("LLISTAR_EMPLEATS");
         processarPersones("LLISTAR_ALUMNES");
     }
+
+    /**
+     * Metode per fer les crides de persones al servidor (reutilització de codi)
+     * @param tipusPeticio Tipus de petició (empleat o aluimne)
+     */
     private void processarPersones(String tipusPeticio) {
         try {
             JSONObject jsonObject = new JSONObject(ConsultesSocket.serverPeticioConsulta(tipusPeticio));
@@ -318,8 +339,9 @@ public class MessageController implements Initializable {
     }
 
 
-
-
+    /**
+     * Metode per extreure la informació de l'usuari connectat, el Singleton, te l'usuari pero no la persona.
+     */
     private void callRemitentPerson() {
         String resposta = ConsultesSocket.serverPeticioConsulta("CONSULTA_PERFIL");
         try {
@@ -341,9 +363,8 @@ public class MessageController implements Initializable {
     public void callRecivedMessages(){
         //MISSATGES_REBUTS
         String response = ConsultesSocket.serverPeticioConsulta("MISSATGES_REBUTS");
+        //pasem resposta al metode que ho tractarà
         callMessageServer(messageRecived, response);
-
-
     }
 
     /**
@@ -353,11 +374,15 @@ public class MessageController implements Initializable {
         //MISSATGES_REBUTS
         String response = ConsultesSocket.serverPeticioConsulta("MISSATGES_ENVIATS");
         //deserialitzar aquests misatges
-
         callMessageServer(messageSended, response);
     }
 
 
+    /**
+     *  Metode que deserialitza els missatges del servidor, utilitzat per les crides de missatges (reutilització de codi=)
+     * @param typeMessage
+     * @param response
+     */
     private void callMessageServer(ArrayList<Message> typeMessage, String response){
         //test deserialitzar
         try {
@@ -373,16 +398,12 @@ public class MessageController implements Initializable {
                 }
 
             } else{
-                //TODO --> controlar si rertorna un error, si es vuit?
+                // no hi ha else, sino retorna res, ens quedem tan panxos
             }
 
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
 
 }

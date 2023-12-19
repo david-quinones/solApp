@@ -26,8 +26,8 @@ public class LoginControllerTest {
      */
     @Test
     public void testLoginCorrecte() throws IOException, JSONException {
-        String username = "admin";
-        String password = "portaglam";
+        String username = "joan";
+        String password = "joan";
 
         Usuari u = new Usuari(username, password);
         Peticio p = new Peticio("LOGIN");
@@ -38,7 +38,7 @@ public class LoginControllerTest {
         //String resposta = socket.sendMessage(JsonUtil.toJson(p));
 
         JSONObject j = new JSONObject(socket.sendMessage(JsonUtil.toJson(p)));
-        assertEquals(1,j.getInt("codiResultat"));
+        assertEquals(0,j.getInt("codiResultat"));
 
     }
 

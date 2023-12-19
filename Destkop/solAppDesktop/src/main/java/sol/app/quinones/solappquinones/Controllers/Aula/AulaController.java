@@ -68,10 +68,10 @@ public class AulaController implements Initializable, ITopMenuDelegation {
         //asjutar columnes
         tableAula.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        //Load Aules
+        //carrega Aules
         carregarAules();
 
-        //load array to table
+        //carrega array to table
         tableAula.setItems(aulaArrayList);
 
         // assign columns to table
@@ -89,11 +89,13 @@ public class AulaController implements Initializable, ITopMenuDelegation {
             return row;
         });
 
-        //mainAula.getChildren().add(0, Model.getInstance().getViewFactory().getMenuTopViewr(this));
-
     }
 
-    //TODO
+    /**
+     * metode per editar un aula
+     * Obre la finestra d'editar amb la informació de l'aula pasada per parametre
+     * @param aulaClidacada
+     */
     private void editarAula(Aula aulaClidacada) {
         //obrir finestra pasant objecte
         Model.getInstance().getViewFactory().showWindowFormAula(" - Editar Aula", aulaClidacada, this);
@@ -148,11 +150,19 @@ public class AulaController implements Initializable, ITopMenuDelegation {
 
     }
 
+    /**
+     * Acció en premer el boto de brear
+     * Obre finestra per crear una nova aula i li pasem el controlador de l'aUala
+     */
     @Override
     public void onBtnCrear() {
         Model.getInstance().getViewFactory().showWindowFormAula(" - Crear Aula", null, this);
     }
 
+    /**
+     * Acció al premer el boto d'editar
+     * Capturem la linia seleccionada  i li passem
+     */
     @Override
     public void onBtnEditar() {
         Aula aulaClic = (Aula) tableAula.getSelectionModel().getSelectedItem();

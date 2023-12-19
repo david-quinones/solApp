@@ -26,7 +26,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Classe per controlar la finestra flotant d'enviament de missatge
+ *
+ * @author david
+ */
 public class ShowerMessageController implements Initializable {
+    /**
+     * Variables del fitxer FXML
+     */
     @FXML
     private Text objDestinatari;
     @FXML
@@ -36,26 +44,37 @@ public class ShowerMessageController implements Initializable {
     @FXML
     private Button btnEnviar;
 
+    /**
+     * Variables de classe
+     */
     private ServerComunication socket = new ServerComunication();
     private Peticio peticio = new Peticio();
     private Persona personaEnviaMiss;
     private ArrayList<Persona> persones = new ArrayList<>();
     private Persona personaRemitent;
 
+    /**
+     * Inicialitzador de la classe
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
+        //assignem l'acció del boto en ser clicat
         btnEnviar.setOnMouseClicked(e -> {
             sendMessage();
         });
     }
 
+    /**
+     * Metode per assignar les dades a la finestra en ser oberta
+     *
+     * @param totalPeople llistat de persones destinetaries
+     */
     public void assignarDadesFinestra(ArrayList<Persona> totalPeople) {
         objDestinatari.setText(personaEnviaMiss.getNom());
         this.persones = totalPeople;
         loadComboBox();
-
     }
 
     /**
@@ -101,10 +120,13 @@ public class ShowerMessageController implements Initializable {
     }
 
 
+    /**
+     * Metode d'enviament del missatge
+     */
     //enviar missatge
     private void sendMessage() {
 
-        //recuperar missatge
+        //recuperar missatge de la vista
         ArrayList<Persona> p = new ArrayList<>();
         p.add(personaRemitent);
 
@@ -128,7 +150,6 @@ public class ShowerMessageController implements Initializable {
                 stage.close();
             }
 
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (JSONException e) {
@@ -137,34 +158,74 @@ public class ShowerMessageController implements Initializable {
 
     }
 
+    /**
+     * Gets obj destinatari.
+     *
+     * @return the obj destinatari
+     */
     public Text getObjDestinatari() {
         return objDestinatari;
     }
 
+    /**
+     * Sets obj destinatari.
+     *
+     * @param objDestinatari the obj destinatari
+     */
     public void setObjDestinatari(Text objDestinatari) {
         this.objDestinatari = objDestinatari;
     }
 
+    /**
+     * Gets list destinetari.
+     *
+     * @return the list destinetari
+     */
     public ComboBox getListDestinetari() {
         return listDestinetari;
     }
 
+    /**
+     * Gets message id.
+     *
+     * @return the message id
+     */
     public TextArea getMessageId() {
         return messageId;
     }
 
+    /**
+     * Sets message id.
+     *
+     * @param messageId the message id
+     */
     public void setMessageId(TextArea messageId) {
         this.messageId = messageId;
     }
 
+    /**
+     * Gets btn enviar.
+     *
+     * @return the btn enviar
+     */
     public Button getBtnEnviar() {
         return btnEnviar;
     }
 
+    /**
+     * Sets btn enviar.
+     *
+     * @param btnEnviar the btn enviar
+     */
     public void setBtnEnviar(Button btnEnviar) {
         this.btnEnviar = btnEnviar;
     }
 
+    /**
+     * Sets persona envia miss.
+     *
+     * @param personaEnviaMiss the persona envia miss
+     */
     public void setPersonaEnviaMiss(Persona personaEnviaMiss) {
         this.personaEnviaMiss = personaEnviaMiss;
     }
