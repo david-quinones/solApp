@@ -257,10 +257,15 @@
                   <HBox prefHeight="15.0" prefWidth="420.0">
                      <children>
                         <Label text="Per: " />
-                        <Label fx:id="IdDestinetariMiss" prefHeight="17.0" prefWidth="361.0" text="administrador@gmail.com">
+                        <Label fx:id="IdDestinetariMiss" prefHeight="17.0" prefWidth="207.0" text="administrador@gmail.com">
                            <HBox.margin>
                               <Insets bottom="5.0" />
                            </HBox.margin>
+                        </Label>
+                        <Label fx:id="idDateEnviat" alignment="CENTER" prefHeight="17.0" prefWidth="154.0" textAlignment="RIGHT">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
                         </Label>
                      </children>
                      <padding>

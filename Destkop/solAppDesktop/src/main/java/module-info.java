@@ -1,6 +1,7 @@
 module sol.app.quinones.solappquinones {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
     requires de.jensd.fx.glyphs.fontawesome;
     requires com.google.gson;
     requires org.json.chargebee;

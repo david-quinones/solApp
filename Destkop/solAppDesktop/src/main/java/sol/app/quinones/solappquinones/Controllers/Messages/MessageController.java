@@ -4,20 +4,20 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sol.app.quinones.solappquinones.Models.Message;
 import sol.app.quinones.solappquinones.Models.Persona;
 import sol.app.quinones.solappquinones.Models.Peticio;
-import sol.app.quinones.solappquinones.Models.Professor;
 import sol.app.quinones.solappquinones.Service.ConsultesSocket;
 import sol.app.quinones.solappquinones.Service.JSON.JsonUtil;
 import sol.app.quinones.solappquinones.Service.ServerComunication;
@@ -25,11 +25,7 @@ import sol.app.quinones.solappquinones.Service.SingletonConnection;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -40,14 +36,13 @@ import java.util.stream.Collectors;
 
 public class MessageController implements Initializable {
 
-
     /**
      * Missatge Sencer
      */
     @FXML
     private HBox btnBasura, btnrespon;
     @FXML
-    private Label IdInicialsMiss, IdNomCorreuMiss, IdDestinetariMiss, idContingutMiss;
+    private Label IdInicialsMiss, IdNomCorreuMiss, IdDestinetariMiss, idContingutMiss, idDateEnviat;
     @FXML
     private Circle idCircle;
     @FXML
@@ -105,7 +100,7 @@ public class MessageController implements Initializable {
 
 
         btnMenuLateral.setOnMouseClicked(e -> changeStateMenu());
-        newConversation.setOnMouseClicked(e -> newMessageView());
+
 
         //load conversations (recived)
         carregarEmailView(messageRecived, false);
@@ -138,6 +133,7 @@ public class MessageController implements Initializable {
          */
         newConversation.setOnMouseClicked(e -> {
             //obrir nova finestra missatge:
+            newMessageView();
 
         });
 
@@ -234,6 +230,9 @@ public class MessageController implements Initializable {
                     //Cos
                     idContingutMiss.setText(cardMessageController.getMissatgeCard().getContingut());
 
+                    //data
+                    idDateEnviat.setText(cardMessageController.getMissatgeCard().getDataEnviament());
+
                     cardMessageControllerSelected = cardMessageController;
 
                 });
@@ -254,6 +253,26 @@ public class MessageController implements Initializable {
      * Metode per crear un nou missatge a la vista
      */
     private void newMessageView() {
+        //load FXML (no utilitzo la fabrica perque no m'interesa)
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ReadNewMessage.fxml"));
+        try {
+            Parent parent = loader.load();
+            //instanciem i obtenim el controlador de la finestra nova
+            ShowerMessageController showerMessageController = loader.getController();
+            showerMessageController.setPersonaEnviaMiss(personaRemitent);
+            showerMessageController.assignarDadesFinestra(llistatPersones);
+
+            //Mostrar finestra
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.setTitle("Enviar Missatge");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     /**
@@ -364,36 +383,6 @@ public class MessageController implements Initializable {
 
 
 
-    //enviar missatge
-    private void sendMessage() {
-        //recuperar missatge
-        ArrayList<Persona> p = new ArrayList<>();
-        p.add(personaRemitent);
 
-        Message message = new Message();
-        message.setRemitentPersona(personaRemitent);
-        message.setDestinataris(p);
-        //message.setContingut(txtf_message.getText());
-        message.setDataEnviament(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-
-        //crear peticio i enviar missatge
-        peticio.dropDades();
-        try {
-            socket.connect();
-            peticio.setPeticio("ENVIAR_MISSATGE");
-            peticio.addDades(SingletonConnection.getInstance().getKey());
-            peticio.addDades(JsonUtil.toJson(message));
-
-            String resposta = socket.sendMessage(JsonUtil.toJson(peticio));
-
-            //controlar resposta per netejar i actualiar o no TODO
-            System.out.println(resposta);
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 
 }
